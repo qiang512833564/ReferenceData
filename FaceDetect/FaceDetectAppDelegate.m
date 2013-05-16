@@ -25,8 +25,8 @@
     [self.window makeKeyAndVisible];
     
     self.controller = [[[FaceDetectViewController alloc]init] autorelease];
-    UINavigationController *nav = [[[UINavigationController alloc]initWithRootViewController:self.controller]autorelease];
-    self.window.rootViewController = nav;
+//    UINavigationController *nav = [[[UINavigationController alloc]initWithRootViewController:self.controller]autorelease];
+    self.window.rootViewController = self.controller;
    
     
     return YES;

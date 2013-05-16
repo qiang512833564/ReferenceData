@@ -28,33 +28,41 @@
 {
     [super viewDidLoad];
 	
+//    [self.view setTransform:CGAffineTransformMakeScale(1, -1)];
+    
     imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ian1.png"]];
-    [imageView setFrame:CGRectMake(0, 0, imageView.image.size.width, imageView.image.size.height)];
-//    [imageView setTransform:CGAffineTransformMakeScale(1, -1)];
     [self setImageViewFrame];
     [self.view addSubview:imageView];
     
     newImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
-//    [newImageView setTransform:CGAffineTransformMakeScale(1, -1)];
     [self.view addSubview:newImageView];
     
     [self faceDetect:imageView.image];
 }
 -(void)setImageViewFrame
 {
-//    CGSize imgSize = imageView.image.size;
-//    CGRect vFrame = self.view.frame;
-//    CGRect imgVFrame = imageView.frame;
-//    if (imgSize.width/CGRectGetWidth(vFrame) > imgSize.height/CGRectGetHeight(vFrame)) {
-//        imgVFrame.size.width = CGRectGetWidth(vFrame);
-//        imgVFrame.size.height = imgSize.height * CGRectGetWidth(vFrame)/imgSize.width;
-//    }
-//    else{
-//        imgVFrame.size.height = CGRectGetHeight(vFrame);
-//        imgVFrame.size.width = imgSize.width * CGRectGetHeight(vFrame)/imgSize.height;
-//    }
-//    
-//    imageView.frame = imgVFrame;
+    
+    CGFloat scale = 1.;
+    
+    CGSize imgSize = imageView.image.size;
+    CGRect vFrame = self.view.frame;
+    CGRect imgVFrame = imageView.frame;
+    if (imgSize.width/CGRectGetWidth(vFrame) > imgSize.height/CGRectGetHeight(vFrame)) {
+        imgVFrame.size.width = CGRectGetWidth(vFrame);
+        imgVFrame.size.height = imgSize.height * CGRectGetWidth(vFrame)/imgSize.width;
+        
+        scale = CGRectGetWidth(vFrame)/imgSize.width;
+    }
+    else{
+        imgVFrame.size.height = CGRectGetHeight(vFrame);
+        imgVFrame.size.width = imgSize.width * CGRectGetHeight(vFrame)/imgSize.height;
+        
+        scale = CGRectGetHeight(vFrame)/imgSize.height;
+    }
+    imageView.frame = imgVFrame;
+    
+    UIImage *newImg = [self scaleImage:imageView.image toScale:scale];//图片根据imgV的frame进行重新缩放生成
+    imageView.image = newImg;
     
 }
 - (void)didReceiveMemoryWarning
@@ -70,9 +78,6 @@
     //Create a CIImage version of your photo
     CIImage* image = [CIImage imageWithCGImage:aImage.CGImage];
     
-    [imageView setTransform:CGAffineTransformMakeScale(1, -1)];
-    [self.view setTransform:CGAffineTransformMakeScale(1, -1)];
-    [imageView setFrame:CGRectMake(0, 0, imageView.image.size.width, imageView.image.size.height)];
     [self setImageViewFrame];
     
     //create a face detector
@@ -87,20 +92,20 @@
     NSArray* features = [detector featuresInImage:image];
     
     if ([features count]==0) {
-        NSLog(@">>>>> 啊啊啊啊啊啊 ～！！！");
+        NSLog(@">>>>> 人脸监测【失败】啦 ～！！！");
         return CGRectZero;
     }
     
-    NSLog(@">>>>> 哈哈哈哈哈～！！！>>>>>> ");
+    NSLog(@">>>>> 人脸监测【成功】～！！！>>>>>> ");
     
     for (CIFaceFeature *f in features)
     {
         //旋转180，仅y
         CGRect aRect = f.bounds;
-        //        aRect.origin.y = self.view.bounds.size.height - aRect.size.height - aRect.origin.y;//self.bounds.size
+        aRect.origin.y = self.view.bounds.size.height - aRect.size.height - aRect.origin.y;//self.bounds.size
         
         UIView *vv = [[UIView alloc]initWithFrame:aRect];
-        //        [vv setTransform:CGAffineTransformMakeScale(1, -1)];
+        [vv setTransform:CGAffineTransformMakeScale(1, -1)];
         vv.backgroundColor = [UIColor redColor];
         vv.alpha = 0.6;
         [self.view addSubview:vv];
@@ -111,9 +116,14 @@
         if (f.hasLeftEyePosition){
             printf("Left eye %g %g\n", f.leftEyePosition.x, f.leftEyePosition.y);
            
-            UIView *vv = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-            vv.center = f.leftEyePosition;
+            UIView *vv = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
+            //旋转180，仅y
+            CGPoint newCenter =  f.leftEyePosition;
+            newCenter.y = self.view.bounds.size.height-newCenter.y;
+            vv.center = newCenter;
+            
             vv.backgroundColor = [UIColor yellowColor];
+             [vv setTransform:CGAffineTransformMakeScale(1, -1)];
             vv.alpha = 0.6;
             [self.view addSubview:vv];
             [vv release];
@@ -122,9 +132,14 @@
         {
             printf("Right eye %g %g\n", f.rightEyePosition.x, f.rightEyePosition.y);
             
-            UIView *vv = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-            vv.center = f.rightEyePosition;
+            UIView *vv = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
+            //旋转180，仅y
+            CGPoint newCenter =  f.rightEyePosition;
+            newCenter.y = self.view.bounds.size.height-newCenter.y;
+            vv.center = newCenter;
+            
             vv.backgroundColor = [UIColor blueColor];
+             [vv setTransform:CGAffineTransformMakeScale(1, -1)];
             vv.alpha = 0.6;
             [self.view addSubview:vv];
             [vv release];
@@ -133,36 +148,37 @@
         {
             printf("Mouth %g %g\n", f.mouthPosition.x, f.mouthPosition.y);
            
-            UIView *vv = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-            vv.center = f.mouthPosition;
+            UIView *vv = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
+            //旋转180，仅y
+            CGPoint newCenter =  f.mouthPosition;
+            newCenter.y = self.view.bounds.size.height-newCenter.y;
+            vv.center = newCenter;
+            
             vv.backgroundColor = [UIColor greenColor];
+             [vv setTransform:CGAffineTransformMakeScale(1, -1)];
             vv.alpha = 0.6;
             [self.view addSubview:vv];
             [vv release];
         
         }
     }
-    
-//    for(CIFaceFeature* feature in features)
-//    {
-//        
-//        //旋转180，仅y
-//        CGRect aRect = feature.bounds;
-////        aRect.origin.y = self.view.bounds.size.height - aRect.size.height - aRect.origin.y;//self.bounds.size
-//        
-//        UIView *vv = [[UIView alloc]initWithFrame:aRect];
-////        [vv setTransform:CGAffineTransformMakeScale(1, -1)];
-//        vv.backgroundColor = [UIColor redColor];
-//        vv.alpha = 0.6;
-//        [self.view addSubview:vv];
-//        [vv release];
-//        
-////        return aRect;
-//        
-//    }
     return CGRectZero;
     
 }
+
+#pragma mark - ScaleImageSize
+//将图片进行缩放重新生成
+- (UIImage *) scaleImage:(UIImage *)image toScale:(float)scaleSize {
+    if (image) {
+        UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+        [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+        UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return scaledImage;
+    }
+    return nil;
+}
+
 
 - (void)showProgressIndicator:(NSString *)text {
 	//[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
