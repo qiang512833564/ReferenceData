@@ -49,7 +49,7 @@
 @end
 
 
-@interface FaceDetectViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface FaceDetectViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIActionSheetDelegate>
 {
     
     UIProgressHUD *progressHUD;
@@ -57,5 +57,7 @@
     UIImageView* imageView;
     UIImageView *newImageView ;//cropimageview
 }
+@property (retain, nonatomic) IBOutlet UIView *viewShow;
+@property (retain, nonatomic) IBOutlet UIImageView *imageView;
 @end
 
