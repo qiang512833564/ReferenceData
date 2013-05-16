@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreImage/CoreImage.h>
+#import "FaceDetectViewController.h"
 
 @interface FaceDetectAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) FaceDetectViewController *controller;
 @end

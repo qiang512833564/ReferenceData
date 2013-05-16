@@ -16,6 +16,14 @@
 		8B102E001675C77F00287224 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B102DFF1675C77F00287224 /* Default.png */; };
 		8B102E021675C77F00287224 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E011675C77F00287224 /* Default@2x.png */; };
 		8B102E041675C77F00287224 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E031675C77F00287224 /* Default-568h@2x.png */; };
+		8B102E0B1675C79D00287224 /* steves.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E0A1675C79D00287224 /* steves.jpg */; };
+		8B102E0D1675C7B900287224 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B102E0C1675C7B900287224 /* CoreImage.framework */; };
+		8B102E0F1675D11900287224 /* ian.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E0E1675D11900287224 /* ian.jpeg */; };
+		8B102E111675D24400287224 /* ian1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E101675D24400287224 /* ian1.png */; };
+		8B102E131675D2BB00287224 /* ian2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E121675D2BB00287224 /* ian2.png */; };
+		8B102E171675D3A700287224 /* FaceDetectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B102E151675D3A700287224 /* FaceDetectViewController.m */; };
+		8B102E181675D3A700287224 /* FaceDetectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E161675D3A700287224 /* FaceDetectViewController.xib */; };
+		8B102E1A1675E6F300287224 /* Tink.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E191675E6F300287224 /* Tink.aiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +40,15 @@
 		8B102DFF1675C77F00287224 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8B102E011675C77F00287224 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		8B102E031675C77F00287224 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8B102E0A1675C79D00287224 /* steves.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steves.jpg; sourceTree = "<group>"; };
+		8B102E0C1675C7B900287224 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		8B102E0E1675D11900287224 /* ian.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ian.jpeg; sourceTree = "<group>"; };
+		8B102E101675D24400287224 /* ian1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ian1.png; sourceTree = "<group>"; };
+		8B102E121675D2BB00287224 /* ian2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ian2.png; sourceTree = "<group>"; };
+		8B102E141675D3A700287224 /* FaceDetectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetectViewController.h; sourceTree = "<group>"; };
+		8B102E151675D3A700287224 /* FaceDetectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetectViewController.m; sourceTree = "<group>"; };
+		8B102E161675D3A700287224 /* FaceDetectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceDetectViewController.xib; sourceTree = "<group>"; };
+		8B102E191675E6F300287224 /* Tink.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Tink.aiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B102E0D1675C7B900287224 /* CoreImage.framework in Frameworks */,
 				8B102DEE1675C77F00287224 /* UIKit.framework in Frameworks */,
 				8B102DF01675C77F00287224 /* Foundation.framework in Frameworks */,
 				8B102DF21675C77F00287224 /* CoreGraphics.framework in Frameworks */,
@@ -68,6 +86,7 @@
 		8B102DEC1675C77F00287224 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B102E0C1675C7B900287224 /* CoreImage.framework */,
 				8B102DED1675C77F00287224 /* UIKit.framework */,
 				8B102DEF1675C77F00287224 /* Foundation.framework */,
 				8B102DF11675C77F00287224 /* CoreGraphics.framework */,
@@ -80,6 +99,9 @@
 			children = (
 				8B102DFC1675C77F00287224 /* FaceDetectAppDelegate.h */,
 				8B102DFD1675C77F00287224 /* FaceDetectAppDelegate.m */,
+				8B102E141675D3A700287224 /* FaceDetectViewController.h */,
+				8B102E151675D3A700287224 /* FaceDetectViewController.m */,
+				8B102E161675D3A700287224 /* FaceDetectViewController.xib */,
 				8B102DF41675C77F00287224 /* Supporting Files */,
 			);
 			path = FaceDetect;
@@ -88,6 +110,11 @@
 		8B102DF41675C77F00287224 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B102E191675E6F300287224 /* Tink.aiff */,
+				8B102E121675D2BB00287224 /* ian2.png */,
+				8B102E101675D24400287224 /* ian1.png */,
+				8B102E0E1675D11900287224 /* ian.jpeg */,
+				8B102E0A1675C79D00287224 /* steves.jpg */,
 				8B102DF51675C77F00287224 /* FaceDetect-Info.plist */,
 				8B102DF61675C77F00287224 /* InfoPlist.strings */,
 				8B102DF91675C77F00287224 /* main.m */,
@@ -155,6 +182,12 @@
 				8B102E001675C77F00287224 /* Default.png in Resources */,
 				8B102E021675C77F00287224 /* Default@2x.png in Resources */,
 				8B102E041675C77F00287224 /* Default-568h@2x.png in Resources */,
+				8B102E0B1675C79D00287224 /* steves.jpg in Resources */,
+				8B102E0F1675D11900287224 /* ian.jpeg in Resources */,
+				8B102E111675D24400287224 /* ian1.png in Resources */,
+				8B102E131675D2BB00287224 /* ian2.png in Resources */,
+				8B102E181675D3A700287224 /* FaceDetectViewController.xib in Resources */,
+				8B102E1A1675E6F300287224 /* Tink.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +200,7 @@
 			files = (
 				8B102DFA1675C77F00287224 /* main.m in Sources */,
 				8B102DFE1675C77F00287224 /* FaceDetectAppDelegate.m in Sources */,
+				8B102E171675D3A700287224 /* FaceDetectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +226,8 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Changming Li (HH8XZC7936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Changming Li (HH8XZC7936)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -206,6 +241,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "8DC64EB4-BD95-4470-897C-3FD739758611";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8DC64EB4-BD95-4470-897C-3FD739758611";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -218,7 +255,8 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Changming Li (HH8XZC7936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Changming Li (HH8XZC7936)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -226,6 +264,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "8DC64EB4-BD95-4470-897C-3FD739758611";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8DC64EB4-BD95-4470-897C-3FD739758611";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -234,10 +274,15 @@
 		8B102E081675C77F00287224 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Changming Li (HH8XZC7936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Changming Li (HH8XZC7936)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FaceDetect/FaceDetect-Prefix.pch";
 				INFOPLIST_FILE = "FaceDetect/FaceDetect-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8DC64EB4-BD95-4470-897C-3FD739758611";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8DC64EB4-BD95-4470-897C-3FD739758611";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -245,10 +290,15 @@
 		8B102E091675C77F00287224 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Changming Li (HH8XZC7936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Changming Li (HH8XZC7936)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FaceDetect/FaceDetect-Prefix.pch";
 				INFOPLIST_FILE = "FaceDetect/FaceDetect-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8DC64EB4-BD95-4470-897C-3FD739758611";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8DC64EB4-BD95-4470-897C-3FD739758611";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -272,6 +322,7 @@
 				8B102E091675C77F00287224 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
