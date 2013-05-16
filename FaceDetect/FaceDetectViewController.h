@@ -2,9 +2,11 @@
 //  FaceDetectViewController.h
 //  FaceDetect
 //
-//  Created by iObitLXF on 12/10/12.
-//  Copyright (c) 2012 iObitLXF. All rights reserved.
+//  Created by iObitLXF on 5/16/13.
+//  Copyright (c) 2013 iObitLXF. All rights reserved.
 //
+
+#import <UIKit/UIKit.h>
 
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -46,13 +48,14 @@
 - (void)dealloc;
 @end
 
+
 @interface FaceDetectViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
-   
+    
     UIProgressHUD *progressHUD;
     SystemSoundID alertSoundID;
     UIImageView* imageView;
     UIImageView *newImageView ;//cropimageview
-
 }
 @end
+

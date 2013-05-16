@@ -21,9 +21,11 @@
 		8B102E0F1675D11900287224 /* ian.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E0E1675D11900287224 /* ian.jpeg */; };
 		8B102E111675D24400287224 /* ian1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E101675D24400287224 /* ian1.png */; };
 		8B102E131675D2BB00287224 /* ian2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E121675D2BB00287224 /* ian2.png */; };
-		8B102E171675D3A700287224 /* FaceDetectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B102E151675D3A700287224 /* FaceDetectViewController.m */; };
-		8B102E181675D3A700287224 /* FaceDetectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E161675D3A700287224 /* FaceDetectViewController.xib */; };
 		8B102E1A1675E6F300287224 /* Tink.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 8B102E191675E6F300287224 /* Tink.aiff */; };
+		8B667E4A1744BB4500307228 /* FaceDetectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B667E491744BB4500307228 /* FaceDetectViewController.m */; };
+		8B667E4C1744C0AE00307228 /* img3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B667E4B1744C0AE00307228 /* img3.png */; };
+		8B667E4E1744C23D00307228 /* img1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8B667E4D1744C23D00307228 /* img1.jpeg */; };
+		8B667E501744C25700307228 /* img5.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B667E4F1744C25700307228 /* img5.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,10 +47,12 @@
 		8B102E0E1675D11900287224 /* ian.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ian.jpeg; sourceTree = "<group>"; };
 		8B102E101675D24400287224 /* ian1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ian1.png; sourceTree = "<group>"; };
 		8B102E121675D2BB00287224 /* ian2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ian2.png; sourceTree = "<group>"; };
-		8B102E141675D3A700287224 /* FaceDetectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetectViewController.h; sourceTree = "<group>"; };
-		8B102E151675D3A700287224 /* FaceDetectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetectViewController.m; sourceTree = "<group>"; };
-		8B102E161675D3A700287224 /* FaceDetectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceDetectViewController.xib; sourceTree = "<group>"; };
 		8B102E191675E6F300287224 /* Tink.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = Tink.aiff; sourceTree = "<group>"; };
+		8B667E481744BB4500307228 /* FaceDetectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetectViewController.h; sourceTree = "<group>"; };
+		8B667E491744BB4500307228 /* FaceDetectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetectViewController.m; sourceTree = "<group>"; };
+		8B667E4B1744C0AE00307228 /* img3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img3.png; sourceTree = "<group>"; };
+		8B667E4D1744C23D00307228 /* img1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img1.jpeg; sourceTree = "<group>"; };
+		8B667E4F1744C25700307228 /* img5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img5.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +103,8 @@
 			children = (
 				8B102DFC1675C77F00287224 /* FaceDetectAppDelegate.h */,
 				8B102DFD1675C77F00287224 /* FaceDetectAppDelegate.m */,
-				8B102E141675D3A700287224 /* FaceDetectViewController.h */,
-				8B102E151675D3A700287224 /* FaceDetectViewController.m */,
-				8B102E161675D3A700287224 /* FaceDetectViewController.xib */,
+				8B667E481744BB4500307228 /* FaceDetectViewController.h */,
+				8B667E491744BB4500307228 /* FaceDetectViewController.m */,
 				8B102DF41675C77F00287224 /* Supporting Files */,
 			);
 			path = FaceDetect;
@@ -110,6 +113,9 @@
 		8B102DF41675C77F00287224 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B667E4F1744C25700307228 /* img5.png */,
+				8B667E4D1744C23D00307228 /* img1.jpeg */,
+				8B667E4B1744C0AE00307228 /* img3.png */,
 				8B102E191675E6F300287224 /* Tink.aiff */,
 				8B102E121675D2BB00287224 /* ian2.png */,
 				8B102E101675D24400287224 /* ian1.png */,
@@ -186,8 +192,10 @@
 				8B102E0F1675D11900287224 /* ian.jpeg in Resources */,
 				8B102E111675D24400287224 /* ian1.png in Resources */,
 				8B102E131675D2BB00287224 /* ian2.png in Resources */,
-				8B102E181675D3A700287224 /* FaceDetectViewController.xib in Resources */,
 				8B102E1A1675E6F300287224 /* Tink.aiff in Resources */,
+				8B667E4C1744C0AE00307228 /* img3.png in Resources */,
+				8B667E4E1744C23D00307228 /* img1.jpeg in Resources */,
+				8B667E501744C25700307228 /* img5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +208,7 @@
 			files = (
 				8B102DFA1675C77F00287224 /* main.m in Sources */,
 				8B102DFE1675C77F00287224 /* FaceDetectAppDelegate.m in Sources */,
-				8B102E171675D3A700287224 /* FaceDetectViewController.m in Sources */,
+				8B667E4A1744BB4500307228 /* FaceDetectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
