@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wTE-cw-X4e">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <scenes>
+        <!--导航控制器-->
+        <scene sceneID="8Rq-dC-ZeS">
+            <objects>
+                <navigationController id="wTE-cw-X4e" userLabel="导航控制器" customClass="WXNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vxp-hc-PCS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="n8L-ak-1CC" kind="relationship" relationship="rootViewController" id="u3a-V2-xek"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cxd-yQ-wx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-682" y="262"/>
+        </scene>
+        <!--登录控制器-->
+        <scene sceneID="rlE-Zw-qsx">
+            <objects>
+                <viewController id="n8L-ak-1CC" userLabel="登录控制器" customClass="WXLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EBZ-ag-gRG"/>
+                        <viewControllerLayoutGuide type="bottom" id="nLk-JG-D1V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Yg1-Dw-VV2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SmV-SZ-m8O" userLabel="登录容器">
+                                <rect key="frame" x="160" y="154" width="280" height="280"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fts_default_headimage" translatesAutoresizingMaskIntoConstraints="NO" id="rUI-lf-RJj" userLabel="头像">
+                                        <rect key="frame" x="95" y="0.0" width="90" height="90"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1030103135" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFX-Rd-sNp" userLabel="帐号">
+                                        <rect key="frame" x="0.0" y="98" width="280" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1a-yi-yoz" userLabel="密码">
+                                        <rect key="frame" x="0.0" y="136" width="280" height="42"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="textChange:" destination="n8L-ak-1CC" eventType="editingChanged" id="sFb-u2-sWD"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKV-ho-leV">
+                                        <rect key="frame" x="0.0" y="183" width="280" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="登录" backgroundImage="fts_green_btn">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="fts_green_btn_HL"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="Y0Z-WT-kdC"/>
+                                    <constraint firstAttribute="width" constant="280" id="xWJ-vF-0gn"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="SmV-SZ-m8O" secondAttribute="centerX" id="YtR-vC-QXe"/>
+                            <constraint firstItem="SmV-SZ-m8O" firstAttribute="top" secondItem="EBZ-ag-gRG" secondAttribute="bottom" constant="90" id="xXU-R5-YEG"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="opQ-k7-Jli" appends="YES" id="O1S-bi-SNl"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="登录" id="QKH-Cw-isA"/>
+                    <connections>
+                        <outlet property="loginBtn" destination="vKV-ho-leV" id="xwq-dI-UMD"/>
+                        <outlet property="loginContainer" destination="SmV-SZ-m8O" id="euR-CJ-vNn"/>
+                        <outlet property="pwdField" destination="Y1a-yi-yoz" id="rcr-hO-oWl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1nd-Eu-lk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="opQ-k7-Jli">
+                    <connections>
+                        <action selector="panView:" destination="n8L-ak-1CC" id="7mE-wg-tqk"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="45" y="262"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fts_default_headimage" width="36" height="36"/>
+        <image name="fts_green_btn" width="8" height="13"/>
+        <image name="fts_green_btn_HL" width="8" height="13"/>
+    </resources>
+</document>
