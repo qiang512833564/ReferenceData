@@ -12,6 +12,7 @@
 		B0050C5A1A1BA48C00D0C5A8 /* Card_Lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0050C591A1BA48C00D0C5A8 /* Card_Lock@2x.png */; };
 		B0050C5D1A1BA68D00D0C5A8 /* UIImage+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0050C5C1A1BA68D00D0C5A8 /* UIImage+WF.m */; };
 		B009D4A71A1C7F380036F87E /* WXRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */; };
+		B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */; };
 		B0A0B94D1A1B591900315EE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94B1A1B591900315EE5 /* Main.storyboard */; };
 		B0A0B94F1A1B591900315EE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94E1A1B591900315EE5 /* Images.xcassets */; };
 		B0A0B9521A1B591900315EE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B9501A1B591900315EE5 /* LaunchScreen.xib */; };
@@ -45,6 +46,8 @@
 		B0050C5E1A1BA7D600D0C5A8 /* CategoryWF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryWF.h; sourceTree = "<group>"; };
 		B009D4A51A1C7F380036F87E /* WXRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXRegisterViewController.h; sourceTree = "<group>"; };
 		B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXRegisterViewController.m; sourceTree = "<group>"; };
+		B009D4A81A1CD5160036F87E /* WXOtherLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXOtherLoginViewController.h; sourceTree = "<group>"; };
+		B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXOtherLoginViewController.m; sourceTree = "<group>"; };
 		B0A0B93E1A1B591900315EE5 /* WeiXin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeiXin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0A0B9421A1B591900315EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0A0B94C1A1B591900315EE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -221,6 +224,8 @@
 				B0A0B97A1A1B8D6500315EE5 /* WXLoginViewController.m */,
 				B009D4A51A1C7F380036F87E /* WXRegisterViewController.h */,
 				B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */,
+				B009D4A81A1CD5160036F87E /* WXOtherLoginViewController.h */,
+				B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				B0050C561A1B9FFA00D0C5A8 /* UIButton+WF.m in Sources */,
 				B0B647801A1C30A400B61286 /* WXTabBarController.m in Sources */,
 				B0A0B96F1A1B74C900315EE5 /* AppDelegate.m in Sources */,
+				B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */,
 				B009D4A71A1C7F380036F87E /* WXRegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
