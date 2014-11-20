@@ -85,4 +85,9 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+-(void)dealloc{
+    WXLog(@"xx");
+}
+
 @end

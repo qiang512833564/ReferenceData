@@ -185,7 +185,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Off-xJ-Bsa" userLabel="其它方式登录框容器">
                                 <rect key="frame" x="184" y="92" width="232" height="184"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="heK-k3-hdB" userLabel="手机">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="18518296880" placeholder="请输入手机号码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="heK-k3-hdB" userLabel="手机">
                                         <rect key="frame" x="0.0" y="8" width="232" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="bZb-Nl-hGk"/>
@@ -196,7 +196,7 @@
                                             <action selector="textChange:" destination="HIs-XN-O0H" eventType="editingChanged" id="GEB-pM-MhM"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入注册密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNZ-ls-Rxn" userLabel="密码">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="请输入注册密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNZ-ls-Rxn" userLabel="密码">
                                         <rect key="frame" x="0.0" y="58" width="232" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="6Q2-3W-5BZ"/>
@@ -219,7 +219,7 @@
                                         </state>
                                         <state key="highlighted" backgroundImage="fts_green_btn_HL"/>
                                         <connections>
-                                            <action selector="login:" destination="HIs-XN-O0H" eventType="touchUpInside" id="zNQ-ZE-KhA"/>
+                                            <action selector="login" destination="HIs-XN-O0H" eventType="touchUpInside" id="1xv-pG-ZNv"/>
                                         </connections>
                                     </button>
                                 </subviews>
