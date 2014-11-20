@@ -8,6 +8,7 @@
 
 #import "WXBaseLoginViewController.h"
 #import "AppDelegate.h"
+#import "WXOtherLoginViewController.h"
 
 @interface WXBaseLoginViewController ()
 
@@ -40,11 +41,15 @@
                 [MBProgressHUD showSuccess:@"登录成功" toView:self.view ];
                 
                 // 模态窗口消失
-                [self dismissViewControllerAnimated:NO completion:nil];
-                
+                if ([self isKindOfClass:[WXOtherLoginViewController class]]) {
+                     [self dismissViewControllerAnimated:NO completion:nil];
+                }
+               
                 // 进到主界面
-                [self enterMainStoryboard];
+                [UIStoryboard showInitialVCWithName:@"Main"];
                 
+                // 登录成功
+                [WXUserInfo sharedWXUserInfo].login = YES;
                 // 保存登录信息到沙盒
                 [[WXUserInfo sharedWXUserInfo] synchronizeToSandBox];
                 break;
@@ -58,11 +63,5 @@
     });
 }
 
--(void)enterMainStoryboard{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    // 切换跟控制器
-    id initalVc = [storyboard instantiateInitialViewController];
-    self.view.window.rootViewController = initalVc;
-}
+
 @end

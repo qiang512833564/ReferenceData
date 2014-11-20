@@ -46,11 +46,11 @@
  4 登录成功 通知用户上线
  */
 -(void)notifyUserOnline;
-/**
- 5 登录成功进入主界面
- */
--(void)enterMainStoryboard;
 
+/**
+ 5 通知用户下线
+ */
+-(void)notifyUserOffline;
 
 
 #pragma mark 成员属性
@@ -65,6 +65,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // 程序启动时调用一次即可
+    [[WXUserInfo sharedWXUserInfo] loadDataFromSandBox];
+    
+    if([WXUserInfo sharedWXUserInfo].isLogin){
+        self.window.rootViewController = [UIStoryboard initialVCWithName:@"Main"];
+        // 自动登录服务器
+        [self connectToServer];
+    }
     return YES;
 }
 
@@ -74,6 +83,8 @@
 -(void)setupXmppStream{
     // 创建xmppStream对象
     self.xmppStream = [[XMPPStream alloc] init];
+    
+    self.xmppStream.enableBackgroundingOnSocket = YES;
     
     // 设置代理【所有跟服务交互后，返回结果通过代理方式通知】
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
@@ -93,7 +104,8 @@
     
     // 提交服务器前
     // 1.设置xmppStream要交互的主机地址与端口
-    self.xmppStream.hostName = userInfo.xmppDomain;
+//    self.xmppStream.hostName = userInfo.xmppDomain;
+    self.xmppStream.hostName = userInfo.xmppHostIP;
     // 默认是5222 可以不用设置
     self.xmppStream.hostPort = 5222;
     
@@ -141,17 +153,11 @@
     [self.xmppStream sendElement:presence];
 }
 
-#pragma mark 5 登录成功进入主界面
--(void)enterMainStoryboard{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    // 切换跟控制器
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        id initalVc = [storyboard instantiateInitialViewController];
-        self.window.rootViewController = initalVc;
-    });
-    
+#pragma mark  5 通知用户下线
+-(void)notifyUserOffline{
+    WXLog(@"通知用户下线");
+    XMPPPresence *offline = [XMPPPresence presenceWithType:@"unavailable"];
+    [self.xmppStream sendElement:offline];
 }
 
 #pragma mark 发送注册密码到服务器
@@ -162,6 +168,8 @@
     
     WXLog(@"发送注册密码到服务器 %@",error);
 }
+
+
 
 #pragma mark -公共方法
 #pragma mark 用户登录
@@ -181,6 +189,23 @@
     
     // 连接到服务器，成功后，发送密码授权
     [self connectToServer];
+}
+
+#pragma mark 用户注销
+-(void)userLogout{
+    WXLog(@"用户注销");
+    // 0.通知用户下线
+    [self notifyUserOffline];
+    
+    // 1.断开连接
+    [self.xmppStream disconnect];
+    
+    // 2.回到登录界面
+    [UIStoryboard showInitialVCWithName:@"Login"];
+    
+    // 3.取消登录状态
+    [WXUserInfo sharedWXUserInfo].login = NO;
+    [[WXUserInfo sharedWXUserInfo] synchronizeToSandBox];
 }
 
 #pragma mark -XMPPStream代理
@@ -237,5 +262,11 @@
     if (self.resultBlock) {
         _resultBlock(XMPPResultTypeRegisterFailure);
     }
+}
+
+-(void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+    NSLog(@"%@",message);
+    
+
 }
 @end

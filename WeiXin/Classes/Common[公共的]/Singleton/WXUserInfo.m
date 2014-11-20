@@ -9,7 +9,9 @@
 #import "WXUserInfo.h"
 #define UserNameKey @"USER_NAME"
 #define PwdKey @"PASSWORD"
+#define LoginKey @"Login"
 static NSString *xmppDomain = @"teacher.local";
+static NSString *xmppHostIP = @"192.168.95.102";
 @implementation WXUserInfo
 singleton_implementation(WXUserInfo);
 
@@ -18,11 +20,23 @@ singleton_implementation(WXUserInfo);
     return xmppDomain;
 }
 
+-(NSString *)xmppHostIP{
+    return xmppHostIP;
+}
+
 -(void)synchronizeToSandBox{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.loginUserName forKey:UserNameKey];
     [defaults setObject:self.loginPwd forKey:PwdKey];
+    [defaults setBool:self.login forKey:LoginKey];
     [defaults synchronize];
+}
+
+-(void)loadDataFromSandBox{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.loginUserName = [defaults objectForKey:UserNameKey];
+    self.loginPwd = [defaults objectForKey:PwdKey];
+    self.login = [defaults boolForKey:LoginKey];
 }
 
 @end

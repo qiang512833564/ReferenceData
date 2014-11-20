@@ -159,6 +159,8 @@
 		B0FABB811A1D9AD90054992D /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B0FABB7D1A1D9AD90054992D /* MBProgressHUD.bundle */; };
 		B0FABB821A1D9AD90054992D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB7F1A1D9AD90054992D /* MBProgressHUD.m */; };
 		B0FABB851A1DCE0A0054992D /* WXBaseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB841A1DCE0A0054992D /* WXBaseLoginViewController.m */; };
+		B0FABB8A1A1DE7690054992D /* WXMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB891A1DE7690054992D /* WXMeViewController.m */; };
+		B0FABB8D1A1DEC200054992D /* UIStoryboard+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB8C1A1DEC200054992D /* UIStoryboard+WF.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -481,6 +483,10 @@
 		B0FABB7F1A1D9AD90054992D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		B0FABB831A1DCE0A0054992D /* WXBaseLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXBaseLoginViewController.h; sourceTree = "<group>"; };
 		B0FABB841A1DCE0A0054992D /* WXBaseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXBaseLoginViewController.m; sourceTree = "<group>"; };
+		B0FABB881A1DE7690054992D /* WXMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMeViewController.h; sourceTree = "<group>"; };
+		B0FABB891A1DE7690054992D /* WXMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMeViewController.m; sourceTree = "<group>"; };
+		B0FABB8B1A1DEC200054992D /* UIStoryboard+WF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+WF.h"; sourceTree = "<group>"; };
+		B0FABB8C1A1DEC200054992D /* UIStoryboard+WF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+WF.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -587,6 +593,7 @@
 				B0A0B96B1A1B749B00315EE5 /* Others */,
 				B0A0B96A1A1B5A2300315EE5 /* Login */,
 				B0A0B9691A1B5A1000315EE5 /* Main */,
+				B0FABB861A1DE7080054992D /* Me[我] */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -672,6 +679,8 @@
 				B0050C5B1A1BA68D00D0C5A8 /* UIImage+WF.h */,
 				B0050C5C1A1BA68D00D0C5A8 /* UIImage+WF.m */,
 				B0050C5E1A1BA7D600D0C5A8 /* CategoryWF.h */,
+				B0FABB8B1A1DEC200054992D /* UIStoryboard+WF.h */,
+				B0FABB8C1A1DEC200054992D /* UIStoryboard+WF.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1500,6 +1509,24 @@
 			path = MBProgessHUD;
 			sourceTree = "<group>";
 		};
+		B0FABB861A1DE7080054992D /* Me[我] */ = {
+			isa = PBXGroup;
+			children = (
+				B0FABB871A1DE74A0054992D /* Controllers */,
+			);
+			name = "Me[我]";
+			path = Me;
+			sourceTree = "<group>";
+		};
+		B0FABB871A1DE74A0054992D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B0FABB881A1DE7690054992D /* WXMeViewController.h */,
+				B0FABB891A1DE7690054992D /* WXMeViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1606,6 +1633,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0FABB8D1A1DEC200054992D /* UIStoryboard+WF.m in Sources */,
 				B0FABAFC1A1D78FE0054992D /* XMPPXOAuth2Google.m in Sources */,
 				B0FABB081A1D78FE0054992D /* XMPPBandwidthMonitor.m in Sources */,
 				B0FABB131A1D78FE0054992D /* XMPPRosterMemoryStorage.m in Sources */,
@@ -1645,6 +1673,7 @@
 				B0FABB591A1D78FE0054992D /* NSXMLElement+XEP_0203.m in Sources */,
 				B0FABB2C1A1D78FE0054992D /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
 				B0FABB211A1D78FE0054992D /* XMPPRoomHybrid.xcdatamodeld in Sources */,
+				B0FABB8A1A1DE7690054992D /* WXMeViewController.m in Sources */,
 				B0FABB0B1A1D78FE0054992D /* XMPPProcessOne.m in Sources */,
 				B0050C5D1A1BA68D00D0C5A8 /* UIImage+WF.m in Sources */,
 				B0FABB1F1A1D78FE0054992D /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,

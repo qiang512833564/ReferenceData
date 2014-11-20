@@ -110,7 +110,7 @@
         <!--我-->
         <scene sceneID="0Kp-em-wQx">
             <objects>
-                <tableViewController id="Lkp-Bz-7h8" userLabel="我" sceneMemberID="viewController">
+                <tableViewController id="Lkp-Bz-7h8" userLabel="我" customClass="WXMeViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rCS-nH-yBL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,7 +128,20 @@
                             <outlet property="delegate" destination="Lkp-Bz-7h8" id="9Mq-2b-LFx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="我" id="nZZ-V5-iGj"/>
+                    <navigationItem key="navigationItem" title="我" id="nZZ-V5-iGj">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="qtM-Mu-uAm">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jN1-J2-x3W">
+                                <rect key="frame" x="534" y="8" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="注销">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutBtnClick" destination="Lkp-Bz-7h8" eventType="touchUpInside" id="JUs-BD-eoQ"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HJR-S9-CeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

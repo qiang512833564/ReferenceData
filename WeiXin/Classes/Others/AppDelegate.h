@@ -37,5 +37,10 @@ typedef void (^ResultBlock)(XMPPResultType type);
 -(void)userRegisterWithResultBlock:(ResultBlock)resultBlock;
 
 
+/**
+ 用户注销
+ */
+-(void)userLogout;
+
 @end
 
