@@ -27,6 +27,13 @@
     
     // 设置密码输入框的样式
     [self setupPwdFieldStyle];
+    
+    // 设置上次登录帐号
+    NSString *lastLoginUsername = [WXUserInfo sharedWXUserInfo].loginUserName;
+    if (lastLoginUsername) {
+        self.phoneLabel.text = lastLoginUsername;
+    }
+    
    
 }
 

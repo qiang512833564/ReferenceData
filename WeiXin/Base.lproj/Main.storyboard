@@ -29,7 +29,7 @@
         <!--微信-->
         <scene sceneID="XGe-1o-QIe">
             <objects>
-                <tableViewController id="im2-GN-xf9" userLabel="微信" sceneMemberID="viewController">
+                <tableViewController id="im2-GN-xf9" userLabel="微信" customClass="WXHistoryViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rzc-CI-g5q">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,22 @@
                             <outlet property="delegate" destination="im2-GN-xf9" id="Nlx-66-I3c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="微信" id="YqG-cr-iGc"/>
+                    <navigationItem key="navigationItem" title="微信" id="YqG-cr-iGc">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="4Ww-8m-Xme">
+                            <view key="customView" contentMode="scaleToFill" id="APr-An-7GE">
+                                <rect key="frame" x="16" y="5" width="80" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="jtc-Sf-0mz">
+                                        <rect key="frame" x="8" y="5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="indicator" destination="jtc-Sf-0mz" id="lpC-2X-Fqf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5dS-Bp-zGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -129,17 +144,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="我" id="nZZ-V5-iGj">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="qtM-Mu-uAm">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jN1-J2-x3W">
-                                <rect key="frame" x="534" y="8" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="注销">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutBtnClick" destination="Lkp-Bz-7h8" eventType="touchUpInside" id="JUs-BD-eoQ"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="注销" id="scq-tH-e0V">
+                            <connections>
+                                <action selector="logoutBtnClick" destination="Lkp-Bz-7h8" id="1bn-VL-YQ4"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>

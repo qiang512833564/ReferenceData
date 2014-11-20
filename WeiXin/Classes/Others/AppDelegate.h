@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
+    XMPPResultTypeConnecting,//连接中....
     XMPPResultTypeLoginSuccess,//登录成功
     XMPPResultTypeLoginFailure,//登录失败
     XMPPResultTypeNetError,//网络不给力
@@ -17,6 +18,11 @@ typedef enum {
 }XMPPResultType;
 
 typedef void (^ResultBlock)(XMPPResultType type);
+
+
+//微信自动登录状态通知
+static NSString *WXAutoLoginStatusNotification = @"WXAutoLoginStatusNotification";
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -13,6 +13,7 @@
 		B0050C5D1A1BA68D00D0C5A8 /* UIImage+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0050C5C1A1BA68D00D0C5A8 /* UIImage+WF.m */; };
 		B009D4A71A1C7F380036F87E /* WXRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */; };
 		B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */; };
+		B09AAC541A1E1C3A008C3638 /* WXHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */; };
 		B0A0B94D1A1B591900315EE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94B1A1B591900315EE5 /* Main.storyboard */; };
 		B0A0B94F1A1B591900315EE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94E1A1B591900315EE5 /* Images.xcassets */; };
 		B0A0B9521A1B591900315EE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B9501A1B591900315EE5 /* LaunchScreen.xib */; };
@@ -185,6 +186,8 @@
 		B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXRegisterViewController.m; sourceTree = "<group>"; };
 		B009D4A81A1CD5160036F87E /* WXOtherLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXOtherLoginViewController.h; sourceTree = "<group>"; };
 		B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXOtherLoginViewController.m; sourceTree = "<group>"; };
+		B09AAC521A1E1C3A008C3638 /* WXHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXHistoryViewController.h; path = WeiXin/Classes/WeiXin/WXHistoryViewController.h; sourceTree = SOURCE_ROOT; };
+		B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXHistoryViewController.m; path = WeiXin/Classes/WeiXin/WXHistoryViewController.m; sourceTree = SOURCE_ROOT; };
 		B0A0B93E1A1B591900315EE5 /* WeiXin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeiXin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0A0B9421A1B591900315EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0A0B94C1A1B591900315EE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -527,6 +530,25 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		B09AAC511A1E19EA008C3638 /* WeiXin[微信] */ = {
+			isa = PBXGroup;
+			children = (
+				B09AAC551A1E1C47008C3638 /* Controllers */,
+			);
+			name = "WeiXin[微信]";
+			path = WeiXin;
+			sourceTree = "<group>";
+		};
+		B09AAC551A1E1C47008C3638 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B09AAC521A1E1C3A008C3638 /* WXHistoryViewController.h */,
+				B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */,
+			);
+			name = Controllers;
+			path = WXHistoryViewController;
+			sourceTree = "<group>";
+		};
 		B0A0B9351A1B591900315EE5 = {
 			isa = PBXGroup;
 			children = (
@@ -551,8 +573,8 @@
 			isa = PBXGroup;
 			children = (
 				B0A0B9681A1B5A0C00315EE5 /* Classes */,
-				B0A0B94E1A1B591900315EE5 /* Images.xcassets */,
 				B0A0B9501A1B591900315EE5 /* LaunchScreen.xib */,
+				B0A0B94E1A1B591900315EE5 /* Images.xcassets */,
 				B0A0B9411A1B591900315EE5 /* Supporting Files */,
 			);
 			path = WeiXin;
@@ -593,6 +615,7 @@
 				B0A0B96B1A1B749B00315EE5 /* Others */,
 				B0A0B96A1A1B5A2300315EE5 /* Login */,
 				B0A0B9691A1B5A1000315EE5 /* Main */,
+				B09AAC511A1E19EA008C3638 /* WeiXin[微信] */,
 				B0FABB861A1DE7080054992D /* Me[我] */,
 			);
 			path = Classes;
@@ -1717,6 +1740,7 @@
 				B0FABB411A1D78FE0054992D /* XMPPMessage+XEP_0085.m in Sources */,
 				B0FABB3B1A1D78FE0054992D /* XMPPPubSub.m in Sources */,
 				B0FABB381A1D78FE0054992D /* NSXMLElement+XEP_0059.m in Sources */,
+				B09AAC541A1E1C3A008C3638 /* WXHistoryViewController.m in Sources */,
 				B0FABB3C1A1D78FE0054992D /* TURNSocket.m in Sources */,
 				B0FABB5B1A1D78FE0054992D /* XMPPAttentionModule.m in Sources */,
 				B0FABB431A1D78FE0054992D /* XMPPTransports.m in Sources */,

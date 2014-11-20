@@ -71,8 +71,11 @@
     
     if([WXUserInfo sharedWXUserInfo].isLogin){
         self.window.rootViewController = [UIStoryboard initialVCWithName:@"Main"];
-        // 自动登录服务器
-        [self connectToServer];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 自动登录服务器
+            [self connectToServer];
+        });
+        
     }
     return YES;
 }
@@ -104,8 +107,8 @@
     
     // 提交服务器前
     // 1.设置xmppStream要交互的主机地址与端口
-//    self.xmppStream.hostName = userInfo.xmppDomain;
-    self.xmppStream.hostName = userInfo.xmppHostIP;
+    self.xmppStream.hostName = userInfo.xmppDomain;
+//    self.xmppStream.hostName = userInfo.xmppHostIP;
     // 默认是5222 可以不用设置
     self.xmppStream.hostPort = 5222;
     
@@ -133,6 +136,9 @@
     NSError *error = nil;
     [self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error];
     WXLog(@"%@",error);
+    
+    // 通知正在连接中
+    [self postNotificationWithResultType:XMPPResultTypeConnecting];
 }
 
 #pragma mark 3 发送登录密码到服务器【代理返回连接成功才执行此步骤】
@@ -169,7 +175,11 @@
     WXLog(@"发送注册密码到服务器 %@",error);
 }
 
-
+#pragma mark  发送登录状态的通知
+-(void)postNotificationWithResultType:(XMPPResultType)type{
+    NSDictionary *userInfo = @{@"type":@(type)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:WXAutoLoginStatusNotification object:nil userInfo:userInfo];
+}
 
 #pragma mark -公共方法
 #pragma mark 用户登录
@@ -226,6 +236,10 @@
 #pragma mark 客户端断开与主机的连接
 -(void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error{
     WXLog(@"与服务器断开连接");
+    if (error) {
+        // 通知连接失败
+        [self postNotificationWithResultType:XMPPResultTypeNetError];
+    }
 }
 
 #pragma mark 授权失败
@@ -234,6 +248,9 @@
     if (self.resultBlock) {
         _resultBlock(XMPPResultTypeLoginFailure);
     }
+    
+    // 通知登录成功
+    [self postNotificationWithResultType:XMPPResultTypeLoginFailure];
 }
 
 #pragma mark 授权成功
@@ -246,6 +263,9 @@
         _resultBlock(XMPPResultTypeLoginSuccess);
     }
     
+    // 通知登录成功
+    [self postNotificationWithResultType:XMPPResultTypeLoginSuccess];
+
 }
 #pragma mark 注册成功
 -(void)xmppStreamDidRegister:(XMPPStream *)sender{
