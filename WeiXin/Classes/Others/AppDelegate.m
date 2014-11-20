@@ -77,8 +77,16 @@
         });
         
     }
+    
+    // 注册通知
+    if ([UIDevice currentDevice].systemVersion.doubleValue >= 8.0) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    
     return YES;
 }
+
 
 
 #pragma mark -私有方法
@@ -107,8 +115,8 @@
     
     // 提交服务器前
     // 1.设置xmppStream要交互的主机地址与端口
-    self.xmppStream.hostName = userInfo.xmppDomain;
-//    self.xmppStream.hostName = userInfo.xmppHostIP;
+//    self.xmppStream.hostName = userInfo.xmppDomain;
+    self.xmppStream.hostName = userInfo.xmppHostIP;
     // 默认是5222 可以不用设置
     self.xmppStream.hostPort = 5222;
     
@@ -285,8 +293,19 @@
 }
 
 -(void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
-    NSLog(@"%@",message);
     
+    // 正常显示信息
+    if([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive){
+    
+        NSLog(@"%@",message);
+    }else{
+        // 本地通知
+        UILocalNotification *localNot = [[UILocalNotification alloc] init];
+        localNot.fireDate = [NSDate date];
+        localNot.alertBody = [NSString stringWithFormat:@"%@\n%@",message.from.bare,message.body];
+        localNot.soundName = @"default";
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNot];
+    }
 
 }
 @end
