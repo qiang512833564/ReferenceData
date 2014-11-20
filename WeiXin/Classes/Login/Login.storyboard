@@ -34,6 +34,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTb-6h-PV2">
+                                <rect key="frame" x="254" y="559" width="93" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="zZy-I8-g2p"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="其它方式登录>">
+                                    <color key="titleColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aXU-01-0ZD" kind="presentation" identifier="OtherLoginNavSegue" id="hMP-dv-h27"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SmV-SZ-m8O" userLabel="登录容器">
                                 <rect key="frame" x="160" y="154" width="280" height="280"/>
                                 <subviews>
@@ -63,6 +77,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="fts_green_btn_HL"/>
+                                        <connections>
+                                            <action selector="loginBtnClick:" destination="n8L-ak-1CC" eventType="touchUpInside" id="D5F-xW-J0K"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrZ-Q9-lqw">
                                         <rect key="frame" x="71" y="233" width="39" height="20"/>
@@ -95,20 +112,6 @@
                                     <constraint firstAttribute="width" constant="280" id="xWJ-vF-0gn"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTb-6h-PV2">
-                                <rect key="frame" x="254" y="559" width="93" height="27"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="zZy-I8-g2p"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="其它方式登录>">
-                                    <color key="titleColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="aXU-01-0ZD" kind="presentation" id="hMP-dv-h27"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -126,6 +129,7 @@
                     <connections>
                         <outlet property="loginBtn" destination="vKV-ho-leV" id="xwq-dI-UMD"/>
                         <outlet property="loginContainer" destination="SmV-SZ-m8O" id="euR-CJ-vNn"/>
+                        <outlet property="phoneLabel" destination="wFX-Rd-sNp" id="Rct-Rb-2R3"/>
                         <outlet property="pwdField" destination="Y1a-yi-yoz" id="rcr-hO-oWl"/>
                     </connections>
                 </viewController>
@@ -219,7 +223,7 @@
                                         </state>
                                         <state key="highlighted" backgroundImage="fts_green_btn_HL"/>
                                         <connections>
-                                            <action selector="login" destination="HIs-XN-O0H" eventType="touchUpInside" id="1xv-pG-ZNv"/>
+                                            <action selector="loginBtnClick" destination="HIs-XN-O0H" eventType="touchUpInside" id="DRF-OG-Rco"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -272,7 +276,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r02-ft-QKY" userLabel="注册框容器">
                                 <rect key="frame" x="184" y="104" width="232" height="184"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRN-sS-H34" userLabel="手机">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="18518296880" placeholder="请输入手机号码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRN-sS-H34" userLabel="手机">
                                         <rect key="frame" x="0.0" y="8" width="232" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="J6P-XR-EDN"/>
@@ -283,7 +287,7 @@
                                             <action selector="textChange:" destination="SfH-dS-epG" eventType="editingChanged" id="zCW-Jt-GTr"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入注册密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bDG-CD-klz" userLabel="密码">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="请输入注册密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bDG-CD-klz" userLabel="密码">
                                         <rect key="frame" x="0.0" y="58" width="232" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="oSU-L5-8Ui"/>
@@ -305,6 +309,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="fts_green_btn_HL"/>
+                                        <connections>
+                                            <action selector="userRegister" destination="SfH-dS-epG" eventType="touchUpInside" id="7P2-La-S29"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

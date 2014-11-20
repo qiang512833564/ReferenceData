@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 Fung. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "WXBaseLoginViewController.h"
 
-@interface WXOtherLoginViewController : UIViewController
+@interface WXOtherLoginViewController : WXBaseLoginViewController
 
 @end

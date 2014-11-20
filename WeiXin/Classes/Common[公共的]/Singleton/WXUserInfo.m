@@ -20,7 +20,7 @@ singleton_implementation(WXUserInfo);
 
 -(void)synchronizeToSandBox{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.loginUser forKey:UserNameKey];
+    [defaults setObject:self.loginUserName forKey:UserNameKey];
     [defaults setObject:self.loginPwd forKey:PwdKey];
     [defaults synchronize];
 }

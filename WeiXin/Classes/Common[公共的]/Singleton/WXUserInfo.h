@@ -14,8 +14,12 @@ singleton_interface(WXUserInfo);
 
 
 @property(nonatomic,copy,readonly)NSString *xmppDomain;//xmpp服务器域名
-@property(nonatomic,copy)NSString *loginUser;//登录账号
+@property(nonatomic,copy)NSString *loginUserName;//登录账号
 @property(nonatomic,copy)NSString *loginPwd;//登录密码
+
+
+@property(nonatomic,copy)NSString *registerUserName;//注册账号
+@property(nonatomic,copy)NSString *registerPwd;//注册密码
 
 /**
  数据保存到沙盒，保存运行内存与沙盒的数据同步

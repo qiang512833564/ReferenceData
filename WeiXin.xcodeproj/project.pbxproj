@@ -158,6 +158,7 @@
 		B0FABB801A1D9AD90054992D /* MBProgressHUD+HM.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB7C1A1D9AD90054992D /* MBProgressHUD+HM.m */; };
 		B0FABB811A1D9AD90054992D /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B0FABB7D1A1D9AD90054992D /* MBProgressHUD.bundle */; };
 		B0FABB821A1D9AD90054992D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB7F1A1D9AD90054992D /* MBProgressHUD.m */; };
+		B0FABB851A1DCE0A0054992D /* WXBaseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB841A1DCE0A0054992D /* WXBaseLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -478,6 +479,8 @@
 		B0FABB7D1A1D9AD90054992D /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		B0FABB7E1A1D9AD90054992D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		B0FABB7F1A1D9AD90054992D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		B0FABB831A1DCE0A0054992D /* WXBaseLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXBaseLoginViewController.h; sourceTree = "<group>"; };
+		B0FABB841A1DCE0A0054992D /* WXBaseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXBaseLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -637,12 +640,14 @@
 		B0A0B9781A1B8D4400315EE5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B0FABB831A1DCE0A0054992D /* WXBaseLoginViewController.h */,
+				B0FABB841A1DCE0A0054992D /* WXBaseLoginViewController.m */,
 				B0A0B9791A1B8D6500315EE5 /* WXLoginViewController.h */,
 				B0A0B97A1A1B8D6500315EE5 /* WXLoginViewController.m */,
-				B009D4A51A1C7F380036F87E /* WXRegisterViewController.h */,
-				B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */,
 				B009D4A81A1CD5160036F87E /* WXOtherLoginViewController.h */,
 				B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */,
+				B009D4A51A1C7F380036F87E /* WXRegisterViewController.h */,
+				B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1677,6 +1682,7 @@
 				B0FABB421A1D78FE0054992D /* XMPPSoftwareVersion.m in Sources */,
 				B0FABB641A1D78FE0054992D /* XMPPIDTracker.m in Sources */,
 				B0A0B96F1A1B74C900315EE5 /* AppDelegate.m in Sources */,
+				B0FABB851A1DCE0A0054992D /* WXBaseLoginViewController.m in Sources */,
 				B0FABAFE1A1D78FE0054992D /* NSNumber+XMPP.m in Sources */,
 				B0FABB541A1D78FE0054992D /* XMPPBlocking.m in Sources */,
 				B0FABB411A1D78FE0054992D /* XMPPMessage+XEP_0085.m in Sources */,

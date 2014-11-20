@@ -14,8 +14,9 @@
  1 初始化XmppStream核心类
  2 连接到服务器【连接服务器已经传送了账号】
  3 发送登录密码到服务器【代理返回连接成功才执行此步骤】
- 4 登录成功进入主界面
- 5 登录失败提示用户名密码错误
+ 4 登录成功 通知用户上线
+ 5 登录成功 进入主界面
+ 6 登录失败提示用户名密码错误
  */
 
 @interface AppDelegate ()<XMPPStreamDelegate>
@@ -37,14 +38,19 @@
 -(void)sendLoginPwdToServer;
 
 /**
- 4 登录成功进入主界面
+  发送注册密码到服务器【代理返回连接成功才执行此步骤】
+ */
+-(void)sendRegisterPwdToServer;
+
+/**
+ 4 登录成功 通知用户上线
+ */
+-(void)notifyUserOnline;
+/**
+ 5 登录成功进入主界面
  */
 -(void)enterMainStoryboard;
 
-/**
- 5 登录失败提示用户名密码错误
- */
--(void)showErrorMsg:(NSString *)msg;
 
 
 #pragma mark 成员属性
@@ -93,12 +99,28 @@
     
     
     // 2.设置登录的账号
-    XMPPJID *myJid = [XMPPJID jidWithUser:userInfo.loginUser domain:userInfo.xmppDomain resource:nil];
+    XMPPJID *myJid = nil;
+    if (!self.isUserRegister) {
+         myJid = [XMPPJID jidWithUser:userInfo.loginUserName domain:userInfo.xmppDomain resource:nil];
+    }else{
+        // 设置注册账号
+        myJid = [XMPPJID jidWithUser:userInfo.registerUserName domain:userInfo.xmppDomain resource:nil];
+    }
+    
     self.xmppStream.myJID = myJid;
+    
+    /**
+     Error Domain=XMPPStreamErrorDomain Code=1 "Attempting to connect while already connected or connecting." UserInfo=0x7be9ac40 {NSLocalizedDescription=Attempting to connect while already connected or connecting.
+     */
+    // 如果之前的连接过，断开连接，否则用新的用户名连接时，会报连接已存在的错误
+    if (self.xmppStream.isConnected) {
+        [self.xmppStream disconnect];
+    }
     
     // 3.执行请求连接服务器
     NSError *error = nil;
     [self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error];
+    WXLog(@"%@",error);
 }
 
 #pragma mark 3 发送登录密码到服务器【代理返回连接成功才执行此步骤】
@@ -112,8 +134,14 @@
     
     
 }
+#pragma mark 4 通知用户上线
+-(void)notifyUserOnline{
+    WXLog(@"通知用户上线");
+    XMPPPresence *presence = [XMPPPresence presence];
+    [self.xmppStream sendElement:presence];
+}
 
-#pragma mark 4 登录成功进入主界面
+#pragma mark 5 登录成功进入主界面
 -(void)enterMainStoryboard{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
@@ -126,8 +154,14 @@
     
 }
 
-#pragma mark 5 登录失败提示用户名密码错误
--(void)showErrorMsg:(NSString *)msg{}
+#pragma mark 发送注册密码到服务器
+-(void)sendRegisterPwdToServer{
+    WXUserInfo *userInfo = [WXUserInfo sharedWXUserInfo];
+    NSError *error = nil;
+    [self.xmppStream registerWithPassword:userInfo.registerPwd error:&error];
+    
+    WXLog(@"发送注册密码到服务器 %@",error);
+}
 
 #pragma mark -公共方法
 #pragma mark 用户登录
@@ -140,14 +174,28 @@
     [self connectToServer];
 }
 
+#pragma mark 用户注册
+-(void)userRegisterWithResultBlock:(ResultBlock)resultBlock{
+    // 赋值给成员属性
+    self.resultBlock = resultBlock;
+    
+    // 连接到服务器，成功后，发送密码授权
+    [self connectToServer];
+}
 
 #pragma mark -XMPPStream代理
 
 #pragma mark 客户端与连接主机成功
 -(void)xmppStreamDidConnect:(XMPPStream *)sender{
     WXLog(@"与服务器连接成功");
-    // 连接成功后 发送密码到服务器，进行授权验证
-    [self sendLoginPwdToServer];
+    if (!self.isUserRegister) {
+        // 连接成功后 发送密码到服务器，进行授权验证
+        [self sendLoginPwdToServer];
+    }else{
+        // 连接成功后 发送注册密码到服务器
+        [self sendRegisterPwdToServer];
+    }
+    
 }
 
 #pragma mark 客户端断开与主机的连接
@@ -165,11 +213,29 @@
 
 #pragma mark 授权成功
 -(void)xmppStreamDidAuthenticate:(XMPPStream *)sender{
-    WXLog(@"授权成功【即成功登录】进入主界面");
+    WXLog(@"授权成功【即成功登录】");
+    
+    [self notifyUserOnline];
+    
     if (self.resultBlock) {
         _resultBlock(XMPPResultTypeLoginSuccess);
     }
     
-    //[self enterMainStoryboard];
+}
+#pragma mark 注册成功
+-(void)xmppStreamDidRegister:(XMPPStream *)sender{
+    WXLog(@"注册成功");
+    if (self.resultBlock) {
+        _resultBlock(XMPPResultTypeRegisterSuccess);
+    }
+}
+
+
+#pragma mark 注册失败
+-(void)xmppStream:(XMPPStream *)sender didNotRegister:(DDXMLElement *)error{
+    WXLog(@"注册失败 %@",error);
+    if (self.resultBlock) {
+        _resultBlock(XMPPResultTypeRegisterFailure);
+    }
 }
 @end

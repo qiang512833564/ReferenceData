@@ -8,6 +8,8 @@
 
 #import "WXRegisterViewController.h"
 #import "CategoryWF.h"
+#import "WXUserInfo.h"
+#import "AppDelegate.h"
 
 @interface WXRegisterViewController()
 
@@ -41,9 +43,14 @@
         self.leftConstraint.constant = 20;
         self.rightConstraint.constant = 20;
     }
+    
+    
+    [self textChange:nil];
 }
 
 - (IBAction)textChange:(id)sender {
+
+    
     // 设置按钮是否可用
     BOOL enable = (self.phoneField.text.length != 0 &&  self.pwdField.text.length != 0);
     
@@ -59,4 +66,54 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+
+- (IBAction)userRegister {
+    [self.view endEditing:YES];
+    
+    
+    NSString *username = self.phoneField.text;
+    NSString *pwd = self.pwdField.text;
+    
+    WXUserInfo *userInfo = [WXUserInfo sharedWXUserInfo];
+    userInfo.registerUserName = username;
+    userInfo.registerPwd = pwd;
+    
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    app.userRegister = YES;
+    
+    [MBProgressHUD showMessage:@"正在注册" toView:self.view];
+     __weak typeof(self) selfVc = self;
+    [app userRegisterWithResultBlock:^(XMPPResultType type) {
+        [selfVc handleResultType:type];
+    }];
+    
+}
+
+// 处理请求结果
+-(void)handleResultType:(XMPPResultType)type{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view ];
+        int myType = type;
+        switch (myType) {
+            case XMPPResultTypeRegisterSuccess:
+                if ([self.delegate respondsToSelector:@selector(registerViewControllerDidfinishedRegister)]) {
+                    [self.delegate registerViewControllerDidfinishedRegister];
+                }
+                break;
+                
+            case XMPPResultTypeRegisterFailure:
+                [MBProgressHUD showError:@"用户名已存在" toView:self.view];
+                break;
+        }
+        
+        WXLog(@"%d",type);
+    });
+}
+
+-(void)dealloc{
+    WXLog(@"xx");
+}
+
+
 @end

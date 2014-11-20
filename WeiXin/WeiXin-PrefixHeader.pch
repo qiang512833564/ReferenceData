@@ -16,4 +16,5 @@
 #define WXLog(...) NSLog(@"%s \n %@ \n",__func__,[NSString stringWithFormat:__VA_ARGS__])
 
 #import "MBProgressHUD+HM.h"
+#import "WXUserInfo.h"
 #endif

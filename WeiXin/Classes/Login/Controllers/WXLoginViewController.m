@@ -8,8 +8,11 @@
 
 #import "WXLoginViewController.h"
 #import "CategoryWF.h"
+#import "WXRegisterViewController.h"
 
-@interface WXLoginViewController ()
+@interface WXLoginViewController ()<WXRegisterViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet UITextField *pwdField;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIView *loginContainer;
@@ -74,7 +77,6 @@
         self.loginContainer.transform = CGAffineTransformTranslate(self.loginContainer.transform, 0, transY);
     }
     
-    
     //清除
     [pan setTranslation:CGPointZero inView:pan.view];
     
@@ -84,6 +86,47 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    id destVc = segue.destinationViewController;
+    if ([destVc isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nav = (UINavigationController *)destVc;
+        id rootVc = nav.viewControllers[0];
+        
+        // 注册控制器
+        if ([rootVc isKindOfClass:[WXRegisterViewController class]]) {
+            WXRegisterViewController *registerVc = (WXRegisterViewController *)rootVc;
+            registerVc.delegate = self;
+        }
+        
+    }
+}
+
+#pragma mark -注册控制器代理
+#pragma mark 注册完成
+-(void)registerViewControllerDidfinishedRegister{
+
+    WXLog(@"注册完成,");;
+    [MBProgressHUD showSuccess:@"注册成功，请再次输入密码登录" toView:self.view ];
+
+    
+    self.phoneLabel.text = [WXUserInfo sharedWXUserInfo].registerUserName;
+    
+    // 消失模态窗口
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)loginBtnClick:(id)sender {
+    NSString *username = self.phoneLabel.text;
+    NSString *pwd = self.pwdField.text;
+    
+    // 放在单例对象中
+    WXUserInfo *userInfo = [WXUserInfo sharedWXUserInfo];
+    userInfo.loginUserName = username;
+    userInfo.loginPwd = pwd;
+    
+    [self login];
 }
 
 -(void)dealloc{
