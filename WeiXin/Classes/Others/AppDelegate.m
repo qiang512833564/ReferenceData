@@ -57,7 +57,7 @@
 
 -(void)teardownXmppStream;
 #pragma mark 成员属性
-@property(nonatomic,strong)XMPPStream *xmppStream;
+
 
 //登录或者注册结果的回调block
 @property(nonatomic,copy)ResultBlock resultBlock;

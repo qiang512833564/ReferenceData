@@ -26,6 +26,8 @@
 		B0A0B97B1A1B8D6500315EE5 /* WXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0B97A1A1B8D6500315EE5 /* WXLoginViewController.m */; };
 		B0A0B9831A1B917100315EE5 /* UIView+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0B9821A1B917100315EE5 /* UIView+WF.m */; };
 		B0B647801A1C30A400B61286 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B6477F1A1C30A400B61286 /* WXTabBarController.m */; };
+		B0BA95D81A1F74A000B47EC8 /* XWAddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BA95D71A1F74A000B47EC8 /* XWAddContactViewController.m */; };
+		B0BA95DB1A1F757F00B47EC8 /* UITextField+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BA95DA1A1F757F00B47EC8 /* UITextField+WF.m */; };
 		B0D126641A1F111E00CDE4D7 /* WXProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */; };
 		B0D126671A1F212700CDE4D7 /* WXEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126661A1F212700CDE4D7 /* WXEditProfileViewController.m */; };
 		B0FAB8261A1D78530054992D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8011A1D78520054992D /* GCDAsyncSocket.m */; };
@@ -213,6 +215,10 @@
 		B0A0B9821A1B917100315EE5 /* UIView+WF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WF.m"; sourceTree = "<group>"; };
 		B0B6477E1A1C30A400B61286 /* WXTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXTabBarController.h; sourceTree = "<group>"; };
 		B0B6477F1A1C30A400B61286 /* WXTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXTabBarController.m; sourceTree = "<group>"; };
+		B0BA95D61A1F74A000B47EC8 /* XWAddContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWAddContactViewController.h; sourceTree = "<group>"; };
+		B0BA95D71A1F74A000B47EC8 /* XWAddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWAddContactViewController.m; sourceTree = "<group>"; };
+		B0BA95D91A1F757F00B47EC8 /* UITextField+WF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+WF.h"; sourceTree = "<group>"; };
+		B0BA95DA1A1F757F00B47EC8 /* UITextField+WF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+WF.m"; sourceTree = "<group>"; };
 		B0D126621A1F111E00CDE4D7 /* WXProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXProfileViewController.h; sourceTree = "<group>"; };
 		B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXProfileViewController.m; sourceTree = "<group>"; };
 		B0D126651A1F212600CDE4D7 /* WXEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEditProfileViewController.h; sourceTree = "<group>"; };
@@ -553,6 +559,8 @@
 			children = (
 				B02A5B1E1A1F5D8B002547DA /* WXContactsViewController.h */,
 				B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */,
+				B0BA95D61A1F74A000B47EC8 /* XWAddContactViewController.h */,
+				B0BA95D71A1F74A000B47EC8 /* XWAddContactViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -732,6 +740,8 @@
 				B0050C5E1A1BA7D600D0C5A8 /* CategoryWF.h */,
 				B0FABB8B1A1DEC200054992D /* UIStoryboard+WF.h */,
 				B0FABB8C1A1DEC200054992D /* UIStoryboard+WF.m */,
+				B0BA95D91A1F757F00B47EC8 /* UITextField+WF.h */,
+				B0BA95DA1A1F757F00B47EC8 /* UITextField+WF.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1698,6 +1708,7 @@
 				B0FABB311A1D78FE0054992D /* XMPPvCardTempAdr.m in Sources */,
 				B0FABB061A1D78FE0054992D /* XMPPPresence.m in Sources */,
 				B0FABB2E1A1D78FE0054992D /* XMPPvCardCoreDataStorageObject.m in Sources */,
+				B0BA95D81A1F74A000B47EC8 /* XWAddContactViewController.m in Sources */,
 				B0FAB82A1A1D78530054992D /* DDLog.m in Sources */,
 				B0FAB82B1A1D78530054992D /* DDTTYLogger.m in Sources */,
 				B0A0B9771A1B768D00315EE5 /* WXNavigationController.m in Sources */,
@@ -1736,6 +1747,7 @@
 				B0FABAF81A1D78FE0054992D /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				B0FABB341A1D78FE0054992D /* XMPPvCardTempEmail.m in Sources */,
 				B0FABB101A1D78FE0054992D /* XMPPRosterCoreDataStorage.m in Sources */,
+				B0BA95DB1A1F757F00B47EC8 /* UITextField+WF.m in Sources */,
 				B0FABB271A1D78FE0054992D /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
 				B0A0B97B1A1B8D6500315EE5 /* WXLoginViewController.m in Sources */,
 				B0FABB2A1A1D78FE0054992D /* XMPPRoom.m in Sources */,

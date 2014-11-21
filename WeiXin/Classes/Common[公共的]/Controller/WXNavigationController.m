@@ -27,9 +27,12 @@
     // 设置导航条标题字体样式
     NSMutableDictionary *titleAtt = [NSMutableDictionary dictionary];
     
-    titleAtt[NSFontAttributeName] = [UIFont boldSystemFontOfSize:18];
+    titleAtt[NSFontAttributeName] = [UIFont boldSystemFontOfSize:20];
     titleAtt[NSForegroundColorAttributeName] = [UIColor whiteColor];
     [navBar setTitleTextAttributes:titleAtt];
+    
+    // 返回按钮的样式 白色
+    [navBar setTintColor:[UIColor whiteColor]];
     
     // 设置导航条item的样式
     NSMutableDictionary *itemAtt = [NSMutableDictionary dictionary];
@@ -38,6 +41,14 @@
     itemAtt[NSForegroundColorAttributeName] = [UIColor whiteColor];
     UIBarButtonItem *barItem = [UIBarButtonItem appearance];
     [barItem setTitleTextAttributes:itemAtt forState:UIControlStateNormal];
+    
+    
+
+}
+
+-(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    viewController.hidesBottomBarWhenPushed = YES;
+    [super pushViewController:viewController animated:YES];
 }
 
 @end

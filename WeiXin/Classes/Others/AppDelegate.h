@@ -51,6 +51,9 @@ static NSString *WXAutoLoginStatusNotification = @"WXAutoLoginStatusNotification
  */
 -(void)userLogout;
 
+// 核心通讯类
+@property(nonatomic,strong,readonly)XMPPStream *xmppStream;
+
 //模块
 // 自动连接模块
 @property(nonatomic,strong)XMPPReconnect *reconnect;

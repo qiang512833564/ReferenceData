@@ -36,7 +36,8 @@
     
     // 设置排序
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"nickname" ascending:YES];
-    request.sortDescriptors = @[sort];
+    NSSortDescriptor *sectionNumSort = [NSSortDescriptor sortDescriptorWithKey:@"sectionNum" ascending:YES];
+    request.sortDescriptors = @[sectionNumSort,sort];
     
     _resultsContrl = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     _resultsContrl.delegate = self;
@@ -64,14 +65,38 @@
     
     XMPPUserCoreDataStorageObject *friend = _resultsContrl.fetchedObjects[indexPath.row];
     // 有昵称用昵称，没有使用账号
-    if (friend.nickname) {
-        cell.textLabel.text = friend.nickname;
-    }else{
-        cell.textLabel.text = friend.jid.user;
+    NSString *displayName = friend.nickname;
+    if (!friend.nickname) {
+        displayName = friend.jid.user;
     }
     
-    
+    NSString *onlineStatus = @"[离线]";
+    switch ([friend.sectionNum intValue]) {
+        case 0:
+            onlineStatus = @"[在线]";
+            break;
+        case 1:
+            onlineStatus = @"[离开]";
+            break;
+        case 2:
+            onlineStatus = @"[离线]";
+            break;
+        default:
+            onlineStatus = @"[见鬼了]";
+            break;
+    }
+        
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",onlineStatus,displayName];
     return cell;
 }
 
+#pragma mark 删除
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // 删除好友
+        XMPPUserCoreDataStorageObject *friend = _resultsContrl.fetchedObjects[indexPath.row];
+        [xmppDelegate.roster removeUser:friend.jid];
+    }
+}
 @end
