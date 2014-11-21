@@ -18,7 +18,7 @@ singleton_interface(WXUserInfo);
 @property(nonatomic,copy)NSString *loginUserName;//登录账号
 @property(nonatomic,copy)NSString *loginPwd;//登录密码
 @property(nonatomic,assign,getter=isLogin)BOOL login;//登录是否成功
-
+@property(nonatomic,copy,readonly)NSString *userJid;
 
 @property(nonatomic,copy)NSString *registerUserName;//注册账号
 @property(nonatomic,copy)NSString *registerPwd;//注册密码

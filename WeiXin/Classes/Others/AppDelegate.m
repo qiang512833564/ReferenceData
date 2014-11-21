@@ -62,15 +62,10 @@
 //登录或者注册结果的回调block
 @property(nonatomic,copy)ResultBlock resultBlock;
 
-//模块
-// 自动连接模块
-@property(nonatomic,strong)XMPPReconnect *reconnect;
 
-// 电子名片数据存储
-@property(nonatomic,strong)XMPPvCardCoreDataStorage *vCardStorage;
 
-// 电子名片头像模块"['ævətɑː(r)]"
-@property(nonatomic,strong)XMPPvCardAvatarModule *vCardAvatarModule;
+
+
 @end
 
 
@@ -78,9 +73,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+ 
     
     // 配置xmpp的日志
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    //[DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     // 程序启动时调用一次即可
     [[WXUserInfo sharedWXUserInfo] loadDataFromSandBox];
@@ -118,17 +114,23 @@
     
     // 3.添加自动连接模块
     _reconnect = [[XMPPReconnect alloc] init];
-    // 激活模块
-    [_reconnect activate:_xmppStream];
     
     // 4.添加电子名片模块
     _vCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
     _vCardModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:_vCardStorage];
-    [_vCardModule activate:_xmppStream];
     
     // 5.添加电子名片头像模块
     _vCardAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:_vCardModule];
-    [_vCardAvatarModule activate:_xmppStream];
+    
+    // 6.添加花名册模块
+    _rosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
+    _roster = [[XMPPRoster alloc] initWithRosterStorage:_rosterStorage];
+    
+    // 激活模块
+    [_reconnect             activate:_xmppStream];
+    [_vCardModule           activate:_xmppStream];
+    [_vCardAvatarModule     activate:_xmppStream];
+    [_roster                activate:_xmppStream];
     
     // 设置代理【所有跟服务交互后，返回结果通过代理方式通知】
     [_xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
@@ -140,20 +142,19 @@
     [_xmppStream removeDelegate:self];
     
     // 2.停止模块 并 清空模块
-    // 2.1自动连接
-    [_reconnect deactivate];
-    _reconnect = nil;
-    
-    // 2.2电子名片
-    [_vCardModule deactivate];
-    _vCardStorage = nil;
-    _vCardModule = nil;
-    
-    // 2.3电子名片头像模块
-    [_vCardAvatarModule deactivate];
-    _vCardAvatarModule = nil;
+    [_reconnect         deactivate];//自动连接
+    [_vCardModule       deactivate];//电子名片
+    [_vCardAvatarModule deactivate];//电子名片头像模块
+    [_roster            deactivate];
     // 3.断开连接
     [_xmppStream disconnect];
+    
+    _reconnect = nil;
+    _vCardStorage = nil;
+    _vCardModule = nil;
+    _vCardAvatarModule = nil;
+    _rosterStorage = nil;
+    _roster = nil;
     _xmppStream = nil;
 }
 

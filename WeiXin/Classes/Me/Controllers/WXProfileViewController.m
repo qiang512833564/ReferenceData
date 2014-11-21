@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "XMPPvCardTemp.h"
 #import "WXEditProfileViewController.h"
+#import "WXNavigationController.h"
 
 @interface WXProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,WXEditProfileViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *headView;
@@ -120,6 +121,9 @@
     
     // 保存头像到服务器
     [self editProfileViewControllerDidFinishedSave];
+    
+    // 在ipad上，选择图片后，导航栏主题会变黑
+    [WXNavigationController setupTheme];
 }
 
 
@@ -160,9 +164,12 @@
     // 邮箱
     myVCard.mailer = self.emailLabel.text;
     
-    // 更新保存到服务器
-    [xmppDelegate.vCardModule updateMyvCardTemp:myVCard];
     
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 更新保存到服务器
+        [xmppDelegate.vCardModule updateMyvCardTemp:myVCard];
+    });
     
 }
 

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WXNavigationController : UINavigationController
-
++(void)setupTheme;
 @end

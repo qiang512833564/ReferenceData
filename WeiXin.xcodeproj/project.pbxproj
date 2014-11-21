@@ -13,6 +13,7 @@
 		B0050C5D1A1BA68D00D0C5A8 /* UIImage+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0050C5C1A1BA68D00D0C5A8 /* UIImage+WF.m */; };
 		B009D4A71A1C7F380036F87E /* WXRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */; };
 		B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */; };
+		B02A5B201A1F5D8B002547DA /* WXContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */; };
 		B09AAC541A1E1C3A008C3638 /* WXHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */; };
 		B0A0B94D1A1B591900315EE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94B1A1B591900315EE5 /* Main.storyboard */; };
 		B0A0B94F1A1B591900315EE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94E1A1B591900315EE5 /* Images.xcassets */; };
@@ -188,6 +189,8 @@
 		B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXRegisterViewController.m; sourceTree = "<group>"; };
 		B009D4A81A1CD5160036F87E /* WXOtherLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXOtherLoginViewController.h; sourceTree = "<group>"; };
 		B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXOtherLoginViewController.m; sourceTree = "<group>"; };
+		B02A5B1E1A1F5D8B002547DA /* WXContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXContactsViewController.h; sourceTree = "<group>"; };
+		B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXContactsViewController.m; sourceTree = "<group>"; };
 		B09AAC521A1E1C3A008C3638 /* WXHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXHistoryViewController.h; path = WeiXin/Classes/WeiXin/WXHistoryViewController.h; sourceTree = SOURCE_ROOT; };
 		B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXHistoryViewController.m; path = WeiXin/Classes/WeiXin/WXHistoryViewController.m; sourceTree = SOURCE_ROOT; };
 		B0A0B93E1A1B591900315EE5 /* WeiXin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeiXin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -536,6 +539,24 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		B02A5B1C1A1F5D4B002547DA /* Contacts[通讯录] */ = {
+			isa = PBXGroup;
+			children = (
+				B02A5B1D1A1F5D69002547DA /* Controllers */,
+			);
+			name = "Contacts[通讯录]";
+			path = "Contacts[联系人]";
+			sourceTree = "<group>";
+		};
+		B02A5B1D1A1F5D69002547DA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B02A5B1E1A1F5D8B002547DA /* WXContactsViewController.h */,
+				B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		B09AAC511A1E19EA008C3638 /* WeiXin[微信] */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,6 +637,7 @@
 		B0A0B9681A1B5A0C00315EE5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B02A5B1C1A1F5D4B002547DA /* Contacts[通讯录] */,
 				B0A0B97F1A1B915000315EE5 /* Lib */,
 				B0A0B9731A1B762D00315EE5 /* Common[公共的] */,
 				B0A0B96B1A1B749B00315EE5 /* Others */,
@@ -1795,6 +1817,7 @@
 				B0FABB191A1D78FE0054992D /* XMPPJabberRPCModule.m in Sources */,
 				B0FABB2D1A1D78FE0054992D /* XMPPvCardCoreDataStorage.m in Sources */,
 				B0FABB801A1D9AD90054992D /* MBProgressHUD+HM.m in Sources */,
+				B02A5B201A1F5D8B002547DA /* WXContactsViewController.m in Sources */,
 				B0FABB001A1D78FE0054992D /* XMPPElement.m in Sources */,
 				B0FABB5D1A1D78FE0054992D /* NSXMLElement+XEP_0297.m in Sources */,
 				B0FABB4B1A1D78FE0054992D /* XMPPMessageArchiving_Contact_CoreDataObject.m in Sources */,

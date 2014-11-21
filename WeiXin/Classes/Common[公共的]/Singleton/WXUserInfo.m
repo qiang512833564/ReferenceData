@@ -24,6 +24,10 @@ singleton_implementation(WXUserInfo);
     return xmppHostIP;
 }
 
+-(NSString *)userJid{
+    return [NSString stringWithFormat:@"%@@%@",self.loginUserName,xmppDomain];
+}
+
 -(void)synchronizeToSandBox{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.loginUserName forKey:UserNameKey];

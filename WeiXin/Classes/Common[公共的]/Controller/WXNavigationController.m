@@ -12,6 +12,10 @@
 
 
 +(void)initialize{
+    [self setupTheme];
+}
+
++(void)setupTheme{
     //设置导航条背景
     UINavigationBar *navBar = [UINavigationBar appearance];
     UIImage *image = [UIImage imageNamed:@"topbarbg_ios7"];
@@ -22,7 +26,7 @@
     
     // 设置导航条标题字体样式
     NSMutableDictionary *titleAtt = [NSMutableDictionary dictionary];
-
+    
     titleAtt[NSFontAttributeName] = [UIFont boldSystemFontOfSize:18];
     titleAtt[NSForegroundColorAttributeName] = [UIColor whiteColor];
     [navBar setTitleTextAttributes:titleAtt];
@@ -35,7 +39,5 @@
     UIBarButtonItem *barItem = [UIBarButtonItem appearance];
     [barItem setTitleTextAttributes:itemAtt forState:UIControlStateNormal];
 }
-
-
 
 @end
