@@ -145,7 +145,7 @@
         <!--注册导航控制器-->
         <scene sceneID="hvn-eA-mmc">
             <objects>
-                <navigationController id="hW1-TS-vBg" userLabel="注册导航控制器" sceneMemberID="viewController">
+                <navigationController id="hW1-TS-vBg" userLabel="注册导航控制器" customClass="WXNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ui5-Pf-oAr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -161,7 +161,7 @@
         <!--"其它"导航控制器-->
         <scene sceneID="gVu-sO-XxB">
             <objects>
-                <navigationController id="aXU-01-0ZD" userLabel="&quot;其它&quot;导航控制器" sceneMemberID="viewController">
+                <navigationController id="aXU-01-0ZD" userLabel="&quot;其它&quot;导航控制器" customClass="WXNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jpa-Bv-Hf1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

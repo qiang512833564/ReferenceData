@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "XMPPFramework.h"
 #import "WXUserInfo.h"
 
 /*
@@ -66,6 +65,12 @@
 //模块
 // 自动连接模块
 @property(nonatomic,strong)XMPPReconnect *reconnect;
+
+// 电子名片数据存储
+@property(nonatomic,strong)XMPPvCardCoreDataStorage *vCardStorage;
+
+// 电子名片头像模块"['ævətɑː(r)]"
+@property(nonatomic,strong)XMPPvCardAvatarModule *vCardAvatarModule;
 @end
 
 
@@ -73,6 +78,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // 配置xmpp的日志
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     // 程序启动时调用一次即可
     [[WXUserInfo sharedWXUserInfo] loadDataFromSandBox];
@@ -102,40 +110,58 @@
 #pragma mark -私有方法
 #pragma mark 1 初始化XmppStream核心类
 -(void)setupXmppStream{
-    // 创建xmppStream对象
-    self.xmppStream = [[XMPPStream alloc] init];
+    // 1.创建xmppStream对象
+    _xmppStream = [[XMPPStream alloc] init];
     
-    // 允许socket后台运行
-    self.xmppStream.enableBackgroundingOnSocket = YES;
+    // 2.允许socket后台运行
+    _xmppStream.enableBackgroundingOnSocket = YES;
     
-    // 添加自动连接模块
-    self.reconnect = [[XMPPReconnect alloc] init];
+    // 3.添加自动连接模块
+    _reconnect = [[XMPPReconnect alloc] init];
     // 激活模块
-    [self.reconnect activate:self.xmppStream];
+    [_reconnect activate:_xmppStream];
+    
+    // 4.添加电子名片模块
+    _vCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
+    _vCardModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:_vCardStorage];
+    [_vCardModule activate:_xmppStream];
+    
+    // 5.添加电子名片头像模块
+    _vCardAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:_vCardModule];
+    [_vCardAvatarModule activate:_xmppStream];
     
     // 设置代理【所有跟服务交互后，返回结果通过代理方式通知】
-    [self.xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    [_xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     
 }
 
 -(void)teardownXmppStream{
-    // 移除代理
-    [self.xmppStream removeDelegate:self];
+    // 1.移除代理
+    [_xmppStream removeDelegate:self];
     
-    // 停止模块 并 清空模块
-    [self.reconnect deactivate];
-    self.reconnect = nil;
+    // 2.停止模块 并 清空模块
+    // 2.1自动连接
+    [_reconnect deactivate];
+    _reconnect = nil;
     
-    // 断开连接
-    [self.xmppStream disconnect];
-    self.xmppStream = nil;
+    // 2.2电子名片
+    [_vCardModule deactivate];
+    _vCardStorage = nil;
+    _vCardModule = nil;
+    
+    // 2.3电子名片头像模块
+    [_vCardAvatarModule deactivate];
+    _vCardAvatarModule = nil;
+    // 3.断开连接
+    [_xmppStream disconnect];
+    _xmppStream = nil;
 }
 
 #pragma mark 2 连接到服务器【连接服务器已经传送了账号】
 -(void)connectToServer{
     WXLog(@"连接服务器");
     // 如果xmppStream没有值，创建对象
-    if (!self.xmppStream) {
+    if (!_xmppStream) {
         [self setupXmppStream];
     }
     
@@ -145,9 +171,9 @@
     // 提交服务器前
     // 1.设置xmppStream要交互的主机地址与端口
 //    self.xmppStream.hostName = userInfo.xmppDomain;
-    self.xmppStream.hostName = userInfo.xmppHostIP;
+    _xmppStream.hostName = userInfo.xmppHostIP;
     // 默认是5222 可以不用设置
-    self.xmppStream.hostPort = 5222;
+    _xmppStream.hostPort = 5222;
     
     
     // 2.设置登录的账号
@@ -159,19 +185,19 @@
         myJid = [XMPPJID jidWithUser:userInfo.registerUserName domain:userInfo.xmppDomain resource:nil];
     }
     
-    self.xmppStream.myJID = myJid;
+    _xmppStream.myJID = myJid;
     
     /**
      Error Domain=XMPPStreamErrorDomain Code=1 "Attempting to connect while already connected or connecting." UserInfo=0x7be9ac40 {NSLocalizedDescription=Attempting to connect while already connected or connecting.
      */
     // 如果之前的连接过，断开连接，否则用新的用户名连接时，会报连接已存在的错误
-    if (self.xmppStream.isConnected) {
-        [self.xmppStream disconnect];
+    if (_xmppStream.isConnected) {
+        [_xmppStream disconnect];
     }
     
     // 3.执行请求连接服务器
     NSError *error = nil;
-    [self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error];
+    [_xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error];
     WXLog(@"%@",error);
     
     // 通知正在连接中
@@ -183,7 +209,7 @@
     WXLog(@"发送登录密码到服务器");
     WXUserInfo *userInfo = [WXUserInfo sharedWXUserInfo];
     NSError *error = nil;
-    [self.xmppStream authenticateWithPassword:userInfo.loginPwd error:&error];
+    [_xmppStream authenticateWithPassword:userInfo.loginPwd error:&error];
     
     WXLog(@"%@",error);
     
@@ -193,21 +219,21 @@
 -(void)notifyUserOnline{
     WXLog(@"通知用户上线");
     XMPPPresence *presence = [XMPPPresence presence];
-    [self.xmppStream sendElement:presence];
+    [_xmppStream sendElement:presence];
 }
 
 #pragma mark  5 通知用户下线
 -(void)notifyUserOffline{
     WXLog(@"通知用户下线");
     XMPPPresence *offline = [XMPPPresence presenceWithType:@"unavailable"];
-    [self.xmppStream sendElement:offline];
+    [_xmppStream sendElement:offline];
 }
 
 #pragma mark 发送注册密码到服务器
 -(void)sendRegisterPwdToServer{
     WXUserInfo *userInfo = [WXUserInfo sharedWXUserInfo];
     NSError *error = nil;
-    [self.xmppStream registerWithPassword:userInfo.registerPwd error:&error];
+    [_xmppStream registerWithPassword:userInfo.registerPwd error:&error];
     
     WXLog(@"发送注册密码到服务器 %@",error);
 }
@@ -245,7 +271,7 @@
     [self notifyUserOffline];
     
     // 1.断开连接
-    [self.xmppStream disconnect];
+    [_xmppStream disconnect];
     
     // 2.回到登录界面
     [UIStoryboard showInitialVCWithName:@"Login"];

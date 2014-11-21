@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XMPPFramework.h"
+
+#define xmppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 typedef enum {
     XMPPResultTypeConnecting,//连接中....
@@ -47,6 +50,10 @@ static NSString *WXAutoLoginStatusNotification = @"WXAutoLoginStatusNotification
  用户注销
  */
 -(void)userLogout;
+
+
+// 电子名片模块
+@property(nonatomic,strong)XMPPvCardTempModule *vCardModule;
 
 @end
 
