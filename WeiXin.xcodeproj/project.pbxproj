@@ -26,6 +26,7 @@
 		B0A0B9831A1B917100315EE5 /* UIView+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0B9821A1B917100315EE5 /* UIView+WF.m */; };
 		B0B647801A1C30A400B61286 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B6477F1A1C30A400B61286 /* WXTabBarController.m */; };
 		B0D126641A1F111E00CDE4D7 /* WXProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */; };
+		B0D126671A1F212700CDE4D7 /* WXEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126661A1F212700CDE4D7 /* WXEditProfileViewController.m */; };
 		B0FAB8261A1D78530054992D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8011A1D78520054992D /* GCDAsyncSocket.m */; };
 		B0FAB8271A1D78530054992D /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8041A1D78520054992D /* DDAbstractDatabaseLogger.m */; };
 		B0FAB8281A1D78530054992D /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8061A1D78520054992D /* DDASLLogger.m */; };
@@ -211,6 +212,8 @@
 		B0B6477F1A1C30A400B61286 /* WXTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXTabBarController.m; sourceTree = "<group>"; };
 		B0D126621A1F111E00CDE4D7 /* WXProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXProfileViewController.h; sourceTree = "<group>"; };
 		B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXProfileViewController.m; sourceTree = "<group>"; };
+		B0D126651A1F212600CDE4D7 /* WXEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEditProfileViewController.h; sourceTree = "<group>"; };
+		B0D126661A1F212700CDE4D7 /* WXEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXEditProfileViewController.m; sourceTree = "<group>"; };
 		B0FAB8001A1D78520054992D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		B0FAB8011A1D78520054992D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		B0FAB8031A1D78520054992D /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
@@ -1551,6 +1554,8 @@
 				B0FABB891A1DE7690054992D /* WXMeViewController.m */,
 				B0D126621A1F111E00CDE4D7 /* WXProfileViewController.h */,
 				B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */,
+				B0D126651A1F212600CDE4D7 /* WXEditProfileViewController.h */,
+				B0D126661A1F212700CDE4D7 /* WXEditProfileViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1754,6 +1759,7 @@
 				B0FAB82D1A1D78530054992D /* DispatchQueueLogFormatter.m in Sources */,
 				B0FABB551A1D78FE0054992D /* XMPPAutoPing.m in Sources */,
 				B0FABB5C1A1D78FE0054992D /* XMPPMessage+XEP_0224.m in Sources */,
+				B0D126671A1F212700CDE4D7 /* WXEditProfileViewController.m in Sources */,
 				B0FABB391A1D78FE0054992D /* XMPPResultSet.m in Sources */,
 				B0FABB481A1D78FE0054992D /* XMPPCapsResourceCoreDataStorageObject.m in Sources */,
 				B0FABB4A1A1D78FE0054992D /* XMPPMessageArchiving.xcdatamodeld in Sources */,

@@ -9,8 +9,9 @@
 #import "WXProfileViewController.h"
 #import "AppDelegate.h"
 #import "XMPPvCardTemp.h"
+#import "WXEditProfileViewController.h"
 
-@interface WXProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface WXProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,WXEditProfileViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *headView;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -19,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;//职位
 @property (weak, nonatomic) IBOutlet UILabel *telLabel;//电话
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;//邮箱
+
+@property(nonatomic,strong)NSIndexPath *selectedIndexPath;
+
 @end
 
 @implementation WXProfileViewController
@@ -74,17 +78,18 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.selectedIndexPath = indexPath;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    int tag = [tableView cellForRowAtIndexPath:indexPath].tag;
-    if (tag == 2) return;//不处理
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.tag == 2) return;//不处理
     
-    if (tag == 0) {//图片选择
+    if (cell.tag == 0) {//图片选择
         UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"从手机相册选择", nil];
         sheet.delegate = self;
         [sheet showInView:self.view];
     }else{//修改数据
-        
+        [self performSegueWithIdentifier:@"editProfileSegue" sender:cell];
     }
 }
 
@@ -99,6 +104,7 @@
     if (buttonIndex == 0) {//照相
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     }else if(buttonIndex == 1){// 相册
+        WXLog(@"......");
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     
@@ -111,6 +117,54 @@
     UIImage *image = info[UIImagePickerControllerEditedImage];
     self.headView.image = image;
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // 保存头像到服务器
+    [self editProfileViewControllerDidFinishedSave];
 }
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+   
+    if ([segue.destinationViewController isKindOfClass:[WXEditProfileViewController class]]) {
+        // 获取目标控制器
+        WXEditProfileViewController *editProfileVc = segue.destinationViewController;
+        editProfileVc.editProfileDelegate = self;
+        editProfileVc.profileCell = sender;
+        
+    }
+    
+}
+
+
+-(void)editProfileViewControllerDidFinishedSave{
+    
+    XMPPvCardTemp *myVCard = xmppDelegate.vCardModule.myvCardTemp;
+    
+    // 设置头像
+    NSData *headData = UIImagePNGRepresentation(self.headView.image);
+    myVCard.photo = headData;
+    
+    //昵称
+    myVCard.nickname = self.nickNameLabel.text;
+    //公司
+    myVCard.orgName = self.orgNameLabel.text;
+    //部门
+    if(self.orgUnitsLabel.text.length != 0){
+        myVCard.orgUnits = @[self.orgUnitsLabel.text];
+    }
+    
+    //职位
+    myVCard.title = self.titleLabel.text;
+    //电话
+    myVCard.note = self.telLabel.text;
+    // 邮箱
+    myVCard.mailer = self.emailLabel.text;
+    
+    // 更新保存到服务器
+    [xmppDelegate.vCardModule updateMyvCardTemp:myVCard];
+    
+    
+}
+
 
 @end

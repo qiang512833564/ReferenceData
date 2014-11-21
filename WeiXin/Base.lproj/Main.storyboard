@@ -384,11 +384,80 @@
                         <outlet property="telLabel" destination="B8e-ks-AIk" id="ZKL-E0-oUb"/>
                         <outlet property="titleLabel" destination="bEE-GC-ceN" id="Fqh-uK-rRs"/>
                         <outlet property="usernameLabel" destination="4yu-kd-yB2" id="kHF-lm-s2j"/>
+                        <segue destination="KQR-Ux-Qq3" kind="push" identifier="editProfileSegue" id="1H7-jF-VSG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yjk-ZV-5bM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1060" y="1591"/>
+            <point key="canvasLocation" x="1062" y="1591"/>
+        </scene>
+        <!--编辑个人信息-->
+        <scene sceneID="pm5-Xz-c32">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="KQR-Ux-Qq3" userLabel="编辑个人信息" customClass="WXEditProfileViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="njX-en-hKH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="fD1-bd-5Zl">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gRy-ir-HuC">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gRy-ir-HuC" id="14E-ds-VMj">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="q9Z-iy-qNN">
+                                                    <rect key="frame" x="18" y="0.0" width="582" height="43"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="q9Z-iy-qNN" firstAttribute="leading" secondItem="14E-ds-VMj" secondAttribute="leadingMargin" constant="10" id="Pv2-uN-Hle"/>
+                                                <constraint firstItem="q9Z-iy-qNN" firstAttribute="top" secondItem="14E-ds-VMj" secondAttribute="topMargin" constant="-8" id="g28-2T-Clk"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="q9Z-iy-qNN" secondAttribute="bottom" constant="-8" id="q9K-vg-0ec"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="q9Z-iy-qNN" secondAttribute="trailing" constant="-8" id="tOe-ST-zgV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="KQR-Ux-Qq3" id="ov7-t0-5kq"/>
+                            <outlet property="delegate" destination="KQR-Ux-Qq3" id="dMn-lE-w7X"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="XRX-7c-FNT">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="pTE-NI-DDA">
+                            <connections>
+                                <action selector="cancleBtnClick:" destination="KQR-Ux-Qq3" id="rgk-PG-3gl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="K2N-xT-KDR">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oPi-Fz-Pxo">
+                                <rect key="frame" x="451" y="7" width="40" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="保存">
+                                    <color key="titleColor" red="0.14207761460000001" green="1" blue="0.35050134030000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveBtnClick:" destination="KQR-Ux-Qq3" eventType="touchUpInside" id="pLQ-3z-urk"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textField" destination="q9Z-iy-qNN" id="beo-Hf-lE4"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V2g-xL-ZSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1745" y="1591"/>
         </scene>
         <!--我导航控制器-->
         <scene sceneID="555-EK-ztf">

@@ -28,7 +28,7 @@
     NSLog(@"%@",doc);
     
     // 设置电子名片信息
-    [self setupVCard];
+    //[self setupVCard];
 }
 
 -(void)setupVCard{
@@ -62,5 +62,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self setupVCard];
 }
 @end
