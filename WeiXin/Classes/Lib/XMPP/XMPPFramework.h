@@ -23,7 +23,10 @@
 //  The following is standard:
 
 #import "XMPP.h"
- 
+//自动连接模块
+#import "XMPPReconnect.h"
+
+
 // List the modules you're using here:
 // (the following may not be a complete list)
 
@@ -31,7 +34,7 @@
 // 
 //#import "XMPPCoreDataStorage.h"
 //
-//#import "XMPPReconnect.h"
+
 //
 //#import "XMPPRoster.h"
 //#import "XMPPRosterMemoryStorage.h"

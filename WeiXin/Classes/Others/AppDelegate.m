@@ -52,12 +52,20 @@
  */
 -(void)notifyUserOffline;
 
+/**
+ * 释放xmppStream相关资源
+ */
 
+-(void)teardownXmppStream;
 #pragma mark 成员属性
 @property(nonatomic,strong)XMPPStream *xmppStream;
 
 //登录或者注册结果的回调block
 @property(nonatomic,copy)ResultBlock resultBlock;
+
+//模块
+// 自动连接模块
+@property(nonatomic,strong)XMPPReconnect *reconnect;
 @end
 
 
@@ -70,6 +78,8 @@
     [[WXUserInfo sharedWXUserInfo] loadDataFromSandBox];
     
     if([WXUserInfo sharedWXUserInfo].isLogin){
+        
+#warning 强调使用[UIStoryboard showInitialVCWithName:]方法时，里面的application无值
         self.window.rootViewController = [UIStoryboard initialVCWithName:@"Main"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // 自动登录服务器
@@ -95,11 +105,30 @@
     // 创建xmppStream对象
     self.xmppStream = [[XMPPStream alloc] init];
     
+    // 允许socket后台运行
     self.xmppStream.enableBackgroundingOnSocket = YES;
+    
+    // 添加自动连接模块
+    self.reconnect = [[XMPPReconnect alloc] init];
+    // 激活模块
+    [self.reconnect activate:self.xmppStream];
     
     // 设置代理【所有跟服务交互后，返回结果通过代理方式通知】
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     
+}
+
+-(void)teardownXmppStream{
+    // 移除代理
+    [self.xmppStream removeDelegate:self];
+    
+    // 停止模块 并 清空模块
+    [self.reconnect deactivate];
+    self.reconnect = nil;
+    
+    // 断开连接
+    [self.xmppStream disconnect];
+    self.xmppStream = nil;
 }
 
 #pragma mark 2 连接到服务器【连接服务器已经传送了账号】
@@ -307,5 +336,10 @@
         [[UIApplication sharedApplication] scheduleLocalNotification:localNot];
     }
 
+}
+
+
+-(void)dealloc{
+    [self teardownXmppStream];
 }
 @end
