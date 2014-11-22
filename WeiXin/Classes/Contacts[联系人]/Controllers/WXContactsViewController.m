@@ -9,6 +9,7 @@
 #import "WXContactsViewController.h"
 #import "AppDelegate.h"
 #import "WXChatViewController.h"
+#import "WXContactCell.h"
 
 @interface WXContactsViewController ()<NSFetchedResultsControllerDelegate>{
     NSFetchedResultsController *_resultsContrl;
@@ -64,33 +65,21 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *ID = @"Friend";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+
+    WXContactCell *cell = [WXContactCell contactCellWithTableView:tableView];
     
     XMPPUserCoreDataStorageObject *friend = _resultsContrl.fetchedObjects[indexPath.row];
-    // 有昵称用昵称，没有使用账号
-    NSString *displayName = friend.nickname;
-    if (!friend.nickname) {
-        displayName = friend.jid.user;
+    cell.mFriend = friend;
+    if (friend.photo) {
+        cell.headView.image = friend.photo;
+    }else{
+        NSData *data = [xmppDelegate.vCardAvatarModule photoDataForJID:friend.jid];
+        if (data) {
+            cell.headView.image = [UIImage imageWithData:data];
+        }else{
+            cell.headView.image = [UIImage imageNamed:@"login_defaultAvatar"];
+        }
     }
-    
-    NSString *onlineStatus = @"[离线]";
-    switch ([friend.sectionNum intValue]) {
-        case 0:
-            onlineStatus = @"[在线]";
-            break;
-        case 1:
-            onlineStatus = @"[离开]";
-            break;
-        case 2:
-            onlineStatus = @"[离线]";
-            break;
-        default:
-            onlineStatus = @"[见鬼了]";
-            break;
-    }
-        
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",onlineStatus,displayName];
     return cell;
 }
 
@@ -110,6 +99,8 @@
     XMPPUserCoreDataStorageObject *friend = _resultsContrl.fetchedObjects[indexPath.row];
     // 传递好友的jid
     chatVc.friendJid = friend.jid;
+    
+    
     [self.navigationController pushViewController:chatVc animated:YES];
 }
 
