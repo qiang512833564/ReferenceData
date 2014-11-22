@@ -74,7 +74,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
  
-    
+    self.window.backgroundColor = [UIColor whiteColor];
     // 配置xmpp的日志
     //[DDLog addLogger:[DDTTYLogger sharedInstance]];
     
@@ -85,9 +85,11 @@
         
 #warning 强调使用[UIStoryboard showInitialVCWithName:]方法时，里面的application无值
         self.window.rootViewController = [UIStoryboard initialVCWithName:@"Main"];
+        [self connectToServer];
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // 自动登录服务器
-            [self connectToServer];
+            
         });
         
     }
@@ -108,6 +110,8 @@
 -(void)setupXmppStream{
     // 1.创建xmppStream对象
     _xmppStream = [[XMPPStream alloc] init];
+    // 设置代理【所有跟服务交互后，返回结果通过代理方式通知】
+    [_xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     
     // 2.允许socket后台运行
     _xmppStream.enableBackgroundingOnSocket = YES;
@@ -125,15 +129,14 @@
     // 6.添加花名册模块
     _rosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
     _roster = [[XMPPRoster alloc] initWithRosterStorage:_rosterStorage];
-    
+//    [_roster addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     // 激活模块
     [_reconnect             activate:_xmppStream];
     [_vCardModule           activate:_xmppStream];
     [_vCardAvatarModule     activate:_xmppStream];
     [_roster                activate:_xmppStream];
     
-    // 设置代理【所有跟服务交互后，返回结果通过代理方式通知】
-    [_xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    
     
 }
 
@@ -366,6 +369,14 @@
 }
 
 
+-(void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence{
+    WXLog(@"%@",presence.type);
+    // 接收好友请求
+    if ([presence.type isEqualToString:@"subscribe"]) {
+        [_roster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
+    }
+        
+}
 -(void)dealloc{
     [self teardownXmppStream];
 }

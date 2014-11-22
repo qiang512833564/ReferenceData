@@ -13,5 +13,6 @@
 #import "UIImage+WF.h"
 #import "UIStoryboard+WF.h"
 #import "UITextField+WF.h"
+#import "UIScreen+WF.h"
 
 #endif

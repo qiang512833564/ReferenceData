@@ -20,4 +20,25 @@
     return self.frame.size.height;
 }
 
+-(void)setW:(float)w{
+    CGRect frm = self.frame;
+    frm.size.width = w;
+    self.frame = frm;
+}
+
+-(float)w{
+    return self.frame.size.width;
+}
+
+-(void)setY:(float)y{
+    CGRect frm = self.frame;
+    frm.origin.y = y;
+    self.frame = frm;
+
+}
+
+
+-(float)y{
+    return self.frame.origin.y;
+}
 @end

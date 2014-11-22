@@ -15,6 +15,9 @@
 		B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */; };
 		B02A5B201A1F5D8B002547DA /* WXContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */; };
 		B09AAC541A1E1C3A008C3638 /* WXHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */; };
+		B09B8D101A2024BF0027450F /* UIScreen+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B8D0F1A2024BF0027450F /* UIScreen+WF.m */; };
+		B09B8D121A202BC20027450F /* WXInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09B8D111A202BC20027450F /* WXInputView.xib */; };
+		B09B8D151A202CEA0027450F /* WXInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B8D141A202CEA0027450F /* WXInputView.m */; };
 		B0A0B94D1A1B591900315EE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94B1A1B591900315EE5 /* Main.storyboard */; };
 		B0A0B94F1A1B591900315EE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B94E1A1B591900315EE5 /* Images.xcassets */; };
 		B0A0B9521A1B591900315EE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A0B9501A1B591900315EE5 /* LaunchScreen.xib */; };
@@ -28,6 +31,7 @@
 		B0B647801A1C30A400B61286 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B6477F1A1C30A400B61286 /* WXTabBarController.m */; };
 		B0BA95D81A1F74A000B47EC8 /* XWAddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BA95D71A1F74A000B47EC8 /* XWAddContactViewController.m */; };
 		B0BA95DB1A1F757F00B47EC8 /* UITextField+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BA95DA1A1F757F00B47EC8 /* UITextField+WF.m */; };
+		B0BA95DE1A1F8F2E00B47EC8 /* WXChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BA95DD1A1F8F2E00B47EC8 /* WXChatViewController.m */; };
 		B0D126641A1F111E00CDE4D7 /* WXProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */; };
 		B0D126671A1F212700CDE4D7 /* WXEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126661A1F212700CDE4D7 /* WXEditProfileViewController.m */; };
 		B0FAB8261A1D78530054992D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8011A1D78520054992D /* GCDAsyncSocket.m */; };
@@ -195,6 +199,11 @@
 		B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXContactsViewController.m; sourceTree = "<group>"; };
 		B09AAC521A1E1C3A008C3638 /* WXHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXHistoryViewController.h; path = WeiXin/Classes/WeiXin/WXHistoryViewController.h; sourceTree = SOURCE_ROOT; };
 		B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXHistoryViewController.m; path = WeiXin/Classes/WeiXin/WXHistoryViewController.m; sourceTree = SOURCE_ROOT; };
+		B09B8D0E1A2024BF0027450F /* UIScreen+WF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+WF.h"; sourceTree = "<group>"; };
+		B09B8D0F1A2024BF0027450F /* UIScreen+WF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+WF.m"; sourceTree = "<group>"; };
+		B09B8D111A202BC20027450F /* WXInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXInputView.xib; sourceTree = "<group>"; };
+		B09B8D131A202CEA0027450F /* WXInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXInputView.h; sourceTree = "<group>"; };
+		B09B8D141A202CEA0027450F /* WXInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXInputView.m; sourceTree = "<group>"; };
 		B0A0B93E1A1B591900315EE5 /* WeiXin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeiXin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0A0B9421A1B591900315EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0A0B94C1A1B591900315EE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -219,6 +228,8 @@
 		B0BA95D71A1F74A000B47EC8 /* XWAddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWAddContactViewController.m; sourceTree = "<group>"; };
 		B0BA95D91A1F757F00B47EC8 /* UITextField+WF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+WF.h"; sourceTree = "<group>"; };
 		B0BA95DA1A1F757F00B47EC8 /* UITextField+WF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+WF.m"; sourceTree = "<group>"; };
+		B0BA95DC1A1F8F2E00B47EC8 /* WXChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatViewController.h; sourceTree = "<group>"; };
+		B0BA95DD1A1F8F2E00B47EC8 /* WXChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatViewController.m; sourceTree = "<group>"; };
 		B0D126621A1F111E00CDE4D7 /* WXProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXProfileViewController.h; sourceTree = "<group>"; };
 		B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXProfileViewController.m; sourceTree = "<group>"; };
 		B0D126651A1F212600CDE4D7 /* WXEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEditProfileViewController.h; sourceTree = "<group>"; };
@@ -548,6 +559,7 @@
 		B02A5B1C1A1F5D4B002547DA /* Contacts[通讯录] */ = {
 			isa = PBXGroup;
 			children = (
+				B09B8D0D1A2013640027450F /* Views */,
 				B02A5B1D1A1F5D69002547DA /* Controllers */,
 			);
 			name = "Contacts[通讯录]";
@@ -561,6 +573,8 @@
 				B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */,
 				B0BA95D61A1F74A000B47EC8 /* XWAddContactViewController.h */,
 				B0BA95D71A1F74A000B47EC8 /* XWAddContactViewController.m */,
+				B0BA95DC1A1F8F2E00B47EC8 /* WXChatViewController.h */,
+				B0BA95DD1A1F8F2E00B47EC8 /* WXChatViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -582,6 +596,16 @@
 			);
 			name = Controllers;
 			path = WXHistoryViewController;
+			sourceTree = "<group>";
+		};
+		B09B8D0D1A2013640027450F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B09B8D111A202BC20027450F /* WXInputView.xib */,
+				B09B8D131A202CEA0027450F /* WXInputView.h */,
+				B09B8D141A202CEA0027450F /* WXInputView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		B0A0B9351A1B591900315EE5 = {
@@ -742,6 +766,8 @@
 				B0FABB8C1A1DEC200054992D /* UIStoryboard+WF.m */,
 				B0BA95D91A1F757F00B47EC8 /* UITextField+WF.h */,
 				B0BA95DA1A1F757F00B47EC8 /* UITextField+WF.m */,
+				B09B8D0E1A2024BF0027450F /* UIScreen+WF.h */,
+				B09B8D0F1A2024BF0027450F /* UIScreen+WF.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1674,6 +1700,7 @@
 			files = (
 				B0A0B9721A1B754800315EE5 /* Login.storyboard in Resources */,
 				B0A0B94D1A1B591900315EE5 /* Main.storyboard in Resources */,
+				B09B8D121A202BC20027450F /* WXInputView.xib in Resources */,
 				B0A0B9521A1B591900315EE5 /* LaunchScreen.xib in Resources */,
 				B0050C531A1B9F9900D0C5A8 /* operationbox_text@2x.png in Resources */,
 				B0A0B94F1A1B591900315EE5 /* Images.xcassets in Resources */,
@@ -1705,6 +1732,8 @@
 				B0FABB141A1D78FE0054992D /* XMPPUserMemoryStorageObject.m in Sources */,
 				B0FABAFD1A1D78FE0054992D /* NSData+XMPP.m in Sources */,
 				B0D126641A1F111E00CDE4D7 /* WXProfileViewController.m in Sources */,
+				B0BA95DE1A1F8F2E00B47EC8 /* WXChatViewController.m in Sources */,
+				B09B8D151A202CEA0027450F /* WXInputView.m in Sources */,
 				B0FABB311A1D78FE0054992D /* XMPPvCardTempAdr.m in Sources */,
 				B0FABB061A1D78FE0054992D /* XMPPPresence.m in Sources */,
 				B0FABB2E1A1D78FE0054992D /* XMPPvCardCoreDataStorageObject.m in Sources */,
@@ -1764,6 +1793,7 @@
 				B0FABB3D1A1D78FE0054992D /* XMPPIQ+XEP_0066.m in Sources */,
 				B0FABB5A1A1D78FE0054992D /* XEP_0223.m in Sources */,
 				B0FABB511A1D78FE0054992D /* XMPPPresence+XEP_0172.m in Sources */,
+				B09B8D101A2024BF0027450F /* UIScreen+WF.m in Sources */,
 				B0FABB611A1D78FE0054992D /* DDList.m in Sources */,
 				B0FABB111A1D78FE0054992D /* XMPPUserCoreDataStorageObject.m in Sources */,
 				B0FAB82C1A1D78530054992D /* ContextFilterLogFormatter.m in Sources */,

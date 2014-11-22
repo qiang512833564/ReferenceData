@@ -23,6 +23,9 @@
 }
 
 -(void)loadFriends{
+    if (xmppDelegate.rosterStorage == nil) {
+        return;
+    }
     NSManagedObjectContext *context = xmppDelegate.rosterStorage.mainThreadManagedObjectContext;
     
     // 创建查询请求【要查哪张表】
@@ -98,5 +101,9 @@
         XMPPUserCoreDataStorageObject *friend = _resultsContrl.fetchedObjects[indexPath.row];
         [xmppDelegate.roster removeUser:friend.jid];
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"chatSegue" sender:nil];
 }
 @end
