@@ -104,9 +104,6 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="ZlV-8E-NMV" kind="show" identifier="chatSegue" id="NYE-14-zZv"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mvT-zH-Ms9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -158,24 +155,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cp-qd-bHX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1032" y="-620"/>
-        </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="Prf-f2-Y3e">
-            <objects>
-                <viewController id="ZlV-8E-NMV" customClass="WXChatViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iAl-pJ-HDt"/>
-                        <viewControllerLayoutGuide type="bottom" id="Y6U-L8-WbG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SvQ-bU-hij">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vIa-jS-Z5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1028" y="141"/>
         </scene>
         <!--发现-->
         <scene sceneID="nBK-WP-kyh">

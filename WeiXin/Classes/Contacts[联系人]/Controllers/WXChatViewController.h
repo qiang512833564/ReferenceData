@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface WXChatViewController : UIViewController
-
+@property(nonatomic,strong)XMPPJID *friendJid;
 @end

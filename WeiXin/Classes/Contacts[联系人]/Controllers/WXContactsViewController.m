@@ -8,6 +8,7 @@
 
 #import "WXContactsViewController.h"
 #import "AppDelegate.h"
+#import "WXChatViewController.h"
 
 @interface WXContactsViewController ()<NSFetchedResultsControllerDelegate>{
     NSFetchedResultsController *_resultsContrl;
@@ -104,6 +105,14 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"chatSegue" sender:nil];
+    
+    WXChatViewController *chatVc = [[WXChatViewController alloc] init];
+    XMPPUserCoreDataStorageObject *friend = _resultsContrl.fetchedObjects[indexPath.row];
+    // 传递好友的jid
+    chatVc.friendJid = friend.jid;
+    [self.navigationController pushViewController:chatVc animated:YES];
 }
+
+
+
 @end

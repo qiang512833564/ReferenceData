@@ -14,6 +14,7 @@
 		B009D4A71A1C7F380036F87E /* WXRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */; };
 		B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */; };
 		B02A5B201A1F5D8B002547DA /* WXContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */; };
+		B036AFAD1A207674003AAC29 /* WXChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B036AFAC1A207674003AAC29 /* WXChatCell.m */; };
 		B09AAC541A1E1C3A008C3638 /* WXHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */; };
 		B09B8D101A2024BF0027450F /* UIScreen+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B09B8D0F1A2024BF0027450F /* UIScreen+WF.m */; };
 		B09B8D121A202BC20027450F /* WXInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09B8D111A202BC20027450F /* WXInputView.xib */; };
@@ -197,6 +198,8 @@
 		B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXOtherLoginViewController.m; sourceTree = "<group>"; };
 		B02A5B1E1A1F5D8B002547DA /* WXContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXContactsViewController.h; sourceTree = "<group>"; };
 		B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXContactsViewController.m; sourceTree = "<group>"; };
+		B036AFAB1A207674003AAC29 /* WXChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatCell.h; sourceTree = "<group>"; };
+		B036AFAC1A207674003AAC29 /* WXChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatCell.m; sourceTree = "<group>"; };
 		B09AAC521A1E1C3A008C3638 /* WXHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXHistoryViewController.h; path = WeiXin/Classes/WeiXin/WXHistoryViewController.h; sourceTree = SOURCE_ROOT; };
 		B09AAC531A1E1C3A008C3638 /* WXHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXHistoryViewController.m; path = WeiXin/Classes/WeiXin/WXHistoryViewController.m; sourceTree = SOURCE_ROOT; };
 		B09B8D0E1A2024BF0027450F /* UIScreen+WF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+WF.h"; sourceTree = "<group>"; };
@@ -604,6 +607,8 @@
 				B09B8D111A202BC20027450F /* WXInputView.xib */,
 				B09B8D131A202CEA0027450F /* WXInputView.h */,
 				B09B8D141A202CEA0027450F /* WXInputView.m */,
+				B036AFAB1A207674003AAC29 /* WXChatCell.h */,
+				B036AFAC1A207674003AAC29 /* WXChatCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1831,6 +1836,7 @@
 				B0FABB261A1D78FE0054992D /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
 				B0FABB1E1A1D78FE0054992D /* XMPPRoomCoreDataStorage.m in Sources */,
 				B0FABB1D1A1D78FE0054992D /* XMPPRoom.xcdatamodeld in Sources */,
+				B036AFAD1A207674003AAC29 /* WXChatCell.m in Sources */,
 				B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */,
 				B0FABB171A1D78FE0054992D /* XMPPIQ+JabberRPC.m in Sources */,
 				B0FABB501A1D78FE0054992D /* XMPPMessage+XEP_0172.m in Sources */,

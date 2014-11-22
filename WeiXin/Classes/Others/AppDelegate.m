@@ -129,13 +129,17 @@
     // 6.添加花名册模块
     _rosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
     _roster = [[XMPPRoster alloc] initWithRosterStorage:_rosterStorage];
-//    [_roster addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    
+    // 7.花名册模块
+    _msgStorage = [[XMPPMessageArchivingCoreDataStorage alloc] init];
+    _msgArchiving = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:_msgStorage];
+    
     // 激活模块
     [_reconnect             activate:_xmppStream];
     [_vCardModule           activate:_xmppStream];
     [_vCardAvatarModule     activate:_xmppStream];
     [_roster                activate:_xmppStream];
-    
+    [_msgArchiving          activate:_xmppStream];
     
     
 }
@@ -149,6 +153,7 @@
     [_vCardModule       deactivate];//电子名片
     [_vCardAvatarModule deactivate];//电子名片头像模块
     [_roster            deactivate];
+    [_msgArchiving      deactivate];
     // 3.断开连接
     [_xmppStream disconnect];
     
@@ -158,6 +163,8 @@
     _vCardAvatarModule = nil;
     _rosterStorage = nil;
     _roster = nil;
+    _msgArchiving = nil;
+    _msgStorage = nil;
     _xmppStream = nil;
 }
 

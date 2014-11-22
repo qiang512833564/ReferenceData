@@ -63,15 +63,19 @@ static NSString *WXAutoLoginStatusNotification = @"WXAutoLoginStatusNotification
 
 
 // 电子名片数据存储
-@property(nonatomic,strong)XMPPvCardCoreDataStorage *vCardStorage;
+@property(nonatomic,strong,readonly)XMPPvCardCoreDataStorage *vCardStorage;
 
 // 电子名片头像模块"['ævətɑː(r)]"
-@property(nonatomic,strong)XMPPvCardAvatarModule *vCardAvatarModule;
+@property(nonatomic,strong,readonly)XMPPvCardAvatarModule *vCardAvatarModule;
 
 // 花名山模块
-@property(nonatomic,strong)XMPPRoster *roster;
+@property(nonatomic,strong,readonly)XMPPRoster *roster;
 // 花名册数据存储
-@property(nonatomic,strong)XMPPRosterCoreDataStorage *rosterStorage;
+@property(nonatomic,strong,readonly)XMPPRosterCoreDataStorage *rosterStorage;
+
+//消息模块
+@property(nonatomic,strong,readonly)XMPPMessageArchiving *msgArchiving;
+@property(nonatomic,strong,readonly)XMPPMessageArchivingCoreDataStorage *msgStorage;
 
 @end
 
