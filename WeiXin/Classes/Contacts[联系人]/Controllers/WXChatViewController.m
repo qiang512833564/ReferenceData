@@ -20,6 +20,7 @@
 @property(nonatomic,weak)UITableView *tableView;
 @property(nonatomic,weak)WXInputView *inputView;
 @property(nonatomic,strong)NSLayoutConstraint *bottomConstraint;
+@property(nonatomic,strong)NSLayoutConstraint *inputViewConstraint;
 @end
 
 @implementation WXChatViewController
@@ -105,6 +106,7 @@
     
     // 垂直约束
     NSArray *vConst = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-0-[inputView(50)]-0-|" options:0 metrics:nil views:views];
+    self.inputViewConstraint = vConst[vConst.count - 2];
     self.bottomConstraint = vConst[vConst.count - 1];
     [self.view addConstraints:vConst];
     WXLog(@"%@",vConst);
@@ -113,11 +115,19 @@
 
 #pragma mark 监听TextField的换行，即回车发送
 -(void)textViewDidChange:(UITextView *)textView{
+    
+    if(textView.contentSize.height > 40 && textView.contentSize.height<=120){
+
+        self.inputViewConstraint.constant = textView.contentSize.height + 10;
+        //self.bottomConstraint
+    }
+    
     // 换行
     if ([textView.text rangeOfString:@"\n"].length != 0) {
         //去除掉首尾的空白字符和换行字符
         NSString *msg = [textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         textView.text = nil;
+        self.inputViewConstraint.constant = 50;
         [self sendMsg:msg];
         
     }

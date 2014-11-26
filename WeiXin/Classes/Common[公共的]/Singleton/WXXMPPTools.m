@@ -8,23 +8,23 @@
 
 #import "WXXMPPTools.h"
 
-@interface WXXMPPTools ()
+@interface WXXMPPTools ()<XMPPRosterDelegate>
 //登录或者注册结果的回调block
 @property(nonatomic,copy)ResultBlock resultBlock;
 @end
 
 @implementation WXXMPPTools
-//singleton_implementation(WXXMPPTools)
+singleton_implementation(WXXMPPTools)
 
-+ (instancetype)sharedWXXMPPTools {
-    static WXXMPPTools *instance;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[self alloc] init];
-    });
-    return instance;
-}
+//+ (instancetype)sharedWXXMPPTools {
+//    static WXXMPPTools *instance;
+//    
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        instance = [[self alloc] init];
+//    });
+//    return instance;
+//}
 
 #pragma mark -私有方法
 #pragma mark 1 初始化XmppStream核心类
@@ -50,6 +50,8 @@
     // 6.添加花名册模块
     _rosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
     _roster = [[XMPPRoster alloc] initWithRosterStorage:_rosterStorage];
+    _roster.autoAcceptKnownPresenceSubscriptionRequests = NO;
+    [_roster addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     
     // 7.花名册模块
     _msgStorage = [[XMPPMessageArchivingCoreDataStorage alloc] init];
@@ -300,11 +302,18 @@
 -(void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence{
     WXLog(@"%@",presence.type);
     // 接收好友请求
-    if ([presence.type isEqualToString:@"subscribe"]) {
-        [_roster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
-    }
+//    if ([presence.type isEqualToString:@"subscribe"]) {
+//        [_roster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
+//    }
     
 }
+
+
+#pragma mark xmppRoster代理
+-(void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence{
+    WXLog(@"%@",presence);
+}
+
 -(void)dealloc{
     [self teardownXmppStream];
 }

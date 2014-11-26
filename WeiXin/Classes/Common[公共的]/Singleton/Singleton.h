@@ -3,7 +3,7 @@
 
 // .m
 #define singleton_implementation(class) \
-class *_instance; \
+static class *_instance; \
 \
 + (id)allocWithZone:(struct _NSZone *)zone \
 { \

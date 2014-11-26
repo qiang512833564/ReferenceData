@@ -85,11 +85,11 @@
         
 #warning 强调使用[UIStoryboard showInitialVCWithName:]方法时，里面的application无值
         self.window.rootViewController = [UIStoryboard initialVCWithName:@"Main"];
-        [self connectToServer];
+        //[self connectToServer];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // 自动登录服务器
-            
+            [[WXXMPPTools sharedWXXMPPTools] userLoginWithResultBlock:nil];
         });
         
     }

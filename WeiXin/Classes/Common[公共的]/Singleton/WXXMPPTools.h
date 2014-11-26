@@ -26,8 +26,8 @@ static NSString *WXAutoLoginStatusNotification = @"WXAutoLoginStatusNotification
 
 @interface WXXMPPTools : NSObject
 
-//singleton_interface(WXXMPPTools)
-+ (instancetype)sharedWXXMPPTools;
+singleton_interface(WXXMPPTools)
+//+ (instancetype)sharedWXXMPPTools;
 
 //是否要执行注册操作 YES 为注册 NO 为登录
 @property(nonatomic,assign,getter=isUserRegister)BOOL userRegister;
