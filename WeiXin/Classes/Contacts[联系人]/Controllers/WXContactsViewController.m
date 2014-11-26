@@ -25,10 +25,10 @@
 }
 
 -(void)loadFriends{
-    if (xmppDelegate.rosterStorage == nil) {
+    if ([WXXMPPTools sharedWXXMPPTools].rosterStorage == nil) {
         return;
     }
-    NSManagedObjectContext *context = xmppDelegate.rosterStorage.mainThreadManagedObjectContext;
+    NSManagedObjectContext *context = [WXXMPPTools sharedWXXMPPTools].rosterStorage.mainThreadManagedObjectContext;
     
     // 创建查询请求【要查哪张表】
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XMPPUserCoreDataStorageObject"];
@@ -73,7 +73,7 @@
     if (friend.photo) {
         cell.headView.image = friend.photo;
     }else{
-        NSData *data = [xmppDelegate.vCardAvatarModule photoDataForJID:friend.jid];
+        NSData *data = [[WXXMPPTools sharedWXXMPPTools].vCardAvatarModule photoDataForJID:friend.jid];
         if (data) {
             cell.headView.image = [UIImage imageWithData:data];
         }else{
@@ -89,7 +89,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // 删除好友
         XMPPUserCoreDataStorageObject *friend = _resultsContrl.fetchedObjects[indexPath.row];
-        [xmppDelegate.roster removeUser:friend.jid];
+        [[WXXMPPTools sharedWXXMPPTools].roster removeUser:friend.jid];
     }
 }
 

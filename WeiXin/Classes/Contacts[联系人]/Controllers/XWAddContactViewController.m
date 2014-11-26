@@ -52,13 +52,13 @@
     
     
     // 好友存在
-    if([xmppDelegate.rosterStorage userExistsWithJID:friendJid xmppStream:xmppDelegate.xmppStream]){
+    if([[WXXMPPTools sharedWXXMPPTools].rosterStorage userExistsWithJID:friendJid xmppStream:[WXXMPPTools sharedWXXMPPTools].xmppStream]){
         [self showAlert:@"当前好友已经存在，无须添加"];
         return;
     }
     
     // 添加好友
-    [xmppDelegate.roster subscribePresenceToUser:friendJid];
+    [[WXXMPPTools sharedWXXMPPTools].roster subscribePresenceToUser:friendJid];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

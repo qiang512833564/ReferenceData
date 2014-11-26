@@ -20,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cxd-yQ-wx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-682" y="262"/>
+            <point key="canvasLocation" x="-718" y="-6"/>
         </scene>
         <!--登录控制器-->
         <scene sceneID="rlE-Zw-qsx">
@@ -140,7 +140,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="45" y="262"/>
+            <point key="canvasLocation" x="45" y="-6"/>
         </scene>
         <!--注册导航控制器-->
         <scene sceneID="hvn-eA-mmc">

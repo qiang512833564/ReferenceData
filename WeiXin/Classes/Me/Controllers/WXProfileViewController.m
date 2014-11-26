@@ -42,7 +42,7 @@
 
 -(void)setupVCard{
     // 获取本人的电子名片
-    XMPPvCardTemp *myvCard = xmppDelegate.vCardModule.myvCardTemp;
+    XMPPvCardTemp *myvCard = [WXXMPPTools sharedWXXMPPTools].vCardModule.myvCardTemp;
     
     if (nil == myvCard) {
         WXLog(@"未获取到本人电子名片数据");
@@ -142,7 +142,7 @@
 
 -(void)editProfileViewControllerDidFinishedSave{
     
-    XMPPvCardTemp *myVCard = xmppDelegate.vCardModule.myvCardTemp;
+    XMPPvCardTemp *myVCard = [WXXMPPTools sharedWXXMPPTools].vCardModule.myvCardTemp;
     
     // 设置头像
     NSData *headData = UIImagePNGRepresentation(self.headView.image);
@@ -168,7 +168,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // 更新保存到服务器
-        [xmppDelegate.vCardModule updateMyvCardTemp:myVCard];
+        [[WXXMPPTools sharedWXXMPPTools].vCardModule updateMyvCardTemp:myVCard];
     });
     
 }

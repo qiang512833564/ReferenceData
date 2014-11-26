@@ -125,8 +125,8 @@
 
 #pragma mark 从数据库加载聊天数据
 -(void)loadMessage{
-    NSManagedObjectContext *context = xmppDelegate.msgStorage.mainThreadManagedObjectContext;
-    
+   // NSManagedObjectContext *context = xmppDelegate.msgStorage.mainThreadManagedObjectContext;
+     NSManagedObjectContext *context = [WXXMPPTools sharedWXXMPPTools].msgStorage.mainThreadManagedObjectContext;
     
     NSFetchRequest *requset = [NSFetchRequest fetchRequestWithEntityName:@"XMPPMessageArchiving_Message_CoreDataObject"];
     
@@ -179,7 +179,7 @@
     XMPPMessage *message = [XMPPMessage messageWithType:@"chat" to:self.friendJid];
     [message addBody:msg];
     
-    [xmppDelegate.xmppStream sendElement:message];
+    [[WXXMPPTools sharedWXXMPPTools].xmppStream sendElement:message];
     
     
 }

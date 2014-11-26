@@ -79,12 +79,12 @@
     userInfo.registerUserName = username;
     userInfo.registerPwd = pwd;
     
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    app.userRegister = YES;
+    //AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [WXXMPPTools sharedWXXMPPTools].userRegister = YES;
     
     [MBProgressHUD showMessage:@"正在注册" toView:self.view];
      __weak typeof(self) selfVc = self;
-    [app userRegisterWithResultBlock:^(XMPPResultType type) {
+    [[WXXMPPTools sharedWXXMPPTools] userRegisterWithResultBlock:^(XMPPResultType type) {
         [selfVc handleResultType:type];
     }];
     

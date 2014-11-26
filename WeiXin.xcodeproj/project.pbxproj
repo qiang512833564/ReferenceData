@@ -37,6 +37,7 @@
 		B0BA95DE1A1F8F2E00B47EC8 /* WXChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BA95DD1A1F8F2E00B47EC8 /* WXChatViewController.m */; };
 		B0D126641A1F111E00CDE4D7 /* WXProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */; };
 		B0D126671A1F212700CDE4D7 /* WXEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D126661A1F212700CDE4D7 /* WXEditProfileViewController.m */; };
+		B0E468C31A2610700007B0D8 /* WXXMPPTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E468C21A2610700007B0D8 /* WXXMPPTools.m */; };
 		B0FAB8261A1D78530054992D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8011A1D78520054992D /* GCDAsyncSocket.m */; };
 		B0FAB8271A1D78530054992D /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8041A1D78520054992D /* DDAbstractDatabaseLogger.m */; };
 		B0FAB8281A1D78530054992D /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAB8061A1D78520054992D /* DDASLLogger.m */; };
@@ -242,6 +243,8 @@
 		B0D126631A1F111E00CDE4D7 /* WXProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXProfileViewController.m; sourceTree = "<group>"; };
 		B0D126651A1F212600CDE4D7 /* WXEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEditProfileViewController.h; sourceTree = "<group>"; };
 		B0D126661A1F212700CDE4D7 /* WXEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXEditProfileViewController.m; sourceTree = "<group>"; };
+		B0E468C11A2610700007B0D8 /* WXXMPPTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXXMPPTools.h; sourceTree = "<group>"; };
+		B0E468C21A2610700007B0D8 /* WXXMPPTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXXMPPTools.m; sourceTree = "<group>"; };
 		B0FAB8001A1D78520054992D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		B0FAB8011A1D78520054992D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		B0FAB8031A1D78520054992D /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
@@ -1592,6 +1595,8 @@
 				B0FABB751A1D89370054992D /* Singleton.h */,
 				B0FABB721A1D89250054992D /* WXUserInfo.h */,
 				B0FABB731A1D89250054992D /* WXUserInfo.m */,
+				B0E468C11A2610700007B0D8 /* WXXMPPTools.h */,
+				B0E468C21A2610700007B0D8 /* WXXMPPTools.m */,
 			);
 			name = "Singleton[单例]";
 			path = Singleton;
@@ -1780,6 +1785,7 @@
 				B0FAB8311A1D78530054992D /* DDXMLElement.m in Sources */,
 				B0FABB471A1D78FE0054992D /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				B0FABB351A1D78FE0054992D /* XMPPvCardTempLabel.m in Sources */,
+				B0E468C31A2610700007B0D8 /* WXXMPPTools.m in Sources */,
 				B0FABB591A1D78FE0054992D /* NSXMLElement+XEP_0203.m in Sources */,
 				B0FABB2C1A1D78FE0054992D /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
 				B0FABB211A1D78FE0054992D /* XMPPRoomHybrid.xcdatamodeld in Sources */,

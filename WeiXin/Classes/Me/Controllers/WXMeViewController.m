@@ -33,7 +33,7 @@
 
 -(void)setupVCard{
     // 获取本人的电子名片
-    XMPPvCardTemp *myvCard = xmppDelegate.vCardModule.myvCardTemp;
+    XMPPvCardTemp *myvCard = [WXXMPPTools sharedWXXMPPTools].vCardModule.myvCardTemp;
 
     if (nil == myvCard) {
         WXLog(@"未获取到本人电子名片数据");
@@ -54,9 +54,9 @@
 // 注销
 - (IBAction)logoutBtnClick {
     
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
+   // AppDelegate *app = [UIApplication sharedApplication].delegate;
     
-    [app userLogout];
+    [[WXXMPPTools sharedWXXMPPTools] userLogout];
 }
 
 

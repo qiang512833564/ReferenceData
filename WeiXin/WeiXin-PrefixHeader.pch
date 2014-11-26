@@ -20,6 +20,7 @@
 #import "MBProgressHUD+HM.h"
 #import "CategoryWF.h"
 #import "WXUserInfo.h"
+#import "WXXMPPTools.h"
 
 //配置xmpp的日志
 //调试模式下才有需要日志输入功能

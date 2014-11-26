@@ -22,10 +22,10 @@
     
     // 调用代理的登录方法
     [MBProgressHUD showMessage:@"正在登录.." toView:self.view];
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    app.userRegister = NO;
+    //AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [WXXMPPTools sharedWXXMPPTools].userRegister = NO;
     __weak typeof(self) selfVc = self;
-    [app userLoginWithResultBlock:^(XMPPResultType type) {
+    [[WXXMPPTools sharedWXXMPPTools] userLoginWithResultBlock:^(XMPPResultType type) {
         [selfVc handleResultType:type];
     }];
 
