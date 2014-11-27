@@ -120,7 +120,7 @@
                         <sections>
                             <tableViewSection id="2vI-c0-3pZ">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5Ta-NG-vyn">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="5Ta-NG-vyn">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Ta-NG-vyn" id="YFO-gi-8oX">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -462,7 +462,7 @@
                         <sections>
                             <tableViewSection id="fD1-bd-5Zl">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gRy-ir-HuC">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="gRy-ir-HuC">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gRy-ir-HuC" id="14E-ds-VMj">
                                             <autoresizingMask key="autoresizingMask"/>

@@ -13,7 +13,7 @@
 #define InputViewH 50 //输入框调度
 #define FunctionViewH 200 //功能框高度
 
-@interface WXChatViewController()<UITextViewDelegate,UITableViewDataSource,NSFetchedResultsControllerDelegate>{
+@interface WXChatViewController()<UITextViewDelegate,UITableViewDataSource,NSFetchedResultsControllerDelegate,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>{
     NSFetchedResultsController *_resultsContr;
 }
 
@@ -31,7 +31,7 @@
     [self setupView];
     // 设置标题
     self.title = self.friendJid.user;
-    
+    self.tableView.delegate = self;
     // 键盘监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kbFrmWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kbFrmWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -84,9 +84,10 @@
     
     // 输入框
     WXInputView *inputView = [WXInputView inputView] ;
-    inputView.backgroundColor = [UIColor redColor];
     inputView.translatesAutoresizingMaskIntoConstraints = NO;
     inputView.msgTextView.delegate = self;
+    [inputView.addBtn addTarget:self action:@selector(addBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    WXLog(@"%@",NSStringFromCGPoint(inputView.msgTextView.contentOffset));
     [self.view addSubview:inputView];
     
 #warning 预留，未实现
@@ -115,22 +116,26 @@
 
 #pragma mark 监听TextField的换行，即回车发送
 -(void)textViewDidChange:(UITextView *)textView{
-    
-    if(textView.contentSize.height > 40 && textView.contentSize.height<=120){
-
-        self.inputViewConstraint.constant = textView.contentSize.height + 10;
-        //self.bottomConstraint
-    }
-    
+    CGFloat needH = textView.contentSize.height;
     // 换行
     if ([textView.text rangeOfString:@"\n"].length != 0) {
         //去除掉首尾的空白字符和换行字符
         NSString *msg = [textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        textView.text = nil;
-        self.inputViewConstraint.constant = 50;
-        [self sendMsg:msg];
         
+        [self sendMsg:msg];
+        self.inputViewConstraint.constant = 50;
+        textView.text = nil;
+    }else{
+        if(needH > 30 && textView.contentSize.height< 80){
+            self.inputViewConstraint.constant = needH + 20;
+        }else if(needH <= 30){
+            self.inputViewConstraint.constant = 50;
+            
+        }
     }
+    
+    
+    
 }
 
 #pragma mark 从数据库加载聊天数据
@@ -180,6 +185,22 @@
     
     chatCell.textLabel.text = msg.body;
     
+    XMPPMessage *xmppMsg = msg.message;
+    chatCell.imageView.image = nil;
+    if ([msg.body isEqual:@"image"]) {
+        NSArray *child = xmppMsg.children;
+        for (XMPPElement *node in child) {
+            if([[node name] isEqualToString:@"attachment"]){
+                NSString *base64 = [node stringValue];
+                NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64 options:0];
+                chatCell.imageView.image = [UIImage imageWithData:imageData];
+            }
+            
+        }
+        
+        
+    }
+    
     return chatCell;
 }
 
@@ -193,4 +214,38 @@
     
     
 }
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
+
+
+#pragma mark 图片选择
+-(void)addBtnClick{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+#pragma mark 图片选择器代理
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    WXLog(@"%@",info);
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    [self sendImage:originalImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark 发送图片
+-(void)sendImage:(UIImage *)image{
+    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:self.friendJid];
+    NSData *data = UIImagePNGRepresentation(image);
+    [msg addBody:@"image"];
+    XMPPElement *attachment = [XMPPElement elementWithName:@"attachment" stringValue:[data base64EncodedStringWithOptions:0]];
+    [msg addChild:attachment];
+    
+    [[WXXMPPTools sharedWXXMPPTools].xmppStream sendElement:msg];
+}
+
 @end

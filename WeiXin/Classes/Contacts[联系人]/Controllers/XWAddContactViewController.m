@@ -47,7 +47,6 @@
     NSString *jid = [NSString stringWithFormat:@"%@@%@",username,[WXUserInfo sharedWXUserInfo].xmppDomain];
     
     
-    
     XMPPJID *friendJid = [XMPPJID jidWithString:jid];
     
     
@@ -65,6 +64,5 @@
 -(void)showAlert:(NSString *)msg{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提醒" message:msg delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
     [alert show];
-    
 }
 @end

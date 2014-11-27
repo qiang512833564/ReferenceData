@@ -8,7 +8,7 @@
 
 #import "WXXMPPTools.h"
 
-@interface WXXMPPTools ()<XMPPRosterDelegate>
+@interface WXXMPPTools ()<XMPPRosterDelegate,XMPPStreamDelegate>
 //登录或者注册结果的回调block
 @property(nonatomic,copy)ResultBlock resultBlock;
 @end
@@ -279,6 +279,10 @@ singleton_implementation(WXXMPPTools)
     if (self.resultBlock) {
         _resultBlock(XMPPResultTypeRegisterFailure);
     }
+}
+
+-(void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message{
+    WXLog(@"%@",message);
 }
 
 -(void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
