@@ -175,6 +175,7 @@
 		B0FABB851A1DCE0A0054992D /* WXBaseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB841A1DCE0A0054992D /* WXBaseLoginViewController.m */; };
 		B0FABB8A1A1DE7690054992D /* WXMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB891A1DE7690054992D /* WXMeViewController.m */; };
 		B0FABB8D1A1DEC200054992D /* UIStoryboard+WF.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FABB8C1A1DEC200054992D /* UIStoryboard+WF.m */; };
+		B0FC7E0A1A276CC30029AED4 /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC7E091A276CC30029AED4 /* HttpTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -527,6 +528,8 @@
 		B0FABB891A1DE7690054992D /* WXMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMeViewController.m; sourceTree = "<group>"; };
 		B0FABB8B1A1DEC200054992D /* UIStoryboard+WF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+WF.h"; sourceTree = "<group>"; };
 		B0FABB8C1A1DEC200054992D /* UIStoryboard+WF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+WF.m"; sourceTree = "<group>"; };
+		B0FC7E081A276CC30029AED4 /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
+		B0FC7E091A276CC30029AED4 /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -761,6 +764,7 @@
 		B0A0B97F1A1B915000315EE5 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B0FC7E071A276CC30029AED4 /* Tool */,
 				B0FABB7A1A1D9AD90054992D /* MBProgessHUD */,
 				B0FAB7FD1A1D76BC0054992D /* XMPP */,
 				B0A0B9801A1B915E00315EE5 /* Category */,
@@ -1636,6 +1640,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		B0FC7E071A276CC30029AED4 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				B0FC7E081A276CC30029AED4 /* HttpTool.h */,
+				B0FC7E091A276CC30029AED4 /* HttpTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1785,6 +1798,7 @@
 				B0FAB8311A1D78530054992D /* DDXMLElement.m in Sources */,
 				B0FABB471A1D78FE0054992D /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				B0FABB351A1D78FE0054992D /* XMPPvCardTempLabel.m in Sources */,
+				B0FC7E0A1A276CC30029AED4 /* HttpTool.m in Sources */,
 				B0E468C31A2610700007B0D8 /* WXXMPPTools.m in Sources */,
 				B0FABB591A1D78FE0054992D /* NSXMLElement+XEP_0203.m in Sources */,
 				B0FABB2C1A1D78FE0054992D /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,

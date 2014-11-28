@@ -74,7 +74,13 @@
     
     // 邮箱
     //因为myCard.emailAddresses这个get方法，没有实现xml的数据解析，所以用mailer字段充当邮箱
-    self.emailLabel.text = myvCard.mailer;
+    //self.emailLabel.text = myvCard.mailer;
+    if (myvCard.emailAddresses.count > 0) {
+        self.emailLabel.text = myvCard.emailAddresses[0];
+    }
+
+    
+    WXLog(@"%@",myvCard.emailAddresses);
 }
 
 
@@ -163,6 +169,7 @@
     myVCard.note = self.telLabel.text;
     // 邮箱
     myVCard.mailer = self.emailLabel.text;
+    myVCard.emailAddresses = @[self.emailLabel.text];
     
     
     

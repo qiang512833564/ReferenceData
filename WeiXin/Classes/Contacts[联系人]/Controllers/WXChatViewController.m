@@ -9,6 +9,7 @@
 #import "WXChatViewController.h"
 #import "WXInputView.h"
 #import "WXChatCell.h"
+#import "WXNavigationController.h"
 
 #define InputViewH 50 //输入框调度
 #define FunctionViewH 200 //功能框高度
@@ -186,6 +187,7 @@
     chatCell.textLabel.text = msg.body;
     
     XMPPMessage *xmppMsg = msg.message;
+    NSLog(@"%@",[xmppMsg attributeStringValueForName:@"bodyType"]); 
     chatCell.imageView.image = nil;
     if ([msg.body isEqual:@"image"]) {
         NSArray *child = xmppMsg.children;
@@ -208,11 +210,10 @@
 -(void)sendMsg:(NSString *)msg{
     //WXLog(@"%@ %d",msg,msg.length);
     XMPPMessage *message = [XMPPMessage messageWithType:@"chat" to:self.friendJid];
+    [message addAttributeWithName:@"bodyType" stringValue:@"image"];
     [message addBody:msg];
     
     [[WXXMPPTools sharedWXXMPPTools].xmppStream sendElement:message];
-    
-    
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
@@ -234,12 +235,14 @@
     WXLog(@"%@",info);
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     [self sendImage:originalImage];
+    [WXNavigationController setupTheme];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark 发送图片
 -(void)sendImage:(UIImage *)image{
     XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:self.friendJid];
+    [msg addAttributeWithName:@"bodyType" stringValue:@"image"];
     NSData *data = UIImagePNGRepresentation(image);
     [msg addBody:@"image"];
     XMPPElement *attachment = [XMPPElement elementWithName:@"attachment" stringValue:[data base64EncodedStringWithOptions:0]];
