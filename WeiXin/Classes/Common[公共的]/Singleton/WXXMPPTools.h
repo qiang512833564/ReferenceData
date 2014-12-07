@@ -32,6 +32,7 @@ singleton_interface(WXXMPPTools)
 //是否要执行注册操作 YES 为注册 NO 为登录
 @property(nonatomic,assign,getter=isUserRegister)BOOL userRegister;
 
+-(void)setupXmppStream;
 /**
  用户登录 登录结果以block的方式返回
  */

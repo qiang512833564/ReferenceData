@@ -24,6 +24,8 @@
     // 程序启动时调用一次即可
     [[WXUserInfo sharedWXUserInfo] loadDataFromSandBox];
     
+    [[WXXMPPTools sharedWXXMPPTools] setupXmppStream];
+    
     if([WXUserInfo sharedWXUserInfo].isLogin){
         
 #warning 强调使用[UIStoryboard showInitialVCWithName:]方法时，里面的application无值

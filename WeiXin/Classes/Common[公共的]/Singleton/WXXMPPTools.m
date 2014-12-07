@@ -50,7 +50,7 @@ singleton_implementation(WXXMPPTools)
     // 6.添加花名册模块
     _rosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
     _roster = [[XMPPRoster alloc] initWithRosterStorage:_rosterStorage];
-    _roster.autoAcceptKnownPresenceSubscriptionRequests = NO;
+    //_roster.autoAcceptKnownPresenceSubscriptionRequests = NO;
     [_roster addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     
     // 7.花名册模块
@@ -302,21 +302,25 @@ singleton_implementation(WXXMPPTools)
     
 }
 
-
--(void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence{
-    WXLog(@"%@",presence.type);
-    // 接收好友请求
+//
+//-(void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence{
+//    WXLog(@"%@",presence.type);
+//    // 接收好友请求
 //    if ([presence.type isEqualToString:@"subscribe"]) {
 //        [_roster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
 //    }
-    
-}
+//    
+//}
 
 
 #pragma mark xmppRoster代理
--(void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence{
-    WXLog(@"%@",presence);
-}
+//-(void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence{
+//    WXLog(@"%@",presence);
+//    if ([presence.type isEqualToString:@"subscribe"]) {
+//        [_roster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
+//    }
+//
+//}
 
 -(void)dealloc{
     [self teardownXmppStream];

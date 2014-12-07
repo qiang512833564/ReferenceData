@@ -36,7 +36,9 @@
     // 设置过滤条件，找谁的好友，有可能多个用户登录
     NSString *userJid = [WXUserInfo sharedWXUserInfo].userJid;
     //WXLog(@"%@",userJid);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@",userJid];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND (subscription contains %@)",userJid,@"both"];
+   // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subscription contains %@",@"both"];
+    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@",userJid];
     request.predicate = predicate;
     
     // 设置排序
@@ -56,8 +58,11 @@
 }
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
-    
+    NSLog(@"%s",__FUNCTION__);
     [self.tableView reloadData];
+}
+-(void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
+    NSLog(@"%s",__FUNCTION__);
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

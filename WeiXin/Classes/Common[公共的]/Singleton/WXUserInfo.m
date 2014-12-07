@@ -11,7 +11,7 @@
 #define PwdKey @"PASSWORD"
 #define LoginKey @"Login"
 static NSString *xmppDomain = @"teacher.local";
-static NSString *xmppHostIP = @"192.168.95.102";
+static NSString *xmppHostIP = @"192.168.95.103";
 @implementation WXUserInfo
 singleton_implementation(WXUserInfo);
 
