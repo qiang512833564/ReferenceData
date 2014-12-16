@@ -9,6 +9,7 @@
 #import "WXChatViewController.h"
 #import "WXInputView.h"
 #import "WXChatCell.h"
+#import "WFChatCell.h"
 #import "WXNavigationController.h"
 
 #define InputViewH 50 //输入框调度
@@ -179,31 +180,60 @@
 }
 
 
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    WXChatCell *chatCell = [WXChatCell chatCellWithTableView:tableView];
+//    
+//    XMPPMessageArchiving_Message_CoreDataObject *msg = [_resultsContr objectAtIndexPath:indexPath];
+//    
+//    chatCell.textLabel.text = msg.body;
+//    
+//    XMPPMessage *xmppMsg = msg.message;
+//    NSLog(@"%@",[xmppMsg attributeStringValueForName:@"bodyType"]); 
+//    chatCell.imageView.image = nil;
+//    if ([msg.body isEqual:@"image"]) {
+//        NSArray *child = xmppMsg.children;
+//        for (XMPPElement *node in child) {
+//            if([[node name] isEqualToString:@"attachment"]){
+//                NSString *base64 = [node stringValue];
+//                NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64 options:0];
+//                chatCell.imageView.image = [UIImage imageWithData:imageData];
+//            }
+//        }
+//    }
+//    
+//    return chatCell;
+//}
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WXChatCell *chatCell = [WXChatCell chatCellWithTableView:tableView];
-    
     XMPPMessageArchiving_Message_CoreDataObject *msg = [_resultsContr objectAtIndexPath:indexPath];
     
-    chatCell.textLabel.text = msg.body;
-    
-    XMPPMessage *xmppMsg = msg.message;
-    NSLog(@"%@",[xmppMsg attributeStringValueForName:@"bodyType"]); 
-    chatCell.imageView.image = nil;
-    if ([msg.body isEqual:@"image"]) {
-        NSArray *child = xmppMsg.children;
-        for (XMPPElement *node in child) {
-            if([[node name] isEqualToString:@"attachment"]){
-                NSString *base64 = [node stringValue];
-                NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64 options:0];
-                chatCell.imageView.image = [UIImage imageWithData:imageData];
-            }
-            
-        }
-        
-        
+    WFChatCell *cc = nil;
+    if([[msg outgoing] boolValue] == YES){
+        cc = [WFChatCell chatCellWithTableView:tableView reuseId:WFReuseIdOfSendCell];
+    }else{
+        cc = [WFChatCell chatCellWithTableView:tableView reuseId:WFReuseIdOfReceiveCell];
     }
     
-    return chatCell;
+    
+    
+    
+    cc.msgLabel.text = msg.body;
+    
+//    XMPPMessage *xmppMsg = msg.message;
+//    NSLog(@"%@",[xmppMsg attributeStringValueForName:@"bodyType"]);
+//    if ([msg.body isEqual:@"image"]) {
+//        NSArray *child = xmppMsg.children;
+//        for (XMPPElement *node in child) {
+//            if([[node name] isEqualToString:@"attachment"]){
+//                NSString *base64 = [node stringValue];
+//                NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64 options:0];
+//                chatCell.imageView.image = [UIImage imageWithData:imageData];
+//            }
+//        }
+//    }
+    
+    return cc;
 }
 
 #pragma mark 发送聊消息
@@ -250,5 +280,33 @@
     
     [[WXXMPPTools sharedWXXMPPTools].xmppStream sendElement:msg];
 }
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //返回一个Cell
+    WFChatCell *chatCell = (WFChatCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    //让cell重新调整
+    [chatCell layoutIfNeeded];
+    
+    NSLog(@"heightForRowAtIndexPath %ld",indexPath.row);
+    //cell的高度，顶边距 + labelHeight + 底边距
+    CGFloat labelH = chatCell.msgLabel.frame.size.height;
+    CGFloat cellHeight = 8 + labelH + 28;
+    
+    if(cellHeight <= 80){
+        cellHeight = 80;
+    }
+    return cellHeight;
+}
+
+
+//预估表格的高度，加快不及格的显示时间，值随便写,实现现此方法，上面的方法会在cell要显示的时候才调用，这样上面的方法才不会被调用多少
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //NSLog(@"estimatedHeightForRowAtIndexPath %ld",indexPath.row);
+    return 80;
+}
+
 
 @end

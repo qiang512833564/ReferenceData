@@ -14,6 +14,8 @@
 		B009D4A71A1C7F380036F87E /* WXRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A61A1C7F380036F87E /* WXRegisterViewController.m */; };
 		B009D4AA1A1CD5160036F87E /* WXOtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */; };
 		B02A5B201A1F5D8B002547DA /* WXContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */; };
+		B02BDB8E1A401C780011BADB /* WFChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B02BDB8C1A401C780011BADB /* WFChatCell.m */; };
+		B02BDB8F1A401C780011BADB /* WFChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B02BDB8D1A401C780011BADB /* WFChatCell.xib */; };
 		B036AFAD1A207674003AAC29 /* WXChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B036AFAC1A207674003AAC29 /* WXChatCell.m */; };
 		B036AFB11A208698003AAC29 /* WXContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B036AFB01A208698003AAC29 /* WXContactCell.xib */; };
 		B036AFB41A2086F2003AAC29 /* WXContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B036AFB31A2086F2003AAC29 /* WXContactCell.m */; };
@@ -202,6 +204,9 @@
 		B009D4A91A1CD5160036F87E /* WXOtherLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXOtherLoginViewController.m; sourceTree = "<group>"; };
 		B02A5B1E1A1F5D8B002547DA /* WXContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXContactsViewController.h; sourceTree = "<group>"; };
 		B02A5B1F1A1F5D8B002547DA /* WXContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXContactsViewController.m; sourceTree = "<group>"; };
+		B02BDB8B1A401C780011BADB /* WFChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFChatCell.h; sourceTree = "<group>"; };
+		B02BDB8C1A401C780011BADB /* WFChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFChatCell.m; sourceTree = "<group>"; };
+		B02BDB8D1A401C780011BADB /* WFChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WFChatCell.xib; sourceTree = "<group>"; };
 		B036AFAB1A207674003AAC29 /* WXChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatCell.h; sourceTree = "<group>"; };
 		B036AFAC1A207674003AAC29 /* WXChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatCell.m; sourceTree = "<group>"; };
 		B036AFB01A208698003AAC29 /* WXContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXContactCell.xib; sourceTree = "<group>"; };
@@ -573,6 +578,7 @@
 		B02A5B1C1A1F5D4B002547DA /* Contacts[通讯录] */ = {
 			isa = PBXGroup;
 			children = (
+				B02BDB8A1A401C780011BADB /* WFView【新聊天Cell】 */,
 				B09B8D0D1A2013640027450F /* Views */,
 				B02A5B1D1A1F5D69002547DA /* Controllers */,
 			);
@@ -591,6 +597,17 @@
 				B0BA95DD1A1F8F2E00B47EC8 /* WXChatViewController.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B02BDB8A1A401C780011BADB /* WFView【新聊天Cell】 */ = {
+			isa = PBXGroup;
+			children = (
+				B02BDB8B1A401C780011BADB /* WFChatCell.h */,
+				B02BDB8C1A401C780011BADB /* WFChatCell.m */,
+				B02BDB8D1A401C780011BADB /* WFChatCell.xib */,
+			);
+			name = "WFView【新聊天Cell】";
+			path = WFView;
 			sourceTree = "<group>";
 		};
 		B09AAC511A1E19EA008C3638 /* WeiXin[微信] */ = {
@@ -1733,6 +1750,7 @@
 				B0A0B94D1A1B591900315EE5 /* Main.storyboard in Resources */,
 				B09B8D121A202BC20027450F /* WXInputView.xib in Resources */,
 				B0A0B9521A1B591900315EE5 /* LaunchScreen.xib in Resources */,
+				B02BDB8F1A401C780011BADB /* WFChatCell.xib in Resources */,
 				B0050C531A1B9F9900D0C5A8 /* operationbox_text@2x.png in Resources */,
 				B0A0B94F1A1B591900315EE5 /* Images.xcassets in Resources */,
 				B0FABB811A1D9AD90054992D /* MBProgressHUD.bundle in Resources */,
@@ -1819,6 +1837,7 @@
 				B0A0B9701A1B74C900315EE5 /* main.m in Sources */,
 				B0FABB031A1D78FE0054992D /* XMPPMessage.m in Sources */,
 				B0050C561A1B9FFA00D0C5A8 /* UIButton+WF.m in Sources */,
+				B02BDB8E1A401C780011BADB /* WFChatCell.m in Sources */,
 				B0FABB491A1D78FE0054992D /* XMPPCapabilities.m in Sources */,
 				B036AFB41A2086F2003AAC29 /* WXContactCell.m in Sources */,
 				B0FABB531A1D78FE0054992D /* XMPPMessageDeliveryReceipts.m in Sources */,
