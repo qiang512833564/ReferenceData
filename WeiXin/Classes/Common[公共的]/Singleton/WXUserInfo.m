@@ -10,7 +10,7 @@
 #define UserNameKey @"USER_NAME"
 #define PwdKey @"PASSWORD"
 #define LoginKey @"Login"
-static NSString *xmppDomain = @"teacher.local";
+static NSString *xmppDomain = @"liqiangqiang";
 //static NSString *xmppHostIP = @"192.168.95.103";
 static NSString *xmppHostIP = @"127.0.0.1";
 @implementation WXUserInfo
