@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		292C1AD41C15729300AD0D1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 292C1AD31C15729300AD0D1E /* main.m */; };
+		292C1AD71C15729300AD0D1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 292C1AD61C15729300AD0D1E /* AppDelegate.m */; };
+		292C1ADA1C15729300AD0D1E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 292C1AD91C15729300AD0D1E /* ViewController.m */; };
+		292C1ADD1C15729300AD0D1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292C1ADB1C15729300AD0D1E /* Main.storyboard */; };
+		292C1ADF1C15729300AD0D1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292C1ADE1C15729300AD0D1E /* Assets.xcassets */; };
+		292C1AE21C15729300AD0D1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292C1AE01C15729300AD0D1E /* LaunchScreen.storyboard */; };
+		292C1AED1C15729300AD0D1E /* Runloop______Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 292C1AEC1C15729300AD0D1E /* Runloop______Tests.m */; };
+		292C1AF81C15729300AD0D1E /* Runloop______UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 292C1AF71C15729300AD0D1E /* Runloop______UITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		292C1AE91C15729300AD0D1E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 292C1AC71C15729200AD0D1E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 292C1ACE1C15729200AD0D1E;
+			remoteInfo = "Runloop实现线程睡眠";
+		};
+		292C1AF41C15729300AD0D1E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 292C1AC71C15729200AD0D1E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 292C1ACE1C15729200AD0D1E;
+			remoteInfo = "Runloop实现线程睡眠";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		292C1ACF1C15729300AD0D1E /* Runloop实现线程睡眠.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Runloop实现线程睡眠.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		292C1AD31C15729300AD0D1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		292C1AD51C15729300AD0D1E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		292C1AD61C15729300AD0D1E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		292C1AD81C15729300AD0D1E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		292C1AD91C15729300AD0D1E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		292C1ADC1C15729300AD0D1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		292C1ADE1C15729300AD0D1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		292C1AE11C15729300AD0D1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		292C1AE31C15729300AD0D1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		292C1AE81C15729300AD0D1E /* Runloop实现线程睡眠Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Runloop实现线程睡眠Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		292C1AEC1C15729300AD0D1E /* Runloop______Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Runloop______Tests.m"; sourceTree = "<group>"; };
+		292C1AEE1C15729300AD0D1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		292C1AF31C15729300AD0D1E /* Runloop实现线程睡眠UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Runloop实现线程睡眠UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		292C1AF71C15729300AD0D1E /* Runloop______UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Runloop______UITests.m"; sourceTree = "<group>"; };
+		292C1AF91C15729300AD0D1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		292C1ACC1C15729200AD0D1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292C1AE51C15729300AD0D1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292C1AF01C15729300AD0D1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		292C1AC61C15729200AD0D1E = {
+			isa = PBXGroup;
+			children = (
+				292C1AD11C15729300AD0D1E /* Runloop实现线程睡眠 */,
+				292C1AEB1C15729300AD0D1E /* Runloop实现线程睡眠Tests */,
+				292C1AF61C15729300AD0D1E /* Runloop实现线程睡眠UITests */,
+				292C1AD01C15729300AD0D1E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		292C1AD01C15729300AD0D1E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				292C1ACF1C15729300AD0D1E /* Runloop实现线程睡眠.app */,
+				292C1AE81C15729300AD0D1E /* Runloop实现线程睡眠Tests.xctest */,
+				292C1AF31C15729300AD0D1E /* Runloop实现线程睡眠UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		292C1AD11C15729300AD0D1E /* Runloop实现线程睡眠 */ = {
+			isa = PBXGroup;
+			children = (
+				292C1AD51C15729300AD0D1E /* AppDelegate.h */,
+				292C1AD61C15729300AD0D1E /* AppDelegate.m */,
+				292C1AD81C15729300AD0D1E /* ViewController.h */,
+				292C1AD91C15729300AD0D1E /* ViewController.m */,
+				292C1ADB1C15729300AD0D1E /* Main.storyboard */,
+				292C1ADE1C15729300AD0D1E /* Assets.xcassets */,
+				292C1AE01C15729300AD0D1E /* LaunchScreen.storyboard */,
+				292C1AE31C15729300AD0D1E /* Info.plist */,
+				292C1AD21C15729300AD0D1E /* Supporting Files */,
+			);
+			path = "Runloop实现线程睡眠";
+			sourceTree = "<group>";
+		};
+		292C1AD21C15729300AD0D1E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				292C1AD31C15729300AD0D1E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		292C1AEB1C15729300AD0D1E /* Runloop实现线程睡眠Tests */ = {
+			isa = PBXGroup;
+			children = (
+				292C1AEC1C15729300AD0D1E /* Runloop______Tests.m */,
+				292C1AEE1C15729300AD0D1E /* Info.plist */,
+			);
+			path = "Runloop实现线程睡眠Tests";
+			sourceTree = "<group>";
+		};
+		292C1AF61C15729300AD0D1E /* Runloop实现线程睡眠UITests */ = {
+			isa = PBXGroup;
+			children = (
+				292C1AF71C15729300AD0D1E /* Runloop______UITests.m */,
+				292C1AF91C15729300AD0D1E /* Info.plist */,
+			);
+			path = "Runloop实现线程睡眠UITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		292C1ACE1C15729200AD0D1E /* Runloop实现线程睡眠 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 292C1AFC1C15729300AD0D1E /* Build configuration list for PBXNativeTarget "Runloop实现线程睡眠" */;
+			buildPhases = (
+				292C1ACB1C15729200AD0D1E /* Sources */,
+				292C1ACC1C15729200AD0D1E /* Frameworks */,
+				292C1ACD1C15729200AD0D1E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Runloop实现线程睡眠";
+			productName = "Runloop实现线程睡眠";
+			productReference = 292C1ACF1C15729300AD0D1E /* Runloop实现线程睡眠.app */;
+			productType = "com.apple.product-type.application";
+		};
+		292C1AE71C15729300AD0D1E /* Runloop实现线程睡眠Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 292C1AFF1C15729300AD0D1E /* Build configuration list for PBXNativeTarget "Runloop实现线程睡眠Tests" */;
+			buildPhases = (
+				292C1AE41C15729300AD0D1E /* Sources */,
+				292C1AE51C15729300AD0D1E /* Frameworks */,
+				292C1AE61C15729300AD0D1E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				292C1AEA1C15729300AD0D1E /* PBXTargetDependency */,
+			);
+			name = "Runloop实现线程睡眠Tests";
+			productName = "Runloop实现线程睡眠Tests";
+			productReference = 292C1AE81C15729300AD0D1E /* Runloop实现线程睡眠Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		292C1AF21C15729300AD0D1E /* Runloop实现线程睡眠UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 292C1B021C15729300AD0D1E /* Build configuration list for PBXNativeTarget "Runloop实现线程睡眠UITests" */;
+			buildPhases = (
+				292C1AEF1C15729300AD0D1E /* Sources */,
+				292C1AF01C15729300AD0D1E /* Frameworks */,
+				292C1AF11C15729300AD0D1E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				292C1AF51C15729300AD0D1E /* PBXTargetDependency */,
+			);
+			name = "Runloop实现线程睡眠UITests";
+			productName = "Runloop实现线程睡眠UITests";
+			productReference = 292C1AF31C15729300AD0D1E /* Runloop实现线程睡眠UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		292C1AC71C15729200AD0D1E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					292C1ACE1C15729200AD0D1E = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					292C1AE71C15729300AD0D1E = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 292C1ACE1C15729200AD0D1E;
+					};
+					292C1AF21C15729300AD0D1E = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 292C1ACE1C15729200AD0D1E;
+					};
+				};
+			};
+			buildConfigurationList = 292C1ACA1C15729200AD0D1E /* Build configuration list for PBXProject "Runloop实现线程睡眠" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 292C1AC61C15729200AD0D1E;
+			productRefGroup = 292C1AD01C15729300AD0D1E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				292C1ACE1C15729200AD0D1E /* Runloop实现线程睡眠 */,
+				292C1AE71C15729300AD0D1E /* Runloop实现线程睡眠Tests */,
+				292C1AF21C15729300AD0D1E /* Runloop实现线程睡眠UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		292C1ACD1C15729200AD0D1E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				292C1AE21C15729300AD0D1E /* LaunchScreen.storyboard in Resources */,
+				292C1ADF1C15729300AD0D1E /* Assets.xcassets in Resources */,
+				292C1ADD1C15729300AD0D1E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292C1AE61C15729300AD0D1E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292C1AF11C15729300AD0D1E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		292C1ACB1C15729200AD0D1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				292C1ADA1C15729300AD0D1E /* ViewController.m in Sources */,
+				292C1AD71C15729300AD0D1E /* AppDelegate.m in Sources */,
+				292C1AD41C15729300AD0D1E /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292C1AE41C15729300AD0D1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				292C1AED1C15729300AD0D1E /* Runloop______Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292C1AEF1C15729300AD0D1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				292C1AF81C15729300AD0D1E /* Runloop______UITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		292C1AEA1C15729300AD0D1E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 292C1ACE1C15729200AD0D1E /* Runloop实现线程睡眠 */;
+			targetProxy = 292C1AE91C15729300AD0D1E /* PBXContainerItemProxy */;
+		};
+		292C1AF51C15729300AD0D1E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 292C1ACE1C15729200AD0D1E /* Runloop实现线程睡眠 */;
+			targetProxy = 292C1AF41C15729300AD0D1E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		292C1ADB1C15729300AD0D1E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				292C1ADC1C15729300AD0D1E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		292C1AE01C15729300AD0D1E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				292C1AE11C15729300AD0D1E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		292C1AFA1C15729300AD0D1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		292C1AFB1C15729300AD0D1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		292C1AFD1C15729300AD0D1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Runloop实现线程睡眠/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Runloop------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		292C1AFE1C15729300AD0D1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Runloop实现线程睡眠/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Runloop------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		292C1B001C15729300AD0D1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Runloop实现线程睡眠Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Runloop------Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runloop实现线程睡眠.app/Runloop实现线程睡眠";
+			};
+			name = Debug;
+		};
+		292C1B011C15729300AD0D1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Runloop实现线程睡眠Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Runloop------Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runloop实现线程睡眠.app/Runloop实现线程睡眠";
+			};
+			name = Release;
+		};
+		292C1B031C15729300AD0D1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Runloop实现线程睡眠UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Runloop------UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Runloop实现线程睡眠";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		292C1B041C15729300AD0D1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Runloop实现线程睡眠UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Runloop------UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Runloop实现线程睡眠";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		292C1ACA1C15729200AD0D1E /* Build configuration list for PBXProject "Runloop实现线程睡眠" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				292C1AFA1C15729300AD0D1E /* Debug */,
+				292C1AFB1C15729300AD0D1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		292C1AFC1C15729300AD0D1E /* Build configuration list for PBXNativeTarget "Runloop实现线程睡眠" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				292C1AFD1C15729300AD0D1E /* Debug */,
+				292C1AFE1C15729300AD0D1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		292C1AFF1C15729300AD0D1E /* Build configuration list for PBXNativeTarget "Runloop实现线程睡眠Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				292C1B001C15729300AD0D1E /* Debug */,
+				292C1B011C15729300AD0D1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		292C1B021C15729300AD0D1E /* Build configuration list for PBXNativeTarget "Runloop实现线程睡眠UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				292C1B031C15729300AD0D1E /* Debug */,
+				292C1B041C15729300AD0D1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 292C1AC71C15729200AD0D1E /* Project object */;
+}

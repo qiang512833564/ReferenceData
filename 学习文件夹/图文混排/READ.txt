@@ -1,0 +1,29 @@
+链接
+是通过NSMutableAttriburedString来设置的（它可以设置文字样式，排布方式，以及下划线等等！）
+
+label里面有图片
+是先通过CTRunDelegateRef在NSMutableAttriburedString中占位，然后在通过调用setNeedDisplay方法，去绘制NSMutableAttriburedString字符串，不同的是，把原先通过CTRunDelegateRef占位的地方，再取出来，在通过CGContextDrawImage方法，去绘制原先CTRunDelegateRef占位的位置，显示为图片。
+
+
+CTRunDelegateCallbacks才是真正定义字形宽度、向上高度和向下高度的结构体，
+typedef struct
+{
+    CFIndex                         version;
+    CTRunDelegateDeallocateCallback dealloc;
+    CTRunDelegateGetAscentCallback  getAscent;
+    CTRunDelegateGetDescentCallback getDescent;
+    CTRunDelegateGetWidthCallback   getWidth;
+} CTRunDelegateCallbacks;
+
+
+
+for (CFIndex k = 0; k < runCount; k++)
+{//一个run就是一个字符的字形所占的位置
+CTRunRef run = CFArrayGetValueAtIndex(runs, k);
+NSDictionary *runAttributes = (NSDictionary *)CTRunGetAttributes(run);
+CTRunDelegateRef delegate = (__bridge CTRunDelegateRef)[runAttributes valueForKey:(id)kCTRunDelegateAttributeName];
+if (nil == delegate)
+ {//这里是过滤掉非图片的位置
+        continue;
+ }//再往下面是对图片位置的操作
+}

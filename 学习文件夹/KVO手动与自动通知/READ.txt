@@ -1,0 +1,12 @@
+
+手动通知方式的好处在于可以减少不必须要的通知，比如你可以首先检测一下 属性值是否发生改变，如果发生改变则通知，否则不通知。
+
+另外，如果一个单一的操作引发了多个属性值的改变，那么就必须嵌套改变通知。如下
+- (void)setOpeningBalance:(double)theBalance {
+    [self willChangeValueForKey:@"openingBalance"];
+    [self willChangeValueForKey:@"itemChanged"];
+    openingBalance=theBalance;
+    itemChanged=itemChanged+1;
+    [self didChangeValueForKey:@"itemChanged"];
+    [self didChangeValueForKey:@"openingBalance"];
+} 

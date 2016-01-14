@@ -1,0 +1,30 @@
+
+事件传递，是从最上层，依次往下传递的，直到最底层uiapplication，从上往下传递的过程中，会寻找是否能有能处理事件的View，如果有，则处理，并且不会接着往下传递了。
+另外注意：如果UIView ---- BOOL userInteractionEnabled;  // default is YES被改成了NO，则事件传递中断，事件则变成无人处理的状态，例如很多时候，底层父视图如果是UIImageView的话，而imageView的交互没有开启的话（默认使关闭NO的），则事件无人响应
+
+
+不管你的application当前设置是否忽略交互事件(application.beginIgnoringInteractionEvents) ，hitTest总会调用的，当然如果忽略了交互事件，之后的事件分发都不会调用了，事件会直接被废弃掉。假定我们没有忽略事件，如果hitTestView 无法处理这个事件，事件就通过响应链往上传递（hitTestView算是最早的Responder）,直到找到一个可以处理的Responder为止
+
+
+—————————需要注意的是，如果在ImageView或者Layer层上面加带事件的控件，则点击该控件的时候，该控件并不会去相应时间————————
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event用以确定事件发生的位置的
+1.默认的父子视图该方法调用的顺序是，父视图先调用，子视图后调用
+2.同级别子视图该方法调用的顺序是，优先检查顶部的子视图，如果发回为NO（或者hit-testing方法返回为nil）,则再检查底部的子视图
+3.Hit-Test也是比较聪明的，检测过程中有这么一点，就是说如果点击没有发生在某View中，那么该事件就不可能发生在View的Subview中，所以检测过程中发现该事件不在ViewB内，也直接就不会检测在不在ViewF内。也就是说，如果你的Subview设置了clipsToBounds=NO,实际显示区域可能超出了superView的frame，你点击超出的部分，是不会处理你的事件的，就是这么任性！
+
+
+void STLogResponderChain(UIResponder *responder) {
+  NSLog(@"------------------The Responder Chain------------------");
+  NSMutableString *spaces = [NSMutableString stringWithCapacity:4];
+  while (responder) {
+      NSLog(@"%@%@", spaces, responder.class);
+      responder = responder.nextResponder;
+      [spaces appendString:@"----"];
+  }
+}
+
+总结，系统会先通过- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event等方法去判断事件的发生位置，找到发生发生的最小控件之后（在这期间，如果一个控件的用户交互被关闭了，则- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event方法返回为nil,同时事件也不会往其子组件传递过去），再从该控件，往其父视图的方向去寻找是否有能处理该事件的控件。直到结束
+
+
+注意当子视图超过父视图的frame之外时，是无法响应事件的：
+系统使用hit-testing来找到触摸下的视图，它检测一个触摸事件是否发生在相应视图对象的边界之内(即视图的frame属性，这也是为什么子视图如果在父视图的frame之外时，是无法响应事件的)

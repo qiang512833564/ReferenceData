@@ -1,0 +1,13 @@
+
+
+Objective-C中对方法的调用并不是像C++里面那样直接调用，而是通过消息分发机制来实现的。这个机制核心的方法是objc_msgSend函数
+
+objc_msgSend，它就是负责发送一个消息给对象的C函数。
+在Objective-C中，message与方法的真正实现是在执行阶段绑定的，而非编译阶段。编译器会将消息发送转成对objc_msgSend方法的调用。
+
+	objc_msgSend方法含两个必要参数：receiver、方法名（即：selector）,如：
+	[receiver messafe];将被转换为：objc_msgsend(receiver,selector);
+   
+	objc_msgSend方法也能hold住message的参数，如：
+	objc_msgSend(receiver,selector,arg1,arg2,...);
+

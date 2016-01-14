@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		290DF77C1C16C79B00D67F2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 290DF77B1C16C79B00D67F2D /* main.m */; };
+		290DF77F1C16C79B00D67F2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 290DF77E1C16C79B00D67F2D /* AppDelegate.m */; };
+		290DF7821C16C79B00D67F2D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 290DF7811C16C79B00D67F2D /* ViewController.m */; };
+		290DF7851C16C79B00D67F2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 290DF7831C16C79B00D67F2D /* Main.storyboard */; };
+		290DF7871C16C79B00D67F2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 290DF7861C16C79B00D67F2D /* Assets.xcassets */; };
+		290DF78A1C16C79B00D67F2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 290DF7881C16C79B00D67F2D /* LaunchScreen.storyboard */; };
+		290DF7951C16C79B00D67F2D /* Water_wavesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 290DF7941C16C79B00D67F2D /* Water_wavesTests.m */; };
+		290DF7A01C16C79B00D67F2D /* Water_wavesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 290DF79F1C16C79B00D67F2D /* Water_wavesUITests.m */; };
+		290DF7B21C16D67E00D67F2D /* picture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 290DF7B11C16D67E00D67F2D /* picture.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		290DF7911C16C79B00D67F2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 290DF76F1C16C79B00D67F2D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 290DF7761C16C79B00D67F2D;
+			remoteInfo = "Water-waves";
+		};
+		290DF79C1C16C79B00D67F2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 290DF76F1C16C79B00D67F2D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 290DF7761C16C79B00D67F2D;
+			remoteInfo = "Water-waves";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		290DF7771C16C79B00D67F2D /* Water-waves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Water-waves.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		290DF77B1C16C79B00D67F2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		290DF77D1C16C79B00D67F2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		290DF77E1C16C79B00D67F2D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		290DF7801C16C79B00D67F2D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		290DF7811C16C79B00D67F2D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		290DF7841C16C79B00D67F2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		290DF7861C16C79B00D67F2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		290DF7891C16C79B00D67F2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		290DF78B1C16C79B00D67F2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		290DF7901C16C79B00D67F2D /* Water-wavesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Water-wavesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		290DF7941C16C79B00D67F2D /* Water_wavesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Water_wavesTests.m; sourceTree = "<group>"; };
+		290DF7961C16C79B00D67F2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		290DF79B1C16C79B00D67F2D /* Water-wavesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Water-wavesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		290DF79F1C16C79B00D67F2D /* Water_wavesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Water_wavesUITests.m; sourceTree = "<group>"; };
+		290DF7A11C16C79B00D67F2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		290DF7B11C16D67E00D67F2D /* picture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picture.jpg; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		290DF7741C16C79B00D67F2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		290DF78D1C16C79B00D67F2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		290DF7981C16C79B00D67F2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		290DF76E1C16C79B00D67F2D = {
+			isa = PBXGroup;
+			children = (
+				290DF7B11C16D67E00D67F2D /* picture.jpg */,
+				290DF7791C16C79B00D67F2D /* Water-waves */,
+				290DF7931C16C79B00D67F2D /* Water-wavesTests */,
+				290DF79E1C16C79B00D67F2D /* Water-wavesUITests */,
+				290DF7781C16C79B00D67F2D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		290DF7781C16C79B00D67F2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				290DF7771C16C79B00D67F2D /* Water-waves.app */,
+				290DF7901C16C79B00D67F2D /* Water-wavesTests.xctest */,
+				290DF79B1C16C79B00D67F2D /* Water-wavesUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		290DF7791C16C79B00D67F2D /* Water-waves */ = {
+			isa = PBXGroup;
+			children = (
+				290DF77D1C16C79B00D67F2D /* AppDelegate.h */,
+				290DF77E1C16C79B00D67F2D /* AppDelegate.m */,
+				290DF7801C16C79B00D67F2D /* ViewController.h */,
+				290DF7811C16C79B00D67F2D /* ViewController.m */,
+				290DF7831C16C79B00D67F2D /* Main.storyboard */,
+				290DF7861C16C79B00D67F2D /* Assets.xcassets */,
+				290DF7881C16C79B00D67F2D /* LaunchScreen.storyboard */,
+				290DF78B1C16C79B00D67F2D /* Info.plist */,
+				290DF77A1C16C79B00D67F2D /* Supporting Files */,
+			);
+			path = "Water-waves";
+			sourceTree = "<group>";
+		};
+		290DF77A1C16C79B00D67F2D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				290DF77B1C16C79B00D67F2D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		290DF7931C16C79B00D67F2D /* Water-wavesTests */ = {
+			isa = PBXGroup;
+			children = (
+				290DF7941C16C79B00D67F2D /* Water_wavesTests.m */,
+				290DF7961C16C79B00D67F2D /* Info.plist */,
+			);
+			path = "Water-wavesTests";
+			sourceTree = "<group>";
+		};
+		290DF79E1C16C79B00D67F2D /* Water-wavesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				290DF79F1C16C79B00D67F2D /* Water_wavesUITests.m */,
+				290DF7A11C16C79B00D67F2D /* Info.plist */,
+			);
+			path = "Water-wavesUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		290DF7761C16C79B00D67F2D /* Water-waves */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 290DF7A41C16C79B00D67F2D /* Build configuration list for PBXNativeTarget "Water-waves" */;
+			buildPhases = (
+				290DF7731C16C79B00D67F2D /* Sources */,
+				290DF7741C16C79B00D67F2D /* Frameworks */,
+				290DF7751C16C79B00D67F2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Water-waves";
+			productName = "Water-waves";
+			productReference = 290DF7771C16C79B00D67F2D /* Water-waves.app */;
+			productType = "com.apple.product-type.application";
+		};
+		290DF78F1C16C79B00D67F2D /* Water-wavesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 290DF7A71C16C79B00D67F2D /* Build configuration list for PBXNativeTarget "Water-wavesTests" */;
+			buildPhases = (
+				290DF78C1C16C79B00D67F2D /* Sources */,
+				290DF78D1C16C79B00D67F2D /* Frameworks */,
+				290DF78E1C16C79B00D67F2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				290DF7921C16C79B00D67F2D /* PBXTargetDependency */,
+			);
+			name = "Water-wavesTests";
+			productName = "Water-wavesTests";
+			productReference = 290DF7901C16C79B00D67F2D /* Water-wavesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		290DF79A1C16C79B00D67F2D /* Water-wavesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 290DF7AA1C16C79B00D67F2D /* Build configuration list for PBXNativeTarget "Water-wavesUITests" */;
+			buildPhases = (
+				290DF7971C16C79B00D67F2D /* Sources */,
+				290DF7981C16C79B00D67F2D /* Frameworks */,
+				290DF7991C16C79B00D67F2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				290DF79D1C16C79B00D67F2D /* PBXTargetDependency */,
+			);
+			name = "Water-wavesUITests";
+			productName = "Water-wavesUITests";
+			productReference = 290DF79B1C16C79B00D67F2D /* Water-wavesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		290DF76F1C16C79B00D67F2D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					290DF7761C16C79B00D67F2D = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					290DF78F1C16C79B00D67F2D = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 290DF7761C16C79B00D67F2D;
+					};
+					290DF79A1C16C79B00D67F2D = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 290DF7761C16C79B00D67F2D;
+					};
+				};
+			};
+			buildConfigurationList = 290DF7721C16C79B00D67F2D /* Build configuration list for PBXProject "Water-waves" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 290DF76E1C16C79B00D67F2D;
+			productRefGroup = 290DF7781C16C79B00D67F2D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				290DF7761C16C79B00D67F2D /* Water-waves */,
+				290DF78F1C16C79B00D67F2D /* Water-wavesTests */,
+				290DF79A1C16C79B00D67F2D /* Water-wavesUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		290DF7751C16C79B00D67F2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				290DF78A1C16C79B00D67F2D /* LaunchScreen.storyboard in Resources */,
+				290DF7871C16C79B00D67F2D /* Assets.xcassets in Resources */,
+				290DF7B21C16D67E00D67F2D /* picture.jpg in Resources */,
+				290DF7851C16C79B00D67F2D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		290DF78E1C16C79B00D67F2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		290DF7991C16C79B00D67F2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		290DF7731C16C79B00D67F2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				290DF7821C16C79B00D67F2D /* ViewController.m in Sources */,
+				290DF77F1C16C79B00D67F2D /* AppDelegate.m in Sources */,
+				290DF77C1C16C79B00D67F2D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		290DF78C1C16C79B00D67F2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				290DF7951C16C79B00D67F2D /* Water_wavesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		290DF7971C16C79B00D67F2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				290DF7A01C16C79B00D67F2D /* Water_wavesUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		290DF7921C16C79B00D67F2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 290DF7761C16C79B00D67F2D /* Water-waves */;
+			targetProxy = 290DF7911C16C79B00D67F2D /* PBXContainerItemProxy */;
+		};
+		290DF79D1C16C79B00D67F2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 290DF7761C16C79B00D67F2D /* Water-waves */;
+			targetProxy = 290DF79C1C16C79B00D67F2D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		290DF7831C16C79B00D67F2D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				290DF7841C16C79B00D67F2D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		290DF7881C16C79B00D67F2D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				290DF7891C16C79B00D67F2D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		290DF7A21C16C79B00D67F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		290DF7A31C16C79B00D67F2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		290DF7A51C16C79B00D67F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Water-waves/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Water-waves";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		290DF7A61C16C79B00D67F2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Water-waves/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Water-waves";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		290DF7A81C16C79B00D67F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Water-wavesTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Water-wavesTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Water-waves.app/Water-waves";
+			};
+			name = Debug;
+		};
+		290DF7A91C16C79B00D67F2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Water-wavesTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Water-wavesTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Water-waves.app/Water-waves";
+			};
+			name = Release;
+		};
+		290DF7AB1C16C79B00D67F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Water-wavesUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Water-wavesUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Water-waves";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		290DF7AC1C16C79B00D67F2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Water-wavesUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.Water-wavesUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Water-waves";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		290DF7721C16C79B00D67F2D /* Build configuration list for PBXProject "Water-waves" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				290DF7A21C16C79B00D67F2D /* Debug */,
+				290DF7A31C16C79B00D67F2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		290DF7A41C16C79B00D67F2D /* Build configuration list for PBXNativeTarget "Water-waves" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				290DF7A51C16C79B00D67F2D /* Debug */,
+				290DF7A61C16C79B00D67F2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		290DF7A71C16C79B00D67F2D /* Build configuration list for PBXNativeTarget "Water-wavesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				290DF7A81C16C79B00D67F2D /* Debug */,
+				290DF7A91C16C79B00D67F2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		290DF7AA1C16C79B00D67F2D /* Build configuration list for PBXNativeTarget "Water-wavesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				290DF7AB1C16C79B00D67F2D /* Debug */,
+				290DF7AC1C16C79B00D67F2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 290DF76F1C16C79B00D67F2D /* Project object */;
+}

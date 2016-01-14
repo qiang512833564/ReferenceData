@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		292609B41BE212ED00358822 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 292609B31BE212ED00358822 /* main.m */; };
+		292609B71BE212ED00358822 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 292609B61BE212ED00358822 /* AppDelegate.m */; };
+		292609BA1BE212ED00358822 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 292609B91BE212ED00358822 /* ViewController.m */; };
+		292609BD1BE212ED00358822 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292609BB1BE212ED00358822 /* Main.storyboard */; };
+		292609BF1BE212ED00358822 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292609BE1BE212ED00358822 /* Images.xcassets */; };
+		292609C21BE212ED00358822 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 292609C01BE212ED00358822 /* LaunchScreen.xib */; };
+		292609CE1BE212ED00358822 /* _D__CATransform3DTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 292609CD1BE212ED00358822 /* _D__CATransform3DTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		292609C81BE212ED00358822 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 292609A61BE212ED00358822 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 292609AD1BE212ED00358822;
+			remoteInfo = "3D矩阵CATransform3D";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		292609AE1BE212ED00358822 /* 3D矩阵CATransform3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3D矩阵CATransform3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		292609B21BE212ED00358822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		292609B31BE212ED00358822 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		292609B51BE212ED00358822 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		292609B61BE212ED00358822 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		292609B81BE212ED00358822 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		292609B91BE212ED00358822 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		292609BC1BE212ED00358822 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		292609BE1BE212ED00358822 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		292609C11BE212ED00358822 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		292609C71BE212ED00358822 /* 3D矩阵CATransform3DTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "3D矩阵CATransform3DTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		292609CC1BE212ED00358822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		292609CD1BE212ED00358822 /* _D__CATransform3DTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _D__CATransform3DTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		292609AB1BE212ED00358822 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292609C41BE212ED00358822 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		292609A51BE212ED00358822 = {
+			isa = PBXGroup;
+			children = (
+				292609B01BE212ED00358822 /* 3D矩阵CATransform3D */,
+				292609CA1BE212ED00358822 /* 3D矩阵CATransform3DTests */,
+				292609AF1BE212ED00358822 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		292609AF1BE212ED00358822 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				292609AE1BE212ED00358822 /* 3D矩阵CATransform3D.app */,
+				292609C71BE212ED00358822 /* 3D矩阵CATransform3DTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		292609B01BE212ED00358822 /* 3D矩阵CATransform3D */ = {
+			isa = PBXGroup;
+			children = (
+				292609B51BE212ED00358822 /* AppDelegate.h */,
+				292609B61BE212ED00358822 /* AppDelegate.m */,
+				292609B81BE212ED00358822 /* ViewController.h */,
+				292609B91BE212ED00358822 /* ViewController.m */,
+				292609BB1BE212ED00358822 /* Main.storyboard */,
+				292609BE1BE212ED00358822 /* Images.xcassets */,
+				292609C01BE212ED00358822 /* LaunchScreen.xib */,
+				292609B11BE212ED00358822 /* Supporting Files */,
+			);
+			path = "3D矩阵CATransform3D";
+			sourceTree = "<group>";
+		};
+		292609B11BE212ED00358822 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				292609B21BE212ED00358822 /* Info.plist */,
+				292609B31BE212ED00358822 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		292609CA1BE212ED00358822 /* 3D矩阵CATransform3DTests */ = {
+			isa = PBXGroup;
+			children = (
+				292609CD1BE212ED00358822 /* _D__CATransform3DTests.m */,
+				292609CB1BE212ED00358822 /* Supporting Files */,
+			);
+			path = "3D矩阵CATransform3DTests";
+			sourceTree = "<group>";
+		};
+		292609CB1BE212ED00358822 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				292609CC1BE212ED00358822 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		292609AD1BE212ED00358822 /* 3D矩阵CATransform3D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 292609D11BE212ED00358822 /* Build configuration list for PBXNativeTarget "3D矩阵CATransform3D" */;
+			buildPhases = (
+				292609AA1BE212ED00358822 /* Sources */,
+				292609AB1BE212ED00358822 /* Frameworks */,
+				292609AC1BE212ED00358822 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "3D矩阵CATransform3D";
+			productName = "3D矩阵CATransform3D";
+			productReference = 292609AE1BE212ED00358822 /* 3D矩阵CATransform3D.app */;
+			productType = "com.apple.product-type.application";
+		};
+		292609C61BE212ED00358822 /* 3D矩阵CATransform3DTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 292609D41BE212ED00358822 /* Build configuration list for PBXNativeTarget "3D矩阵CATransform3DTests" */;
+			buildPhases = (
+				292609C31BE212ED00358822 /* Sources */,
+				292609C41BE212ED00358822 /* Frameworks */,
+				292609C51BE212ED00358822 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				292609C91BE212ED00358822 /* PBXTargetDependency */,
+			);
+			name = "3D矩阵CATransform3DTests";
+			productName = "3D矩阵CATransform3DTests";
+			productReference = 292609C71BE212ED00358822 /* 3D矩阵CATransform3DTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		292609A61BE212ED00358822 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					292609AD1BE212ED00358822 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					292609C61BE212ED00358822 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 292609AD1BE212ED00358822;
+					};
+				};
+			};
+			buildConfigurationList = 292609A91BE212ED00358822 /* Build configuration list for PBXProject "3D矩阵CATransform3D" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 292609A51BE212ED00358822;
+			productRefGroup = 292609AF1BE212ED00358822 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				292609AD1BE212ED00358822 /* 3D矩阵CATransform3D */,
+				292609C61BE212ED00358822 /* 3D矩阵CATransform3DTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		292609AC1BE212ED00358822 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				292609BD1BE212ED00358822 /* Main.storyboard in Resources */,
+				292609C21BE212ED00358822 /* LaunchScreen.xib in Resources */,
+				292609BF1BE212ED00358822 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292609C51BE212ED00358822 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		292609AA1BE212ED00358822 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				292609BA1BE212ED00358822 /* ViewController.m in Sources */,
+				292609B71BE212ED00358822 /* AppDelegate.m in Sources */,
+				292609B41BE212ED00358822 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		292609C31BE212ED00358822 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				292609CE1BE212ED00358822 /* _D__CATransform3DTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		292609C91BE212ED00358822 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 292609AD1BE212ED00358822 /* 3D矩阵CATransform3D */;
+			targetProxy = 292609C81BE212ED00358822 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		292609BB1BE212ED00358822 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				292609BC1BE212ED00358822 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		292609C01BE212ED00358822 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				292609C11BE212ED00358822 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		292609CF1BE212ED00358822 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		292609D01BE212ED00358822 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		292609D21BE212ED00358822 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "3D矩阵CATransform3D/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		292609D31BE212ED00358822 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "3D矩阵CATransform3D/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		292609D51BE212ED00358822 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "3D矩阵CATransform3DTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/3D矩阵CATransform3D.app/3D矩阵CATransform3D";
+			};
+			name = Debug;
+		};
+		292609D61BE212ED00358822 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "3D矩阵CATransform3DTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/3D矩阵CATransform3D.app/3D矩阵CATransform3D";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		292609A91BE212ED00358822 /* Build configuration list for PBXProject "3D矩阵CATransform3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				292609CF1BE212ED00358822 /* Debug */,
+				292609D01BE212ED00358822 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		292609D11BE212ED00358822 /* Build configuration list for PBXNativeTarget "3D矩阵CATransform3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				292609D21BE212ED00358822 /* Debug */,
+				292609D31BE212ED00358822 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		292609D41BE212ED00358822 /* Build configuration list for PBXNativeTarget "3D矩阵CATransform3DTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				292609D51BE212ED00358822 /* Debug */,
+				292609D61BE212ED00358822 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 292609A61BE212ED00358822 /* Project object */;
+}

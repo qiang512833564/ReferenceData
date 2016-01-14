@@ -1,0 +1,48 @@
+
+字符串求长度：
+let str:String!
+str.characters.count
+
+swift协议：
+协议可以扩展：
+协议本身可以包含属性
+
+另外：结构体也可以遵循协议，跟类一样，需要注意的是：结构体Struct与类里必须含有与其遵循的协议相同的属性，
+如果是方法，则结构体与类里必须要有协议里方法的实现
+例如：
+//MARK: 在类，结构体，枚举的名称后加上协议名称，中间以冒号：分隔
+protocol FullyName {
+    var fullName:String { get }
+    func myNameIsWhat()->String;
+}
+struct Person:FullyName{
+    var fullName:String//FullyNamed协议含有fullName属性。因此其遵循者必须含有一个名为fullName，类型为String的可读属性。
+    func myNameIsWhat() -> String {
+        return self.fullName//注意：这里self指的是结构体对象
+    }
+}
+let john = Person(fullName: "John Appleseed")
+print(Person(fullName: "myFullName is zhang !").myNameIsWhat())
+这里需要注意的是，结构体初始化方式Person(里面加上结构体的属性)
+
+
+里面获取当前的输入法
+OC：
+NSArray *arr = [UITextInputMode activeInputModes]—>
+NSString *str = arr.first;
+/*
+zh-Hans简单汉字拼音、en-US英文、zh-Hans简体手写、zh-Hant繁体手写
+*/
+swift:
+let result = textView.textInputMode?.primaryLanguage
+
+static引入，使用下面的方式
+struct Static {
+            static var onceToken:dispatch_once_t = 0
+}
+dispatch_once(&Static.onceToken) { () -> Void in
+}
+
+
+
+OC——类别扩展，在swift上不存在，在swift里用extension替代了！

@@ -1,0 +1,25 @@
+load--当类被引用进程序的时候会执行这个函数。
+
+当父类和子类都实现load函数时，父类的load函数会被先执行。load函数是系统自动加载的，因此不需要调用父类的load函数，否则父类的load函数会多次执行。
+
+在Category中写load函数是不会替换原始类中的load函数的，原始类和Category中的load函数都会被执行，原始类的load会先被执行，再执行Category中的load函数。当有多个Category都实现了load函数，这几个load函数执行顺序不确定。
+
+initialize--当类第一次被执行到的时候这个函数会被执行。
+
+
+如果类包含继承关系，父类的initialize函数会比子类先执行。由于是系统自动调用，也不需要显式的调用父类的initialize，否则父类的initialize会被多次执行。
+
+假如这个类放到代码中，而这段代码并没有被执行，这个函数是不会被执行的。
+
+
+Load or Initialize
+
+这两个函数没有交集，也没有执行的先后顺序，他们各自遵循着各自的调用原则。因此在写逻辑的时候，不能有逻辑依赖load函数比initialize函数先行调用。
+
+
+
+使用场景：
+
+将针对于类修改放在intialize中，将针对Category的修改放在load中。
+
+但是假如我们是修改系统的类，一般会通过添加Category来添加功能，但是如果修改initialize会导致原生的intialize不会执行，所以放在load中会比较妥当。

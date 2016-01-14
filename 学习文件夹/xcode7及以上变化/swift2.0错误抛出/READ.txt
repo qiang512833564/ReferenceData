@@ -1,0 +1,25 @@
+错误1：
+Errors thrown from here are not handled because the enclosing catch is not exhaustive
+是因为在抓取到error的时候，获取的不全
+如：
+do{}catch let error as NSError{
+}
+解决方法：
+do{}catch let error as NSError{
+}catch{
+}
+
+错误2：
+var request:NSMutableURLRequest
+do{
+request = try self.requestSerializer.multipartFormRequestWithMethod……
+}catch{
+}
+request.HTTPShouldHandleCookies = false 报错
+原因：如果真的有错误发生，throw抛出错误来，那么throw下面的代码就不会被执行，然后方法就不会返回值
+使得request不会获取到值，因此后面再用request就会报错，提示未初始化
+解决方法：
+do{}catch{
+  request = NSMutableURLRequest()
+}
+抛出错误的时候，也被初始化一下

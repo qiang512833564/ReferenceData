@@ -1,0 +1,7 @@
+
+系统的对象：
+如：
+NSArray、NSDictionary等都可以直接用[NSKeyedArchiver archiveRootObject:_modelArray toFile:self.mypath];进行归档。
+另外，如果是定义的对象的话，需要归档，则必须遵循NSCoding协议，然后在实现方法：
+方法1：- (void)encodeWithCoder:(NSCoder *)aCoder
+方法2：- (id)initWithCoder:(NSCoder *)aDecoder

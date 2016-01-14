@@ -1,0 +1,531 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29C5F58A1BEB402C00227C0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C5F5891BEB402C00227C0C /* main.m */; };
+		29C5F58D1BEB402C00227C0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C5F58C1BEB402C00227C0C /* AppDelegate.m */; };
+		29C5F5901BEB402C00227C0C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C5F58F1BEB402C00227C0C /* ViewController.m */; };
+		29C5F5931BEB402C00227C0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29C5F5911BEB402C00227C0C /* Main.storyboard */; };
+		29C5F5951BEB402C00227C0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C5F5941BEB402C00227C0C /* Assets.xcassets */; };
+		29C5F5981BEB402C00227C0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29C5F5961BEB402C00227C0C /* LaunchScreen.storyboard */; };
+		29C5F5A31BEB402C00227C0C /* _________Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C5F5A21BEB402C00227C0C /* _________Tests.m */; };
+		29C5F5AE1BEB402C00227C0C /* _________UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C5F5AD1BEB402C00227C0C /* _________UITests.m */; };
+		29C5F5BD1BEB408500227C0C /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C5F5BC1BEB408500227C0C /* Utility.m */; };
+		29C5F5BF1BEB4D3D00227C0C /* 图片.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29C5F5BE1BEB4D3D00227C0C /* 图片.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		29C5F59F1BEB402C00227C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29C5F57D1BEB402B00227C0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29C5F5841BEB402B00227C0C;
+			remoteInfo = "视图切割与阴影颜色";
+		};
+		29C5F5AA1BEB402C00227C0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29C5F57D1BEB402B00227C0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29C5F5841BEB402B00227C0C;
+			remoteInfo = "视图切割与阴影颜色";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		29C5F5851BEB402B00227C0C /* 视图切割与阴影颜色.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "视图切割与阴影颜色.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29C5F5891BEB402C00227C0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29C5F58B1BEB402C00227C0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		29C5F58C1BEB402C00227C0C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		29C5F58E1BEB402C00227C0C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		29C5F58F1BEB402C00227C0C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		29C5F5921BEB402C00227C0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		29C5F5941BEB402C00227C0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		29C5F5971BEB402C00227C0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		29C5F5991BEB402C00227C0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29C5F59E1BEB402C00227C0C /* 视图切割与阴影颜色Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "视图切割与阴影颜色Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29C5F5A21BEB402C00227C0C /* _________Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_________Tests.m"; sourceTree = "<group>"; };
+		29C5F5A41BEB402C00227C0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29C5F5A91BEB402C00227C0C /* 视图切割与阴影颜色UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "视图切割与阴影颜色UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29C5F5AD1BEB402C00227C0C /* _________UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_________UITests.m"; sourceTree = "<group>"; };
+		29C5F5AF1BEB402C00227C0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29C5F5BB1BEB408500227C0C /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		29C5F5BC1BEB408500227C0C /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		29C5F5BE1BEB4D3D00227C0C /* 图片.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "图片.jpg"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29C5F5821BEB402B00227C0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29C5F59B1BEB402C00227C0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29C5F5A61BEB402C00227C0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29C5F57C1BEB402B00227C0C = {
+			isa = PBXGroup;
+			children = (
+				29C5F5871BEB402B00227C0C /* 视图切割与阴影颜色 */,
+				29C5F5A11BEB402C00227C0C /* 视图切割与阴影颜色Tests */,
+				29C5F5AC1BEB402C00227C0C /* 视图切割与阴影颜色UITests */,
+				29C5F5861BEB402B00227C0C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		29C5F5861BEB402B00227C0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29C5F5851BEB402B00227C0C /* 视图切割与阴影颜色.app */,
+				29C5F59E1BEB402C00227C0C /* 视图切割与阴影颜色Tests.xctest */,
+				29C5F5A91BEB402C00227C0C /* 视图切割与阴影颜色UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29C5F5871BEB402B00227C0C /* 视图切割与阴影颜色 */ = {
+			isa = PBXGroup;
+			children = (
+				29C5F5BE1BEB4D3D00227C0C /* 图片.jpg */,
+				29C5F58B1BEB402C00227C0C /* AppDelegate.h */,
+				29C5F58C1BEB402C00227C0C /* AppDelegate.m */,
+				29C5F58E1BEB402C00227C0C /* ViewController.h */,
+				29C5F58F1BEB402C00227C0C /* ViewController.m */,
+				29C5F5BB1BEB408500227C0C /* Utility.h */,
+				29C5F5BC1BEB408500227C0C /* Utility.m */,
+				29C5F5911BEB402C00227C0C /* Main.storyboard */,
+				29C5F5941BEB402C00227C0C /* Assets.xcassets */,
+				29C5F5961BEB402C00227C0C /* LaunchScreen.storyboard */,
+				29C5F5991BEB402C00227C0C /* Info.plist */,
+				29C5F5881BEB402C00227C0C /* Supporting Files */,
+			);
+			path = "视图切割与阴影颜色";
+			sourceTree = "<group>";
+		};
+		29C5F5881BEB402C00227C0C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29C5F5891BEB402C00227C0C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29C5F5A11BEB402C00227C0C /* 视图切割与阴影颜色Tests */ = {
+			isa = PBXGroup;
+			children = (
+				29C5F5A21BEB402C00227C0C /* _________Tests.m */,
+				29C5F5A41BEB402C00227C0C /* Info.plist */,
+			);
+			path = "视图切割与阴影颜色Tests";
+			sourceTree = "<group>";
+		};
+		29C5F5AC1BEB402C00227C0C /* 视图切割与阴影颜色UITests */ = {
+			isa = PBXGroup;
+			children = (
+				29C5F5AD1BEB402C00227C0C /* _________UITests.m */,
+				29C5F5AF1BEB402C00227C0C /* Info.plist */,
+			);
+			path = "视图切割与阴影颜色UITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29C5F5841BEB402B00227C0C /* 视图切割与阴影颜色 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29C5F5B21BEB402C00227C0C /* Build configuration list for PBXNativeTarget "视图切割与阴影颜色" */;
+			buildPhases = (
+				29C5F5811BEB402B00227C0C /* Sources */,
+				29C5F5821BEB402B00227C0C /* Frameworks */,
+				29C5F5831BEB402B00227C0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "视图切割与阴影颜色";
+			productName = "视图切割与阴影颜色";
+			productReference = 29C5F5851BEB402B00227C0C /* 视图切割与阴影颜色.app */;
+			productType = "com.apple.product-type.application";
+		};
+		29C5F59D1BEB402C00227C0C /* 视图切割与阴影颜色Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29C5F5B51BEB402C00227C0C /* Build configuration list for PBXNativeTarget "视图切割与阴影颜色Tests" */;
+			buildPhases = (
+				29C5F59A1BEB402C00227C0C /* Sources */,
+				29C5F59B1BEB402C00227C0C /* Frameworks */,
+				29C5F59C1BEB402C00227C0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29C5F5A01BEB402C00227C0C /* PBXTargetDependency */,
+			);
+			name = "视图切割与阴影颜色Tests";
+			productName = "视图切割与阴影颜色Tests";
+			productReference = 29C5F59E1BEB402C00227C0C /* 视图切割与阴影颜色Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		29C5F5A81BEB402C00227C0C /* 视图切割与阴影颜色UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29C5F5B81BEB402C00227C0C /* Build configuration list for PBXNativeTarget "视图切割与阴影颜色UITests" */;
+			buildPhases = (
+				29C5F5A51BEB402C00227C0C /* Sources */,
+				29C5F5A61BEB402C00227C0C /* Frameworks */,
+				29C5F5A71BEB402C00227C0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29C5F5AB1BEB402C00227C0C /* PBXTargetDependency */,
+			);
+			name = "视图切割与阴影颜色UITests";
+			productName = "视图切割与阴影颜色UITests";
+			productReference = 29C5F5A91BEB402C00227C0C /* 视图切割与阴影颜色UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29C5F57D1BEB402B00227C0C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					29C5F5841BEB402B00227C0C = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					29C5F59D1BEB402C00227C0C = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 29C5F5841BEB402B00227C0C;
+					};
+					29C5F5A81BEB402C00227C0C = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 29C5F5841BEB402B00227C0C;
+					};
+				};
+			};
+			buildConfigurationList = 29C5F5801BEB402B00227C0C /* Build configuration list for PBXProject "视图切割与阴影颜色" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 29C5F57C1BEB402B00227C0C;
+			productRefGroup = 29C5F5861BEB402B00227C0C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29C5F5841BEB402B00227C0C /* 视图切割与阴影颜色 */,
+				29C5F59D1BEB402C00227C0C /* 视图切割与阴影颜色Tests */,
+				29C5F5A81BEB402C00227C0C /* 视图切割与阴影颜色UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29C5F5831BEB402B00227C0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29C5F5981BEB402C00227C0C /* LaunchScreen.storyboard in Resources */,
+				29C5F5951BEB402C00227C0C /* Assets.xcassets in Resources */,
+				29C5F5BF1BEB4D3D00227C0C /* 图片.jpg in Resources */,
+				29C5F5931BEB402C00227C0C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29C5F59C1BEB402C00227C0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29C5F5A71BEB402C00227C0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29C5F5811BEB402B00227C0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29C5F5BD1BEB408500227C0C /* Utility.m in Sources */,
+				29C5F5901BEB402C00227C0C /* ViewController.m in Sources */,
+				29C5F58D1BEB402C00227C0C /* AppDelegate.m in Sources */,
+				29C5F58A1BEB402C00227C0C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29C5F59A1BEB402C00227C0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29C5F5A31BEB402C00227C0C /* _________Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29C5F5A51BEB402C00227C0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29C5F5AE1BEB402C00227C0C /* _________UITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		29C5F5A01BEB402C00227C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29C5F5841BEB402B00227C0C /* 视图切割与阴影颜色 */;
+			targetProxy = 29C5F59F1BEB402C00227C0C /* PBXContainerItemProxy */;
+		};
+		29C5F5AB1BEB402C00227C0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29C5F5841BEB402B00227C0C /* 视图切割与阴影颜色 */;
+			targetProxy = 29C5F5AA1BEB402C00227C0C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		29C5F5911BEB402C00227C0C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29C5F5921BEB402C00227C0C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		29C5F5961BEB402C00227C0C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29C5F5971BEB402C00227C0C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		29C5F5B01BEB402C00227C0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29C5F5B11BEB402C00227C0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		29C5F5B31BEB402C00227C0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "视图切割与阴影颜色/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.---------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		29C5F5B41BEB402C00227C0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "视图切割与阴影颜色/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.---------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		29C5F5B61BEB402C00227C0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "视图切割与阴影颜色Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.---------Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/视图切割与阴影颜色.app/视图切割与阴影颜色";
+			};
+			name = Debug;
+		};
+		29C5F5B71BEB402C00227C0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "视图切割与阴影颜色Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.---------Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/视图切割与阴影颜色.app/视图切割与阴影颜色";
+			};
+			name = Release;
+		};
+		29C5F5B91BEB402C00227C0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "视图切割与阴影颜色UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.---------UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "视图切割与阴影颜色";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		29C5F5BA1BEB402C00227C0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "视图切割与阴影颜色UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "www.com.com.---------UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "视图切割与阴影颜色";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29C5F5801BEB402B00227C0C /* Build configuration list for PBXProject "视图切割与阴影颜色" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29C5F5B01BEB402C00227C0C /* Debug */,
+				29C5F5B11BEB402C00227C0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29C5F5B21BEB402C00227C0C /* Build configuration list for PBXNativeTarget "视图切割与阴影颜色" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29C5F5B31BEB402C00227C0C /* Debug */,
+				29C5F5B41BEB402C00227C0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		29C5F5B51BEB402C00227C0C /* Build configuration list for PBXNativeTarget "视图切割与阴影颜色Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29C5F5B61BEB402C00227C0C /* Debug */,
+				29C5F5B71BEB402C00227C0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		29C5F5B81BEB402C00227C0C /* Build configuration list for PBXNativeTarget "视图切割与阴影颜色UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29C5F5B91BEB402C00227C0C /* Debug */,
+				29C5F5BA1BEB402C00227C0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29C5F57D1BEB402B00227C0C /* Project object */;
+}

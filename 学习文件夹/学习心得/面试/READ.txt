@@ -1,0 +1,17 @@
+
+表单提交 post和get的区别？
+1、get方式提交会把参数显示在地址
+post方式提交不会把参数显示在地址栏上。（请求体）				
+2、get方式敏感信息不安全
+   post方式敏感信息相对安全
+3、get方式提交，官方限制提交大小仅1KB（但多数浏览器可以提交2KB）
+   post方式提交，提交大数据。一般用于附件上传
+
+#import <objc/runtime.h>
+runtime——给OC类别，扩展属性
+         (关联对象与被关联对象本身的存储并没有直接的关系，它是存储在单独的哈希表中的)
+       > 对象地址与AssociationsHashMap哈希表是一一对应的（因此，我们也可以给类对象添加关联对象）
+       > 流程： self ---> ObjectAssociationMap对象 ----> ObjectAssociationHashMap
+
+copy、strong、assign存储策略
+

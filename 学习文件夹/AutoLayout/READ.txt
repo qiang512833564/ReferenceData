@@ -1,0 +1,28 @@
+
+self.translatesAutoresizingMaskIntoConstraints = NO; 
+constraint.priority = _al_globalConstraintPriority;必须在往视图添加约束之前，设置好优先级，否则，优先级设置会崩溃的
+[self addConstraint:constraint];
+//设置优先级低于UILayoutPriorityRequired(1000)，UILayoutPriorityDefaultHigh是750
+//需要注意的是，优先级最大为1000
+
+约束在加载的时候，会以不同视图加入的顺序为参考。
+
+需要注意的是，对于同一个视图的同级别优先级来说，该视图的所有约束都是同等级的，个人理解是同步加载的。（因此，针对uilabel来说,这一点特别需要注意，当需要根据文字来设置高度的label来说，不要把约束设置为同一等级，否则，该label上所有的约束同时加载，label的位置就会被固定，如例子中的一样）
+
+优先级设置的时候，需要记住：哪一个约束，需要变动，就设置该约束较低。尽量不要去设置两个或多个视图之间关联着的约束。
+
+
+
+NSLayoutConstraint *tempWidthConstraint = [NSLayoutConstraint constraintWithItem:cell.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:contentViewWidth];
+设置宽度
+
+代码约束———是可以获取到frame的（但是需要在添加完约束以后[self layoutIfNeeded];执行该方法）
+而：
+storyboard或者xib,添加约束貌似要通过
+CGSize fittingSize = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];方法才能获得
+
+
+问题：
+需要根据图片，来自适应cell高度，(autoLayout—不需要把约束设置完全，而留一些>=的约束)
+本地图片是可以的。
+但是网络图片，貌似难以实现——貌似现在想到的好办法，是先获取当前界面的所有cell,然后判断是否所有界面显示的cell都已经加载完图片了，然后再统一刷新tableView(或者——直接后台直接在获取tableview列表的时候，就把每个图片的长宽返回给我们了)

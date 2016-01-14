@@ -1,0 +1,36 @@
+NSRunLoop
+是IOS消息机制的处理模式
+1.NSRunloop与线程的关系
+NSRunloop的主要作用：控制NSRunloop里面线程的执行与休眠
+当有任务的时候Runloop会让线程处理任务，当没有任务的时候Runloop会让线程处于休眠状态
+使用ports或input sources和其他线程通信
+2.
+每一个线程都有自己的Runloop,只是只有主线程的runloop是开启的
+因此：除了主线程，其它的线程都需要显示地运行Runlop
+3.两种事件源
+Input sources异步的分发事件到线程，然后引起runUntilDate:(由线程相关的Runloop对象调用)方法退出
+Timer sources同步分发事件到相应地处理器但是不会引起Runloop退出
+4.注册Runloop观察者
+注册Runloop观察者可以收到这些消息，然后在线程内用他们做一些额外的处理，我们只能使用Core Founation接口来注册线程的Runloop观察者
+5.Runloop运行模式
+在Runloop运行期间，只有和当前运行模式相关的事件源才能被监控和允许发送事件。（例如，NSTimer与UITableview滚动时候，NSTimer被暂停，就是因为UITableView滚动时候，Runloop的运行模式改变了，并且与NSTimer所处的运行模式不同，导致其被暂停）。
+只有和当前运行模式相关的观察者才会被通知Runloop的行为
+和其他模式相关的事件源会被保留新的事件直到Runloop运行在了合适的模式才会分发。
+6.Runloop过滤不想要的事件源
+大多数的情况下，Runloop都运行在系统提供的模式模式下，当设置Runloop为指定模式的时候，只有和这个模式相关的事件源才会发送事件到我们的线程，
+另外，我们通常使用自定义模式来阻止低优先级的事件源在其他关键处理的时间内发送事件。
+7.什么时候使用NSRunloop
+由于主线程的NSRunloop默认自动运行，所以只有第二线程才需要我们运行自己运行NSRunloop。
+需要运行NSRunloop的情况：
+需要使用Port或者自定义Input Source与其他线程进行通讯
+需要在线程中使用Timer
+需要在线程上使用performSelector方法
+需要让线程执行周期性的工作
+nsurlconnection在线程中发起异步请求
+8.Cocoa和Core Foundation定义的标准模式：
+NSDefaultRunLoopMode：默认的运行模式，用于大部分操作，除了NSConnection对象事件。
+NSConnectionReplyMode：用来监控NSConnection对象的回复的，很少能够用到
+NSModalPaneRunloopMode：用来标明和Mode Panel相关的事件。
+NSEventTrackingRunLoopMode：用于跟踪触摸事件触发的模式（例如UIScrollView上下滚动）
+NSRunLoopCommonModes：是一个模式集合，当绑定一个事件源到这个模式集合的时候就相当于绑定到了集合内的每一个模式
+我们可以通过CFRunLoopAddCommonMode添加模式

@@ -1,0 +1,75 @@
+
+http://www.jianshu.com/p/9a7f2b534b2d
+唐巧博客————http://www.wrox.cn/source/241/
+coreAnimation
+———>http://www.cocoachina.com/ios/20150104/10814.html
+
+##########动画###########
+CoreAnimation——是针对CALayer实现的，核心动画包含在Quartz核心框架(Quartz Core framework)
+  >CAPropertyAnimation 是一个抽象的子类，它支持动画显示图层的关键路径中指定的属性
+                       (一般不直接使用，而是使用它的子类：CABasicAnimation、                                             CAkeyframeAnimation)
+  >CABasicAnimation    简单的为图层的属性提供修改（如大小、透明度、颜色等）
+  >CAkeyframeAnimation 支持关键帧动画，可以指定图层属性的关键路径动画，包括动画的每个阶段的价值，以及关键帧时间和计时功能的一系列值
+  >CAAnimationGroup    动画组
+
+##########绘图###############
+iOS支持两套图形API族：CoreGraphics/Quartz2D和OpenGL ES（其中OpenGL ES是跨平台的图形API，属于OpenGL的一个简化版本）
+CoreGraphics（也叫Quartz2D/Quartz） ——- 是一套基于C的API框架，使用Quartz作为绘图引擎
+   >coregrahics所有的操作都在一个上下文中进行(上下文就先当于一块画布)
+      >获取图形上下文：UIGraphicsBeginImageContextWithOptions函数获取用来处理图片的图形上下文
+      >获取图片上下文：利用cocoa为你生成的图形上下文。UIView实现自己的drawRect方法
+      >UIGraphicsBeginImageContextWithOptions函数和drawRect方法，获取的上下文属于当前上下文（需要注意的是需要判断：回调方法所持有的context是否为当前图形上下文）
+UIKit和Core Graphics框架：(UIKit绘图，也是通过Quartz实现的)
+   >UIKit:使用UIKit，你只能在当前上下文中绘图，当处于UIGraphicsBeginImageContextWithOptions函数或drawRect：方法中，你就可以直接使用UIKit提供的方法进行绘图。如果你持有一个context：参数，那么使用UIKit提供的方法之前，必须将该上下文参数转化为当前上下文。幸运的是，调用UIGraphicsPushContext 函数可以方便的将context：参数转化为当前上下文，记住最后别忘了调用UIGraphicsPopContext函数恢复上下文环境。
+   >
+#####绘制图片的颠倒情况#####
+图片绘制的时候需注意：在单分辨率和双分辨率下，一个UIImage对象的size属性值都是一样的，但是双分辨率UImage对应的CGImage是单分辨率下的两倍大）
+   >当创建一个CGImage并使用CGContextDrawImage方法绘图就会引起图片颠倒的问题(即：创建和绘制一个CGImage对象时就会暴露出倒置问题)————另外，在UIGraphicsBeginImageContextWithOptions中获取的上下文，然后在获取图片，也是颠倒的
+     >原因：因为原始的本地坐标系(坐标原点在左上角)与目标上下文(坐标原点在左下角)不匹配(究其原因是因为Core Graphics源于Mac OSX系统，在Mac OSX中，坐标原点在左下方并且正y坐标是朝上的，而在iOS中，原点坐标是在左上方并且正y坐标是朝下的。在大多数情况下，这不会出现任何问题，因为图形上下文的坐标系统会自动调节补偿的。)
+        >修复方法：
+            >1:使用CGContextDrawImage方法先将CGImage绘制到UIImage上，然后获取UIImage对应的CGImage，此时就得到一个倒转的CGImage。当在调用CGContextDrawImage方法，就把倒转的图片再次倒转，还原回来了。
+            >2:可以在绘图之前将CGImage包，装进UIImage中，再调用UIKit绘图的drawAtPoint方法，这样做有两大优点：
+               >2.1当UIImage绘图时它会自动修复倒置问题
+               >2.2当你从CGImage转化为UIImage时，可调用imageWithCGImage:scale:orientation:方法生成CGImage作为对缩放性的补偿。
+            >3:坐标系转换://因为CGContextDrawImage会使用Quartz内的以左下角为(0,0)的坐标系
+                  CGContextTranslateCTM(gc, 0, height);
+                  CGContextScaleCTM(gc, 1, -1);
+              或者
+                 CGAffineTransform transform = CGAffineTransformScale(CGAffineTransformMakeTranslation(0, self.bounds.size.height), 1.f, -1.f);
+                CGContextConcatCTM(ctx, transform);//把当前的图形矩阵与后面参数transform关联起来----在这里实现的作用就是：翻转图形上下文，因为这里默认的是以左下角为原点
+##############CoreText#################
+
+#################ImageIO框架####################
+iOS4.0引入Image I/O框架，该框架的接口可用于导入或导出图像数据及图像元数据。该框架架构于Core Graphics数据类型和函数之上，能够支持iOS上所有的标准图像类型
+################事件传递机制##################
+
+###########Cocoa##################
+Cocoa是OS X和iOS操作系统的程序的运行环境
+     >Cocoa框架：Foundation(和界面无关)和UIKit(和界面相关)
+         >Foundation:所有以NSObject为基类的OC对象
+         >UIKit:UI控件
+         >Cocoa对象：Objective-C
+
+#############Objective-C##########
+Objective-C语言<objc/message.h>—><objc/object.h>—><objc/objc.h>——><objc/runtime.h>
+     >相对于C++ Java等面向对象的特点:
+         >OC的优点是它是动态的：动态能力分为有三种
+               >动态类—----—运行时确定类的对象
+               >动态绑定————运行时确定要调用的方法
+               >动态加载————运行时为程序加载新的模块
+         >动态能力相关的isa指针
+               >每个Objective-C对象都有一个隐藏的数据结构：OC对象的第一个成员变量就是isa指针。
+ @interface NSObject<NSObject>{Class isa;},typedef struct objc_class *Class=========>
+ 可以看作为：struct NSObject{objc_class *isa}       
+               >isa指针指向一个类对象（这个类对象包含了OC对象的一些信息，包含OC对象的方法调度表，实现     了什么协议等等，这个包含信息就是Objective-C动态能力的根源）
+              >objc_class一个分为三个层次：类对象->元类对象->NSObject元类对象
+
+
+CATransform3D 4*4矩阵
+  struct CATransform3D{
+    m11(x缩放),m12(y切变),m13(旋转),m14;
+    m21(x切变),m22(y缩放),m23,m24;
+    m31(旋转), m32,      m33,m34(透视效果，要操作的这个对象要有旋转的角度，否则没有效果。正直/负值都有意义）;
+    m41(x平移),m42(y平移),m43(z平移),m44;
+  }
+  >m34值必须在绕x轴或y轴旋转后，才会有效果（也就是旋转的时候距离旋转点越远的地方越小，产生3D感——正常表达例如：-1/2000.0）

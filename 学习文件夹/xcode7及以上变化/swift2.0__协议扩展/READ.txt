@@ -1,0 +1,4 @@
+
+swift的协议有两种：
+一种：swift协议
+二种：@objc前缀的协议（跟Objective-C是一样的）
