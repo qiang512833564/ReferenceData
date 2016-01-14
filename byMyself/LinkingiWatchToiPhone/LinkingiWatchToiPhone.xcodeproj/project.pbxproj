@@ -1,0 +1,686 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		291784D21B85B66900E28ED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784D11B85B66900E28ED9 /* AppDelegate.swift */; };
+		291784D41B85B66900E28ED9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784D31B85B66900E28ED9 /* ViewController.swift */; };
+		291784D71B85B66900E28ED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 291784D51B85B66900E28ED9 /* Main.storyboard */; };
+		291784D91B85B66900E28ED9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291784D81B85B66900E28ED9 /* Images.xcassets */; };
+		291784DC1B85B66900E28ED9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 291784DA1B85B66900E28ED9 /* LaunchScreen.xib */; };
+		291784E81B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784E71B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.swift */; };
+		291784FB1B85B67800E28ED9 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784FA1B85B67800E28ED9 /* InterfaceController.swift */; };
+		291784FD1B85B67800E28ED9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784FC1B85B67800E28ED9 /* NotificationController.swift */; };
+		291784FF1B85B67800E28ED9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291784FE1B85B67800E28ED9 /* Images.xcassets */; };
+		291785031B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 291785021B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App.app */; };
+		2917850B1B85B67800E28ED9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 291785091B85B67800E28ED9 /* Interface.storyboard */; };
+		2917850D1B85B67800E28ED9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2917850C1B85B67800E28ED9 /* Images.xcassets */; };
+		291785101B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 291784F51B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		291784E21B85B66900E28ED9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291784C41B85B66900E28ED9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 291784CB1B85B66900E28ED9;
+			remoteInfo = LinkingiWatchToiPhone;
+		};
+		291785041B85B67800E28ED9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291784C41B85B66900E28ED9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 291785011B85B67800E28ED9;
+			remoteInfo = "LinkingiWatchToiPhone WatchKit App";
+		};
+		2917850E1B85B67800E28ED9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291784C41B85B66900E28ED9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 291784F41B85B67800E28ED9;
+			remoteInfo = "LinkingiWatchToiPhone WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		291785171B85B67800E28ED9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				291785101B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		291784CC1B85B66900E28ED9 /* LinkingiWatchToiPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkingiWatchToiPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		291784D01B85B66900E28ED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291784D11B85B66900E28ED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		291784D31B85B66900E28ED9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		291784D61B85B66900E28ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		291784D81B85B66900E28ED9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		291784DB1B85B66900E28ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		291784E11B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkingiWatchToiPhoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		291784E61B85B66900E28ED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291784E71B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkingiWatchToiPhoneTests.swift; sourceTree = "<group>"; };
+		291784F51B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LinkingiWatchToiPhone WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		291784F81B85B67800E28ED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291784F91B85B67800E28ED9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		291784FA1B85B67800E28ED9 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		291784FC1B85B67800E28ED9 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		291784FE1B85B67800E28ED9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		291785021B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LinkingiWatchToiPhone WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		291785081B85B67800E28ED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2917850A1B85B67800E28ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		2917850C1B85B67800E28ED9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		291784C91B85B66900E28ED9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784DE1B85B66900E28ED9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784F21B85B67800E28ED9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		291784C31B85B66900E28ED9 = {
+			isa = PBXGroup;
+			children = (
+				291784CE1B85B66900E28ED9 /* LinkingiWatchToiPhone */,
+				291784E41B85B66900E28ED9 /* LinkingiWatchToiPhoneTests */,
+				291784F61B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension */,
+				291785061B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App */,
+				291784CD1B85B66900E28ED9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		291784CD1B85B66900E28ED9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				291784CC1B85B66900E28ED9 /* LinkingiWatchToiPhone.app */,
+				291784E11B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.xctest */,
+				291784F51B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension.appex */,
+				291785021B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		291784CE1B85B66900E28ED9 /* LinkingiWatchToiPhone */ = {
+			isa = PBXGroup;
+			children = (
+				291784D11B85B66900E28ED9 /* AppDelegate.swift */,
+				291784D31B85B66900E28ED9 /* ViewController.swift */,
+				291784D51B85B66900E28ED9 /* Main.storyboard */,
+				291784D81B85B66900E28ED9 /* Images.xcassets */,
+				291784DA1B85B66900E28ED9 /* LaunchScreen.xib */,
+				291784CF1B85B66900E28ED9 /* Supporting Files */,
+			);
+			path = LinkingiWatchToiPhone;
+			sourceTree = "<group>";
+		};
+		291784CF1B85B66900E28ED9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291784D01B85B66900E28ED9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		291784E41B85B66900E28ED9 /* LinkingiWatchToiPhoneTests */ = {
+			isa = PBXGroup;
+			children = (
+				291784E71B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.swift */,
+				291784E51B85B66900E28ED9 /* Supporting Files */,
+			);
+			path = LinkingiWatchToiPhoneTests;
+			sourceTree = "<group>";
+		};
+		291784E51B85B66900E28ED9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291784E61B85B66900E28ED9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		291784F61B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				291784FA1B85B67800E28ED9 /* InterfaceController.swift */,
+				291784FC1B85B67800E28ED9 /* NotificationController.swift */,
+				291784FE1B85B67800E28ED9 /* Images.xcassets */,
+				291784F71B85B67800E28ED9 /* Supporting Files */,
+			);
+			path = "LinkingiWatchToiPhone WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		291784F71B85B67800E28ED9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291784F81B85B67800E28ED9 /* Info.plist */,
+				291784F91B85B67800E28ED9 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		291785061B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				291785091B85B67800E28ED9 /* Interface.storyboard */,
+				2917850C1B85B67800E28ED9 /* Images.xcassets */,
+				291785071B85B67800E28ED9 /* Supporting Files */,
+			);
+			path = "LinkingiWatchToiPhone WatchKit App";
+			sourceTree = "<group>";
+		};
+		291785071B85B67800E28ED9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291785081B85B67800E28ED9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		291784CB1B85B66900E28ED9 /* LinkingiWatchToiPhone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291784EB1B85B66900E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhone" */;
+			buildPhases = (
+				291784C81B85B66900E28ED9 /* Sources */,
+				291784C91B85B66900E28ED9 /* Frameworks */,
+				291784CA1B85B66900E28ED9 /* Resources */,
+				291785171B85B67800E28ED9 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2917850F1B85B67800E28ED9 /* PBXTargetDependency */,
+			);
+			name = LinkingiWatchToiPhone;
+			productName = LinkingiWatchToiPhone;
+			productReference = 291784CC1B85B66900E28ED9 /* LinkingiWatchToiPhone.app */;
+			productType = "com.apple.product-type.application";
+		};
+		291784E01B85B66900E28ED9 /* LinkingiWatchToiPhoneTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291784EE1B85B66900E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhoneTests" */;
+			buildPhases = (
+				291784DD1B85B66900E28ED9 /* Sources */,
+				291784DE1B85B66900E28ED9 /* Frameworks */,
+				291784DF1B85B66900E28ED9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				291784E31B85B66900E28ED9 /* PBXTargetDependency */,
+			);
+			name = LinkingiWatchToiPhoneTests;
+			productName = LinkingiWatchToiPhoneTests;
+			productReference = 291784E11B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		291784F41B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291785141B85B67800E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhone WatchKit Extension" */;
+			buildPhases = (
+				291784F11B85B67800E28ED9 /* Sources */,
+				291784F21B85B67800E28ED9 /* Frameworks */,
+				291784F31B85B67800E28ED9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				291785051B85B67800E28ED9 /* PBXTargetDependency */,
+			);
+			name = "LinkingiWatchToiPhone WatchKit Extension";
+			productName = "LinkingiWatchToiPhone WatchKit Extension";
+			productReference = 291784F51B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		291785011B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291785111B85B67800E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhone WatchKit App" */;
+			buildPhases = (
+				291785001B85B67800E28ED9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LinkingiWatchToiPhone WatchKit App";
+			productName = "LinkingiWatchToiPhone WatchKit App";
+			productReference = 291785021B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		291784C41B85B66900E28ED9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = lqq;
+				TargetAttributes = {
+					291784CB1B85B66900E28ED9 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					291784E01B85B66900E28ED9 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 291784CB1B85B66900E28ED9;
+					};
+					291784F41B85B67800E28ED9 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					291785011B85B67800E28ED9 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 291784C71B85B66900E28ED9 /* Build configuration list for PBXProject "LinkingiWatchToiPhone" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 291784C31B85B66900E28ED9;
+			productRefGroup = 291784CD1B85B66900E28ED9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				291784CB1B85B66900E28ED9 /* LinkingiWatchToiPhone */,
+				291784E01B85B66900E28ED9 /* LinkingiWatchToiPhoneTests */,
+				291784F41B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension */,
+				291785011B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		291784CA1B85B66900E28ED9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784D71B85B66900E28ED9 /* Main.storyboard in Resources */,
+				291784DC1B85B66900E28ED9 /* LaunchScreen.xib in Resources */,
+				291784D91B85B66900E28ED9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784DF1B85B66900E28ED9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784F31B85B67800E28ED9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784FF1B85B67800E28ED9 /* Images.xcassets in Resources */,
+				291785031B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291785001B85B67800E28ED9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2917850B1B85B67800E28ED9 /* Interface.storyboard in Resources */,
+				2917850D1B85B67800E28ED9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		291784C81B85B66900E28ED9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784D41B85B66900E28ED9 /* ViewController.swift in Sources */,
+				291784D21B85B66900E28ED9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784DD1B85B66900E28ED9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784E81B85B66900E28ED9 /* LinkingiWatchToiPhoneTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784F11B85B67800E28ED9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784FD1B85B67800E28ED9 /* NotificationController.swift in Sources */,
+				291784FB1B85B67800E28ED9 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		291784E31B85B66900E28ED9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 291784CB1B85B66900E28ED9 /* LinkingiWatchToiPhone */;
+			targetProxy = 291784E21B85B66900E28ED9 /* PBXContainerItemProxy */;
+		};
+		291785051B85B67800E28ED9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 291785011B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit App */;
+			targetProxy = 291785041B85B67800E28ED9 /* PBXContainerItemProxy */;
+		};
+		2917850F1B85B67800E28ED9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 291784F41B85B67800E28ED9 /* LinkingiWatchToiPhone WatchKit Extension */;
+			targetProxy = 2917850E1B85B67800E28ED9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		291784D51B85B66900E28ED9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				291784D61B85B66900E28ED9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		291784DA1B85B66900E28ED9 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				291784DB1B85B66900E28ED9 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		291785091B85B67800E28ED9 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2917850A1B85B67800E28ED9 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		291784E91B85B66900E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		291784EA1B85B66900E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		291784EC1B85B66900E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LinkingiWatchToiPhone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		291784ED1B85B66900E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LinkingiWatchToiPhone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		291784EF1B85B66900E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LinkingiWatchToiPhoneTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinkingiWatchToiPhone.app/LinkingiWatchToiPhone";
+			};
+			name = Debug;
+		};
+		291784F01B85B66900E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LinkingiWatchToiPhoneTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinkingiWatchToiPhone.app/LinkingiWatchToiPhone";
+			};
+			name = Release;
+		};
+		291785121B85B67800E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = LinkingiWatchToiPhone_WatchKit_Extension;
+				INFOPLIST_FILE = "LinkingiWatchToiPhone WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		291785131B85B67800E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = LinkingiWatchToiPhone_WatchKit_Extension;
+				INFOPLIST_FILE = "LinkingiWatchToiPhone WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		291785151B85B67800E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LinkingiWatchToiPhone WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		291785161B85B67800E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "LinkingiWatchToiPhone WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		291784C71B85B66900E28ED9 /* Build configuration list for PBXProject "LinkingiWatchToiPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291784E91B85B66900E28ED9 /* Debug */,
+				291784EA1B85B66900E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291784EB1B85B66900E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291784EC1B85B66900E28ED9 /* Debug */,
+				291784ED1B85B66900E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291784EE1B85B66900E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhoneTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291784EF1B85B66900E28ED9 /* Debug */,
+				291784F01B85B66900E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291785111B85B67800E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhone WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291785121B85B67800E28ED9 /* Debug */,
+				291785131B85B67800E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291785141B85B67800E28ED9 /* Build configuration list for PBXNativeTarget "LinkingiWatchToiPhone WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291785151B85B67800E28ED9 /* Debug */,
+				291785161B85B67800E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 291784C41B85B66900E28ED9 /* Project object */;
+}

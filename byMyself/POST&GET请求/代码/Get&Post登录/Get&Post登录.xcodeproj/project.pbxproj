@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08BA5F1A1908EED20070B990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BA5F191908EED20070B990 /* Foundation.framework */; };
+		08BA5F1C1908EED30070B990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BA5F1B1908EED30070B990 /* CoreGraphics.framework */; };
+		08BA5F1E1908EED30070B990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BA5F1D1908EED30070B990 /* UIKit.framework */; };
+		08BA5F241908EED30070B990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F221908EED30070B990 /* InfoPlist.strings */; };
+		08BA5F261908EED30070B990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA5F251908EED30070B990 /* main.m */; };
+		08BA5F2A1908EED30070B990 /* MJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA5F291908EED30070B990 /* MJAppDelegate.m */; };
+		08BA5F2D1908EED30070B990 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F2B1908EED30070B990 /* Main.storyboard */; };
+		08BA5F301908EED30070B990 /* MJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA5F2F1908EED30070B990 /* MJViewController.m */; };
+		08BA5F321908EED30070B990 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F311908EED30070B990 /* Images.xcassets */; };
+		08BA5F391908EED30070B990 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BA5F381908EED30070B990 /* XCTest.framework */; };
+		08BA5F3A1908EED30070B990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BA5F191908EED20070B990 /* Foundation.framework */; };
+		08BA5F3B1908EED30070B990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BA5F1D1908EED30070B990 /* UIKit.framework */; };
+		08BA5F431908EED30070B990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08BA5F411908EED30070B990 /* InfoPlist.strings */; };
+		08BA5F451908EED30070B990 /* Get_Post__Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA5F441908EED30070B990 /* Get_Post__Tests.m */; };
+		08BA5F50190900CF0070B990 /* MJWebDelegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA5F4F190900CF0070B990 /* MJWebDelegateViewController.m */; };
+		08BA5F54190908360070B990 /* NSString+Password.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BA5F53190908360070B990 /* NSString+Password.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		08BA5F3C1908EED30070B990 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08BA5F0E1908EED20070B990 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08BA5F151908EED20070B990;
+			remoteInfo = "Get&Post登录";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08BA5F161908EED20070B990 /* Get&Post登录.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get&Post登录.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08BA5F191908EED20070B990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		08BA5F1B1908EED30070B990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		08BA5F1D1908EED30070B990 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		08BA5F211908EED30070B990 /* Get&Post登录-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Get&Post登录-Info.plist"; sourceTree = "<group>"; };
+		08BA5F231908EED30070B990 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		08BA5F251908EED30070B990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		08BA5F271908EED30070B990 /* Get&Post登录-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Get&Post登录-Prefix.pch"; sourceTree = "<group>"; };
+		08BA5F281908EED30070B990 /* MJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJAppDelegate.h; sourceTree = "<group>"; };
+		08BA5F291908EED30070B990 /* MJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJAppDelegate.m; sourceTree = "<group>"; };
+		08BA5F2C1908EED30070B990 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		08BA5F2E1908EED30070B990 /* MJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJViewController.h; sourceTree = "<group>"; };
+		08BA5F2F1908EED30070B990 /* MJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJViewController.m; sourceTree = "<group>"; };
+		08BA5F311908EED30070B990 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		08BA5F371908EED30070B990 /* Get&Post登录Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Get&Post登录Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08BA5F381908EED30070B990 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		08BA5F401908EED30070B990 /* Get&Post登录Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Get&Post登录Tests-Info.plist"; sourceTree = "<group>"; };
+		08BA5F421908EED30070B990 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		08BA5F441908EED30070B990 /* Get_Post__Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Get_Post__Tests.m; sourceTree = "<group>"; };
+		08BA5F4E190900CF0070B990 /* MJWebDelegateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJWebDelegateViewController.h; sourceTree = "<group>"; };
+		08BA5F4F190900CF0070B990 /* MJWebDelegateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJWebDelegateViewController.m; sourceTree = "<group>"; };
+		08BA5F52190908360070B990 /* NSString+Password.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Password.h"; sourceTree = "<group>"; };
+		08BA5F53190908360070B990 /* NSString+Password.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Password.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		08BA5F131908EED20070B990 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BA5F1C1908EED30070B990 /* CoreGraphics.framework in Frameworks */,
+				08BA5F1E1908EED30070B990 /* UIKit.framework in Frameworks */,
+				08BA5F1A1908EED20070B990 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08BA5F341908EED30070B990 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BA5F391908EED30070B990 /* XCTest.framework in Frameworks */,
+				08BA5F3B1908EED30070B990 /* UIKit.framework in Frameworks */,
+				08BA5F3A1908EED30070B990 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08BA5F0D1908EED20070B990 = {
+			isa = PBXGroup;
+			children = (
+				08BA5F1F1908EED30070B990 /* Get&Post登录 */,
+				08BA5F3E1908EED30070B990 /* Get&Post登录Tests */,
+				08BA5F181908EED20070B990 /* Frameworks */,
+				08BA5F171908EED20070B990 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		08BA5F171908EED20070B990 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				08BA5F161908EED20070B990 /* Get&Post登录.app */,
+				08BA5F371908EED30070B990 /* Get&Post登录Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		08BA5F181908EED20070B990 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08BA5F191908EED20070B990 /* Foundation.framework */,
+				08BA5F1B1908EED30070B990 /* CoreGraphics.framework */,
+				08BA5F1D1908EED30070B990 /* UIKit.framework */,
+				08BA5F381908EED30070B990 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08BA5F1F1908EED30070B990 /* Get&Post登录 */ = {
+			isa = PBXGroup;
+			children = (
+				08BA5F51190908360070B990 /* Category */,
+				08BA5F281908EED30070B990 /* MJAppDelegate.h */,
+				08BA5F291908EED30070B990 /* MJAppDelegate.m */,
+				08BA5F2B1908EED30070B990 /* Main.storyboard */,
+				08BA5F2E1908EED30070B990 /* MJViewController.h */,
+				08BA5F2F1908EED30070B990 /* MJViewController.m */,
+				08BA5F4E190900CF0070B990 /* MJWebDelegateViewController.h */,
+				08BA5F4F190900CF0070B990 /* MJWebDelegateViewController.m */,
+				08BA5F311908EED30070B990 /* Images.xcassets */,
+				08BA5F201908EED30070B990 /* Supporting Files */,
+			);
+			path = "Get&Post登录";
+			sourceTree = "<group>";
+		};
+		08BA5F201908EED30070B990 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				08BA5F211908EED30070B990 /* Get&Post登录-Info.plist */,
+				08BA5F221908EED30070B990 /* InfoPlist.strings */,
+				08BA5F251908EED30070B990 /* main.m */,
+				08BA5F271908EED30070B990 /* Get&Post登录-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		08BA5F3E1908EED30070B990 /* Get&Post登录Tests */ = {
+			isa = PBXGroup;
+			children = (
+				08BA5F441908EED30070B990 /* Get_Post__Tests.m */,
+				08BA5F3F1908EED30070B990 /* Supporting Files */,
+			);
+			path = "Get&Post登录Tests";
+			sourceTree = "<group>";
+		};
+		08BA5F3F1908EED30070B990 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				08BA5F401908EED30070B990 /* Get&Post登录Tests-Info.plist */,
+				08BA5F411908EED30070B990 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		08BA5F51190908360070B990 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				08BA5F52190908360070B990 /* NSString+Password.h */,
+				08BA5F53190908360070B990 /* NSString+Password.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		08BA5F151908EED20070B990 /* Get&Post登录 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08BA5F481908EED30070B990 /* Build configuration list for PBXNativeTarget "Get&Post登录" */;
+			buildPhases = (
+				08BA5F121908EED20070B990 /* Sources */,
+				08BA5F131908EED20070B990 /* Frameworks */,
+				08BA5F141908EED20070B990 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Get&Post登录";
+			productName = "Get&Post登录";
+			productReference = 08BA5F161908EED20070B990 /* Get&Post登录.app */;
+			productType = "com.apple.product-type.application";
+		};
+		08BA5F361908EED30070B990 /* Get&Post登录Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08BA5F4B1908EED30070B990 /* Build configuration list for PBXNativeTarget "Get&Post登录Tests" */;
+			buildPhases = (
+				08BA5F331908EED30070B990 /* Sources */,
+				08BA5F341908EED30070B990 /* Frameworks */,
+				08BA5F351908EED30070B990 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08BA5F3D1908EED30070B990 /* PBXTargetDependency */,
+			);
+			name = "Get&Post登录Tests";
+			productName = "Get&Post登录Tests";
+			productReference = 08BA5F371908EED30070B990 /* Get&Post登录Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08BA5F0E1908EED20070B990 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MJ;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = itcast;
+				TargetAttributes = {
+					08BA5F361908EED30070B990 = {
+						TestTargetID = 08BA5F151908EED20070B990;
+					};
+				};
+			};
+			buildConfigurationList = 08BA5F111908EED20070B990 /* Build configuration list for PBXProject "Get&Post登录" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 08BA5F0D1908EED20070B990;
+			productRefGroup = 08BA5F171908EED20070B990 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				08BA5F151908EED20070B990 /* Get&Post登录 */,
+				08BA5F361908EED30070B990 /* Get&Post登录Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		08BA5F141908EED20070B990 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BA5F321908EED30070B990 /* Images.xcassets in Resources */,
+				08BA5F241908EED30070B990 /* InfoPlist.strings in Resources */,
+				08BA5F2D1908EED30070B990 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08BA5F351908EED30070B990 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BA5F431908EED30070B990 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		08BA5F121908EED20070B990 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BA5F261908EED30070B990 /* main.m in Sources */,
+				08BA5F301908EED30070B990 /* MJViewController.m in Sources */,
+				08BA5F54190908360070B990 /* NSString+Password.m in Sources */,
+				08BA5F2A1908EED30070B990 /* MJAppDelegate.m in Sources */,
+				08BA5F50190900CF0070B990 /* MJWebDelegateViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08BA5F331908EED30070B990 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BA5F451908EED30070B990 /* Get_Post__Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		08BA5F3D1908EED30070B990 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08BA5F151908EED20070B990 /* Get&Post登录 */;
+			targetProxy = 08BA5F3C1908EED30070B990 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		08BA5F221908EED30070B990 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08BA5F231908EED30070B990 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		08BA5F2B1908EED30070B990 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08BA5F2C1908EED30070B990 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		08BA5F411908EED30070B990 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08BA5F421908EED30070B990 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		08BA5F461908EED30070B990 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		08BA5F471908EED30070B990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		08BA5F491908EED30070B990 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Get&Post登录/Get&Post登录-Prefix.pch";
+				INFOPLIST_FILE = "Get&Post登录/Get&Post登录-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		08BA5F4A1908EED30070B990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Get&Post登录/Get&Post登录-Prefix.pch";
+				INFOPLIST_FILE = "Get&Post登录/Get&Post登录-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		08BA5F4C1908EED30070B990 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Get&Post登录.app/Get&Post登录";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Get&Post登录/Get&Post登录-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Get&Post登录Tests/Get&Post登录Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		08BA5F4D1908EED30070B990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Get&Post登录.app/Get&Post登录";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Get&Post登录/Get&Post登录-Prefix.pch";
+				INFOPLIST_FILE = "Get&Post登录Tests/Get&Post登录Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08BA5F111908EED20070B990 /* Build configuration list for PBXProject "Get&Post登录" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08BA5F461908EED30070B990 /* Debug */,
+				08BA5F471908EED30070B990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08BA5F481908EED30070B990 /* Build configuration list for PBXNativeTarget "Get&Post登录" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08BA5F491908EED30070B990 /* Debug */,
+				08BA5F4A1908EED30070B990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		08BA5F4B1908EED30070B990 /* Build configuration list for PBXNativeTarget "Get&Post登录Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08BA5F4C1908EED30070B990 /* Debug */,
+				08BA5F4D1908EED30070B990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08BA5F0E1908EED20070B990 /* Project object */;
+}

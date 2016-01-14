@@ -1,0 +1,14 @@
+{
+  "name": "ButtonDemo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "apsl-react-native-button": "^2.3.0",
+    "react-native": "^0.11.0",
+    "react-native-action-button": "^1.0.7",
+    "react-native-activity-view": "^0.2.7"
+  }
+}

@@ -1,0 +1,715 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		291D0B081B85BD3900149663 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291D0B071B85BD3900149663 /* AppDelegate.swift */; };
+		291D0B0A1B85BD3900149663 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291D0B091B85BD3900149663 /* ViewController.swift */; };
+		291D0B0D1B85BD3900149663 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 291D0B0B1B85BD3900149663 /* Main.storyboard */; };
+		291D0B0F1B85BD3900149663 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291D0B0E1B85BD3900149663 /* Images.xcassets */; };
+		291D0B121B85BD3900149663 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 291D0B101B85BD3900149663 /* LaunchScreen.xib */; };
+		291D0B1E1B85BD3900149663 /* iPhoneToiWatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291D0B1D1B85BD3900149663 /* iPhoneToiWatchTests.swift */; };
+		291D0B311B85BD4600149663 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291D0B301B85BD4600149663 /* InterfaceController.swift */; };
+		291D0B331B85BD4600149663 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291D0B321B85BD4600149663 /* NotificationController.swift */; };
+		291D0B351B85BD4600149663 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291D0B341B85BD4600149663 /* Images.xcassets */; };
+		291D0B391B85BD4700149663 /* iPhoneToiWatch WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 291D0B381B85BD4700149663 /* iPhoneToiWatch WatchKit App.app */; };
+		291D0B411B85BD4700149663 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 291D0B3F1B85BD4700149663 /* Interface.storyboard */; };
+		291D0B431B85BD4700149663 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291D0B421B85BD4700149663 /* Images.xcassets */; };
+		291D0B461B85BD4700149663 /* iPhoneToiWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 291D0B2B1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		291D0B181B85BD3900149663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291D0AFA1B85BD3900149663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 291D0B011B85BD3900149663;
+			remoteInfo = iPhoneToiWatch;
+		};
+		291D0B3A1B85BD4700149663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291D0AFA1B85BD3900149663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 291D0B371B85BD4700149663;
+			remoteInfo = "iPhoneToiWatch WatchKit App";
+		};
+		291D0B441B85BD4700149663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291D0AFA1B85BD3900149663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 291D0B2A1B85BD4600149663;
+			remoteInfo = "iPhoneToiWatch WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		291D0B4D1B85BD4700149663 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				291D0B461B85BD4700149663 /* iPhoneToiWatch WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		291450231B86B491006D5DD6 /* iPhoneToiWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iPhoneToiWatch.entitlements; sourceTree = "<group>"; };
+		291D0B021B85BD3900149663 /* iPhoneToiWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneToiWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		291D0B061B85BD3900149663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291D0B071B85BD3900149663 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		291D0B091B85BD3900149663 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		291D0B0C1B85BD3900149663 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		291D0B0E1B85BD3900149663 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		291D0B111B85BD3900149663 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		291D0B171B85BD3900149663 /* iPhoneToiWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPhoneToiWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		291D0B1C1B85BD3900149663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291D0B1D1B85BD3900149663 /* iPhoneToiWatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneToiWatchTests.swift; sourceTree = "<group>"; };
+		291D0B2B1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "iPhoneToiWatch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		291D0B2E1B85BD4600149663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291D0B2F1B85BD4600149663 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		291D0B301B85BD4600149663 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		291D0B321B85BD4600149663 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		291D0B341B85BD4600149663 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		291D0B381B85BD4700149663 /* iPhoneToiWatch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iPhoneToiWatch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		291D0B3E1B85BD4700149663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291D0B401B85BD4700149663 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		291D0B421B85BD4700149663 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		291D0B761B85CA5100149663 /* iPhoneToiWatch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "iPhoneToiWatch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		291D0AFF1B85BD3900149663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291D0B141B85BD3900149663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291D0B281B85BD4600149663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		291D0AF91B85BD3900149663 = {
+			isa = PBXGroup;
+			children = (
+				291D0B041B85BD3900149663 /* iPhoneToiWatch */,
+				291D0B1A1B85BD3900149663 /* iPhoneToiWatchTests */,
+				291D0B2C1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension */,
+				291D0B3C1B85BD4700149663 /* iPhoneToiWatch WatchKit App */,
+				291D0B031B85BD3900149663 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		291D0B031B85BD3900149663 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B021B85BD3900149663 /* iPhoneToiWatch.app */,
+				291D0B171B85BD3900149663 /* iPhoneToiWatchTests.xctest */,
+				291D0B2B1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension.appex */,
+				291D0B381B85BD4700149663 /* iPhoneToiWatch WatchKit App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		291D0B041B85BD3900149663 /* iPhoneToiWatch */ = {
+			isa = PBXGroup;
+			children = (
+				291450231B86B491006D5DD6 /* iPhoneToiWatch.entitlements */,
+				291D0B071B85BD3900149663 /* AppDelegate.swift */,
+				291D0B091B85BD3900149663 /* ViewController.swift */,
+				291D0B0B1B85BD3900149663 /* Main.storyboard */,
+				291D0B0E1B85BD3900149663 /* Images.xcassets */,
+				291D0B101B85BD3900149663 /* LaunchScreen.xib */,
+				291D0B051B85BD3900149663 /* Supporting Files */,
+			);
+			path = iPhoneToiWatch;
+			sourceTree = "<group>";
+		};
+		291D0B051B85BD3900149663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B061B85BD3900149663 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		291D0B1A1B85BD3900149663 /* iPhoneToiWatchTests */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B1D1B85BD3900149663 /* iPhoneToiWatchTests.swift */,
+				291D0B1B1B85BD3900149663 /* Supporting Files */,
+			);
+			path = iPhoneToiWatchTests;
+			sourceTree = "<group>";
+		};
+		291D0B1B1B85BD3900149663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B1C1B85BD3900149663 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		291D0B2C1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B761B85CA5100149663 /* iPhoneToiWatch WatchKit Extension.entitlements */,
+				291D0B301B85BD4600149663 /* InterfaceController.swift */,
+				291D0B321B85BD4600149663 /* NotificationController.swift */,
+				291D0B341B85BD4600149663 /* Images.xcassets */,
+				291D0B2D1B85BD4600149663 /* Supporting Files */,
+			);
+			path = "iPhoneToiWatch WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		291D0B2D1B85BD4600149663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B2E1B85BD4600149663 /* Info.plist */,
+				291D0B2F1B85BD4600149663 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		291D0B3C1B85BD4700149663 /* iPhoneToiWatch WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B3F1B85BD4700149663 /* Interface.storyboard */,
+				291D0B421B85BD4700149663 /* Images.xcassets */,
+				291D0B3D1B85BD4700149663 /* Supporting Files */,
+			);
+			path = "iPhoneToiWatch WatchKit App";
+			sourceTree = "<group>";
+		};
+		291D0B3D1B85BD4700149663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291D0B3E1B85BD4700149663 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		291D0B011B85BD3900149663 /* iPhoneToiWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291D0B211B85BD3900149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatch" */;
+			buildPhases = (
+				291D0AFE1B85BD3900149663 /* Sources */,
+				291D0AFF1B85BD3900149663 /* Frameworks */,
+				291D0B001B85BD3900149663 /* Resources */,
+				291D0B4D1B85BD4700149663 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				291D0B451B85BD4700149663 /* PBXTargetDependency */,
+			);
+			name = iPhoneToiWatch;
+			productName = iPhoneToiWatch;
+			productReference = 291D0B021B85BD3900149663 /* iPhoneToiWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		291D0B161B85BD3900149663 /* iPhoneToiWatchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291D0B241B85BD3900149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatchTests" */;
+			buildPhases = (
+				291D0B131B85BD3900149663 /* Sources */,
+				291D0B141B85BD3900149663 /* Frameworks */,
+				291D0B151B85BD3900149663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				291D0B191B85BD3900149663 /* PBXTargetDependency */,
+			);
+			name = iPhoneToiWatchTests;
+			productName = iPhoneToiWatchTests;
+			productReference = 291D0B171B85BD3900149663 /* iPhoneToiWatchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		291D0B2A1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291D0B4A1B85BD4700149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatch WatchKit Extension" */;
+			buildPhases = (
+				291D0B271B85BD4600149663 /* Sources */,
+				291D0B281B85BD4600149663 /* Frameworks */,
+				291D0B291B85BD4600149663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				291D0B3B1B85BD4700149663 /* PBXTargetDependency */,
+			);
+			name = "iPhoneToiWatch WatchKit Extension";
+			productName = "iPhoneToiWatch WatchKit Extension";
+			productReference = 291D0B2B1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		291D0B371B85BD4700149663 /* iPhoneToiWatch WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291D0B471B85BD4700149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatch WatchKit App" */;
+			buildPhases = (
+				291D0B361B85BD4700149663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iPhoneToiWatch WatchKit App";
+			productName = "iPhoneToiWatch WatchKit App";
+			productReference = 291D0B381B85BD4700149663 /* iPhoneToiWatch WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		291D0AFA1B85BD3900149663 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = lqq;
+				TargetAttributes = {
+					291D0B011B85BD3900149663 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = SPD96STJT7;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					291D0B161B85BD3900149663 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 291D0B011B85BD3900149663;
+					};
+					291D0B2A1B85BD4600149663 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = SPD96STJT7;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					291D0B371B85BD4700149663 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 291D0AFD1B85BD3900149663 /* Build configuration list for PBXProject "iPhoneToiWatch" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 291D0AF91B85BD3900149663;
+			productRefGroup = 291D0B031B85BD3900149663 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				291D0B011B85BD3900149663 /* iPhoneToiWatch */,
+				291D0B161B85BD3900149663 /* iPhoneToiWatchTests */,
+				291D0B2A1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension */,
+				291D0B371B85BD4700149663 /* iPhoneToiWatch WatchKit App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		291D0B001B85BD3900149663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291D0B0D1B85BD3900149663 /* Main.storyboard in Resources */,
+				291D0B121B85BD3900149663 /* LaunchScreen.xib in Resources */,
+				291D0B0F1B85BD3900149663 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291D0B151B85BD3900149663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291D0B291B85BD4600149663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291D0B391B85BD4700149663 /* iPhoneToiWatch WatchKit App.app in Resources */,
+				291D0B351B85BD4600149663 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291D0B361B85BD4700149663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291D0B411B85BD4700149663 /* Interface.storyboard in Resources */,
+				291D0B431B85BD4700149663 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		291D0AFE1B85BD3900149663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291D0B0A1B85BD3900149663 /* ViewController.swift in Sources */,
+				291D0B081B85BD3900149663 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291D0B131B85BD3900149663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291D0B1E1B85BD3900149663 /* iPhoneToiWatchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291D0B271B85BD4600149663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291D0B331B85BD4600149663 /* NotificationController.swift in Sources */,
+				291D0B311B85BD4600149663 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		291D0B191B85BD3900149663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 291D0B011B85BD3900149663 /* iPhoneToiWatch */;
+			targetProxy = 291D0B181B85BD3900149663 /* PBXContainerItemProxy */;
+		};
+		291D0B3B1B85BD4700149663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 291D0B371B85BD4700149663 /* iPhoneToiWatch WatchKit App */;
+			targetProxy = 291D0B3A1B85BD4700149663 /* PBXContainerItemProxy */;
+		};
+		291D0B451B85BD4700149663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 291D0B2A1B85BD4600149663 /* iPhoneToiWatch WatchKit Extension */;
+			targetProxy = 291D0B441B85BD4700149663 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		291D0B0B1B85BD3900149663 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				291D0B0C1B85BD3900149663 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		291D0B101B85BD3900149663 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				291D0B111B85BD3900149663 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		291D0B3F1B85BD4700149663 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				291D0B401B85BD4700149663 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		291D0B1F1B85BD3900149663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		291D0B201B85BD3900149663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		291D0B221B85BD3900149663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iPhoneToiWatch/iPhoneToiWatch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = iPhoneToiWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		291D0B231B85BD3900149663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iPhoneToiWatch/iPhoneToiWatch.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = iPhoneToiWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		291D0B251B85BD3900149663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iPhoneToiWatchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPhoneToiWatch.app/iPhoneToiWatch";
+			};
+			name = Debug;
+		};
+		291D0B261B85BD3900149663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iPhoneToiWatchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPhoneToiWatch.app/iPhoneToiWatch";
+			};
+			name = Release;
+		};
+		291D0B481B85BD4700149663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = iPhoneToiWatch_WatchKit_Extension;
+				INFOPLIST_FILE = "iPhoneToiWatch WatchKit App/Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		291D0B491B85BD4700149663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = iPhoneToiWatch_WatchKit_Extension;
+				INFOPLIST_FILE = "iPhoneToiWatch WatchKit App/Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		291D0B4B1B85BD4700149663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "iPhoneToiWatch WatchKit Extension/iPhoneToiWatch WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "iPhoneToiWatch WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		291D0B4C1B85BD4700149663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "iPhoneToiWatch WatchKit Extension/iPhoneToiWatch WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "iPhoneToiWatch WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		291D0AFD1B85BD3900149663 /* Build configuration list for PBXProject "iPhoneToiWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291D0B1F1B85BD3900149663 /* Debug */,
+				291D0B201B85BD3900149663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291D0B211B85BD3900149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291D0B221B85BD3900149663 /* Debug */,
+				291D0B231B85BD3900149663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291D0B241B85BD3900149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291D0B251B85BD3900149663 /* Debug */,
+				291D0B261B85BD3900149663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291D0B471B85BD4700149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatch WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291D0B481B85BD4700149663 /* Debug */,
+				291D0B491B85BD4700149663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291D0B4A1B85BD4700149663 /* Build configuration list for PBXNativeTarget "iPhoneToiWatch WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291D0B4B1B85BD4700149663 /* Debug */,
+				291D0B4C1B85BD4700149663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 291D0AFA1B85BD3900149663 /* Project object */;
+}

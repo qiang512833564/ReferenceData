@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rqt-Eg-6rt">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Series View Controller-->
+        <scene sceneID="Nqe-jv-hSp">
+            <objects>
+                <viewController storyboardIdentifier="SeriesViewControllerId" id="rqt-Eg-6rt" customClass="SeriesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IWW-Uu-fsi"/>
+                        <viewControllerLayoutGuide type="bottom" id="ULe-yy-eES"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bc5-R6-gJQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="172" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="WMP-sL-egi">
+                                <rect key="frame" x="0.0" y="-20" width="375" height="667"/>
+                                <animations/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IntroductionCellId" rowHeight="210" id="Agp-q6-z1v" customClass="IntroductionCell">
+                                        <rect key="frame" x="0.0" y="49.5" width="375" height="210"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Agp-q6-z1v" id="jJA-YN-X5B">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="209.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="简介" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iyq-Fi-drO">
+                                                    <rect key="frame" x="8" y="28" width="36" height="21.5"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2 Broke Girls" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hs6-cy-qor">
+                                                    <rect key="frame" x="8" y="51.5" width="89" height="18"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="HBO电视台" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLa-Gk-s8W">
+                                                    <rect key="frame" x="8" y="71.5" width="78" height="18"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="魔幻/剧情" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBv-le-9Xf">
+                                                    <rect key="frame" x="301" y="69.5" width="65.5" height="18"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.63" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56g-R7-tiE">
+                                                    <rect key="frame" x="8" y="91.5" width="359" height="73"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="73" id="VyG-Rd-dvq"/>
+                                                    </constraints>
+                                                    <string key="text">Cyanogen成立于2009年，先是由一家生物信息初创公司的首席工程师Steve Kondik（其论坛ID就是Cyanogen）发起，后来渐渐有一批拥有共同兴趣爱好的码农陆续加入形成Cyanogen团队。整个团队都是业余时间从事Cyanogen的开发工作，成员们都有自己的职业。甚至包括创始人Steve Kondik在内，他也曾经在开发CyanogenMod（简称CM系统）的过程中就职于三星电子任软件工程师。</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.63" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMt-Ee-Pd7">
+                                                    <rect key="frame" x="177" y="166.5" width="20" height="22"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="75" id="un4-o0-7uf"/>
+                                                    </constraints>
+                                                    <state key="normal" image="btn_drama_expansion.png"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="un4-o0-7uf"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="pullAction:" destination="Agp-q6-z1v" eventType="touchUpInside" id="Svm-Mx-5Zh"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="wMt-Ee-Pd7" firstAttribute="top" secondItem="56g-R7-tiE" secondAttribute="bottom" constant="2" id="5Ot-PV-8dY"/>
+                                                <constraint firstAttribute="trailing" secondItem="56g-R7-tiE" secondAttribute="trailing" constant="8" id="6nk-Bl-pbS"/>
+                                                <constraint firstItem="eLa-Gk-s8W" firstAttribute="top" secondItem="hs6-cy-qor" secondAttribute="bottom" constant="2" id="7bE-rS-VoR"/>
+                                                <constraint firstItem="hs6-cy-qor" firstAttribute="bottom" secondItem="vBv-le-9Xf" secondAttribute="top" id="AGa-lx-N5Z"/>
+                                                <constraint firstItem="56g-R7-tiE" firstAttribute="leading" secondItem="jJA-YN-X5B" secondAttribute="leading" constant="8" id="AUd-TU-UEO"/>
+                                                <constraint firstItem="wMt-Ee-Pd7" firstAttribute="centerX" secondItem="56g-R7-tiE" secondAttribute="centerX" id="AwO-vT-odK"/>
+                                                <constraint firstItem="56g-R7-tiE" firstAttribute="top" secondItem="hs6-cy-qor" secondAttribute="bottom" constant="18" id="NE3-HH-XKI"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="wMt-Ee-Pd7" secondAttribute="bottom" constant="21.5" id="QVP-pk-dVf"/>
+                                                <constraint firstItem="hs6-cy-qor" firstAttribute="top" secondItem="Iyq-Fi-drO" secondAttribute="bottom" constant="2" id="ZWl-TV-3Go"/>
+                                                <constraint firstItem="eLa-Gk-s8W" firstAttribute="leading" secondItem="jJA-YN-X5B" secondAttribute="leading" constant="8" id="f0y-vD-p5x"/>
+                                                <constraint firstItem="56g-R7-tiE" firstAttribute="top" secondItem="eLa-Gk-s8W" secondAttribute="bottom" constant="2" id="fep-EU-yeM"/>
+                                                <constraint firstItem="hs6-cy-qor" firstAttribute="leading" secondItem="jJA-YN-X5B" secondAttribute="leading" constant="8" id="nbk-yM-9YT"/>
+                                                <constraint firstAttribute="trailing" secondItem="vBv-le-9Xf" secondAttribute="trailing" constant="8" id="ohL-wh-lw4"/>
+                                                <constraint firstItem="Iyq-Fi-drO" firstAttribute="leading" secondItem="jJA-YN-X5B" secondAttribute="leading" constant="8" id="qVs-uW-bbn"/>
+                                                <constraint firstAttribute="centerX" secondItem="wMt-Ee-Pd7" secondAttribute="centerX" id="v3v-UM-lvN"/>
+                                                <constraint firstItem="Iyq-Fi-drO" firstAttribute="top" secondItem="jJA-YN-X5B" secondAttribute="top" constant="28" id="zWn-yE-xzG"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="NE3-HH-XKI"/>
+                                                    <exclude reference="AwO-vT-odK"/>
+                                                    <exclude reference="QVP-pk-dVf"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <outlet property="introduction" destination="56g-R7-tiE" id="jKw-Vi-qfY"/>
+                                            <outlet property="introductionHeight" destination="VyG-Rd-dvq" id="SHK-gg-1Bb"/>
+                                            <outlet property="movieName" destination="hs6-cy-qor" id="XFc-BA-EXb"/>
+                                            <outlet property="pullBtn" destination="wMt-Ee-Pd7" id="Wxl-4k-bqP"/>
+                                            <outlet property="tvName" destination="eLa-Gk-s8W" id="bgI-zc-41s"/>
+                                            <outlet property="typeName" destination="vBv-le-9Xf" id="T9w-ez-lnY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActorsCellId" rowHeight="134" id="hLn-zk-Yfn" customClass="ActorsCell">
+                                        <rect key="frame" x="0.0" y="259.5" width="375" height="134"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hLn-zk-Yfn" id="2bM-HF-xzg">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="133.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="职演人员" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqR-zk-o1p">
+                                                    <rect key="frame" x="8" y="8" width="73" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNO-NN-B63">
+                                                    <rect key="frame" x="321" y="8" width="46" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <state key="normal" title="更多">
+                                                        <color key="titleColor" white="0.63" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="moreAction:" destination="hLn-zk-Yfn" eventType="touchUpInside" id="bSz-mf-PR6"/>
+                                                    </connections>
+                                                </button>
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bE2-Gi-Rtq">
+                                                    <rect key="frame" x="0.0" y="37" width="375" height="123"/>
+                                                    <animations/>
+                                                </scrollView>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="vNO-NN-B63" secondAttribute="trailing" constant="8" id="Mli-Va-b2o"/>
+                                                <constraint firstItem="vNO-NN-B63" firstAttribute="top" secondItem="2bM-HF-xzg" secondAttribute="top" constant="8" id="fRw-jT-X6K"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <outlet property="moreBtn" destination="vNO-NN-B63" id="Nao-0W-KO6"/>
+                                            <outlet property="scrollView" destination="bE2-Gi-Rtq" id="feE-aT-nZ6"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PicturesCellId" id="d4A-8K-s1V" customClass="PicturesCell">
+                                        <rect key="frame" x="0.0" y="393.5" width="375" height="172"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d4A-8K-s1V" id="Cn3-3b-eZU">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="171.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25张图片" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtf-j0-8n3">
+                                                    <rect key="frame" x="8" y="8" width="91" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-PU-Ozb">
+                                                    <rect key="frame" x="321" y="8" width="46" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <state key="normal" title="更多">
+                                                        <color key="titleColor" white="0.63" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="moreAction:" destination="d4A-8K-s1V" eventType="touchUpInside" id="8tQ-4u-xFV"/>
+                                                    </connections>
+                                                </button>
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPf-eN-sQd">
+                                                    <rect key="frame" x="0.0" y="37" width="375" height="108"/>
+                                                    <animations/>
+                                                </scrollView>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="KnY-PU-Ozb" secondAttribute="trailing" constant="8" id="1Zj-ym-Jyj"/>
+                                                <constraint firstItem="KnY-PU-Ozb" firstAttribute="top" secondItem="Cn3-3b-eZU" secondAttribute="top" constant="8" id="mp1-IJ-lXZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <outlet property="moreBtn" destination="KnY-PU-Ozb" id="2sl-Rh-X6T"/>
+                                            <outlet property="numberPictures" destination="gtf-j0-8n3" id="kBE-CV-IQ0"/>
+                                            <outlet property="scrollView" destination="jPf-eN-sQd" id="tkW-0L-5CJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="WMP-sL-egi" secondAttribute="trailing" id="ZKS-gO-sSY"/>
+                            <constraint firstItem="WMP-sL-egi" firstAttribute="top" secondItem="Bc5-R6-gJQ" secondAttribute="top" id="akA-61-5Ae"/>
+                            <constraint firstItem="WMP-sL-egi" firstAttribute="leading" secondItem="Bc5-R6-gJQ" secondAttribute="leading" id="eUQ-YE-u47"/>
+                            <constraint firstItem="ULe-yy-eES" firstAttribute="top" secondItem="WMP-sL-egi" secondAttribute="bottom" id="qeU-cC-h38"/>
+                            <constraint firstItem="ULe-yy-eES" firstAttribute="top" secondItem="WMP-sL-egi" secondAttribute="bottom" id="qpL-WJ-Epl"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="qpL-WJ-Epl"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="WMP-sL-egi" id="mAn-jM-WT8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sv1-jI-1md" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="251.5" y="-54.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btn_drama_expansion.png" width="20" height="10"/>
+    </resources>
+</document>

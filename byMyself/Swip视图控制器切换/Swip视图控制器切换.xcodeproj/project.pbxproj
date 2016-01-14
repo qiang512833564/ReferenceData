@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29BC1DD41B5776C100C7B1AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BC1DD31B5776C100C7B1AD /* main.m */; };
+		29BC1DD71B5776C100C7B1AD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BC1DD61B5776C100C7B1AD /* AppDelegate.m */; };
+		29BC1DDA1B5776C100C7B1AD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BC1DD91B5776C100C7B1AD /* ViewController.m */; };
+		29BC1DDD1B5776C100C7B1AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29BC1DDB1B5776C100C7B1AD /* Main.storyboard */; };
+		29BC1DDF1B5776C100C7B1AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29BC1DDE1B5776C100C7B1AD /* Images.xcassets */; };
+		29BC1DE21B5776C100C7B1AD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29BC1DE01B5776C100C7B1AD /* LaunchScreen.xib */; };
+		29BC1DEE1B5776C100C7B1AD /* Swip_______Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 29BC1DED1B5776C100C7B1AD /* Swip_______Tests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		29BC1DE81B5776C100C7B1AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29BC1DC61B5776C100C7B1AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29BC1DCD1B5776C100C7B1AD;
+			remoteInfo = "Swip视图控制器切换";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		29BC1DCE1B5776C100C7B1AD /* Swip视图控制器切换.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swip视图控制器切换.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29BC1DD21B5776C100C7B1AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29BC1DD31B5776C100C7B1AD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29BC1DD51B5776C100C7B1AD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		29BC1DD61B5776C100C7B1AD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		29BC1DD81B5776C100C7B1AD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		29BC1DD91B5776C100C7B1AD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		29BC1DDC1B5776C100C7B1AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		29BC1DDE1B5776C100C7B1AD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		29BC1DE11B5776C100C7B1AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		29BC1DE71B5776C100C7B1AD /* Swip视图控制器切换Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swip视图控制器切换Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29BC1DEC1B5776C100C7B1AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29BC1DED1B5776C100C7B1AD /* Swip_______Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Swip_______Tests.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29BC1DCB1B5776C100C7B1AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29BC1DE41B5776C100C7B1AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29BC1DC51B5776C100C7B1AD = {
+			isa = PBXGroup;
+			children = (
+				29BC1DD01B5776C100C7B1AD /* Swip视图控制器切换 */,
+				29BC1DEA1B5776C100C7B1AD /* Swip视图控制器切换Tests */,
+				29BC1DCF1B5776C100C7B1AD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		29BC1DCF1B5776C100C7B1AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29BC1DCE1B5776C100C7B1AD /* Swip视图控制器切换.app */,
+				29BC1DE71B5776C100C7B1AD /* Swip视图控制器切换Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29BC1DD01B5776C100C7B1AD /* Swip视图控制器切换 */ = {
+			isa = PBXGroup;
+			children = (
+				29BC1DD51B5776C100C7B1AD /* AppDelegate.h */,
+				29BC1DD61B5776C100C7B1AD /* AppDelegate.m */,
+				29BC1DD81B5776C100C7B1AD /* ViewController.h */,
+				29BC1DD91B5776C100C7B1AD /* ViewController.m */,
+				29BC1DDB1B5776C100C7B1AD /* Main.storyboard */,
+				29BC1DDE1B5776C100C7B1AD /* Images.xcassets */,
+				29BC1DE01B5776C100C7B1AD /* LaunchScreen.xib */,
+				29BC1DD11B5776C100C7B1AD /* Supporting Files */,
+			);
+			path = "Swip视图控制器切换";
+			sourceTree = "<group>";
+		};
+		29BC1DD11B5776C100C7B1AD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29BC1DD21B5776C100C7B1AD /* Info.plist */,
+				29BC1DD31B5776C100C7B1AD /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29BC1DEA1B5776C100C7B1AD /* Swip视图控制器切换Tests */ = {
+			isa = PBXGroup;
+			children = (
+				29BC1DED1B5776C100C7B1AD /* Swip_______Tests.m */,
+				29BC1DEB1B5776C100C7B1AD /* Supporting Files */,
+			);
+			path = "Swip视图控制器切换Tests";
+			sourceTree = "<group>";
+		};
+		29BC1DEB1B5776C100C7B1AD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29BC1DEC1B5776C100C7B1AD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29BC1DCD1B5776C100C7B1AD /* Swip视图控制器切换 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29BC1DF11B5776C100C7B1AD /* Build configuration list for PBXNativeTarget "Swip视图控制器切换" */;
+			buildPhases = (
+				29BC1DCA1B5776C100C7B1AD /* Sources */,
+				29BC1DCB1B5776C100C7B1AD /* Frameworks */,
+				29BC1DCC1B5776C100C7B1AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swip视图控制器切换";
+			productName = "Swip视图控制器切换";
+			productReference = 29BC1DCE1B5776C100C7B1AD /* Swip视图控制器切换.app */;
+			productType = "com.apple.product-type.application";
+		};
+		29BC1DE61B5776C100C7B1AD /* Swip视图控制器切换Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29BC1DF41B5776C100C7B1AD /* Build configuration list for PBXNativeTarget "Swip视图控制器切换Tests" */;
+			buildPhases = (
+				29BC1DE31B5776C100C7B1AD /* Sources */,
+				29BC1DE41B5776C100C7B1AD /* Frameworks */,
+				29BC1DE51B5776C100C7B1AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29BC1DE91B5776C100C7B1AD /* PBXTargetDependency */,
+			);
+			name = "Swip视图控制器切换Tests";
+			productName = "Swip视图控制器切换Tests";
+			productReference = 29BC1DE71B5776C100C7B1AD /* Swip视图控制器切换Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29BC1DC61B5776C100C7B1AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = lqq;
+				TargetAttributes = {
+					29BC1DCD1B5776C100C7B1AD = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					29BC1DE61B5776C100C7B1AD = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 29BC1DCD1B5776C100C7B1AD;
+					};
+				};
+			};
+			buildConfigurationList = 29BC1DC91B5776C100C7B1AD /* Build configuration list for PBXProject "Swip视图控制器切换" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 29BC1DC51B5776C100C7B1AD;
+			productRefGroup = 29BC1DCF1B5776C100C7B1AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29BC1DCD1B5776C100C7B1AD /* Swip视图控制器切换 */,
+				29BC1DE61B5776C100C7B1AD /* Swip视图控制器切换Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29BC1DCC1B5776C100C7B1AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29BC1DDD1B5776C100C7B1AD /* Main.storyboard in Resources */,
+				29BC1DE21B5776C100C7B1AD /* LaunchScreen.xib in Resources */,
+				29BC1DDF1B5776C100C7B1AD /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29BC1DE51B5776C100C7B1AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29BC1DCA1B5776C100C7B1AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29BC1DDA1B5776C100C7B1AD /* ViewController.m in Sources */,
+				29BC1DD71B5776C100C7B1AD /* AppDelegate.m in Sources */,
+				29BC1DD41B5776C100C7B1AD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29BC1DE31B5776C100C7B1AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29BC1DEE1B5776C100C7B1AD /* Swip_______Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		29BC1DE91B5776C100C7B1AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29BC1DCD1B5776C100C7B1AD /* Swip视图控制器切换 */;
+			targetProxy = 29BC1DE81B5776C100C7B1AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		29BC1DDB1B5776C100C7B1AD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29BC1DDC1B5776C100C7B1AD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		29BC1DE01B5776C100C7B1AD /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29BC1DE11B5776C100C7B1AD /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		29BC1DEF1B5776C100C7B1AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		29BC1DF01B5776C100C7B1AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		29BC1DF21B5776C100C7B1AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Swip视图控制器切换/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		29BC1DF31B5776C100C7B1AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Swip视图控制器切换/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		29BC1DF51B5776C100C7B1AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Swip视图控制器切换Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swip视图控制器切换.app/Swip视图控制器切换";
+			};
+			name = Debug;
+		};
+		29BC1DF61B5776C100C7B1AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Swip视图控制器切换Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swip视图控制器切换.app/Swip视图控制器切换";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29BC1DC91B5776C100C7B1AD /* Build configuration list for PBXProject "Swip视图控制器切换" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29BC1DEF1B5776C100C7B1AD /* Debug */,
+				29BC1DF01B5776C100C7B1AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29BC1DF11B5776C100C7B1AD /* Build configuration list for PBXNativeTarget "Swip视图控制器切换" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29BC1DF21B5776C100C7B1AD /* Debug */,
+				29BC1DF31B5776C100C7B1AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		29BC1DF41B5776C100C7B1AD /* Build configuration list for PBXNativeTarget "Swip视图控制器切换Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29BC1DF51B5776C100C7B1AD /* Debug */,
+				29BC1DF61B5776C100C7B1AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29BC1DC61B5776C100C7B1AD /* Project object */;
+}

@@ -1,0 +1,3 @@
+
+
+头视图放在tableview上面，然后监听tableview滚动，然后改变头视图的高度，然后头视图的origin.y并不改变

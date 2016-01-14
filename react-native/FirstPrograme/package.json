@@ -1,0 +1,13 @@
+{
+  "name": "FirstPrograme",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "react-native": "^0.11.0",
+    "react-timer-mixin": "^0.13.3",
+    "react-tween-state": "^0.1.3"
+  }
+}

@@ -1,0 +1,19 @@
+//
+//  SimpleIntroductionCellTableViewCell.h
+//  rrmj个人主页
+//
+//  Created by lizhongqiang on 15/8/26.
+//  Copyright (c) 2015年 lqq. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+
+@interface SimpleIntroductionCell : UITableViewCell
+@property (nonatomic, strong)void (^updateContraints)(void);
+@property (weak, nonatomic) IBOutlet UILabel *introductionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *pullBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *introductionHeight;
+- (void)config:(NSString *)title;
++ (CGFloat)returnFromNSString:(NSString *)title;
+@end

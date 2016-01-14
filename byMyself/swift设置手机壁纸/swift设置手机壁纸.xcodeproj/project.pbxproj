@@ -1,0 +1,430 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		291784A11B85ABF800E28ED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784A01B85ABF800E28ED9 /* AppDelegate.swift */; };
+		291784A31B85ABF800E28ED9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784A21B85ABF800E28ED9 /* ViewController.swift */; };
+		291784A61B85ABF800E28ED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 291784A41B85ABF800E28ED9 /* Main.storyboard */; };
+		291784A81B85ABF800E28ED9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291784A71B85ABF800E28ED9 /* Images.xcassets */; };
+		291784AB1B85ABF800E28ED9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 291784A91B85ABF800E28ED9 /* LaunchScreen.xib */; };
+		291784B71B85ABF800E28ED9 /* swift______Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291784B61B85ABF800E28ED9 /* swift______Tests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		291784B11B85ABF800E28ED9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 291784931B85ABF800E28ED9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2917849A1B85ABF800E28ED9;
+			remoteInfo = "swift设置手机壁纸";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2917849B1B85ABF800E28ED9 /* swift设置手机壁纸.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swift设置手机壁纸.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2917849F1B85ABF800E28ED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291784A01B85ABF800E28ED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		291784A21B85ABF800E28ED9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		291784A51B85ABF800E28ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		291784A71B85ABF800E28ED9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		291784AA1B85ABF800E28ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		291784B01B85ABF800E28ED9 /* swift设置手机壁纸Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift设置手机壁纸Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		291784B51B85ABF800E28ED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291784B61B85ABF800E28ED9 /* swift______Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "swift______Tests.swift"; sourceTree = "<group>"; };
+		291784C01B85AC1B00E28ED9 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		291784981B85ABF800E28ED9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784AD1B85ABF800E28ED9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		291784921B85ABF800E28ED9 = {
+			isa = PBXGroup;
+			children = (
+				2917849D1B85ABF800E28ED9 /* swift设置手机壁纸 */,
+				291784B31B85ABF800E28ED9 /* swift设置手机壁纸Tests */,
+				2917849C1B85ABF800E28ED9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2917849C1B85ABF800E28ED9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2917849B1B85ABF800E28ED9 /* swift设置手机壁纸.app */,
+				291784B01B85ABF800E28ED9 /* swift设置手机壁纸Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2917849D1B85ABF800E28ED9 /* swift设置手机壁纸 */ = {
+			isa = PBXGroup;
+			children = (
+				291784A01B85ABF800E28ED9 /* AppDelegate.swift */,
+				291784A21B85ABF800E28ED9 /* ViewController.swift */,
+				291784A41B85ABF800E28ED9 /* Main.storyboard */,
+				291784A71B85ABF800E28ED9 /* Images.xcassets */,
+				291784A91B85ABF800E28ED9 /* LaunchScreen.xib */,
+				2917849E1B85ABF800E28ED9 /* Supporting Files */,
+				291784C01B85AC1B00E28ED9 /* Header.h */,
+			);
+			path = "swift设置手机壁纸";
+			sourceTree = "<group>";
+		};
+		2917849E1B85ABF800E28ED9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2917849F1B85ABF800E28ED9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		291784B31B85ABF800E28ED9 /* swift设置手机壁纸Tests */ = {
+			isa = PBXGroup;
+			children = (
+				291784B61B85ABF800E28ED9 /* swift______Tests.swift */,
+				291784B41B85ABF800E28ED9 /* Supporting Files */,
+			);
+			path = "swift设置手机壁纸Tests";
+			sourceTree = "<group>";
+		};
+		291784B41B85ABF800E28ED9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				291784B51B85ABF800E28ED9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2917849A1B85ABF800E28ED9 /* swift设置手机壁纸 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291784BA1B85ABF800E28ED9 /* Build configuration list for PBXNativeTarget "swift设置手机壁纸" */;
+			buildPhases = (
+				291784971B85ABF800E28ED9 /* Sources */,
+				291784981B85ABF800E28ED9 /* Frameworks */,
+				291784991B85ABF800E28ED9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "swift设置手机壁纸";
+			productName = "swift设置手机壁纸";
+			productReference = 2917849B1B85ABF800E28ED9 /* swift设置手机壁纸.app */;
+			productType = "com.apple.product-type.application";
+		};
+		291784AF1B85ABF800E28ED9 /* swift设置手机壁纸Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 291784BD1B85ABF800E28ED9 /* Build configuration list for PBXNativeTarget "swift设置手机壁纸Tests" */;
+			buildPhases = (
+				291784AC1B85ABF800E28ED9 /* Sources */,
+				291784AD1B85ABF800E28ED9 /* Frameworks */,
+				291784AE1B85ABF800E28ED9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				291784B21B85ABF800E28ED9 /* PBXTargetDependency */,
+			);
+			name = "swift设置手机壁纸Tests";
+			productName = "swift设置手机壁纸Tests";
+			productReference = 291784B01B85ABF800E28ED9 /* swift设置手机壁纸Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		291784931B85ABF800E28ED9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = lqq;
+				TargetAttributes = {
+					2917849A1B85ABF800E28ED9 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					291784AF1B85ABF800E28ED9 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 2917849A1B85ABF800E28ED9;
+					};
+				};
+			};
+			buildConfigurationList = 291784961B85ABF800E28ED9 /* Build configuration list for PBXProject "swift设置手机壁纸" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 291784921B85ABF800E28ED9;
+			productRefGroup = 2917849C1B85ABF800E28ED9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2917849A1B85ABF800E28ED9 /* swift设置手机壁纸 */,
+				291784AF1B85ABF800E28ED9 /* swift设置手机壁纸Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		291784991B85ABF800E28ED9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784A61B85ABF800E28ED9 /* Main.storyboard in Resources */,
+				291784AB1B85ABF800E28ED9 /* LaunchScreen.xib in Resources */,
+				291784A81B85ABF800E28ED9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784AE1B85ABF800E28ED9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		291784971B85ABF800E28ED9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784A31B85ABF800E28ED9 /* ViewController.swift in Sources */,
+				291784A11B85ABF800E28ED9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		291784AC1B85ABF800E28ED9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				291784B71B85ABF800E28ED9 /* swift______Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		291784B21B85ABF800E28ED9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2917849A1B85ABF800E28ED9 /* swift设置手机壁纸 */;
+			targetProxy = 291784B11B85ABF800E28ED9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		291784A41B85ABF800E28ED9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				291784A51B85ABF800E28ED9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		291784A91B85ABF800E28ED9 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				291784AA1B85ABF800E28ED9 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		291784B81B85ABF800E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		291784B91B85ABF800E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		291784BB1B85ABF800E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "swift设置手机壁纸/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/swift设置手机壁纸/Header.h";
+			};
+			name = Debug;
+		};
+		291784BC1B85ABF800E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "swift设置手机壁纸/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/swift设置手机壁纸/Header.h";
+			};
+			name = Release;
+		};
+		291784BE1B85ABF800E28ED9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "swift设置手机壁纸Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/swift设置手机壁纸.app/swift设置手机壁纸";
+			};
+			name = Debug;
+		};
+		291784BF1B85ABF800E28ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "swift设置手机壁纸Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/swift设置手机壁纸.app/swift设置手机壁纸";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		291784961B85ABF800E28ED9 /* Build configuration list for PBXProject "swift设置手机壁纸" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291784B81B85ABF800E28ED9 /* Debug */,
+				291784B91B85ABF800E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		291784BA1B85ABF800E28ED9 /* Build configuration list for PBXNativeTarget "swift设置手机壁纸" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291784BB1B85ABF800E28ED9 /* Debug */,
+				291784BC1B85ABF800E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		291784BD1B85ABF800E28ED9 /* Build configuration list for PBXNativeTarget "swift设置手机壁纸Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				291784BE1B85ABF800E28ED9 /* Debug */,
+				291784BF1B85ABF800E28ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 291784931B85ABF800E28ED9 /* Project object */;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Awesome",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "react-native": "^0.11.4",
+    "react-native-activity-view": "^0.2.6",
+    "react-native-audio-player": "0.0.2",
+    "react-native-icon-button": "^1.0.0",
+    "react-native-lightbox": "^0.4.0",
+    "react-timer-mixin": "^0.13.3"
+  }
+}

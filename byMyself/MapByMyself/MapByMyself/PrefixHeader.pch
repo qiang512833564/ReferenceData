@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  MapByMyself
+//
+//  Created by lizhongqiang on 15/7/24.
+//  Copyright (c) 2015年 lqq. All rights reserved.
+//
+
+#ifndef MapByMyself_PrefixHeader_pch
+#define MapByMyself_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+#import <BaiduMapAPI/BMapKit.h>
+#import <BaiduMapAPI/BMKMapView.h>
+#import <BaiduMapAPI/BMKPolyline.h>
+#import <BaiduMapAPI/BMKRouteSearch.h>
+#import "BlocksKit+UIKit.h"
+#import "AnnotationView.h"
+
+#endif
+#endif

@@ -1,0 +1,731 @@
+
+https://github.com/booxood/fetch-react-native-components
+
+——react-native—相关语法可以查看jsx+es6+javaScript基础的语法
+
+
+记号（token）,就是一个关键字、变量名、数字、函数名或者其他实体；
+在JavaScript中，如果语句分别放置在不同的行中，就可以省去分号。
+支持作为数组直接量和对象直接量的表达式。例如：
+  { x:1, y:2 }//对象初始化程序--[1,2,3,4,5]//数组初始化程
+DOM模型比JaveScript对象的操作速度慢；
+
+react笔记：（http://wiki.jikexueyuan.com/project/react/advanced-performance.html），（http://wiki.jikexueyuan.com/project/react-native/push-notification.html）
+
+'',""都表示字符串
+
+————iOS-JS改变刷新———-command+R
+————android—JS改变刷新—-暂时只能通过调出菜单栏(fn+F2)然后点击reload js
+
+—————android调出菜单栏，点击dev setting,选择当js改变时就自动刷新
+
+—————android加图片，要在android的目录下加
+
+react-native start启动服务器
+npm install —-save +组件名 （下载组件）
+react-native install(初始化)
+react-native android(初始化)ButtonDemo/android/app/src/main/res/drawable
+
+》》》》》》》》》》》》》》》》》
+react-android—>
+步骤brew install java
+   brew install android-sdk(AndroidDevtools)
+   终端：sudo vi ~/.bash_profile
+        在最后添加export ANDROID_HOME=/usr/local/opt/android-sdk一句
+   其它的按官网操作
+另外。需要手动安装虚拟机加速模块
+     进入sdk（/usr/local/opt/android-sdk/extras/intel/Hardware_Accelerated_Execution_Manager）目录双击dmg文件,安装后，再重新打开android avd（安装虚拟引擎）
+——>进入工程文件夹下，打开终端输入：react-native run-android（注意an安卓虚拟机需要先启动start)—->然后第一次，会用一段时间下载一些文件。。。   
+》》》》》》》》》》》》》》》
+
+>>>>>>>>>>>>>>>>>>>>>>>>
+完成ReactNative的编写
+到Xcode中，打开「AppDelegate.m」文件
+找到「OPTION 2」
+取消jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];的注释
+打开命令行，跳转到ReactNative应用的根目录
+执行命令react-native bundle --minify
+回到Xcode中，连接手机，并使用真机调试
+在手机中打开对应的应用
+PS: 由于只有使用命令将应用进行打包后，才能正常运行离线应用，所以每次想要查看离线应用的变化时，都需要重新打包一遍。所以建议只有当想发布的时候才去取消「OPTION 2」的注释，这样调试起来比较方便。
+>>>>>>>>>>>>>>>>>>>>>>>>
+
+npm install (+具体的组件)—初始化react-native文件（添加具体的组件）
+
+alignItems:’center’水平居中
+justifyContent:’center’垂直居中
+flexDirection:’row’水平方向排布
+position: 'absolute’自定义，就可以实现子组件之间的重叠
+
+padding是控件的内容相对控件的边缘的边距。(与子组件里的关系) 
+margin是控件边缘相对父空间的边距．(与父组件间的关系)
+
+‘\’’单引号
+
+position:'absolute’,要设置top,与left,相当于frame的x,y 值
+
+JSX 里添加注释很容易；它们只是 JS 表达式而已。你只需要在一个标签的子节点内(非最外层)小心地用 {} 包围要注释的部分。
+
+等于操作符
+==等于
+!=不等于
+===恒等于
+!==非全同操作（ListView初始化的时候，就用到了）
+
+typeof 运算符 返回一个用来表示表达式的数据类型的字符串。
+typeof在JavaScript里面是判断类型的，typeof(123)返回number——>
+        typeof(document.mylist.length != "undefined")
+react-native中
+(typeof this.props.style === "undefined”—判断当前类型是否成立 ? styles.default : this.props.style);
+注意typeof用于的是判断类型
+
+var renderFooter=this.props.footer?this.renderFooter:this.props.renderFooter;
+判断this.props.footer是否有值，三目运算符
+
+{this.state.animated ? 'with' : 'without'}
+animated={this.state.animated}———React-native里面{}表示的是表达式或者对象
+
+{this.props.children}也只能用在子组件里
+
+可复用组件:
+    为了保证组件能被正确使用:React.propTypes提供很多验证器（validator）来传入数据的有效性。当想props传入无效数据时，JavaScript控制台会抛出警告。注意:为了性能考虑，只在开发环境验证propTypes。（任意类型后加上'isRequired'来使prop不可空）
+   React.createClass({
+       propTypes:{
+         children:React.PropTypes.element.isRequired//:React.PropTypes.element可以限定只能有一个子级传入
+   },....
+});
+默认Prop值
+    React支持以声明式的方式来定义props的默认值
+    当父级没有传入props时，getDefaultProps()可以保证this.props.value有默认值,注意getDefaultProps的结果会被缓存
+   var ComponentWithDefaultProps = React.createClass({
+   getDefaultProps: function() {
+    return {
+      value: 'default value'
+      };
+    }
+   });
+可以通过this.setState({设值})，或者this.state = {};
+
+Mixins组件
+
+一个组件需要定期更新，用setInterval()
+
+使用this.props的好处就是var Person =  React.createClass({
+});在外面初始化自定义组件(<Person />)的时候可以传入参数<Person name={name} />,在里面可以通过this.props.name去访问,注意this.props.name中的name要与<Person name={name}/>中的name保持一致，因为他们都是参数的名称.
+
+另外需要注意：父级与子级之间的从属关系（父子级之间传递参数，使通过this.props）
+
+this.props：通过React.Children工具类来操作。
+
+Array.isArray()来判断是否为数组()括号里的是需要判断的对象
+
+在组件方法中通过this访问改组件实例
+
+React.createClass({
+  getInitialState:function(){
+    return {userInput:''};
+  },
+});
+this.state取出
+this.setState设值
+
+shouldComponentUpdate:function(nextProps, nextState){ 
+    return true;
+}这个是在重新绘制过程开始之前触发的，这个函数的默认实现返回true，另外：React将非常频繁的调用这个函数，所以实现必须要快。
+
+RCT_EXPORT_METHOD supports all standard JSON object types:such as:
+string(NSString)
+number(NSInteger,float,double,CGFloat,NSNumber)
+boolean(BOOL,NSNumber)
+array(NSArray)of any types from this list
+map (NSDictionary) with string keys and values of any type from this list
+function (RCTResponseSenderBlock)
+
+对于组件，这样的参数(数据结构）：value = {foo:'bar'},我们可以通过this.props.value.foo来访问
+
+如果：var x = {foo:'bar'};
+      var y = x;
+这里的y = x仅仅只是一个x的引用，改变y的值，同时也会改变x
+可以通过：
+       var SomeRecord = Immutable.Record({ foo: null });
+       var x = new SomeRecord({ foo: 'bar'  });
+       var y = x.set('foo', 'baz');
+Immutable.Record表示不可变的数据结构
+
+模拟的实体。记录是不可变的容器，为一组特定的域保存值：
+var User = Immutable.Record({
+    id: undefined,
+    name: undefined,
+    email:undefined
+});
+var Message = Immutable.Record({
+   timestamp:new Date(),
+   sender:undefined,
+   text:''
+});
+消息库可以使用以下两个列表来追踪用户和信息：
+       this.users = Immutable.List();
+       this.messages = Immutable.List();
+当库看到负载正在显示一个新的消息，把它添加到消息列表中
+      this.messages = this.messages.push({
+           new Message({
+              timestamp:payload.timestamp,
+              sender:payload.sender,
+              text:payload.text
+     })
+});
+
+
+React元素：
+     React中最主要的类型就是ReactElement。他有四个属性：type,props,key和ref。
+     var child = React.createElement('li', null, 'Text Content');
+     var root = React.createElement('ul', { className: 'my-list' }, child);
+     React.render(root, document.body);
+     等同于：
+     var root = <ul className="my-list">
+             <li>Text Content</li>
+             </ul>;
+     React.render(root, document.body);
+
+注意：
+   所有 React component 都可以采用自闭和的形式：<div />. <div></div> 它们是等价的。
+
+var classString = "message";
+<div className={classString}I'm a book </div>自我理解：{参数名}表示调用
+
+classSet()
+可以把简单的if(BOOL)判断转换成:
+    var cx = React.addons.classSet;
+    var classes = cx({
+      'message':ture,
+      'message-important':this.props.isImportant,
+      'message-read':this.props.isRead
+});
+
+render()函数，应该是纯粹的渲染
+
+getInitialState(),在组件挂载之前调用一次，返回值将作为this.state的初始值
+
+getDefaultProps(),在组件创建的时候调用一次，然后返回值被缓存下来。如果父组件没有指定props中的某个键，则此处返回的对象中的相关属性将会被合并到this.props(使用in监测属性)。
+该方法在任何实例创建之前调用，因此不能依赖于this.props。另外，getDefaultProps()返回的任何复杂对象将会实例间共享，而不是每个实例拥有一份拷贝。
+
+propTypes对象允许验证传入到组件的props。
+
+mixin数组允许使用混合来在多个组件之间共享行为。
+
+statics对象允许你定义静态的方法，这些静态的方法可以在组件类上调用。例如：
+var MyComponent = React.createClass({
+  statics: {
+    customMethod: function(foo) {
+      return foo === 'bar';
+    }
+  },
+  render: function() {
+  }
+});
+MyComponent.customMethod('bar');  // true
+在这个块儿里面定义的方法都是静态的，意味着你可以在任何组件实例创建之前调用它们，这些方法不能获取组件的 props 和 state。如果你想在静态方法中检查 props 的值，在调用处把 props 作为参数传入到静态方法。
+
+
+生命周期方法：
+getInitialState：获得初始化组件状态，只调用一次
+componentWillMount：组件将要加载，只调用一次
+componentDidMount：组件加载完成并显示出来了，也就是完成了一次绘制，只调用一次
+render：绘制组件，可能调用多次。
+
+挂载：
+componentWillMount()只调用一次，在初始化渲染执行之前立刻调用（服务器和客户端都只调用一次）
+componentDidMout()在初始化渲染执行之后立刻调用一次（仅客户端有效）
+
+更新：
+componentWillReceiveProps(object nextProps)在组件接到新的props的时候调用（在初始化渲染的时候，改方法不会调用）此函数可以作为react在prop传入之后，render()渲染之前更新state的机会。
+
+shouldComponentUpdate(object nextProps, object nextState)在接收到新的props或者state,将要渲染之前调用。-----判断是否重新渲染时调用。
+shouldComponentUpdate: function(nextProps, nextState) {
+  return nextProps.id !== this.props.id;
+}如果返回为false，则render()将不会执行，知道下一次state改变。
+
+componentWillUpdate(object nextProps, object nextState)
+在接收到新的props或者state之前立刻调用。在初始化渲染的时候该方法不会被调用，
+使用该方法是为了做一些更新之前的准备工作。
+
+Children对象。该对象里有几个方法：map,forEach,count,only
+map用于遍历和修改子节点，forEach仅仅只是遍历子节点，count是求子节点个数，only返回children中仅有的子级，否则抛出异常。
+
+componentDidUpdate(object prevProps, object prevState)在组件的更新已经同步到DOM中之后立刻被调用。使用改方法可以在组件更新之后操作DOM元素。
+
+componentWillUnmout()在组件从DOM中移除的时候立刻被调用。
+在该方法中执行任何必要的清理，比如无效的定时器，或者清除在componentDidMount中穿件的DOM元素。
+
+表单组件：
+    受限组件设置了value的<input>是一个受限组件
+    render:function(){
+       return <input tyep="text"  value="Hello!" />;
+}  如果想响应更新用户输入的值，就得使用onChange事件
+    不受限组件：没有设置value(或者设为null)的<input>组件是一个不受限组件。对于不受限的<input>组件，渲染出来的元素直接反应用户输入。
+
+js里面注册事件：
+var {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ActivityIndicatorIOS,
+  TouchableHighlight//注册事件
+}=React;
+添加事件(貌似onPress=这里的onPress可以是自己定义的名字)
+<TouchableHighlight onPress={this.props.onPress}>这里是在子组件写的
+  <View />
+</TouchableHighlight>
+给出具体的调用方法，其实在上一步TouchableHighlight里面也可以直接设置具体的调用方法
+<Person  onPress={this.onPresonPress} />
+———————这里添加事件的方法，也是子组件调用父组件的方法，并且可以传值———
+
+添加导航控制器
+class Helloworld extends React.Component
+{
+     render(){
+        return (
+          <React.NavigatorIOS   style={styles.container} initialRoute={{ title:'title',  component:组件}} >//这里的initialRoute相当于OC中，给导航控制器添加跟视图
+        ); 
+    }
+}
+this.props.navigator.pop();
+this.props.navigator.push(nextRoute);
+
+onPersonPress: function(user) {函数固定写法，参数放在function(这里user)}，
+this.onPersonPress.bind(this, person.user) ;传参数,这里的this，千万不能忘记了,第二个参数代表传入的实参，但是可以不写。
+
+console.log('输出语句======\n');
+
+这是表达式。
+1
+2
+.then(response=>response.json())
+.then(json=>this._handleResponse(json.response))
+相当于
+1
+2
+.then(function(response){response.json();})
+.then(function(json){this._handleResponse(json.response);})
+
+组件自身定义了一组props作为对外接口，展示一个组件时只需要指定props作为XML节点的属性。组件很少需要对外公开方法，唯一的交互途径就是props。
+
+
+App状态state
+我们知道React的主流思想就是，所有的state状态和方法都是由父组件控制，然后通过props传递给子组件，形成一个单方向的数据链路，保持各组件的状态一致。所以我们在这个父组件App上，看的东西稍微有点多。一点点来看：
+constructor(Props){//构造函数:在对象创建或者实例化时候被调用的方法。通常使用该方法来初始化数据成员和所需资源。Props可以看成是被初始化的对象
+    super(Props);
+    this.db = new LocalDb('React-Todos');
+    this.state = {//初始化state状态机
+        todos: this.db.get("todos") || [],
+        isAllChecked: false
+    };
+}
+在App组件的constructor内，我们先是初始化了我们的localStorage的数据库，放在了this.db上。然后便是初始化了state，分别有两个，一个是todos的列表，一个是所有的todos是否全选的状态。
+constructor()一般用在class FadeInView extends React.Component{}创建的组件里，而且是执行在最前面调用
+貌似class FadeInView extends React.Component{里面不能调用getInitialState:function(){return {};}}方法,所以this.state的初始化只能在constructor()里面进行（也不能绝对，也可以这样：
+constructor(props) {super(props);this.state = this.getInitialState();}—  getInitialState() {return {}；}）,class FadeInView extends React.Component里render()方法不能写成render:function()
+
+
+一般情况下defaultProps和type TimingAnimationConfig = {里面的属性都是可以调用的}；
+
+setState或者初始化this.state不能放在render()方法里面，一般放在点击事件里
+
+注意ListView上不能加事件，否则冲突
+
+var SubComponent = require('./subComponent’);注意SubComponent这个首字母必须大写
+
+var subComponent =  <SubComponent style={{backgroundColor:'red',flex:1,width:100,height:100}}/>;
+<View style={{backgroundColor:'black',flex:1}}>
+  {subComponent}注意这里使用的时候，要加上大括号{},否则仅仅被当做字符串看做，加上大括号后，被当成对象看待
+ </View>
+
+class ListViewDataSource {} 需要用new—new ListView.DataSource({参数})去创建对象，然后对象里面的方法，貌似可以用对象直接去调用
+
+注意使用</TouchableHighlight>等，因为会改变flex和position: 'absolute’,父组件的alignItems:'center’,也不生效了,
+
+var tweenState = require('react-tween-state’);只能用在NSNumber值得动画
+
+只要父组件的this.state状态变了，子组件都会去调用componentWillReceiveProps方法
+
+var tweenState = require('react-tween-state’);这个方法去注册动画的时候，要注意this.tweenState('x',{
+});名字的取名，有时候可能会无效的
+
+Animated动画的实现方式，是在组件上再加一层动画组件，然后该动画组件自己内部实现动画
+
+<View style={[{width:100,height:100}, {width:200}]}>//这样子，虽然两个结构体里，都存放着相同的属性，但是以后一个为准
+
+
+可以把style单独弄一个文件：
+'use strict';
+var React = require('react-native');
+var {
+  StyleSheet,
+} = React;
+module.exports = StyleSheet.create({
+});
+
+单独把接口放在一个文件：
+module.exports = {
+  topics: 'https://cnodejs.org/api/v1/topics',
+  topic: 'https://cnodejs.org/api/v1/topic'
+};
+
+index.js文件默认会识别
+
+如果index.js的路径是/App(这里的是与index.ios.js同级别)/Views/Topic/index.js
+再引入的时候可以：require(‘./Topic’)(个人理解./表示当前目录)
+                                      ../表示回到上一层目录
+
+当设置父组件的style={{padding:20}}值得时候，父组件在未设置高度的情况下，父组件会根据padding与子组件的高度来设置自身高度
+
+例子：
+textColor: {/*字体不设高宽度，默认是padding与文字加起来的*/
+    color: 'white',
+    borderWidth: 1,
+    borderColor: 'white',
+    padding: 8,//字体离边界的距离
+    borderRadius: 3,
+    textAlign: 'center',
+    margin: 10,//边界离父控件的距离
+    alignSelf: 'flex-start',/*
+                             * alignSelf的对齐方式主要有四种：
+                             * flex-start居左摆放、 
+                             * flex-end居右摆放、
+                             * center居中摆放、 
+                             * auto自由摆放、 stretch。
+                             */
+  },
+
+例子：
+hide(){setTimeout(()=>alert('hide'));//直接使用setTimeout代表直接调用(里面的方法)，}
+
+
+例子：
+ <JSX {...props} ref='JSX'>{/*这个 ... 操作符（也被叫做延展操作符 － spread operator）已经被 ES6 数组 支持
+        	* 如果再想添加属性{value:10,...props}
+        	* */}
+
+
+例子：
+renderChildren () {
+    return React.cloneElement(//cloneElement方法，复制节点
+    	//克隆并返回一个新的 ReactElement （内部子元素也会跟着克隆），
+    	//新返回的元素会保留有旧元素的 props、ref、key，也会集成新的 props（只要在第二个参数中有定义）。
+      this.props.children,
+      {closeModal: this._myClose.bind(this)}
+    );
+  }
+
+  render () {
+    return (
+    	<View style={[styles.modalWrapper, this.state.modalWrapper]}>{/*这样子，虽然两个结构体里，都存放着相同的属性，但是以后一个为准*/}
+        <View style={[styles.modalUnderlay, this.state.modalUnderlay]}></View>
+        <View style={[styles.modal, this.state.modal, this.props.modalStyle]}>
+          {this.renderChildren()}{/*自定义组件----如果想在父控件为该自定义组件下添加子组件，貌似需要克隆一下子组件放在这里*/}
+        </View>
+    	</View>
+    );
+  }
+
+例子：ref要在var Sub = React.createClass下使用，而不能在extends Component创建的组件里使用
+onPressAction(){
+   	//measure这个方法只能在子组件中使用
+   	//是测量改组件在父组件中的位置
+   	//ox,oy-->相对于父组件的xy位置
+   	//width,height-->组件的宽高
+   	//px,py--->相对于屏幕的x,y位置
+   	this.root.measure((ox, oy, width, height, px, py)=>{
+   		console.log(ox, oy, width, height, px, py);
+   	});
+   },
+	render () {
+    return (
+    	<View 
+    	ref={component=>this.root=component}
+    	style={styles.container} >{/*ref要放在TouchableHighlight事件的父组件上*/}
+       <TouchableHighlight onPress={this.onPressAction.bind(this)}>
+       <View style={{flex:1,backgroundColor:'blue',height:100,width:100}}>
+       </View>
+       </TouchableHighlight>	
+    	</View>  
+    );
+
+<Animated.View style={[styles.header, lightboxOpacityStyle]} />动画，通过style来改变的
+
+
+margin:100,想要设置有效，
+必须还要设置flex:1
+
+
+例子：定时器的创建及取消
+this.timer=setInterval(()=>{this.setState({text:describedText.substring(0,txtLocation)})},500);
+    //虽然并没用初始化timer属性，但是这样子js会自动创建一个timer属性
+clearInterval(this.timer);
+
+例子：组件内部函数的调用分两种
+一种是，直接在该组件内部调用：this._resetState()
+第二种，在其它组件内部调用：this._resetState.bind(this,’参数，没有参数的话，可以省略’)，但是这个仅仅相当于函数指针，而并不调用。
+第三种，也可以直接this._resetState
+注意有时候，在React.createClass({})创建的组件内部，也可以用this._resetState,去作为函数指针。
+Animated.decay(this.state.pan, {
+            velocity: {x: velocity, y: vy},
+            deceleration: 0.98
+          }).start(this._resetState.bind(this))
+_resetState() {
+    this.state.pan.setValue({x: 0, y: 0});
+    this.state.enter.setValue(0);
+    this._goToNextPerson();
+    this._animateEntrance;
+  }
+
+例子：判断是否为空
+typeof this.props.icon === "undefined"
+var style = (typeof this.props.style === "undefined" ? styles.default : this.props.style);
+
+例子：const常数
+const People = [
+  'red',
+  'green',
+  'blue',
+  'purple',
+  'orange',
+]
+
+例子：输入pan.x拖动的位置，输出角度
+let rotate = pan.x.interpolate({inputRange: [-200, 0, 200], outputRange: ["-30deg", "0deg", "30deg"]});
+
+例子：组件引入：
+var MODE = require('./modes/current');
+MODE.Rectangle = require('./shapes/rectangle');
+MODE.Pill = require('./shapes/pill');
+MODE.Ellipse = require('./shapes/ellipse');
+MODE.Wedge = require('./shapes/wedge');
+if (!MODE.Font) MODE.Font = require('./shapes/font');
+MODE.Transform = require('./core/transform');
+MODE.Color = require('./core/color');
+module.exports = MODE;
+
+例子动画：经测试，这个动画的实现是在Animated.View内部实现的，因此，render()方法只会调用一次（因此，可以通过interpolate来关联另一个属性），但是react-tween-state动画，是反复调用render()来实现动画的，
+render(){
+     let {positionX}=this.state;
+     let top=positionX.interpolate({inputRange:[0,300],outputRange:[80,400]});
+    return (
+           <Animated.View style={{height:100,width:100,position:"absolute",left:this.state.positionX,top:top,backgroundColor:'yellow'}}>	
+			</Animated.View>
+			);
+	}
+
+例子动画：X与Y关联
+ pan: new Animated.ValueXY(),
+ let [translateX, translateY] = [pan.x, pan.y];
+ let animatedCardStyles = {transform: [{translateX}, {translateY}]};
+ <Animated.View style={animatedCardStyle}/>
+
+例子：把字符串与其他类型的数据相加
+i = 1;
+'image!p'+(i+1)
+得到的结果是字符串
+
+例子：貌似require(“”)里面必须是一个字符串路径，而不能是一个字符串指针（）
+如：require(“image!pan”)正确—》string=‘image!pan’ require(string)错误
+
+例子：样式
+<View style={[styles.base, styles.background]} />在冲突值的情况下，从最右边元素的值将会优先
+<View
+  style={[styles.base, {
+    width: this.state.width,
+    height: this.state.width * this.state.aspectRatio
+  }]}
+/>
+
+例子：平台
+STATUS_BAR_OFFSET = (Platform.OS === 'android' ? -25 : 0);
+
+例子：组件var Lightbox = require('react-native-lightbox’);使用，要记住一点：
+设置children中的style属性flex:1否则图片不会等比放大。
+
+例子：
+navigatorIOS
+initialRoute={{
+      component:MyView, 
+      title:”Title”,
+      passProps:{myProp:’param’}
+}}
+navigator
+initialRoute={{
+      component:MyView, 
+      passProps:{myProp:’param’}
+}}
+
+例子：run-android的时候如果出现错误SyntaxError: Use of const in strict mode.的时候
+在该工程下面执行两行命令
+sudo npm install -g n
+sudo n io latest
+
+
+例子：参数propTypes(需要引入组件PropTypes)
+propTypes:{
+        func:PropTypes.func.isRequired,
+        bool:PropTypes.bool,
+        number:PropTypes.number,
+        string:PropTypes.string,
+        any:PropTypes.any。isRequired,// 不可空的任意类型
+        // 用 enum 来限制 prop 只接受指定的值。
+        optionalEnum: React.PropTypes.oneOf(['News', 'Photos']),
+        // 指定的多个对象类型中的一个
+        optionalUnion: React.PropTypes.oneOfType([
+           React.PropTypes.string,
+           React.PropTypes.number,
+           React.PropTypes.instanceOf(Message)
+        ]),——也就是说optionalUnion只能使上面三种类型中的一种
+        // 特定形状参数的对象
+        optionalObjectWithShape: React.PropTypes.shape({
+           color: React.PropTypes.string,
+           fontSize: React.PropTypes.number
+        }),
+          // 用 JS 的 instanceof 操作符声明 prop 为类的实例。
+        optionalMessage: React.PropTypes.instanceOf(Message),//这个就说明：需要传过来的参数，是一个组件的对象
+}
+
+例子：一般()=>{}里面加入的，一般可以是执行语句
+
+
+例子：Native UI Components
+
+
+例子：cloneElement(component,props)
+var image =  React.cloneElement(this.props.superChildren,{style:{height:WINDOW_HEIGHT,width:WINDOW_WIDTH}});	
+
+
+例子：
+
+——本人觉得extends Component创建的组件就好比JS里面的构造函数结构，——其中：
+constructor(props) {
+        super(props);
+        this.myname = 'lucy';//这是构造函数，所以，这里在这里改掉对外的属性----可以对比js的构造函数来理解
+        this.state = {wording: '你好呀, '};
+}就是构造函数的实现部分—里面的内容可以根据js的构造函数的内容来填写
+
+例子：
+React.createClass({
+})—创建的组件，如果想改掉props，则必须改变该组件的props指向，而不能仅仅改掉其中的某个组件
+this.props={name:"china"};//这样是可以改掉的，但是把props里面所有的属性都改掉了
+  //	this.setProps({name:'china'});这样也不好使，报错：提示-仅仅使当组件被创建的时候，去设置props
+
+
+例子：_genRows:function(pressData:{[key:number]:boolean}):Array<string>
+这个是一个函数，其中向函数传递的参数是function(里面的)，返回值类型是:Array(注意：也可以不写),另外<string>个人猜测是Array里面元素的类型
+
+例子：
+ <ListView 
+         dataSource={this.state.dataSource}
+	 renderRow={(rowData, sectionID, rowID, highlightRow) => this._renderRow(rowData, sectionID, rowID, highlightRow)}
+	 style={{backgroundColor:'red'}}
+	 initialListSize={20} //这里是设置ListView第一次显示时，能看见的cell个数，默认是10，另外这里需要在数字前加一个{}括号，因为这里参数initialListSize需要传递的是一个number对象
+			        // automaticallyAdjustContentInsets={false}
+			>
+			</ListView>
+
+例子：
+getInitialState() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    return {
+      dataSource: ds.cloneWithRows(array),
+    };
+  },
+ListView的数据源需要通过ds.cloneWithRows去设置
+
+例子：
+数组的初始化
+var dataBlob = [];
+for(var i=0; i<100; i++){
+dataBlob.push('Row'+i+pressedText);
+}
+
+例子：
+获取屏幕的宽度
+var WINDOW_WIDTH = Dimensions.get('window').width;
+
+例子：
+<Modal ref={component=>this.refAlias=component}>
+{/*<Modal ref={component=>this.refAlias=component}>这个貌似是取别名
+ ---可以用this.refAlias去调用该节点组件*/}
+</Modal>
+//<Modal ref={'modal'}>这里添加了ref={'modal'}，可以在其他方法里访问到子节点即子组件
+
+
+例子：
+获取某个组件的frame
+ this.refs.AccordionContent.measure((ox, oy, width, height, px, py) => {
+        // Sets content height in state
+        this.setState({content_height: height});
+      });
+
+例子：
+let {positionX}=this.state;
+let top=positionX.interpolate({inputRange:[0,300],outputRange:[80,400]});
+interpolate在一个范围来确定另一个范围的值
+
+例子：merge合并多个对象属性，到最前面的{}里，然后返回一个含有所有属性的字典，与Object.assign()有点像
+var merge = require('merge'); 
+var props = merge({}, this.props, {
+      onScroll: this.onScroll,
+      onScrollAnimationEnd: this.onScrollAnimationEnd,
+      dataSource,
+      renderFooter,
+      renderHeader,
+      renderRow: this.renderRow,
+      renderSectionHeader
+    });
+
+
+例子：
+// var React = require('react-native');
+import React from 'react-native';
+syntaxError:Unexpected use of reserved word 'import'
+需要react+webpack+babel才可以使用ES6
+
+例子：
+this.setState({},()=>{});
+
+例子：
+var {NativeModules} = React;
+var UIManager=NativeModules.UIManager;
+_action(){
+	//经过测试，知道React.findNodeHandle(this.root)是获取某个节点（在这里是一个视图），
+	//另外UIManager.measure( , ()=>{})该方法是度量视图的，跟this.root.measure(()=>{})相似
+	UIManager.measure(React.findNodeHandle(this.root),(x,y,w,h)=>{
+			this.containerHeight = h;
+			alert('dadadadad'+w)
+	});
+	this.root.measure((ox, oy, width, height, px, py)=>{
+   	console.log(ox, oy, width, height, px, py);
+   	});
+	}
+
+例子：
+<TouchableHighlight onPress={this._action.bind(this)}>
+    <View ref={component => this.root = component} style={styles.main}>
+    </View>
+</TouchableHighlight>
+这样子设置ref是无效的，貌似跟TouchableHighlight有关系。
+
+例子：
+class MyTest extends Component{
+      componentDidMount(){
+       //貌似这里通过this.root.measure((ox, oy, width, height, px, py)=>{
+   		console.log(ox, oy, width, height, px, py);
+   	});方法获取到视图的measure是0，也就是无法获取到视图的frame
+      }
+}
+
+例子：
+Object.keys()获取对象对应的键值
+如：
+var arr=[‘a’,’b’,’c’];
+console.log(Object.keys(arr));//console:[‘0’,’1’,’2’]
+
+例子：
+arr.reduce(callback[,initialValue])

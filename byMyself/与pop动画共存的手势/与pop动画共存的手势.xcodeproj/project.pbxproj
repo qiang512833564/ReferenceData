@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		296F67641B54FCCA00DCB872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F67631B54FCCA00DCB872 /* main.m */; };
+		296F67671B54FCCA00DCB872 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F67661B54FCCA00DCB872 /* AppDelegate.m */; };
+		296F676A1B54FCCA00DCB872 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F67691B54FCCA00DCB872 /* ViewController.m */; };
+		296F676D1B54FCCA00DCB872 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296F676B1B54FCCA00DCB872 /* Main.storyboard */; };
+		296F676F1B54FCCA00DCB872 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296F676E1B54FCCA00DCB872 /* Images.xcassets */; };
+		296F67721B54FCCA00DCB872 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296F67701B54FCCA00DCB872 /* LaunchScreen.xib */; };
+		296F677E1B54FCCA00DCB872 /* _pop_______Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F677D1B54FCCA00DCB872 /* _pop_______Tests.m */; };
+		296F67891B54FDDB00DCB872 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F67881B54FDDB00DCB872 /* SecondViewController.m */; };
+		296F678C1B55009700DCB872 /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F678B1B55009700DCB872 /* PopView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		296F67781B54FCCA00DCB872 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 296F67561B54FCCA00DCB872 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 296F675D1B54FCCA00DCB872;
+			remoteInfo = "与pop动画共存的手势";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		296F675E1B54FCCA00DCB872 /* 与pop动画共存的手势.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "与pop动画共存的手势.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		296F67621B54FCCA00DCB872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		296F67631B54FCCA00DCB872 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		296F67651B54FCCA00DCB872 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		296F67661B54FCCA00DCB872 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		296F67681B54FCCA00DCB872 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		296F67691B54FCCA00DCB872 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		296F676C1B54FCCA00DCB872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		296F676E1B54FCCA00DCB872 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		296F67711B54FCCA00DCB872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		296F67771B54FCCA00DCB872 /* 与pop动画共存的手势Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "与pop动画共存的手势Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		296F677C1B54FCCA00DCB872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		296F677D1B54FCCA00DCB872 /* _pop_______Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_pop_______Tests.m"; sourceTree = "<group>"; };
+		296F67871B54FDDB00DCB872 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		296F67881B54FDDB00DCB872 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		296F678A1B55009700DCB872 /* PopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopView.h; sourceTree = "<group>"; };
+		296F678B1B55009700DCB872 /* PopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		296F675B1B54FCCA00DCB872 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		296F67741B54FCCA00DCB872 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		296F67551B54FCCA00DCB872 = {
+			isa = PBXGroup;
+			children = (
+				296F67601B54FCCA00DCB872 /* 与pop动画共存的手势 */,
+				296F677A1B54FCCA00DCB872 /* 与pop动画共存的手势Tests */,
+				296F675F1B54FCCA00DCB872 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		296F675F1B54FCCA00DCB872 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				296F675E1B54FCCA00DCB872 /* 与pop动画共存的手势.app */,
+				296F67771B54FCCA00DCB872 /* 与pop动画共存的手势Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		296F67601B54FCCA00DCB872 /* 与pop动画共存的手势 */ = {
+			isa = PBXGroup;
+			children = (
+				296F67651B54FCCA00DCB872 /* AppDelegate.h */,
+				296F67661B54FCCA00DCB872 /* AppDelegate.m */,
+				296F67681B54FCCA00DCB872 /* ViewController.h */,
+				296F67691B54FCCA00DCB872 /* ViewController.m */,
+				296F67871B54FDDB00DCB872 /* SecondViewController.h */,
+				296F67881B54FDDB00DCB872 /* SecondViewController.m */,
+				296F678A1B55009700DCB872 /* PopView.h */,
+				296F678B1B55009700DCB872 /* PopView.m */,
+				296F676B1B54FCCA00DCB872 /* Main.storyboard */,
+				296F676E1B54FCCA00DCB872 /* Images.xcassets */,
+				296F67701B54FCCA00DCB872 /* LaunchScreen.xib */,
+				296F67611B54FCCA00DCB872 /* Supporting Files */,
+			);
+			path = "与pop动画共存的手势";
+			sourceTree = "<group>";
+		};
+		296F67611B54FCCA00DCB872 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				296F67621B54FCCA00DCB872 /* Info.plist */,
+				296F67631B54FCCA00DCB872 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		296F677A1B54FCCA00DCB872 /* 与pop动画共存的手势Tests */ = {
+			isa = PBXGroup;
+			children = (
+				296F677D1B54FCCA00DCB872 /* _pop_______Tests.m */,
+				296F677B1B54FCCA00DCB872 /* Supporting Files */,
+			);
+			path = "与pop动画共存的手势Tests";
+			sourceTree = "<group>";
+		};
+		296F677B1B54FCCA00DCB872 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				296F677C1B54FCCA00DCB872 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		296F675D1B54FCCA00DCB872 /* 与pop动画共存的手势 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 296F67811B54FCCA00DCB872 /* Build configuration list for PBXNativeTarget "与pop动画共存的手势" */;
+			buildPhases = (
+				296F675A1B54FCCA00DCB872 /* Sources */,
+				296F675B1B54FCCA00DCB872 /* Frameworks */,
+				296F675C1B54FCCA00DCB872 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "与pop动画共存的手势";
+			productName = "与pop动画共存的手势";
+			productReference = 296F675E1B54FCCA00DCB872 /* 与pop动画共存的手势.app */;
+			productType = "com.apple.product-type.application";
+		};
+		296F67761B54FCCA00DCB872 /* 与pop动画共存的手势Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 296F67841B54FCCA00DCB872 /* Build configuration list for PBXNativeTarget "与pop动画共存的手势Tests" */;
+			buildPhases = (
+				296F67731B54FCCA00DCB872 /* Sources */,
+				296F67741B54FCCA00DCB872 /* Frameworks */,
+				296F67751B54FCCA00DCB872 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				296F67791B54FCCA00DCB872 /* PBXTargetDependency */,
+			);
+			name = "与pop动画共存的手势Tests";
+			productName = "与pop动画共存的手势Tests";
+			productReference = 296F67771B54FCCA00DCB872 /* 与pop动画共存的手势Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		296F67561B54FCCA00DCB872 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = lqq;
+				TargetAttributes = {
+					296F675D1B54FCCA00DCB872 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					296F67761B54FCCA00DCB872 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 296F675D1B54FCCA00DCB872;
+					};
+				};
+			};
+			buildConfigurationList = 296F67591B54FCCA00DCB872 /* Build configuration list for PBXProject "与pop动画共存的手势" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 296F67551B54FCCA00DCB872;
+			productRefGroup = 296F675F1B54FCCA00DCB872 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				296F675D1B54FCCA00DCB872 /* 与pop动画共存的手势 */,
+				296F67761B54FCCA00DCB872 /* 与pop动画共存的手势Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		296F675C1B54FCCA00DCB872 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				296F676D1B54FCCA00DCB872 /* Main.storyboard in Resources */,
+				296F67721B54FCCA00DCB872 /* LaunchScreen.xib in Resources */,
+				296F676F1B54FCCA00DCB872 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		296F67751B54FCCA00DCB872 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		296F675A1B54FCCA00DCB872 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				296F67891B54FDDB00DCB872 /* SecondViewController.m in Sources */,
+				296F676A1B54FCCA00DCB872 /* ViewController.m in Sources */,
+				296F67671B54FCCA00DCB872 /* AppDelegate.m in Sources */,
+				296F67641B54FCCA00DCB872 /* main.m in Sources */,
+				296F678C1B55009700DCB872 /* PopView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		296F67731B54FCCA00DCB872 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				296F677E1B54FCCA00DCB872 /* _pop_______Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		296F67791B54FCCA00DCB872 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 296F675D1B54FCCA00DCB872 /* 与pop动画共存的手势 */;
+			targetProxy = 296F67781B54FCCA00DCB872 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		296F676B1B54FCCA00DCB872 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				296F676C1B54FCCA00DCB872 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		296F67701B54FCCA00DCB872 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				296F67711B54FCCA00DCB872 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		296F677F1B54FCCA00DCB872 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		296F67801B54FCCA00DCB872 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		296F67821B54FCCA00DCB872 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "与pop动画共存的手势/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		296F67831B54FCCA00DCB872 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "与pop动画共存的手势/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		296F67851B54FCCA00DCB872 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "与pop动画共存的手势Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/与pop动画共存的手势.app/与pop动画共存的手势";
+			};
+			name = Debug;
+		};
+		296F67861B54FCCA00DCB872 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "与pop动画共存的手势Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/与pop动画共存的手势.app/与pop动画共存的手势";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		296F67591B54FCCA00DCB872 /* Build configuration list for PBXProject "与pop动画共存的手势" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				296F677F1B54FCCA00DCB872 /* Debug */,
+				296F67801B54FCCA00DCB872 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		296F67811B54FCCA00DCB872 /* Build configuration list for PBXNativeTarget "与pop动画共存的手势" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				296F67821B54FCCA00DCB872 /* Debug */,
+				296F67831B54FCCA00DCB872 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		296F67841B54FCCA00DCB872 /* Build configuration list for PBXNativeTarget "与pop动画共存的手势Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				296F67851B54FCCA00DCB872 /* Debug */,
+				296F67861B54FCCA00DCB872 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 296F67561B54FCCA00DCB872 /* Project object */;
+}

@@ -1,0 +1,3 @@
+rootProject.name = 'NativeMethods'
+
+include ':app'
