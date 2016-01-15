@@ -1,0 +1,37 @@
+//
+//  WeiXin-PrefixHeader.pch
+//  WeiXin
+//
+//  Created by Yong Feng Guo on 14-11-20.
+//  Copyright (c) 2014年 Fung. All rights reserved.
+//
+
+#ifndef WeiXin_WeiXin_PrefixHeader_pch
+#define WeiXin_WeiXin_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <UIKit/UIKit.h>
+
+
+
+#define WXLog(...) NSLog(@"%s \n %@ \n\n",__func__,[NSString stringWithFormat:__VA_ARGS__])
+
+#import "MBProgressHUD+HM.h"
+#import "CategoryWF.h"
+#import "WXUserInfo.h"
+#import "WXXMPPTools.h"
+
+//配置xmpp的日志
+//调试模式下才有需要日志输入功能
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+#ifdef DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_OFF;
+#endif
+
+#define iSiPhoneDevice ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)
+
+#endif

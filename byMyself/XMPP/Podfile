@@ -1,0 +1,4 @@
+
+platform:ios,'7.0'
+pod 'MBProgressHUD+BWMExtension','~>1.0.0’
+pod 'MBProgressHUD'

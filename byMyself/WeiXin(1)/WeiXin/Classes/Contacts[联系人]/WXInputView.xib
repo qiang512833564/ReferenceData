@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WXInputView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JP8-l9-9xb">
+                    <rect key="frame" x="50" y="10" width="450" height="30"/>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDf-7Q-38A">
+                    <rect key="frame" x="50" y="10" width="450" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJN-GT-cKZ">
+                    <rect key="frame" x="557" y="7" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="p4X-pO-xSl"/>
+                        <constraint firstAttribute="width" constant="35" id="wji-2z-mCD"/>
+                    </constraints>
+                    <state key="normal" image="TypeSelectorBtn_Black">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="AJN-GT-cKZ" secondAttribute="trailing" constant="8" id="7YS-Hz-KMu"/>
+                <constraint firstItem="bDf-7Q-38A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="Nvw-FB-C3r"/>
+                <constraint firstItem="JP8-l9-9xb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="PUn-1l-0Vu"/>
+                <constraint firstAttribute="trailing" secondItem="JP8-l9-9xb" secondAttribute="trailing" constant="100" id="QSc-dv-27P"/>
+                <constraint firstItem="bDf-7Q-38A" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="TTL-7S-ONE"/>
+                <constraint firstAttribute="bottom" secondItem="AJN-GT-cKZ" secondAttribute="bottom" constant="8" id="b6X-tp-QJK"/>
+                <constraint firstItem="JP8-l9-9xb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="loW-Mg-wLw"/>
+                <constraint firstAttribute="bottom" secondItem="JP8-l9-9xb" secondAttribute="bottom" constant="10" id="nkC-aB-nUZ"/>
+                <constraint firstAttribute="bottom" secondItem="bDf-7Q-38A" secondAttribute="bottom" constant="10" id="sPu-l4-pyk"/>
+                <constraint firstAttribute="trailing" secondItem="bDf-7Q-38A" secondAttribute="trailing" constant="100" id="skM-DO-vfg"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addBtn" destination="AJN-GT-cKZ" id="NAo-YQ-3tB"/>
+                <outlet property="msgTextView" destination="bDf-7Q-38A" id="Obk-vq-Q4N"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="TypeSelectorBtn_Black" width="35" height="35"/>
+    </resources>
+</document>

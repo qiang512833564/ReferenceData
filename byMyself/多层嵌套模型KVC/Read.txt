@@ -1,0 +1,22 @@
+原理：
+首先先创建：
+MJMember类
+然后在创建继承自MJMember类的子类MJIvar类
+
+然后实现两个NSObject的扩展类
+NSObject+MJKeyValue
+NSObject+MJMember
+
+接着在实现的过程中：
+由于需要判断是否是NSNumber、NSString等基本系统类，引入了MJType、MJTypeEncoding与MJFoundation
+
+需要注意的是：
+当服务器那段传过来的数据：
+age:40———这个age我们这边用NSString接受的时候：
+就需要通过MJType去判断，并且做相应地处理—
+// NSNumber -> NSString
+            NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+            value = [fmt stringFromNumber:value];
+// NSString -> NSNumber
+            NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+            value = [fmt numberFromString:value];

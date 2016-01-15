@@ -1,0 +1,21 @@
+//
+//  PrefixHeader.pch
+//  多层嵌套模型KVC
+//
+//  Created by lizhongqiang on 15/10/14.
+//  Copyright (c) 2015年 lizhongqiang. All rights reserved.
+//
+
+#ifndef ______KVC_PrefixHeader_pch
+#define ______KVC_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <objc/runtime.h>
+#import "MJIvar.h"
+#import "NSObject+MJMember.h"
+#import "NSObject+MJKeyValue.h"
+#import "MJType.h"
+#import "MJTypeEncoding.h"
+#import "MJFoundation.h"
+#endif

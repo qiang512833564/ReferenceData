@@ -1,0 +1,49 @@
+
+除了一般的字符串替换，还要做参数代换
+　　格式：
+　　#define 宏名（参数表） 字符串
+　　例如：#define S(a,b) a*b
+　　area=S(3,2)；第一步被换为area=a*b; ，第二步被换为area=3*2;
+　　类似于函数调用，有一个哑实结合的过程：
+　　（1）实参如果是表达式容易出问题
+　　#define S(r) r*r
+　　area=S(a+b);第一步换为area=r*r;,第二步被换为area=a+b*a+b;
+　　正确的宏定义是#define S(r) (r)*(r)
+　　（2）宏名和参数的括号间不能有空格
+　　（3）宏替换只作替换，不做计算，不做表达式求解
+　　（4）函数调用在编译后程序运行时进行，并且分配内存。宏替换在编译前进行，不分配内存
+　　（5）宏的哑实结合不存在类型，也没有类型转换。
+　　（6）函数只有一个返回值，利用宏则可以设法得到多个值
+　　（7）宏展开使源程序变长，函数调用不会
+　　（8）宏展开不占运行时间，只占编译时间，函数调用占运行时间（分配内存、保留现场、值传递、返回值）
+—=======宏还可以用来节约代码量，用来替换重复的代码块-=========
+注意：如下：
+#define InitShapeLayer(layer,tag,color,point,offY)\
+\
+if(contentOffY<=-offY){\
+if(layer == nil){\
+    layer = [self layer:tag backgroundColor:color center:point];\
+}\
+[self.layer insertSublayer:object below:self.shapeLayer];\
+}else{\
+    [layer removeFromSuperlayer];\
+}
+千万要小心，传入的参数layer与下面实现部分里面的用到的layer不能一样，否则会出错，上面就是一个错误的例子
+
+
+例子：
+#define CustomColor(value) ({UIColor *color=nil;\
+if(value.length){\
+float float1,float2,float3;\
+NSScanner *scanner = [NSScanner scannerWithString:value];\
+[scanner scanFloat:&float1];\
+scanner.scanLocation = scanner.scanLocation+1;\
+[scanner scanFloat:&float2];\
+scanner.scanLocation = scanner.scanLocation+1;\
+[scanner scanFloat:&float3];\
+[UIColor colorWithRed:float1/255.f green:float2/255.f blue:float3/255.f alpha:1.0];}else{\
+color = [UIColor whiteColor];}\
+(color);\——这里是最终返回的值，千万要用()括号括起来，另外需要注意的是函数需要({})两层括号，括起来
+})
+
+

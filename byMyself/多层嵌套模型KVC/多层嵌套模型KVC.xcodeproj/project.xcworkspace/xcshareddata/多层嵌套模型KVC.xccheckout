@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DD9B5E06-4175-4D51-835A-5AE04A104F95</string>
+	<key>IDESourceControlProjectName</key>
+	<string>多层嵌套模型KVC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A18F4EB764D8DAE0B42103C998AD348614AC973A</key>
+		<string>https://github.com/qiang512833564/-KVC</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>多层嵌套模型KVC.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A18F4EB764D8DAE0B42103C998AD348614AC973A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/qiang512833564/-KVC</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A18F4EB764D8DAE0B42103C998AD348614AC973A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A18F4EB764D8DAE0B42103C998AD348614AC973A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>%E5%A4%9A%E5%B1%82%E5%B5%8C%E5%A5%97%E6%A8%A1%E5%9E%8BKVC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
