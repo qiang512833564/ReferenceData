@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29D4F81F1BDDCD20007D9DAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F81E1BDDCD20007D9DAC /* main.m */; };
+		29D4F8221BDDCD20007D9DAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F8211BDDCD20007D9DAC /* AppDelegate.m */; };
+		29D4F8251BDDCD20007D9DAC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F8241BDDCD20007D9DAC /* ViewController.m */; };
+		29D4F8281BDDCD20007D9DAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29D4F8261BDDCD20007D9DAC /* Main.storyboard */; };
+		29D4F82A1BDDCD20007D9DAC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29D4F8291BDDCD20007D9DAC /* Images.xcassets */; };
+		29D4F82D1BDDCD20007D9DAC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29D4F82B1BDDCD20007D9DAC /* LaunchScreen.xib */; };
+		29D4F8391BDDCD20007D9DAC /* HelloGLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F8381BDDCD20007D9DAC /* HelloGLTests.m */; };
+		29D4F8431BDDD0F2007D9DAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D4F8421BDDD0F2007D9DAC /* QuartzCore.framework */; };
+		29D4F8451BDDD0F9007D9DAC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D4F8441BDDD0F9007D9DAC /* OpenGLES.framework */; };
+		29D4F8471BDDD0FE007D9DAC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D4F8461BDDD0FE007D9DAC /* GLKit.framework */; };
+		29D4F8491BDDFE9B007D9DAC /* Tulips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29D4F8481BDDFE9B007D9DAC /* Tulips.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		29D4F8331BDDCD20007D9DAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29D4F8111BDDCD20007D9DAC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29D4F8181BDDCD20007D9DAC;
+			remoteInfo = HelloGL;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		29D4F8191BDDCD20007D9DAC /* HelloGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		29D4F81D1BDDCD20007D9DAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29D4F81E1BDDCD20007D9DAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29D4F8201BDDCD20007D9DAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		29D4F8211BDDCD20007D9DAC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		29D4F8231BDDCD20007D9DAC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		29D4F8241BDDCD20007D9DAC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		29D4F8271BDDCD20007D9DAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		29D4F8291BDDCD20007D9DAC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		29D4F82C1BDDCD20007D9DAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		29D4F8321BDDCD20007D9DAC /* HelloGLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloGLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		29D4F8371BDDCD20007D9DAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29D4F8381BDDCD20007D9DAC /* HelloGLTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloGLTests.m; sourceTree = "<group>"; };
+		29D4F8421BDDD0F2007D9DAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		29D4F8441BDDD0F9007D9DAC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		29D4F8461BDDD0FE007D9DAC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		29D4F8481BDDFE9B007D9DAC /* Tulips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Tulips.jpg; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29D4F8161BDDCD20007D9DAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29D4F8471BDDD0FE007D9DAC /* GLKit.framework in Frameworks */,
+				29D4F8451BDDD0F9007D9DAC /* OpenGLES.framework in Frameworks */,
+				29D4F8431BDDD0F2007D9DAC /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29D4F82F1BDDCD20007D9DAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29D4F8101BDDCD20007D9DAC = {
+			isa = PBXGroup;
+			children = (
+				29D4F8461BDDD0FE007D9DAC /* GLKit.framework */,
+				29D4F8441BDDD0F9007D9DAC /* OpenGLES.framework */,
+				29D4F8421BDDD0F2007D9DAC /* QuartzCore.framework */,
+				29D4F81B1BDDCD20007D9DAC /* HelloGL */,
+				29D4F8351BDDCD20007D9DAC /* HelloGLTests */,
+				29D4F81A1BDDCD20007D9DAC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		29D4F81A1BDDCD20007D9DAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29D4F8191BDDCD20007D9DAC /* HelloGL.app */,
+				29D4F8321BDDCD20007D9DAC /* HelloGLTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29D4F81B1BDDCD20007D9DAC /* HelloGL */ = {
+			isa = PBXGroup;
+			children = (
+				29D4F8481BDDFE9B007D9DAC /* Tulips.jpg */,
+				29D4F8201BDDCD20007D9DAC /* AppDelegate.h */,
+				29D4F8211BDDCD20007D9DAC /* AppDelegate.m */,
+				29D4F8231BDDCD20007D9DAC /* ViewController.h */,
+				29D4F8241BDDCD20007D9DAC /* ViewController.m */,
+				29D4F8261BDDCD20007D9DAC /* Main.storyboard */,
+				29D4F8291BDDCD20007D9DAC /* Images.xcassets */,
+				29D4F82B1BDDCD20007D9DAC /* LaunchScreen.xib */,
+				29D4F81C1BDDCD20007D9DAC /* Supporting Files */,
+			);
+			path = HelloGL;
+			sourceTree = "<group>";
+		};
+		29D4F81C1BDDCD20007D9DAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29D4F81D1BDDCD20007D9DAC /* Info.plist */,
+				29D4F81E1BDDCD20007D9DAC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29D4F8351BDDCD20007D9DAC /* HelloGLTests */ = {
+			isa = PBXGroup;
+			children = (
+				29D4F8381BDDCD20007D9DAC /* HelloGLTests.m */,
+				29D4F8361BDDCD20007D9DAC /* Supporting Files */,
+			);
+			path = HelloGLTests;
+			sourceTree = "<group>";
+		};
+		29D4F8361BDDCD20007D9DAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29D4F8371BDDCD20007D9DAC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29D4F8181BDDCD20007D9DAC /* HelloGL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29D4F83C1BDDCD20007D9DAC /* Build configuration list for PBXNativeTarget "HelloGL" */;
+			buildPhases = (
+				29D4F8151BDDCD20007D9DAC /* Sources */,
+				29D4F8161BDDCD20007D9DAC /* Frameworks */,
+				29D4F8171BDDCD20007D9DAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HelloGL;
+			productName = HelloGL;
+			productReference = 29D4F8191BDDCD20007D9DAC /* HelloGL.app */;
+			productType = "com.apple.product-type.application";
+		};
+		29D4F8311BDDCD20007D9DAC /* HelloGLTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29D4F83F1BDDCD20007D9DAC /* Build configuration list for PBXNativeTarget "HelloGLTests" */;
+			buildPhases = (
+				29D4F82E1BDDCD20007D9DAC /* Sources */,
+				29D4F82F1BDDCD20007D9DAC /* Frameworks */,
+				29D4F8301BDDCD20007D9DAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29D4F8341BDDCD20007D9DAC /* PBXTargetDependency */,
+			);
+			name = HelloGLTests;
+			productName = HelloGLTests;
+			productReference = 29D4F8321BDDCD20007D9DAC /* HelloGLTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29D4F8111BDDCD20007D9DAC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					29D4F8181BDDCD20007D9DAC = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					29D4F8311BDDCD20007D9DAC = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 29D4F8181BDDCD20007D9DAC;
+					};
+				};
+			};
+			buildConfigurationList = 29D4F8141BDDCD20007D9DAC /* Build configuration list for PBXProject "HelloGL" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 29D4F8101BDDCD20007D9DAC;
+			productRefGroup = 29D4F81A1BDDCD20007D9DAC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29D4F8181BDDCD20007D9DAC /* HelloGL */,
+				29D4F8311BDDCD20007D9DAC /* HelloGLTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29D4F8171BDDCD20007D9DAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29D4F8491BDDFE9B007D9DAC /* Tulips.jpg in Resources */,
+				29D4F8281BDDCD20007D9DAC /* Main.storyboard in Resources */,
+				29D4F82D1BDDCD20007D9DAC /* LaunchScreen.xib in Resources */,
+				29D4F82A1BDDCD20007D9DAC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29D4F8301BDDCD20007D9DAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29D4F8151BDDCD20007D9DAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29D4F8251BDDCD20007D9DAC /* ViewController.m in Sources */,
+				29D4F8221BDDCD20007D9DAC /* AppDelegate.m in Sources */,
+				29D4F81F1BDDCD20007D9DAC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29D4F82E1BDDCD20007D9DAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29D4F8391BDDCD20007D9DAC /* HelloGLTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		29D4F8341BDDCD20007D9DAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29D4F8181BDDCD20007D9DAC /* HelloGL */;
+			targetProxy = 29D4F8331BDDCD20007D9DAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		29D4F8261BDDCD20007D9DAC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29D4F8271BDDCD20007D9DAC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		29D4F82B1BDDCD20007D9DAC /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29D4F82C1BDDCD20007D9DAC /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		29D4F83A1BDDCD20007D9DAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29D4F83B1BDDCD20007D9DAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		29D4F83D1BDDCD20007D9DAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HelloGL/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		29D4F83E1BDDCD20007D9DAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HelloGL/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		29D4F8401BDDCD20007D9DAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HelloGLTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloGL.app/HelloGL";
+			};
+			name = Debug;
+		};
+		29D4F8411BDDCD20007D9DAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HelloGLTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloGL.app/HelloGL";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29D4F8141BDDCD20007D9DAC /* Build configuration list for PBXProject "HelloGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29D4F83A1BDDCD20007D9DAC /* Debug */,
+				29D4F83B1BDDCD20007D9DAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29D4F83C1BDDCD20007D9DAC /* Build configuration list for PBXNativeTarget "HelloGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29D4F83D1BDDCD20007D9DAC /* Debug */,
+				29D4F83E1BDDCD20007D9DAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		29D4F83F1BDDCD20007D9DAC /* Build configuration list for PBXNativeTarget "HelloGLTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29D4F8401BDDCD20007D9DAC /* Debug */,
+				29D4F8411BDDCD20007D9DAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29D4F8111BDDCD20007D9DAC /* Project object */;
+}
