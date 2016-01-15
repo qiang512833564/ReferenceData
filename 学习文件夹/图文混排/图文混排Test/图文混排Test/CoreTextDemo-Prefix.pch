@@ -1,0 +1,29 @@
+//
+//  CoreTextDemo-Prefix.pch
+//  图文混排Test
+//
+//  Created by lizhongqiang on 16/1/13.
+//  Copyright © 2016年 lizhongqiang. All rights reserved.
+//
+
+#ifndef CoreTextDemo_Prefix_h
+#define CoreTextDemo_Prefix_h
+
+#ifdef DEBUG
+#define debugLog(...) NSLog(__VA__ARGS)
+#define debugMethod() NSLog(@"%s",__func__)
+#else
+#define debugLog(...)
+#define debugMethod()
+#endif
+
+#define RGB(A,B,C) [UIColor colorWithRed:A/255.0 green:B/255.0 blue:C/255.0 alpha:1.0]
+
+#import <UIKit/UIKit.h>
+#import <CoreText/CoreText.h>
+#import "CTFrameParserConfig.h"
+#import "CoreTextData.h"
+#import "UIView+frameAdjust.h"
+#import "CTFrameParser.h"
+#import "CoreTextImageData.h"
+#endif /* CoreTextDemo_Prefix_h */
