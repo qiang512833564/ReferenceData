@@ -23,3 +23,4 @@ WatchKit使用
 视频APP用到的框架以及第三方库
 获取iOS设备的内存状况
 UIImagePickerController自定义导航栏—因为他也是一个导航控制器，可以修改，其navigationBar
+图片渐进加载——大图片会影响性能！
