@@ -1,0 +1,385 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		293E1D6D1C4B918400DB681A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 293E1D6C1C4B918400DB681A /* main.m */; };
+		293E1D701C4B918400DB681A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 293E1D6F1C4B918400DB681A /* AppDelegate.m */; };
+		293E1D731C4B918400DB681A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 293E1D721C4B918400DB681A /* ViewController.m */; };
+		293E1D761C4B918400DB681A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 293E1D741C4B918400DB681A /* Main.storyboard */; };
+		293E1D781C4B918400DB681A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 293E1D771C4B918400DB681A /* Assets.xcassets */; };
+		293E1D7B1C4B918400DB681A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 293E1D791C4B918400DB681A /* LaunchScreen.storyboard */; };
+		F692D821DEC2E0AB2B47A6B1 /* libPods-获取当前设备内存以及自定义相册.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC46CC48E8DD643F4632C29E /* libPods-获取当前设备内存以及自定义相册.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		067F70D0011B45478D3888D9 /* Pods-获取当前设备内存以及自定义相册.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-获取当前设备内存以及自定义相册.release.xcconfig"; path = "Pods/Target Support Files/Pods-获取当前设备内存以及自定义相册/Pods-获取当前设备内存以及自定义相册.release.xcconfig"; sourceTree = "<group>"; };
+		293E1D681C4B918400DB681A /* 获取当前设备内存以及自定义相册.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "获取当前设备内存以及自定义相册.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		293E1D6C1C4B918400DB681A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		293E1D6E1C4B918400DB681A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		293E1D6F1C4B918400DB681A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		293E1D711C4B918400DB681A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		293E1D721C4B918400DB681A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		293E1D751C4B918400DB681A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		293E1D771C4B918400DB681A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		293E1D7A1C4B918400DB681A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		293E1D7C1C4B918400DB681A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B313EB440DCC55DCFD2E581 /* Pods-获取当前设备内存以及自定义相册.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-获取当前设备内存以及自定义相册.debug.xcconfig"; path = "Pods/Target Support Files/Pods-获取当前设备内存以及自定义相册/Pods-获取当前设备内存以及自定义相册.debug.xcconfig"; sourceTree = "<group>"; };
+		FC46CC48E8DD643F4632C29E /* libPods-获取当前设备内存以及自定义相册.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-获取当前设备内存以及自定义相册.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		293E1D651C4B918400DB681A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F692D821DEC2E0AB2B47A6B1 /* libPods-获取当前设备内存以及自定义相册.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		293E1D5F1C4B918400DB681A = {
+			isa = PBXGroup;
+			children = (
+				293E1D6A1C4B918400DB681A /* 获取当前设备内存以及自定义相册 */,
+				293E1D691C4B918400DB681A /* Products */,
+				DABCB0177ACE679A2CFFC345 /* Pods */,
+				5CB6C6BCAF8C23A3787A13FA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		293E1D691C4B918400DB681A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				293E1D681C4B918400DB681A /* 获取当前设备内存以及自定义相册.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		293E1D6A1C4B918400DB681A /* 获取当前设备内存以及自定义相册 */ = {
+			isa = PBXGroup;
+			children = (
+				293E1D6E1C4B918400DB681A /* AppDelegate.h */,
+				293E1D6F1C4B918400DB681A /* AppDelegate.m */,
+				293E1D711C4B918400DB681A /* ViewController.h */,
+				293E1D721C4B918400DB681A /* ViewController.m */,
+				293E1D741C4B918400DB681A /* Main.storyboard */,
+				293E1D771C4B918400DB681A /* Assets.xcassets */,
+				293E1D791C4B918400DB681A /* LaunchScreen.storyboard */,
+				293E1D7C1C4B918400DB681A /* Info.plist */,
+				293E1D6B1C4B918400DB681A /* Supporting Files */,
+			);
+			path = "获取当前设备内存以及自定义相册";
+			sourceTree = "<group>";
+		};
+		293E1D6B1C4B918400DB681A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				293E1D6C1C4B918400DB681A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5CB6C6BCAF8C23A3787A13FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC46CC48E8DD643F4632C29E /* libPods-获取当前设备内存以及自定义相册.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DABCB0177ACE679A2CFFC345 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4B313EB440DCC55DCFD2E581 /* Pods-获取当前设备内存以及自定义相册.debug.xcconfig */,
+				067F70D0011B45478D3888D9 /* Pods-获取当前设备内存以及自定义相册.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		293E1D671C4B918400DB681A /* 获取当前设备内存以及自定义相册 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 293E1D7F1C4B918400DB681A /* Build configuration list for PBXNativeTarget "获取当前设备内存以及自定义相册" */;
+			buildPhases = (
+				94F1E1D37F0D03AB656373EB /* Check Pods Manifest.lock */,
+				293E1D641C4B918400DB681A /* Sources */,
+				293E1D651C4B918400DB681A /* Frameworks */,
+				293E1D661C4B918400DB681A /* Resources */,
+				F62C1F1CA038184AAF5AC259 /* Embed Pods Frameworks */,
+				FED7CE13FBE43F89A1F2D1F3 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "获取当前设备内存以及自定义相册";
+			productName = "获取当前设备内存以及自定义相册";
+			productReference = 293E1D681C4B918400DB681A /* 获取当前设备内存以及自定义相册.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		293E1D601C4B918400DB681A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					293E1D671C4B918400DB681A = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 293E1D631C4B918400DB681A /* Build configuration list for PBXProject "获取当前设备内存以及自定义相册" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 293E1D5F1C4B918400DB681A;
+			productRefGroup = 293E1D691C4B918400DB681A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				293E1D671C4B918400DB681A /* 获取当前设备内存以及自定义相册 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		293E1D661C4B918400DB681A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				293E1D7B1C4B918400DB681A /* LaunchScreen.storyboard in Resources */,
+				293E1D781C4B918400DB681A /* Assets.xcassets in Resources */,
+				293E1D761C4B918400DB681A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		94F1E1D37F0D03AB656373EB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F62C1F1CA038184AAF5AC259 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-获取当前设备内存以及自定义相册/Pods-获取当前设备内存以及自定义相册-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FED7CE13FBE43F89A1F2D1F3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-获取当前设备内存以及自定义相册/Pods-获取当前设备内存以及自定义相册-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		293E1D641C4B918400DB681A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				293E1D731C4B918400DB681A /* ViewController.m in Sources */,
+				293E1D701C4B918400DB681A /* AppDelegate.m in Sources */,
+				293E1D6D1C4B918400DB681A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		293E1D741C4B918400DB681A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				293E1D751C4B918400DB681A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		293E1D791C4B918400DB681A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				293E1D7A1C4B918400DB681A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		293E1D7D1C4B918400DB681A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		293E1D7E1C4B918400DB681A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		293E1D801C4B918400DB681A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B313EB440DCC55DCFD2E581 /* Pods-获取当前设备内存以及自定义相册.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "获取当前设备内存以及自定义相册/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.---------------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		293E1D811C4B918400DB681A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 067F70D0011B45478D3888D9 /* Pods-获取当前设备内存以及自定义相册.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "获取当前设备内存以及自定义相册/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.---------------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		293E1D631C4B918400DB681A /* Build configuration list for PBXProject "获取当前设备内存以及自定义相册" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				293E1D7D1C4B918400DB681A /* Debug */,
+				293E1D7E1C4B918400DB681A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		293E1D7F1C4B918400DB681A /* Build configuration list for PBXNativeTarget "获取当前设备内存以及自定义相册" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				293E1D801C4B918400DB681A /* Debug */,
+				293E1D811C4B918400DB681A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 293E1D601C4B918400DB681A /* Project object */;
+}

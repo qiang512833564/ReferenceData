@@ -1,0 +1,34 @@
+//获取硬盘大小
++ (long long)longDiskSpace {
+    // Get the long long disk space    
+	@try {
+        // Set up variables
+        long long DiskSpace = 0L;
+		NSError *Error = nil;
+		NSDictionary *FileAttributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:&Error];
+        
+        // Get the file attributes of the home directory assuming no errors
+		if (Error == nil) {
+            // Get the size of the filesystem
+            DiskSpace = [[FileAttributes objectForKey:NSFileSystemSize] longLongValue];
+        } else {
+            // Error, return nil
+            return -1;
+        }
+        
+        // Check to make sure it's a valid size
+        if (DiskSpace <= 0) {
+            // Invalid size
+            return -1;
+        }
+        
+        // Successful
+        return DiskSpace;
+	}
+	@catch (NSException *exception) {
+        // Error
+        return -1;
+	}
+}
+
+

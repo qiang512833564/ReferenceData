@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://github.com/Shmoopi/iOS-System-Services/issues/11 -->
+<html lang="en" class=" is-copy-enabled is-u2f-enabled"><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=1020">
+    
+    
+    <title>Build failed: 'route.h' file not found · Issue #11 · Shmoopi/iOS-System-Services · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="https://github.com/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://github.com/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://github.com/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://github.com/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://github.com/apple-touch-icon-144.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta content="@github" name="twitter:site"><meta content="summary" name="twitter:card"><meta content="Build failed: &#39;route.h&#39; file not found · Issue #11 · Shmoopi/iOS-System-Services" name="twitter:title"><meta content="When build in the simulator is successful but when I run in iPhone device fail:
+The file route.h not found in your project. 
+System Services/Utilities/SystemServicesConstants.h:44:10: &#39;route.h&#39; fil..." name="twitter:description"><meta content="https://avatars0.githubusercontent.com/u/1110786?v=3&amp;s=400" name="twitter:image:src">
+      <meta content="GitHub" property="og:site_name"><meta content="object" property="og:type"><meta content="https://avatars0.githubusercontent.com/u/1110786?v=3&amp;s=400" property="og:image"><meta content="Build failed: &#39;route.h&#39; file not found · Issue #11 · Shmoopi/iOS-System-Services" property="og:title"><meta content="https://github.com/Shmoopi/iOS-System-Services/issues/11" property="og:url"><meta content="When build in the simulator is successful but when I run in iPhone device fail:
+The file route.h not found in your project. 
+System Services/Utilities/SystemServicesConstants.h:44:10: &#39;route.h&#39; fil..." property="og:description">
+      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    
+    <meta name="pjax-timeout" content="1000">
+    
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_issues" data-pjax-transient="">
+
+    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host"><meta content="github" name="octolytics-app-id"><meta content="2D2014A8:2F2D:25BFDC4:569B6CF5" name="octolytics-dimension-request_id">
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/issues/show" data-pjax-transient="true" name="analytics-location">
+<meta content="Rails, view, issues#show" data-pjax-transient="true" name="analytics-event">
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+
+
+
+        <meta name="hostname" content="github.com">
+    <meta name="user-login" content="">
+
+        <meta name="expected-hostname" content="github.com">
+
+      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#4078c0">
+      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+    <meta content="2e2e723117de97ad534051e559c253e8deb9c799" name="form-nonce">
+
+    <link crossorigin="anonymous" href="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/github-e9bcbd2b27a6b792794dfc31fff5f4f8e7245c761ddb1a44cb19b6a6cc5e4ff7.css" integrity="sha256-6by9Kyemt5J5Tfwx//X0+OckXHYd2xpEyxm2psxeT/c=" media="all" rel="stylesheet">
+    <link crossorigin="anonymous" href="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/github2-70af51f1bed4904749e6ef486ad11871c8ce4361ac82bb5f96a090b7f5346580.css" integrity="sha256-cK9R8b7UkEdJ5u9IatEYccjOQ2GsgrtflqCQt/U0ZYA=" media="all" rel="stylesheet">
+    
+    
+
+
+    <meta http-equiv="x-pjax-version" content="33df7816266be22aad9db35bc85c5c41">
+
+      
+  <meta name="description" content="iOS-System-Services - iOS System Services is a class to gather all available information about a device.">
+  <meta name="go-import" content="github.com/Shmoopi/iOS-System-Services git https://github.com/Shmoopi/iOS-System-Services.git">
+
+  <meta content="1914231" name="octolytics-dimension-user_id"><meta content="Shmoopi" name="octolytics-dimension-user_login"><meta content="6159714" name="octolytics-dimension-repository_id"><meta content="Shmoopi/iOS-System-Services" name="octolytics-dimension-repository_nwo"><meta content="true" name="octolytics-dimension-repository_public"><meta content="false" name="octolytics-dimension-repository_is_fork"><meta content="6159714" name="octolytics-dimension-repository_network_root_id"><meta content="Shmoopi/iOS-System-Services" name="octolytics-dimension-repository_network_root_nwo">
+  <link href="https://github.com/Shmoopi/iOS-System-Services/commits/master.atom" rel="alternate" title="Recent Commits to iOS-System-Services:master" type="application/atom+xml">
+
+  </head>
+
+
+  <body class="logged_out   env-production macintosh vis-public">
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues/11#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+
+    
+    
+    
+
+
+
+      
+      <div class="header header-logged-out" role="banner">
+  <div class="container clearfix">
+
+    <a class="header-logo-wordmark" href="https://github.com/" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <span aria-hidden="true" class="mega-octicon octicon-logo-github"></span>
+    </a>
+
+    <div class="header-actions" role="navigation">
+        <a class="btn btn-primary" href="https://github.com/join" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+      <a class="btn" href="https://github.com/login?return_to=%2FShmoopi%2FiOS-System-Services%2Fissues%2F11" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+    </div>
+
+    <div class="site-search repo-scope js-site-search" role="search">
+      <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/Shmoopi/iOS-System-Services/search" class="js-site-search-form" data-global-search-url="/search" data-repo-search-url="/Shmoopi/iOS-System-Services/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label class="js-chromeless-input-container form-control">
+    <div class="scope-badge">This repository</div>
+    <input type="text" class="js-site-search-focus js-site-search-field is-clearable chromeless-input" data-hotkey="s" name="q" placeholder="Search" aria-label="Search this repository" data-global-scope-placeholder="Search GitHub" data-repo-scope-placeholder="Search" tabindex="1" autocapitalize="off">
+  </label>
+</form>
+    </div>
+
+      <ul class="header-nav left" role="navigation">
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://github.com/explore" data-ga-click="(Logged out) Header, go to explore, text:explore">Explore</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://github.com/features" data-ga-click="(Logged out) Header, go to features, text:features">Features</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://enterprise.github.com/" data-ga-click="(Logged out) Header, go to enterprise, text:enterprise">Enterprise</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://github.com/pricing" data-ga-click="(Logged out) Header, go to pricing, text:pricing">Pricing</a>
+          </li>
+      </ul>
+
+  </div>
+</div>
+
+
+
+    <div id="start-of-content" class="accessibility-aid"></div>
+
+      <div id="js-flash-container">
+</div>
+
+
+    <div role="main" class="main-content">
+        <div itemscope="" itemtype="http://schema.org/WebPage">
+    <div id="js-repo-pjax-container" class="context-loader-container js-repo-nav-next" data-pjax-container="">
+      
+<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+  <div class="container repohead-details-container">
+
+    
+
+<ul class="pagehead-actions">
+
+  <li>
+      <a href="https://github.com/login?return_to=%2FShmoopi%2FiOS-System-Services" class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <span aria-hidden="true" class="octicon octicon-eye"></span>
+    Watch
+  </a>
+  <a class="social-count" href="https://github.com/Shmoopi/iOS-System-Services/watchers">
+    58
+  </a>
+
+  </li>
+
+  <li>
+      <a href="https://github.com/login?return_to=%2FShmoopi%2FiOS-System-Services" class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to star a repository" rel="nofollow">
+    <span aria-hidden="true" class="octicon octicon-star"></span>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="https://github.com/Shmoopi/iOS-System-Services/stargazers">
+      798
+    </a>
+
+  </li>
+
+  <li>
+      <a href="https://github.com/login?return_to=%2FShmoopi%2FiOS-System-Services" class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <span aria-hidden="true" class="octicon octicon-repo-forked"></span>
+        Fork
+      </a>
+
+    <a href="https://github.com/Shmoopi/iOS-System-Services/network" class="social-count">
+      168
+    </a>
+  </li>
+</ul>
+
+    <h1 itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public ">
+  <span aria-hidden="true" class="octicon octicon-repo"></span>
+  <span class="author"><a href="https://github.com/Shmoopi" class="url fn" itemprop="url" rel="author"><span itemprop="title">Shmoopi</span></a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong><a href="https://github.com/Shmoopi/iOS-System-Services" data-pjax="#js-repo-pjax-container">iOS-System-Services</a></strong>
+
+  <span class="page-context-loader">
+    <img alt="" height="16" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/octocat-spinner-32.gif" width="16">
+  </span>
+
+</h1>
+
+  </div>
+  <div class="container">
+    
+<nav class="reponav js-repo-nav js-sidenav-container-pjax js-octicon-loaders" role="navigation" data-pjax="#js-repo-pjax-container">
+
+  <a href="https://github.com/Shmoopi/iOS-System-Services" aria-label="Code" class="js-selected-navigation-item reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /Shmoopi/iOS-System-Services">
+    <span aria-hidden="true" class="octicon octicon-code"></span>
+    Code
+</a>
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues" aria-selected="true" class="js-selected-navigation-item selected reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /Shmoopi/iOS-System-Services/issues">
+      <span aria-hidden="true" class="octicon octicon-issue-opened"></span>
+      Issues
+      <span class="counter">2</span>
+</a>
+  <a href="https://github.com/Shmoopi/iOS-System-Services/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /Shmoopi/iOS-System-Services/pulls">
+    <span aria-hidden="true" class="octicon octicon-git-pull-request"></span>
+    Pull requests
+    <span class="counter">0</span>
+</a>
+
+  <a href="https://github.com/Shmoopi/iOS-System-Services/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /Shmoopi/iOS-System-Services/pulse">
+    <span aria-hidden="true" class="octicon octicon-pulse"></span>
+    Pulse
+</a>
+  <a href="https://github.com/Shmoopi/iOS-System-Services/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /Shmoopi/iOS-System-Services/graphs">
+    <span aria-hidden="true" class="octicon octicon-graph"></span>
+    Graphs
+</a>
+
+</nav>
+
+  </div>
+</div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+<style type="text/css" media="screen">
+  span.labelstyle-fc2929, .linked-labelstyle-fc2929 {  background-color: #fc2929 !important;  color: #fff !important;}.labelstyle-fc2929.selected {  background-color: #fc2929 !important;  color: #fff !important;}.label-select-menu .labelstyle-fc2929.selected {  background:rgba(252, 41, 41, 0.12) !important;  color: #991818 !important;}
+
+span.labelstyle-cccccc, .linked-labelstyle-cccccc {  background-color: #cccccc !important;  color: #333333 !important;}.labelstyle-cccccc.selected {  background-color: #cccccc !important;  color: #333333 !important;}.label-select-menu .labelstyle-cccccc.selected {  background:rgba(204, 204, 204, 0.12) !important;  color: #999999 !important;}
+
+span.labelstyle-84b6eb, .linked-labelstyle-84b6eb {  background-color: #84b6eb !important;  color: #1c2733 !important;}.labelstyle-84b6eb.selected {  background-color: #84b6eb !important;  color: #1c2733 !important;}.label-select-menu .labelstyle-84b6eb.selected {  background:rgba(132, 182, 235, 0.12) !important;  color: #557699 !important;}
+
+span.labelstyle-e6e6e6, .linked-labelstyle-e6e6e6 {  background-color: #e6e6e6 !important;  color: #333333 !important;}.labelstyle-e6e6e6.selected {  background-color: #e6e6e6 !important;  color: #333333 !important;}.label-select-menu .labelstyle-e6e6e6.selected {  background:rgba(230, 230, 230, 0.12) !important;  color: #999999 !important;}
+
+span.labelstyle-cc317c, .linked-labelstyle-cc317c {  background-color: #cc317c !important;  color: #fff !important;}.labelstyle-cc317c.selected {  background-color: #cc317c !important;  color: #fff !important;}.label-select-menu .labelstyle-cc317c.selected {  background:rgba(204, 49, 124, 0.12) !important;  color: #99245c !important;}
+
+span.labelstyle-ffffff, .linked-labelstyle-ffffff {  background-color: #ffffff !important;  color: #333333 !important;}.labelstyle-ffffff.selected {  background-color: #ffffff !important;  color: #333333 !important;}.label-select-menu .labelstyle-ffffff.selected {  background:rgba(255, 255, 255, 0.12) !important;  color: #999999 !important;}
+</style>
+
+<div class="issues-listing" data-pjax="">
+  <div class="context-loader large-format-loader">
+  <p><img alt="" height="64" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/octocat-spinner-128.gif" width="64"></p>
+  <p>Loading…</p>
+</div>
+
+    <div id="show_issue" class="js-issues-results">
+
+    
+  <div id="partial-discussion-header" class="gh-header js-details-container js-socket-channel js-updatable-content issue" data-channel="Shmoopi/iOS-System-Services:issue:55446164" data-url="/Shmoopi/iOS-System-Services/issues/11/show_partial?partial=issues%2Ftitle">
+
+  <div class="gh-header-show ">
+      <div class="gh-header-actions">
+          <a href="https://github.com/Shmoopi/iOS-System-Services/issues/new" class="btn btn-sm btn-primary right" data-hotkey="c">
+            New issue
+          </a>
+      </div>
+
+    <h1 class="gh-header-title">
+      <span class="js-issue-title">Build failed: 'route.h' file not found</span>
+      <span class="gh-header-number">#11</span>
+    </h1>
+  </div>
+
+
+  <div class="flex-table gh-header-meta">
+    <div class="flex-table-item">
+        <div class="state state-open">
+          <span aria-hidden="true" class="octicon octicon-issue-opened"></span>
+          Open
+        </div>
+    </div>
+    <div class="flex-table-item flex-table-item-primary">
+        <a href="https://github.com/toanmh" class="author">toanmh</a> opened this <span class="noun">Issue</span> <time datetime="2015-01-26T04:37:59Z" is="relative-time" title="2015年1月26日 GMT+8下午12:37">on 26 Jan 2015</time>
+        · 5 comments
+    </div>
+  </div>
+</div>
+
+
+    <div id="discussion_bucket" class="tab-content clearfix">
+      <div id="partial-discussion-sidebar" class="discussion-sidebar js-socket-channel js-updatable-content" data-channel="Shmoopi/iOS-System-Services:issue:55446164" data-url="/Shmoopi/iOS-System-Services/issues/11/show_partial?partial=issues%2Fsidebar">
+  
+  <div class="discussion-sidebar-item sidebar-labels js-discussion-sidebar-item">
+  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/Shmoopi/iOS-System-Services/issues/11?partial=issues%2Fsidebar%2Fshow%2Flabels" class="js-issue-sidebar-form" data-form-nonce="2e2e723117de97ad534051e559c253e8deb9c799" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="yjSJxOThQUf696Hzb5HG+LdPe1ezIy2hW8DgHUYW0r4AKJJIYa0ZaMblrsSycMfZfDaF87CcU5dkKNkraFw8Ig=="></div>
+      
+  <h3 class="discussion-sidebar-heading">
+    Labels
+  </h3>
+
+
+    <div class="labels css-truncate">
+    None yet
+</div>
+
+</form></div>
+
+  <div class="discussion-sidebar-item sidebar-milestone js-discussion-sidebar-item">
+  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/Shmoopi/iOS-System-Services/issues/11/set_milestone?partial=issues%2Fsidebar%2Fshow%2Fmilestone" class="js-issue-sidebar-form" data-form-nonce="2e2e723117de97ad534051e559c253e8deb9c799" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="jjT3C5okYk1JXNwyFDceP3HGloi3lMRWA0fZgtdXoMPntTdiGxF1jTXfTe8W6NGliCwLZ3sJn4rLUvHjkXQdwA=="></div>
+    
+  <h3 class="discussion-sidebar-heading">
+    Milestone
+  </h3>
+
+
+      No milestone
+
+</form></div>
+
+  <div class="discussion-sidebar-item sidebar-assignee js-discussion-sidebar-item">
+  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/Shmoopi/iOS-System-Services/issues/11?partial=issues%2Fsidebar%2Fshow%2Fassignee" class="js-issue-sidebar-form" data-form-nonce="2e2e723117de97ad534051e559c253e8deb9c799" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="BgDwDmpawVlItY+YPiFE8ZVoEOVpdhfDnwIOKGopfOJPjsHMWXBsJ2ppTa1M0S9RGnHMjlQrzSw+/WaIz6lpvg=="></div>
+    
+  <h3 class="discussion-sidebar-heading">
+    Assignee
+  </h3>
+
+
+    <span class="css-truncate">
+      No one assigned
+</span>
+
+</form></div>
+
+  
+  <div id="partial-users-participants" class="discussion-sidebar-item">
+  <div class="participation">
+
+    <h3 class="discussion-sidebar-heading">
+      6 participants
+    </h3>
+    <div class="participation-avatars">
+        <a class="participant-avatar tooltipped tooltipped-s" aria-label="toanmh" href="https://github.com/toanmh"><img alt="@toanmh" class="avatar" height="20" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/1110786" width="20"> </a>
+        <a class="participant-avatar tooltipped tooltipped-s" aria-label="GWesley" href="https://github.com/GWesley"><img alt="@GWesley" class="avatar" height="20" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/2985638" width="20"> </a>
+        <a class="participant-avatar tooltipped tooltipped-s" aria-label="vrunoa" href="https://github.com/vrunoa"><img alt="@vrunoa" class="avatar" height="20" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/329957" width="20"> </a>
+        <a class="participant-avatar tooltipped tooltipped-s" aria-label="ergunkocak" href="https://github.com/ergunkocak"><img alt="@ergunkocak" class="avatar" height="20" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/610975" width="20"> </a>
+        <a class="participant-avatar tooltipped tooltipped-s" aria-label="sbauch" href="https://github.com/sbauch"><img alt="@sbauch" class="avatar" height="20" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/923033" width="20"> </a>
+        <a class="participant-avatar tooltipped tooltipped-s" aria-label="LifeWinnerJymn" href="https://github.com/LifeWinnerJymn"><img alt="@LifeWinnerJymn" class="avatar" height="20" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/10388327" width="20"> </a>
+    </div>
+  </div>
+</div>
+
+
+  
+</div>
+
+
+      <div class="discussion-timeline js-quote-selection-container ">
+
+        <div class="js-discussion js-socket-channel" data-channel="Shmoopi/iOS-System-Services:marked-as-read:55446164">
+          
+
+  <div class="timeline-comment-wrapper js-comment-container">
+    <a href="https://github.com/toanmh"><img alt="@toanmh" class="timeline-comment-avatar" height="48" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/1110786(1)" width="48"></a>
+    <div id="issue-55446164" class="comment previewable-edit timeline-comment js-comment js-task-list-container " data-body-version="37f3daa00c1037417eb78239aa00252f">
+
+  <div class="timeline-comment-header ">
+
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+      <a href="https://github.com/toanmh" class="author">toanmh</a>
+    </strong>
+
+    commented
+
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues/11#issue-55446164" class="timestamp">
+      <time datetime="2015-01-26T04:37:59Z" is="relative-time" title="2015年1月26日 GMT+8下午12:37">on 26 Jan 2015</time>
+    </a>
+  </div>
+</div>
+
+
+  <div class="comment-content">
+
+    <div class="edit-comment-hide">
+      <div class="comment-body markdown-body markdown-format js-comment-body">
+          <p>When build in the simulator is successful but when I run in iPhone device fail:<br>
+The file route.h not found in your project. <br>
+System Services/Utilities/SystemServicesConstants.h:44:10: 'route.h' file not found</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  <div class="timeline-comment-wrapper js-comment-container">
+    <a href="https://github.com/GWesley"><img alt="@GWesley" class="timeline-comment-avatar" height="48" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/2985638(1)" width="48"></a>
+    <div id="issuecomment-71791771" class="comment previewable-edit timeline-comment js-comment js-task-list-container " data-body-version="f99d659d12c5c2c7bdb601d7907b1136">
+
+  <div class="timeline-comment-header ">
+
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+      <a href="https://github.com/GWesley" class="author">GWesley</a>
+    </strong>
+
+    commented
+
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues/11#issuecomment-71791771" class="timestamp">
+      <time datetime="2015-01-28T07:23:57Z" is="relative-time" title="2015年1月28日 GMT+8下午3:23">on 28 Jan 2015</time>
+    </a>
+  </div>
+</div>
+
+
+  <div class="comment-content">
+
+    <div class="edit-comment-hide">
+      <div class="comment-body markdown-body markdown-format js-comment-body">
+          <p>Same issue here<br>
+You can copy that file (route.h) in the simulator to you project, that works for me</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  <div class="timeline-comment-wrapper js-comment-container">
+    <a href="https://github.com/vrunoa"><img alt="@vrunoa" class="timeline-comment-avatar" height="48" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/329957(1)" width="48"></a>
+    <div id="issuecomment-79343901" class="comment previewable-edit timeline-comment js-comment js-task-list-container " data-body-version="e2cbc232fa7aca67ebb8772a29d13375">
+
+  <div class="timeline-comment-header ">
+
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+      <a href="https://github.com/vrunoa" class="author">vrunoa</a>
+    </strong>
+
+    commented
+
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues/11#issuecomment-79343901" class="timestamp">
+      <time datetime="2015-03-13T20:22:17Z" is="relative-time" title="2015年3月14日 GMT+8上午4:22">on 14 Mar 2015</time>
+    </a>
+  </div>
+</div>
+
+
+  <div class="comment-content">
+
+    <div class="edit-comment-hide">
+      <div class="comment-body markdown-body markdown-format js-comment-body">
+          <p><a href="https://github.com/GWesley" class="user-mention">@GWesley</a> where is the route.h located ?</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  <div class="timeline-comment-wrapper js-comment-container">
+    <a href="https://github.com/ergunkocak"><img alt="@ergunkocak" class="timeline-comment-avatar" height="48" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/610975(1)" width="48"></a>
+    <div id="issuecomment-80987427" class="comment previewable-edit timeline-comment js-comment js-task-list-container " data-body-version="be0d8bdaf7cba5883e4052602eecf298">
+
+  <div class="timeline-comment-header ">
+
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+      <a href="https://github.com/ergunkocak" class="author">ergunkocak</a>
+    </strong>
+
+    commented
+
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues/11#issuecomment-80987427" class="timestamp">
+      <time datetime="2015-03-15T12:15:55Z" is="relative-time" title="2015年3月15日 GMT+8下午8:15">on 15 Mar 2015</time>
+    </a>
+  </div>
+</div>
+
+
+  <div class="comment-content">
+
+    <div class="edit-comment-hide">
+      <div class="comment-body markdown-body markdown-format js-comment-body">
+          <p>You can find the route.h file in /usr/include/net folder in your mac. Just copy it into your xcode project. it works ;)</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  <div class="timeline-comment-wrapper js-comment-container">
+    <a href="https://github.com/sbauch"><img alt="@sbauch" class="timeline-comment-avatar" height="48" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/923033(1)" width="48"></a>
+    <div id="issuecomment-104356723" class="comment previewable-edit timeline-comment js-comment js-task-list-container " data-body-version="b9019c980707085d5e140f8af0829379">
+
+  <div class="timeline-comment-header ">
+
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+      <a href="https://github.com/sbauch" class="author">sbauch</a>
+    </strong>
+
+    commented
+
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues/11#issuecomment-104356723" class="timestamp">
+      <time datetime="2015-05-21T17:06:16Z" is="relative-time" title="2015年5月22日 GMT+8上午1:06">on 22 May 2015</time>
+    </a>
+  </div>
+</div>
+
+
+  <div class="comment-content">
+
+    <div class="edit-comment-hide">
+      <div class="comment-body markdown-body markdown-format js-comment-body">
+          <p>I didn't find the route.h file at that location (Yosemite) but I did find it here - <br>
+<a href="http://www.opensource.apple.com/source/xnu/xnu-1456.1.26/bsd/net/route.h?txt">http://www.opensource.apple.com/source/xnu/xnu-1456.1.26/bsd/net/route.h?txt</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+  <div class="timeline-comment-wrapper js-comment-container">
+    <a href="https://github.com/LifeWinnerJymn"><img alt="@LifeWinnerJymn" class="timeline-comment-avatar" height="48" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/10388327(1)" width="48"></a>
+    <div id="issuecomment-112622286" class="comment previewable-edit timeline-comment js-comment js-task-list-container " data-body-version="fa8a136906234495bdb85fde11bc3219">
+
+  <div class="timeline-comment-header ">
+
+
+
+
+  <div class="timeline-comment-header-text">
+
+    <strong>
+      <a href="https://github.com/LifeWinnerJymn" class="author">LifeWinnerJymn</a>
+    </strong>
+
+    commented
+
+    <a href="https://github.com/Shmoopi/iOS-System-Services/issues/11#issuecomment-112622286" class="timestamp">
+      <time datetime="2015-06-17T01:56:56Z" is="relative-time" title="2015年6月17日 GMT+8上午9:56">on 17 Jun 2015</time>
+    </a>
+  </div>
+</div>
+
+
+  <div class="comment-content">
+
+    <div class="edit-comment-hide">
+      <div class="comment-body markdown-body markdown-format js-comment-body">
+          <p>Open Build Settings, add /usr/include/net to User Header Search Paths</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+
+
+
+<!-- Rendered timeline since 2015-06-16 18:56:56 -->
+<div id="partial-timeline-marker" class="js-timeline-marker js-socket-channel js-updatable-content" data-channel="Shmoopi/iOS-System-Services:issue:55446164" data-url="/Shmoopi/iOS-System-Services/issues/11/show_partial?partial=issues%2Ftimeline_marker&amp;since=1434506216" data-last-modified="Wed, 17 Jun 2015 01:56:56 GMT">
+
+    <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/Shmoopi/iOS-System-Services/notifications/mark?ids=56367774" class="hidden js-timeline-marker-form" data-form-nonce="2e2e723117de97ad534051e559c253e8deb9c799" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="FnaHfRWha+urD32cXsqnQ0DwEheSksFHpj/xOzad9Us5uPxk13VS/GOYtIgnJc2AaadhVODWQkLVhvfsi6vIRg=="></div>
+</form></div>
+
+
+        </div>
+
+          <div class="discussion-timeline-actions">
+                <div class="signed-out-comment">
+	<a href="https://github.com/join" class="btn btn-primary" rel="nofollow">Sign up for free</a>
+	<strong>to join this conversation on GitHub</strong>.
+	Already have an account?
+	<a href="https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2FShmoopi%2FiOS-System-Services%2Fissues%2F11" rel="nofollow">Sign in to comment</a>
+</div>
+
+
+          </div>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+</div>
+
+
+  </div>
+  <div class="modal-backdrop"></div>
+</div>
+
+    </div>
+  </div>
+
+    </div>
+
+        <div class="container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links right">
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+      <li><a href="https://developer.github.com/" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com/" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com/" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+        <li><a href="https://github.com/pricing" data-ga-click="Footer, go to pricing, text:pricing">Pricing</a></li>
+
+    </ul>
+
+    <a href="https://github.com/" aria-label="Homepage">
+      <span aria-hidden="true" class="mega-octicon octicon-mark-github" title="GitHub "></span>
+</a>
+    <ul class="site-footer-links">
+      <li>© 2016 <span title="0.07292s from github-fe140-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</a></li>
+        <li><a href="https://help.github.com/" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+    
+    
+    
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span aria-hidden="true" class="octicon octicon-alert"></span>
+      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+        <span aria-hidden="true" class="octicon octicon-x"></span>
+      </button>
+      Something went wrong with that request. Please try again.
+    </div>
+
+
+      <script crossorigin="anonymous" integrity="sha256-KJVHXHFPE3kLY+Y2tTiaaRiiYCWcWyKhWs9e8mvW7wk=" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/frameworks-2895475c714f13790b63e636b5389a6918a260259c5b22a15acf5ef26bd6ef09.js"></script>
+      <script async="async" crossorigin="anonymous" integrity="sha256-wEBGCKO80TEHdt8Ksm4Qe/1w/wOCQI9D7eGoHnMOOc0=" src="./Build failed_ 'route.h' file not found · Issue #11 · Shmoopi_iOS-System-Services · GitHub_files/github-c0404608a3bcd1310776df0ab26e107bfd70ff0382408f43ede1a81e730e39cd.js"></script>
+      
+      
+      
+    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
+      <span aria-hidden="true" class="octicon octicon-alert"></span>
+      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    </div>
+    <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <span aria-hidden="true" class="octicon octicon-x"></span>
+    </button>
+  </div>
+</div>
+
+  
+
+
+</body></html>

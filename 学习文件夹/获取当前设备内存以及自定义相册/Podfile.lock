@@ -1,0 +1,10 @@
+PODS:
+  - SystemServices (1.0.2)
+
+DEPENDENCIES:
+  - SystemServices (~> 1.0.2)
+
+SPEC CHECKSUMS:
+  SystemServices: f009fa1334c0711c3da6a491e1192e9379bfc40d
+
+COCOAPODS: 0.39.0
