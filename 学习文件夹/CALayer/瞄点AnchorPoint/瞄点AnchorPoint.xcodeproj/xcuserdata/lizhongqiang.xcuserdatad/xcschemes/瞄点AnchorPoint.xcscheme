@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "299830901BE8A740006E0CAA"
-               BuildableName = "AnchorPoint&#x7784;&#x70b9;.app"
-               BlueprintName = "AnchorPoint&#x7784;&#x70b9;"
-               ReferencedContainer = "container:AnchorPoint&#x7784;&#x70b9;.xcodeproj">
+               BlueprintIdentifier = "2901CD031C492570007A4208"
+               BuildableName = "&#x7784;&#x70b9;AnchorPoint.app"
+               BlueprintName = "&#x7784;&#x70b9;AnchorPoint"
+               ReferencedContainer = "container:&#x7784;&#x70b9;AnchorPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,34 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "299830A91BE8A740006E0CAA"
-               BuildableName = "AnchorPoint&#x7784;&#x70b9;Tests.xctest"
-               BlueprintName = "AnchorPoint&#x7784;&#x70b9;Tests"
-               ReferencedContainer = "container:AnchorPoint&#x7784;&#x70b9;.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "299830B41BE8A741006E0CAA"
-               BuildableName = "AnchorPoint&#x7784;&#x70b9;UITests.xctest"
-               BlueprintName = "AnchorPoint&#x7784;&#x70b9;UITests"
-               ReferencedContainer = "container:AnchorPoint&#x7784;&#x70b9;.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "299830901BE8A740006E0CAA"
-            BuildableName = "AnchorPoint&#x7784;&#x70b9;.app"
-            BlueprintName = "AnchorPoint&#x7784;&#x70b9;"
-            ReferencedContainer = "container:AnchorPoint&#x7784;&#x70b9;.xcodeproj">
+            BlueprintIdentifier = "2901CD031C492570007A4208"
+            BuildableName = "&#x7784;&#x70b9;AnchorPoint.app"
+            BlueprintName = "&#x7784;&#x70b9;AnchorPoint"
+            ReferencedContainer = "container:&#x7784;&#x70b9;AnchorPoint.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -75,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "299830901BE8A740006E0CAA"
-            BuildableName = "AnchorPoint&#x7784;&#x70b9;.app"
-            BlueprintName = "AnchorPoint&#x7784;&#x70b9;"
-            ReferencedContainer = "container:AnchorPoint&#x7784;&#x70b9;.xcodeproj">
+            BlueprintIdentifier = "2901CD031C492570007A4208"
+            BuildableName = "&#x7784;&#x70b9;AnchorPoint.app"
+            BlueprintName = "&#x7784;&#x70b9;AnchorPoint"
+            ReferencedContainer = "container:&#x7784;&#x70b9;AnchorPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "299830901BE8A740006E0CAA"
-            BuildableName = "AnchorPoint&#x7784;&#x70b9;.app"
-            BlueprintName = "AnchorPoint&#x7784;&#x70b9;"
-            ReferencedContainer = "container:AnchorPoint&#x7784;&#x70b9;.xcodeproj">
+            BlueprintIdentifier = "2901CD031C492570007A4208"
+            BuildableName = "&#x7784;&#x70b9;AnchorPoint.app"
+            BlueprintName = "&#x7784;&#x70b9;AnchorPoint"
+            ReferencedContainer = "container:&#x7784;&#x70b9;AnchorPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

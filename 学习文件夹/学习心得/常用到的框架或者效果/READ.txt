@@ -65,7 +65,7 @@ Objective-C语言<objc/message.h>—><objc/object.h>—><objc/objc.h>——><obj
               >objc_class一个分为三个层次：类对象->元类对象->NSObject元类对象
 
 
-CATransform3D 4*4矩阵
+CATransform3D 4*4矩阵(矩阵x对应第一列，y对应第二列，但是注意经测试:即x对应m11~m41列，y对应m12~m42等等)
   struct CATransform3D{
     m11(x缩放),m12(y切变),m13(旋转),m14;
     m21(x切变),m22(y缩放),m23,m24;
@@ -73,3 +73,4 @@ CATransform3D 4*4矩阵
     m41(x平移),m42(y平移),m43(z平移),m44;
   }
   >m34值必须在绕x轴或y轴旋转后，才会有效果（也就是旋转的时候距离旋转点越远的地方越小，产生3D感——正常表达例如：-1/2000.0）
+
