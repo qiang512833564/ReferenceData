@@ -1,0 +1,344 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29A99F5B1C4FAEC500D12E1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A99F5A1C4FAEC500D12E1D /* main.m */; };
+		29A99F5E1C4FAEC500D12E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A99F5D1C4FAEC500D12E1D /* AppDelegate.m */; };
+		29A99F611C4FAEC500D12E1D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A99F601C4FAEC500D12E1D /* ViewController.m */; };
+		29A99F641C4FAEC500D12E1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29A99F621C4FAEC500D12E1D /* Main.storyboard */; };
+		29A99F661C4FAEC500D12E1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29A99F651C4FAEC500D12E1D /* Assets.xcassets */; };
+		29A99F691C4FAEC500D12E1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29A99F671C4FAEC500D12E1D /* LaunchScreen.storyboard */; };
+		29A99F721C4FAFA600D12E1D /* BlurImageview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A99F711C4FAFA600D12E1D /* BlurImageview.swift */; };
+		29A99F751C4FB07700D12E1D /* UIView+Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A99F741C4FB07700D12E1D /* UIView+Screen.m */; };
+		29A99F771C4FB10200D12E1D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A99F761C4FB10200D12E1D /* Accelerate.framework */; };
+		29A99F7A1C4FB13C00D12E1D /* UIImage+My_Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A99F791C4FB13C00D12E1D /* UIImage+My_Image.m */; };
+		29A99F7D1C4FB18500D12E1D /* Head_bgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A99F7C1C4FB18500D12E1D /* Head_bgView.m */; };
+		29A99F7F1C4FB1C700D12E1D /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A99F7E1C4FB1C700D12E1D /* background.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		29A99F561C4FAEC500D12E1D /* 头像背景模糊化处理.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "头像背景模糊化处理.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29A99F5A1C4FAEC500D12E1D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29A99F5C1C4FAEC500D12E1D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		29A99F5D1C4FAEC500D12E1D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		29A99F5F1C4FAEC500D12E1D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		29A99F601C4FAEC500D12E1D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		29A99F631C4FAEC500D12E1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		29A99F651C4FAEC500D12E1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		29A99F681C4FAEC500D12E1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		29A99F6A1C4FAEC500D12E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29A99F701C4FAFA500D12E1D /* 头像背景模糊化处理-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "头像背景模糊化处理-Bridging-Header.h"; sourceTree = "<group>"; };
+		29A99F711C4FAFA600D12E1D /* BlurImageview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurImageview.swift; sourceTree = "<group>"; };
+		29A99F731C4FB07700D12E1D /* UIView+Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screen.h"; sourceTree = "<group>"; };
+		29A99F741C4FB07700D12E1D /* UIView+Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screen.m"; sourceTree = "<group>"; };
+		29A99F761C4FB10200D12E1D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		29A99F781C4FB13C00D12E1D /* UIImage+My_Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+My_Image.h"; sourceTree = "<group>"; };
+		29A99F791C4FB13C00D12E1D /* UIImage+My_Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+My_Image.m"; sourceTree = "<group>"; };
+		29A99F7B1C4FB18500D12E1D /* Head_bgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Head_bgView.h; sourceTree = "<group>"; };
+		29A99F7C1C4FB18500D12E1D /* Head_bgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Head_bgView.m; sourceTree = "<group>"; };
+		29A99F7E1C4FB1C700D12E1D /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29A99F531C4FAEC500D12E1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29A99F771C4FB10200D12E1D /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29A99F4D1C4FAEC500D12E1D = {
+			isa = PBXGroup;
+			children = (
+				29A99F761C4FB10200D12E1D /* Accelerate.framework */,
+				29A99F581C4FAEC500D12E1D /* 头像背景模糊化处理 */,
+				29A99F571C4FAEC500D12E1D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		29A99F571C4FAEC500D12E1D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29A99F561C4FAEC500D12E1D /* 头像背景模糊化处理.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29A99F581C4FAEC500D12E1D /* 头像背景模糊化处理 */ = {
+			isa = PBXGroup;
+			children = (
+				29A99F5C1C4FAEC500D12E1D /* AppDelegate.h */,
+				29A99F5D1C4FAEC500D12E1D /* AppDelegate.m */,
+				29A99F5F1C4FAEC500D12E1D /* ViewController.h */,
+				29A99F601C4FAEC500D12E1D /* ViewController.m */,
+				29A99F7B1C4FB18500D12E1D /* Head_bgView.h */,
+				29A99F7C1C4FB18500D12E1D /* Head_bgView.m */,
+				29A99F731C4FB07700D12E1D /* UIView+Screen.h */,
+				29A99F741C4FB07700D12E1D /* UIView+Screen.m */,
+				29A99F781C4FB13C00D12E1D /* UIImage+My_Image.h */,
+				29A99F791C4FB13C00D12E1D /* UIImage+My_Image.m */,
+				29A99F711C4FAFA600D12E1D /* BlurImageview.swift */,
+				29A99F7E1C4FB1C700D12E1D /* background.jpg */,
+				29A99F621C4FAEC500D12E1D /* Main.storyboard */,
+				29A99F651C4FAEC500D12E1D /* Assets.xcassets */,
+				29A99F671C4FAEC500D12E1D /* LaunchScreen.storyboard */,
+				29A99F6A1C4FAEC500D12E1D /* Info.plist */,
+				29A99F591C4FAEC500D12E1D /* Supporting Files */,
+				29A99F701C4FAFA500D12E1D /* 头像背景模糊化处理-Bridging-Header.h */,
+			);
+			path = "头像背景模糊化处理";
+			sourceTree = "<group>";
+		};
+		29A99F591C4FAEC500D12E1D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29A99F5A1C4FAEC500D12E1D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29A99F551C4FAEC500D12E1D /* 头像背景模糊化处理 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29A99F6D1C4FAEC500D12E1D /* Build configuration list for PBXNativeTarget "头像背景模糊化处理" */;
+			buildPhases = (
+				29A99F521C4FAEC500D12E1D /* Sources */,
+				29A99F531C4FAEC500D12E1D /* Frameworks */,
+				29A99F541C4FAEC500D12E1D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "头像背景模糊化处理";
+			productName = "头像背景模糊化处理";
+			productReference = 29A99F561C4FAEC500D12E1D /* 头像背景模糊化处理.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29A99F4E1C4FAEC500D12E1D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					29A99F551C4FAEC500D12E1D = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 29A99F511C4FAEC500D12E1D /* Build configuration list for PBXProject "头像背景模糊化处理" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 29A99F4D1C4FAEC500D12E1D;
+			productRefGroup = 29A99F571C4FAEC500D12E1D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29A99F551C4FAEC500D12E1D /* 头像背景模糊化处理 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29A99F541C4FAEC500D12E1D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29A99F691C4FAEC500D12E1D /* LaunchScreen.storyboard in Resources */,
+				29A99F7F1C4FB1C700D12E1D /* background.jpg in Resources */,
+				29A99F661C4FAEC500D12E1D /* Assets.xcassets in Resources */,
+				29A99F641C4FAEC500D12E1D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29A99F521C4FAEC500D12E1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29A99F611C4FAEC500D12E1D /* ViewController.m in Sources */,
+				29A99F7A1C4FB13C00D12E1D /* UIImage+My_Image.m in Sources */,
+				29A99F751C4FB07700D12E1D /* UIView+Screen.m in Sources */,
+				29A99F721C4FAFA600D12E1D /* BlurImageview.swift in Sources */,
+				29A99F5E1C4FAEC500D12E1D /* AppDelegate.m in Sources */,
+				29A99F5B1C4FAEC500D12E1D /* main.m in Sources */,
+				29A99F7D1C4FB18500D12E1D /* Head_bgView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		29A99F621C4FAEC500D12E1D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29A99F631C4FAEC500D12E1D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		29A99F671C4FAEC500D12E1D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29A99F681C4FAEC500D12E1D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		29A99F6B1C4FAEC500D12E1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29A99F6C1C4FAEC500D12E1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		29A99F6E1C4FAEC500D12E1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "头像背景模糊化处理/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.---------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "头像背景模糊化处理/头像背景模糊化处理-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		29A99F6F1C4FAEC500D12E1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "头像背景模糊化处理/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.---------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "头像背景模糊化处理/头像背景模糊化处理-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29A99F511C4FAEC500D12E1D /* Build configuration list for PBXProject "头像背景模糊化处理" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29A99F6B1C4FAEC500D12E1D /* Debug */,
+				29A99F6C1C4FAEC500D12E1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29A99F6D1C4FAEC500D12E1D /* Build configuration list for PBXNativeTarget "头像背景模糊化处理" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29A99F6E1C4FAEC500D12E1D /* Debug */,
+				29A99F6F1C4FAEC500D12E1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29A99F4E1C4FAEC500D12E1D /* Project object */;
+}
