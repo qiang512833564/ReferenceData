@@ -46,3 +46,41 @@ dispatch_once(&Static.onceToken) { () -> Void in
 
 
 OC——类别扩展，在swift上不存在，在swift里用extension替代了！
+
+
+override  init() {
+        super.init()
+    }
+这样子是会报错的
+解决方法：
+override  init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+
+block闭包
+//无参无返回值  
+typealias funcBlock = () -> () //或者 () -> Void  
+//返回值是String  
+typealias funcBlockA = (Int,Int) -> String  
+//返回值是一个函数指针，入参为String  
+typealias funcBlockB = (Int,Int) -> (String)->()  
+//返回值是一个函数指针，入参为String 返回值也是String  
+typealias funcBlockC = (Int,Int) -> (String)->String 
+———————————————————————————————Block作为属性—————————————————————————————
+ //block作为属性变量  
+    var blockProperty : (Int,Int) -> String = {a,b in return ""/**/} // 带初始化方式  
+    var blockPropertyNoReturn : (String) -> () = {param in }    
+    var blockPropertyA : funcBlockA?  //这写法就可以初始时为nil了,因为生命周其中，(理想状态)可能为nil所以用?  
+    var blockPropertyB : funcBlockB!  //这写法也可以初始时为nil了,因为生命周其中，(理想状态)认为不可能为nil,所以用!
+ //block调用
+//        if self.blockProperty != Optional.None!{
+//            self.blockProperty()
+//        }
+        if let exsistBlock  = self.blockProperty{
+            exsistBlock()
+        }
+  //block申明
+   vc.blockProperty = { () -> Void in
+            self.personalCenterTV.queryListData()
+        }

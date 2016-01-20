@@ -18,9 +18,11 @@ copy、strong、assign存储策略
 
 搜索实现关键字联想（接口端请求获取）
 cell根据图片高度来自适应高度，需要服务器端先告诉图片的尺寸，否则无法实现，因为即时刷新效率很低，
-swift1.0~2.0区别
+swift1.0~2.0区别——字符串获取长度有变：先获取到C的字符串，在获取C字符串的长度
 WatchKit使用
 视频APP用到的框架以及第三方库
 获取iOS设备的内存状况
 UIImagePickerController自定义导航栏—因为他也是一个导航控制器，可以修改，其navigationBar
 图片渐进加载——大图片会影响性能！
+
+喜欢自定义func myLayoutSubviews()这样是因为系统的LayoutSubviews()不容易控制，在很多情况下会调用，这导致一个可变的frame，出现了可控制性
