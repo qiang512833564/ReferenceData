@@ -84,3 +84,11 @@ typealias funcBlockC = (Int,Int) -> (String)->String
    vc.blockProperty = { () -> Void in
             self.personalCenterTV.queryListData()
         }
+
+——————————————————————————OC调用swift协议代理———————————————————————————————————————
+方法一：
+@objc protocol MyProtocol {}
+转成
+@objc public protocol MyProtocol {}——有时候，只要在协议前面加上@objc，而并不一定需要加public
+方法二：
+建立一个swift文件，把需要使用的代理写在里面

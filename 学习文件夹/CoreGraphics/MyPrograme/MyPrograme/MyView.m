@@ -9,10 +9,13 @@
 #import "MyView.h"
 
 @implementation MyView
+//在圆外
+//奇偶规则：偶数----CGContextEOClip
+//非零规则：零(顺时针穿过减一，逆时针穿过加一)-----CGContextClip，CGContextFillPath
 - (void)drawRect:(CGRect)rect{
     CGContextRef con = UIGraphicsGetCurrentContext();
     
-#if 0    // 在上下文裁剪区域挖一个三角形孔
+#if 1    // 在上下文裁剪区域挖一个三角形孔
     CGContextSetFillColorWithColor(con, [UIColor yellowColor].CGColor);
     //CGContextSetStrokeColorWithColor(con, [UIColor redColor].CGColor);
     CGContextSetLineWidth(con, 5);
@@ -42,7 +45,7 @@
     // 绘制渐变
     //CGContextStrokePath(con);
 #endif
-#if 1
+#if 0
     
     CGContextSaveGState(con);
     // 在上下文裁剪区域挖一个三角形孔
@@ -101,7 +104,7 @@
     CGGradientRef grad = CGGradientCreateWithColorComponents (sp, colors, locs, 3);
     
     CGContextDrawLinearGradient(con, grad, CGPointMake(89,0), CGPointMake(111,0), 0);
-    CGContextTranslateCTM(<#CGContextRef  _Nullable c#>, <#CGFloat tx#>, <#CGFloat ty#>)
+    //CGContextTranslateCTM(<#CGContextRef  _Nullable c#>, <#CGFloat tx#>, <#CGFloat ty#>)
     CGColorSpaceRelease(sp);
     
     CGGradientRelease(grad);

@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Swift protocol in Objective-C class - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta property="og:type" content="website">    
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded&amp;a">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Swift protocol in Objective-C class">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I wrote SearcherProtocol in Swift and need to implement an Objective-C class FileSearcher which has to use this protocol.
+
+So I tried this:
+
+#import &amp;lt;Foundation/Foundation.h&amp;gt;
+
+@interface ">
+    <meta property="og:url" content="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class">
+    <link rel="canonical" href="./OC调用swift代理协议_files/OC调用swift代理协议.html">
+
+    
+    
+    <script type="text/javascript" async="" src="./OC调用swift代理协议_files/ados"></script><script async="" src="./OC调用swift代理协议_files/quant.js"></script><script async="" src="./OC调用swift代理协议_files/beacon.js"></script><script async="" src="./OC调用swift代理协议_files/analytics.js"></script><script src="./OC调用swift代理协议_files/jquery.min.js"></script>
+    <script src="./OC调用swift代理协议_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./OC调用swift代理协议_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Swift protocol in Objective-C class&#39;" href="http://stackoverflow.com/feeds/question/25266137">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:5,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:25266137});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '25266137');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1453375504,"networkMetaHostname":"meta.stackexchange.com","routeName":"Questions/Show","styleCode":true,"enableUserHovercards":true,"snippets":{"enabled":true,"domain":"stacksnippets.net"},"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableSocialMediaInSharePopup":true},"user":{"fkey":"45d495b7f77d0138cc1ad90b60bb3ad0","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0566f44c832","js/moderator.en.js":"9473d953df60","js/full-anon.en.js":"64261ec8d04d","js/full.en.js":"9bb016c2c47e","js/wmd.en.js":"947bb3fff859","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"088295e03986","js/help.en.js":"54b998574be9","js/tageditor.en.js":"c84618a71b61","js/tageditornew.en.js":"5c2cd7f4c8af","js/inline-tag-editing.en.js":"de80429b1816","js/revisions.en.js":"82fcdf5bb6de","js/review.en.js":"3fb64ee37378","js/tagsuggestions.en.js":"d1ff9b84abe5","js/post-validation.en.js":"f7ef83cb480a","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"ddd297baaf71","js/keyboard-shortcuts.en.js":"1d4ac6cd034b","js/external-editor.en.js":"ac5eb21e8006","js/external-editor.en.js":"ac5eb21e8006","js/snippet-javascript.en.js":"9d60ae7a3bc2","js/snippet-javascript-codemirror.en.js":"b6b1901e39c1"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    
+    
+<script async="" src="./OC调用swift代理协议_files/full-anon.en.js"></script><script async="" src="./OC调用swift代理协议_files/snippet-javascript.en.js"></script><script async="" src="./OC调用swift代理协议_files/post-validation.en.js"></script><script async="" src="./OC调用swift代理协议_files/prettify-full.en.js"></script><script async="" src="./OC调用swift代理协议_files/external-editor.en.js"></script><link type="text/css" rel="stylesheet" href="./OC调用swift代理协议_files/jobs.min.css"><script type="text/javascript" src="./OC调用swift代理协议_files/adFeedback.js"></script><link rel="stylesheet" href="./OC调用swift代理协议_files/adFeedback.css"></head>
+<body class="question-page new-topbar">
+    <noscript>&lt;div id="noscript-padding"&gt;&lt;/div&gt;</noscript>
+    
+
+
+
+
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="http://stackoverflow.com/">current community</a></h3>
+    </div>
+    <div class="modal-content current-site-container">
+        <ul class="current-site">
+                <li>
+                        <div class="related-links">
+                    <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+
+
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="
+        site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                </li>
+                <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    
+
+
+
+    <a href="http://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="
+            site.switch({ target_site:552, item_type:3 }),
+        site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                </li>
+                            <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    <a class="site-link js-gps-track" href="http://careers.stackoverflow.com/?utm_source=stackoverflow.com&amp;utm_medium=site-ui&amp;utm_campaign=multicollider" data-gps-track="site_switcher.click({ item_type:9 })">
+                        <div class="site-icon favicon favicon-careers" title="Stack Overflow Careers"></div>
+                        Stack Overflow Careers
+                    </a>
+                </li>
+        </ul>
+    </div>
+    
+    <div class="header" id="your-communities-header">
+        <h3>
+your communities        </h3>
+            
+    </div>
+    <div class="modal-content" id="your-communities-section">
+            
+            <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f25266137%2fswift-protocol-in-objective-c-class" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f25266137%2fswift-protocol-in-objective-c-class" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+            </div>
+    </div>
+    
+    <div class="header">
+        <h3><a href="http://stackexchange.com/sites">more stack exchange communities</a></h3>
+        <a href="http://blog.stackoverflow.com/" class="fr">company blog</a>
+    </div>
+    <div class="modal-content">
+            <div class="child-content"></div>
+    </div>
+</div>
+        </div>
+
+        <div class="network-items">
+
+            <a href="http://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 151 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+
+    <a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+        <span class="hidden-text">Inbox</span>
+        <span class="unread-count" style="display:none"></span>
+    </a>
+    <a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" class="topbar-icon icon-achievements yes-hover js-achievements-button" data-unread-class="" title="Recent achievements: reputation, badges, and privileges earned">
+        <span class="hidden-text">Reputation and Badges</span>
+        <span class="unread-count" style="display:none">
+            
+        </span>
+    </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                <span class="topbar-menu-links">
+                                    <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f25266137%2fswift-protocol-in-objective-c-class" class="login-link">sign up</a>
+                                <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f25266137%2fswift-protocol-in-objective-c-class" class="login-link">log in</a>
+
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                            <a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" class="icon-help js-help-button" title="Help Center and other resources">
+        help
+        <span class="triangle"></span>
+    </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                    <li>
+                        <a href="http://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                            Meta
+                            <span class="item-summary">
+                                Discuss the workings and policies of this site
+                            </span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+                    </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="http://stackoverflow.com/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+        <div id="header">
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                            <li><a id="nav-jobs" href="http://stackoverflow.com/jobs">Jobs</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/help/badges">Badges</a></li>
+                                            </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content" class="snippet-hidden">
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+<div id="herobox">
+    <div id="hero-content">
+            <div id="close"><a title="click to minimize">_</a></div>
+        <div id="blurb">
+            Stack Overflow is a community of 4.7 million programmers, just like you, helping each other.
+            <br>
+                <br>Join them; it only takes a minute:<br>
+            <br>
+            <a href="http://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f25266137%2fswift-protocol-in-objective-c-class" id="tell-me-more" class="button">Sign up</a>
+        </div>
+        <div id="desc">
+            <b>Join the Stack Overflow community to:</b>
+            <ol id="hiw">
+                <li id="q">Ask programming questions
+                </li>
+                <li id="an">Answer and help your peers
+                </li>
+                <li id="b">Get recognized for your expertise
+                </li>
+            </ol>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <script>
+        StackExchange.ready(function () {
+
+            var location = 0;
+            if ($("body").hasClass("questions-page")) {
+                location = 1;;
+            } else if ($("body").hasClass("question-page")) {
+                location = 1;;
+            } else if ($("body").hasClass("faq-page")) {
+                location = 5;;
+            } else if ($("body").hasClass("home-page")) {
+                location = 3;;
+            }
+
+            $('#tell-me-more').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+                });
+            });
+            $('#herobox #close').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+                });
+                $.cookie("hero", "mini", { path: "/", expires: 365 });
+                $.ajax({
+                    url: "/hero-mini",
+                    success: function (data) {
+                        $("#herobox").fadeOut("fast", function () {
+                            $("#herobox").replaceWith(data);
+                            $("#herobox-mini").fadeIn("fast");
+                        });
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+</div>
+			<div id="question-header">
+                <h1 itemprop="name"><a href="./OC调用swift代理协议_files/OC调用swift代理协议.html" class="question-hyperlink">Swift protocol in Objective-C class</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="25266137" id="question">
+
+    <div class="everyonelovesstackoverflow adzerk-vote" id="careers1"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjozMjI1MTQsImNoIjoxMTc4LCJjayI6e30sImNyIjoxMTk1Nzc4LCJkaSI6Ijc0ZGFlZTdiNzE5ZTQxZGZhNGEwN2YxZDBjM2Q3NTA5IiwiZG0iOjEsImZjIjoxMjY5MTM3LCJmbCI6ODY0MjI1LCJpcCI6IjExNi4yMjYuNi40MiIsIm53IjoyMiwicGMiOjAsImVjIjowLCJwciI6MTYwNCwicnQiOjEsInJmIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvLmpwLyIsInN0Ijo4Mjc3LCJ1ayI6InVlMS0xMjhlMzY1MGMxMWY0ZTllYjdmNzJmNTRmMmZmM2FjMyIsInpuIjo0MywidHMiOjE0NTMzNzU1MTAxNDksImJmIjp0cnVlLCJwbiI6ImNhcmVlcnMxIiwidXIiOiJodHRwOi8vY2FyZWVycy5zdGFja292ZXJmbG93LmNvbS9wcm9kdWN0cz91dG1fc291cmNlPXN0YWNrb3ZlcmZsb3cuY29tJnV0bV9tZWRpdW09YWQmdXRtX2NhbXBhaWduPWVtcGxveWVycy1iZXN0LXdheSZ1dG1fY29udGVudD1sYi11c2UifQ&amp;s=X9bFPWnmAoVnt2edoUuTyT3NHyo" rel="nofollow" target="_blank" title=""><img src="./OC调用swift代理协议_files/5fa811fa1a3e40f1a3435478bd1364a0.png" title="" alt="" border="0" width="728" height="90"></a><img height="0px" width="0px" border="0" style="position:absolute;" src="./OC调用swift代理协议_files/i.gif"><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="25266137">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">8</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" title="This is a favorite question (click again to undo)">favorite</a>
+        <div class="favoritecount"><b>2</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I wrote <code>SearcherProtocol</code> in Swift and need to implement an Objective-C class <code>FileSearcher</code> which has to use this protocol.</p>
+
+<p>So I tried this:</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="com">#import &lt;Foundation/Foundation.h&gt;</span><span class="pln">
+
+</span><span class="lit">@interface</span><span class="pln"> </span><span class="typ">FileSearcher</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">NSObject</span><span class="pln"> </span><span class="pun">&lt;</span><span class="typ">SearcherProtocol</span><span class="pun">&gt;</span><span class="pln">
+
+</span><span class="com">// ... class content</span><span class="pln">
+
+</span><span class="lit">@end</span></code></pre>
+
+<p>The compiler tells me </p>
+
+<blockquote>
+  <p>Cannot find protocol declaration for 'SearcherProtocol'</p>
+</blockquote>
+
+<p>The corresponding bridged header file (<code>modulename-Swift.h</code>) is being imported within <code>FileSearcher.m</code>.</p>
+
+<p>Importing <code>SearcherProtocol</code> into <code>FileSearcher.h</code> throws another compiler error: <code>module name-swift.h file not found</code></p>
+
+<p>Does anybody have any clue what I'm doing wrong?</p>
+
+<p>I'm using Xcode 6 Beta 5.</p>
+
+<p><strong>Edit</strong></p>
+
+<p>Here is the protocol declaration in Swift:</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="lit">@objc</span><span class="pln"> protocol </span><span class="typ">SearcherProtocol</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">    
+    var searchNotificationTarget</span><span class="pun">:</span><span class="pln"> </span><span class="typ">SearchCompletedProtocol</span><span class="pun">?</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> get </span><span class="pun">}</span><span class="pln">
+    var lastSearchResults</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="typ">AnyObject</span><span class="pun">]</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> get </span><span class="typ">set</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+
+    func search</span><span class="pun">(</span><span class="pln">searchParam</span><span class="pun">:</span><span class="pln"> </span><span class="typ">String</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">:</span><span class="pln"> </span><span class="typ">NSErrorPointer</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="typ">Bool</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>And the SearchCompletedProtocol:</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="lit">@objc</span><span class="pln"> protocol </span><span class="typ">SearchCompletedProtocol</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+    func searchCompletedNotification</span><span class="pun">(</span><span class="pln">sender</span><span class="pun">:</span><span class="pln"> </span><span class="typ">AnyObject</span><span class="pun">!)</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/objective-c" class="post-tag js-gps-track" title="show questions tagged &#39;objective-c&#39;" rel="tag">objective-c</a> <a href="http://stackoverflow.com/questions/tagged/swift" class="post-tag js-gps-track" title="show questions tagged &#39;swift&#39;" rel="tag">swift</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/25266137" title="short permalink to this question" class="short-link" id="link-post-25266137">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/25266137/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/25266137/revisions" title="show all edits to this post">edited <span title="2014-08-13 05:29:47Z" class="relativetime">Aug 13 '14 at 5:29</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2014-08-12 13:54:44Z" class="relativetime">Aug 12 '14 at 13:54</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/3066217/thegoonie"><div class="gravatar-wrapper-32"><img src="./OC调用swift代理协议_files/KrFR1.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/3066217/thegoonie">TheGoonie</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">360</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25266137" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-39368722" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Is the protocol declared with <code>@objc</code> flag?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/669586/sulthan" title="39352 reputation" class="comment-user">Sulthan</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39368722_25266137"><span title="2014-08-12 13:57:02Z" class="relativetime-clean">Aug 12 '14 at 13:57</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39369105" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Yes, it is. Looking into the generated header file tells me it's there.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3066217/thegoonie" title="360 reputation" class="comment-user owner">TheGoonie</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39369105_25266137"><span title="2014-08-12 14:05:43Z" class="relativetime-clean">Aug 12 '14 at 14:05</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39369483" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Could you show us the protocol declaration?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/669586/sulthan" title="39352 reputation" class="comment-user">Sulthan</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39369483_25266137"><span title="2014-08-12 14:14:49Z" class="relativetime-clean">Aug 12 '14 at 14:14</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39372574" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Sure. I will post it tomorrow (I'm out of office now).</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3066217/thegoonie" title="360 reputation" class="comment-user owner">TheGoonie</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39372574_25266137"><span title="2014-08-12 15:26:56Z" class="relativetime-clean">Aug 12 '14 at 15:26</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-46329727" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">If anyone is finding that their Swift Delegate protocol isn't found and they're using both Objective-C and Swift, it's because you're missing the @objc flag.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/1862222/will" title="162 reputation" class="comment-user">Will</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment46329727_25266137"><span title="2015-03-14 03:39:27Z" class="relativetime-clean">Mar 14 '15 at 3:39</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-25266137" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								6 Answers
+                                <span style="display:none;" itemprop="answerCount">6</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active">
+            active</a>
+        <a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest">
+            oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="25268794"></a>
+<div id="answer-25268794" class="answer accepted-answer" data-answerid="25268794" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="25268794">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">9</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If both the swift protocol and and Objective C are in the same project then according to <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html">apple</a> you should just need to make sure you get the correct module name.</p>
+
+<p>For Xcode6 beta 5 you can find it under BuildSettings-&gt;Packaging-&gt;Product Module Name</p>
+
+<p>A common mistake would be to think that each swift file/class gets its own file, but instead they are all put into one big one that is the name of the project.</p>
+
+<p>A further mistakes are if the module name has spaces, these should be replaced with underscores.</p>
+
+<p>Edit:</p>
+
+<p>With your protocol I created a test project called 'Test' which compiles perfectly and it has the files:</p>
+
+<p>TestObjClass.h</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="com">#import &lt;Foundation/Foundation.h&gt;</span><span class="pln">
+</span><span class="com">#import "Test-Swift.h"</span><span class="pln">
+
+</span><span class="lit">@interface</span><span class="pln"> </span><span class="typ">TestObjCClass</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">NSObject</span><span class="pln"> </span><span class="pun">&lt;</span><span class="typ">SearcherProtocol</span><span class="pun">&gt;</span><span class="pln">
+
+</span><span class="lit">@end</span></code></pre>
+
+<p>TestObjClass.m</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="com">#import "TestObjCClass.h"</span><span class="pln">
+
+
+</span><span class="lit">@implementation</span><span class="pln"> </span><span class="typ">TestObjCClass</span><span class="pln">
+
+</span><span class="lit">@end</span></code></pre>
+
+<p>TestProtocol.swift</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="kwd">import</span><span class="pln"> </span><span class="typ">Foundation</span><span class="pln">
+
+</span><span class="lit">@objc</span><span class="pln"> protocol </span><span class="typ">SearcherProtocol</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+    var searchNotificationTarget</span><span class="pun">:</span><span class="pln"> </span><span class="typ">SearchCompletedProtocol</span><span class="pun">?</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> get </span><span class="pun">}</span><span class="pln">
+    var lastSearchResults</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="typ">AnyObject</span><span class="pun">]</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> get </span><span class="typ">set</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+
+    func search</span><span class="pun">(</span><span class="pln">searchParam</span><span class="pun">:</span><span class="pln"> </span><span class="typ">String</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">:</span><span class="pln"> </span><span class="typ">NSErrorPointer</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="typ">Bool</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="lit">@objc</span><span class="pln"> protocol </span><span class="typ">SearchCompletedProtocol</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+    func searchCompletedNotification</span><span class="pun">(</span><span class="pln">sender</span><span class="pun">:</span><span class="pln"> </span><span class="typ">AnyObject</span><span class="pun">!)</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/25268794" title="short permalink to this answer" class="short-link" id="link-post-25268794">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/25268794/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/25268794/revisions" title="show all edits to this post">edited <span title="2014-08-13 09:53:00Z" class="relativetime">Aug 13 '14 at 9:53</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-08-12 15:53:26Z" class="relativetime">Aug 12 '14 at 15:53</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/3232667/james-alvarez"><div class="gravatar-wrapper-32"><img src="./OC调用swift代理协议_files/731ddf5fab6832cf52b7a80237d12691" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/3232667/james-alvarez">james_alvarez</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">2,268</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="22 bronze badges"><span class="badge3"></span><span class="badgecount">22</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25268794" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="2" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-39391623" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">The module name is not the problem. I'm able to import it into the Objective-C source code file. CMD + click on the imported file also works (shows me the code Xcode generated for the Swift code - and there I can see both protocols).</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3066217/thegoonie" title="360 reputation" class="comment-user owner">TheGoonie</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39391623_25268794"><span title="2014-08-13 05:32:22Z" class="relativetime-clean">Aug 13 '14 at 5:32</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39399368" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I have tested the protocols, and probably unfortunately for you, they work fine for me, would you like a copy of the project?  I will update my answer too...</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3232667/james-alvarez" title="2268 reputation" class="comment-user">james_alvarez</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39399368_25268794"><span title="2014-08-13 09:42:05Z" class="relativetime-clean">Aug 13 '14 at 9:42</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39399866" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">You say you can see the Xcode generated swift code, which suggests you don't have any small errors in the protocol, which obviously can cause issues...  Could you post the full files?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3232667/james-alvarez" title="2268 reputation" class="comment-user">james_alvarez</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39399866_25268794"><span title="2014-08-13 09:55:34Z" class="relativetime-clean">Aug 13 '14 at 9:55</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-39401666" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I tried this in a separate project, as well, and it compiles without issues. But: Trying to create an instance of <code>SearcherProtocol</code> like <code>let a: SearcherProtocol = TestObjClass()</code> throws an error that <code>TestObjClass</code> does not conform to protocol <code>SearcherProtocol</code>.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/3066217/thegoonie" title="360 reputation" class="comment-user owner">TheGoonie</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment39401666_25268794"><span title="2014-08-13 10:48:24Z" class="relativetime-clean">Aug 13 '14 at 10:48</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-48899207" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thank you, thank you, thank you!  I forgot the @objc before protocol.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/2697490/heading-to-tahiti" title="419 reputation" class="comment-user">heading_to_tahiti</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#comment48899207_25268794"><span title="2015-05-22 20:58:33Z" class="relativetime-clean">May 22 '15 at 20:58</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-25268794" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" onclick="">show <b>2</b> more comments</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<div class="everyonelovesstackoverflow adzerk-vote" id="careers3"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjozMjI1MTQsImNoIjoxMTc4LCJjayI6e30sImNyIjoxMjY3ODQ0LCJkaSI6ImMzYjMyOWZmZDU3OTQyNDVhM2ZlMjc4OWY2MWQ4MjFlIiwiZG0iOjEsImZjIjoxMzY2MzQ1LCJmbCI6ODY0MjI2LCJpcCI6IjExNi4yMjYuNi40MiIsIm53IjoyMiwicGMiOjAsImVjIjowLCJwciI6MTU2OCwicnQiOjEsInJmIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvLmpwLyIsInN0Ijo4Mjc3LCJ1ayI6InVlMS0xMjhlMzY1MGMxMWY0ZTllYjdmNzJmNTRmMmZmM2FjMyIsInpuIjo0NCwidHMiOjE0NTMzNzU1MTAxNTAsImJmIjp0cnVlLCJwbiI6ImNhcmVlcnMzIiwidXIiOiJodHRwOi8vc3RhY2tvdmVyZmxvdy5jb20vam9icy93aHktam9icz91dG1fc291cmNlPXN0YWNrb3ZlcmZsb3cuY29tJnV0bV9tZWRpdW09YWQmdXRtX2NhbXBhaWduPWNhbmRpZGF0ZXMtYWRkLWN2JnV0bV9jb250ZW50PWxiLWNhcmVlcnMtZ2l0cHVzaCJ9&amp;s=FVldP8VlFxL01A5ti_knsoMgjJI" rel="nofollow" target="_blank" title=""><img src="./OC调用swift代理协议_files/93b331982e5545428dc54970697b879a.png" title="" alt="" border="0" width="728" height="90"></a><img height="0px" width="0px" border="0" style="position:absolute;" src="./OC调用swift代理协议_files/i(1).gif"><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div></div>
+  
+<a name="29172242"></a>
+<div id="answer-29172242" class="answer" data-answerid="29172242" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="29172242">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">5</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I know this was a long time ago, but I just struggled with the same problem when adding a protocol to my Swift code, and it wasn't being added to the -Swift.h header file, hence "Cannot find protocol declaration"</p>
+
+<p>The problem was my protocol wasn't marked as <em>Public</em>. I changed my protocol from this:</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="lit">@objc</span><span class="pln"> protocol </span><span class="typ">MyProtocol</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">//etc.... }</span></code></pre>
+
+<p>to this:</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="lit">@objc</span><span class="pln"> </span><span class="kwd">public</span><span class="pln"> protocol </span><span class="typ">MyProtocol</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">//etc.... }</span></code></pre>
+
+<p>I'm still not entirely sure why I need 'Public' but nobody else seems to, but hey it works...</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/29172242" title="short permalink to this answer" class="short-link" id="link-post-29172242">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/29172242/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2015-03-20 17:15:03Z" class="relativetime">Mar 20 '15 at 17:15</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1156668/tokn"><div class="gravatar-wrapper-32"><img src="./OC调用swift代理协议_files/6a0298cea3c87abbcd39833825e273f9" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1156668/tokn">Tokn</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">2,922</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="23 bronze badges"><span class="badge3"></span><span class="badgecount">23</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-29172242" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-29172242" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="29197634"></a>
+<div id="answer-29197634" class="answer" data-answerid="29197634" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="29197634">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>When you have </p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="com">#import "moduleName-Swift.h" </span></code></pre>
+
+<p>in the .h file that you want to be a delegate, and you have that .h file also in the bridging headers file, there's a circular reference that causes the moduleName-Swift.h to fail compilation. for @james_alvarez's test project, it's probably working because you don't need to include TestObjClass.h into the bridging header. </p>
+
+<p>The best way for me to combine objc files that need to be the delegate for a class written in swift, but that also needs to be included in the bridging header so other swift files can access this objc class, is to create a separate protocol file in objc:</p>
+
+<p>MyProtocol.h:</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="lit">@protocol</span><span class="pln"> </span><span class="typ">MyDelegate</span><span class="pln"> </span><span class="pun">&lt;</span><span class="typ">NSObject</span><span class="pun">&gt;</span><span class="pln">
+
+</span><span class="pun">-(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">didDoThis</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">-(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">didDoThat</span><span class="pun">;</span><span class="pln">
+
+</span><span class="lit">@end</span></code></pre>
+
+<p>ViewController.h:</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="com">#import "MyProtocol.h"</span><span class="pln">
+
+</span><span class="lit">@interface</span><span class="pln"> </span><span class="typ">ViewController</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">UIViewController</span><span class="pln"> </span><span class="pun">&lt;</span><span class="typ">MyDelegate</span><span class="pun">&gt;</span></code></pre>
+
+<p>MyProject-Bridging-Header.h</p>
+
+<pre class="lang-c prettyprint prettyprinted"><code><span class="com">#import "MyProtocol.h"</span><span class="pln">
+</span><span class="com">#import "ViewController.h"</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/29197634" title="short permalink to this answer" class="short-link" id="link-post-29197634">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/29197634/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-03-22 17:39:39Z" class="relativetime">Mar 22 '15 at 17:39</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/2184893/mitrenegade"><div class="gravatar-wrapper-32"><img src="./OC调用swift代理协议_files/bf4342b2419065f8c0f66bbb83de5ccb" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/2184893/mitrenegade">mitrenegade</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">802</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="16 bronze badges"><span class="badge3"></span><span class="badgecount">16</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-29197634" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-29197634" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="28784949"></a>
+<div id="answer-28784949" class="answer" data-answerid="28784949" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="28784949">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Make sure you are including the auto generated Swift header in your ObjectiveC file.  It will have the same name as your project module followed by <code>-Swift.h</code>.</p>
+
+<p>For instance if your Project Module is <strong>MyTarget</strong>, then you would use:</p>
+
+<p><code>#import "MyTarget-Swift.h"</code></p>
+
+<p>If you are typing in the import into your Objective C file, it will not autocomplete.  You can verify that you have the correct file by Command-clicking on the header after typing it in.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/28784949" title="short permalink to this answer" class="short-link" id="link-post-28784949">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/28784949/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-02-28 17:56:04Z" class="relativetime">Feb 28 '15 at 17:56</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/4368917/hughv"><div class="gravatar-wrapper-32"><img src="./OC调用swift代理协议_files/4c90f02e927b8a2d564a673488806414" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/4368917/hughv">HughV</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">56</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-28784949" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-28784949" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="32413502"></a>
+<div id="answer-32413502" class="answer" data-answerid="32413502" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="32413502">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Try adding <code>#import "Product_Module_Name-Swift.h"</code> to your <code>Product_Module_Name-Prefix.pch</code> file.  That fixed it for me, plus you will now have access to your swift files from any objc file.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/32413502" title="short permalink to this answer" class="short-link" id="link-post-32413502">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/32413502/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-09-05 13:17:23Z" class="relativetime">Sep 5 '15 at 13:17</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/897523/joshua-goossen"><div class="gravatar-wrapper-32"><img src="./OC调用swift代理协议_files/46e98023c5fcb2375b9f6d5b59b845a9" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/897523/joshua-goossen">Joshua Goossen</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">927</span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="24 bronze badges"><span class="badge3"></span><span class="badgecount">24</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32413502" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-32413502" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="28528471"></a>
+<div id="answer-28528471" class="answer" data-answerid="28528471" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="28528471">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">-1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Solve my problem. I copied the delegate call back within the wrong curly brace. </p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/28528471" title="short permalink to this answer" class="short-link" id="link-post-28528471">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/28528471/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-02-15 16:48:52Z" class="relativetime">Feb 15 '15 at 16:48</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/546912/bac-apple-developer"><div class="gravatar-wrapper-32"><img src="./OC调用swift代理协议_files/5c998532707c299d1d9cab588043c6de" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/546912/bac-apple-developer">BAC Apple Developer</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">25</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-28528471" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-28528471" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/25266137/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="25266137">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.co.jp/">
+							<h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.options.snippets.enabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="45d495b7f77d0138cc1ad90b60bb3ad0">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="http://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f25266137%2fswift-protocol-in-objective-c-class%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'http%3a%2f%2fstackoverflow.com%2fquestions%2f25266137%2fswift-protocol-in-objective-c-class%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/objective-c" class="post-tag" title="show questions tagged &#39;objective-c&#39;" rel="tag">objective-c</a> <a href="http://stackoverflow.com/questions/tagged/swift" class="post-tag" title="show questions tagged &#39;swift&#39;" rel="tag">swift</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2014-08-12 13:54:44Z"><b>1 year ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>4925 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/25266137/swift-protocol-in-objective-c-class?lastactivity" class="lastactivity-link" title="2015-09-05 13:17:23Z">4 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+						
+			<div class="everyonelovesstackoverflow" id="careers2">
+        </div>
+        <div id="hireme" class=" blue looking tagged"><a href="http://stackoverflow.com/jobs" target="_blank" data-tz="1" data-ti="0" class="top"><span>Looking for a job?</span></a><div class="middle"><ul class="jobs"><li><a data-at="0" data-tz="3" data-ti="139547" href="http://stackoverflow.com/jobs/53076/ios-developer-bookingcom" target="_blank" title="iOS Developer at Booking.com. Click to learn more.">iOS Developer<br><div class="company">Booking.com</div><div class="location" title="Amsterdam, Netherlands / relocation">Amsterdam, Netherlands / relocation</div><span class="post-tag highlight">ios</span><span class="post-tag">objective-c</span></a></li><li><a data-at="0" data-tz="3" data-ti="192892" href="http://stackoverflow.com/jobs/106977/drupal-developer-shanghai-mediasia-interactive" target="_blank" title="Drupal Developer - Shanghai at Mediasia Interactive. Click to learn more.">Drupal Developer - Shanghai<br><div class="company">Mediasia Interactive</div><div class="location" title="Shanghai, China">Shanghai, China</div><span class="post-tag">drupal</span><span class="post-tag">php</span></a></li><li><a data-at="0" data-tz="3" data-ti="191771" href="http://stackoverflow.com/jobs/105844/ios-developer-catawiki" target="_blank" title="iOS Developer at Catawiki. Click to learn more.">iOS Developer<br><div class="company">Catawiki</div><div class="location" title="Assen, Netherlands / relocation">Assen, Netherlands / relocation</div><span class="post-tag highlight">ios</span><span class="post-tag">objective-c</span></a></li><li><a data-at="0" data-tz="3" data-ti="171778" href="http://stackoverflow.com/jobs/85563/senior-ios-developer-m-f-delivery-hero" target="_blank" title="Senior iOS Developer (m/f) at Delivery Hero. Click to learn more.">Senior iOS Developer (m/f)<br><div class="company">Delivery Hero</div><div class="location" title="Berlin, Germany / relocation">Berlin, Germany / relocation</div><span class="post-tag highlight">ios</span><span class="post-tag">objective-c</span></a></li></ul></div><img class="impression" src="./OC调用swift代理协议_files/i(2).gif" style="display:none;"></div>
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/31629825?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/31629825/short-circuit-when-using-a-swift-protocol?lq=1" class="question-hyperlink">Short-circuit when using a Swift protocol</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24002369?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted large">440
+    </div>
+</a><a href="http://stackoverflow.com/questions/24002369/how-to-call-objective-c-code-from-swift?rq=1" class="question-hyperlink">How to call Objective C code from Swift</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24047987?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/24047987/bridging-swift-objective-c-protocols?rq=1" class="question-hyperlink">bridging swift &amp; objective-c protocols?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24078242?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">29
+    </div>
+</a><a href="http://stackoverflow.com/questions/24078242/importing-a-swift-protocol-in-objective-c-class?rq=1" class="question-hyperlink">Importing a Swift protocol in Objective-C class</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24699567?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/24699567/delegating-objective-c-protocol-on-swift?rq=1" class="question-hyperlink">Delegating Objective-C Protocol on Swift</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24991018?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">52
+    </div>
+</a><a href="http://stackoverflow.com/questions/24991018/how-to-make-a-class-conform-to-a-protocol-in-swift?rq=1" class="question-hyperlink">How to make a class conform to a protocol in Swift?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/27114548?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/27114548/objective-c-declare-block-in-swift?rq=1" class="question-hyperlink">Objective C ^ Declare block in Swift</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/27346708?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/27346708/swift-class-conforming-to-objective-c-protocol?rq=1" class="question-hyperlink">Swift class conforming to Objective-C protocol</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/30233902?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">9
+    </div>
+</a><a href="http://stackoverflow.com/questions/30233902/swift-declare-class-func-in-protocol?rq=1" class="question-hyperlink">Swift Declare Class Func in Protocol</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/31278783?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">-1
+    </div>
+</a><a href="http://stackoverflow.com/questions/31278783/ios-swift-adopting-objective-c-protocol-and-returning-nsarray?rq=1" class="question-hyperlink">iOS Swift: Adopting Objective C protocol and returning NSArray</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/33364923?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">-1
+    </div>
+</a><a href="http://stackoverflow.com/questions/33364923/objective-c-protocol-method-invisible-in-swift?rq=1" class="question-hyperlink">Objective C protocol method invisible in swift</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="http://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/301280/term-for-doing-something-little-by-little" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Term for doing something little by little?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a href="http://unix.stackexchange.com/questions/256497/on-what-systems-is-foo-bar-different-from-foo-bar" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    On what systems is //foo/bar different from /foo/bar?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/115646/what-does-dumbledores-title-supreme-mugwump-mean" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What does Dumbledore's title "Supreme Mugwump" mean?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-stats" title="Cross Validated"></div><a href="http://stats.stackexchange.com/questions/191705/why-are-solution-to-ridge-regression-always-expressed-using-matrix-notation" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why are solution to ridge regression always expressed using matrix notation?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="http://travel.stackexchange.com/questions/61614/leaving-schengen-area-the-day-after-the-visa-expiry-due-to-the-transit" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Leaving Schengen area the day after the visa expiry due to the transit
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="http://worldbuilding.stackexchange.com/questions/33696/society-expectations-to-work-for-your-living" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Society expectations to Work for your living
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/61892/can-one-or-two-emoticons-be-used-in-a-phd-thesis" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can one or two emoticons be used in a PhD Thesis?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mechanics" title="Motor Vehicle Maintenance &amp; Repair Stack Exchange"></div><a href="http://mechanics.stackexchange.com/questions/25089/how-do-you-un-seize-an-engine" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:224 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do you un-seize an engine?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-engineering" title="Engineering Stack Exchange"></div><a href="http://engineering.stackexchange.com/questions/7019/is-it-possible-to-remove-staedler-ink-from-a-paper" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:595 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it possible to remove Staedler ink from a paper?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1618741/how-to-prove-that-all-odd-powers-of-two-add-one-are-multiples-of-three" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to prove that all odd powers of two add one are multiples of three
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gamedev" title="Game Development Stack Exchange"></div><a href="http://gamedev.stackexchange.com/questions/115169/how-to-give-the-player-the-feeling-of-being-chased-by-enemies-and-force-him-her" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:53 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to give the player the feeling of being chased by enemies and force him/her to rush
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/61748/how-to-deal-with-a-colleague-who-always-puts-you-down" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to deal with a colleague who always puts you down?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/301160/what-is-the-idiom-for-a-guy-situation-who-where-has-his-own-shortcoming-but-stil" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the idiom for a guy/situation who/where has his own shortcoming but still mocks others?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="http://workplace.stackexchange.com/questions/60743/how-do-i-keep-a-work-life-balance-while-traveling-for-work" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I keep a work-life balance while traveling for work?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/300834/opposite-of-smartwatch" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Opposite of smartwatch
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="http://askubuntu.com/questions/723308/new-zero-day-exploit-reportedly-found-affecting-linux-android" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    New Zero-day exploit reportedly found affecting Linux/Android
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-diy" title="Home Improvement Stack Exchange"></div><a href="http://diy.stackexchange.com/questions/82622/how-can-it-be-dangerous-to-feed-a-water-heater-from-two-separate-panels" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:73 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How can it be dangerous to feed a water heater from two separate panels?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="http://codereview.stackexchange.com/questions/117464/simple-datetime-abstraction" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Simple DateTime abstraction
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-superuser" title="Super User"></div><a href="http://superuser.com/questions/1029295/is-there-a-faster-way-to-open-a-process-as-administrator-with-uac-enabled" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:3 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there a faster way to open a process as Administrator (With UAC enabled)?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a href="http://skeptics.stackexchange.com/questions/31452/are-41-of-donald-trump-supporters-in-favor-of-bombing-agrabah-the-country-from" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Are 41% of Donald Trump supporters in favor of bombing Agrabah (the country from Aladdin)?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-apple" title="Ask Different"></div><a href="http://apple.stackexchange.com/questions/223974/can-i-trust-apple-support-and-share-my-password" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:118 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can I trust Apple support and share my password?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="http://movies.stackexchange.com/questions/46549/who-had-turbo-lasers-first-star-wars-or-battlestar-galactica" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Who had "turbo lasers" first, Star Wars or Battlestar Galactica?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/110676/how-should-i-securely-type-a-password-in-front-of-a-lot-of-people" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How should I securely type a password in front of a lot of people?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-history" title="History Stack Exchange"></div><a href="http://history.stackexchange.com/questions/27235/how-much-were-telegraphists-in-the-1950s-paid" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:324 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How much were telegraphists in the 1950s paid?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/25266137" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/25266137/ivc/dc27');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/25266137/ivc/dc27" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">lang-c</div></div>
+
+
+        </div>
+    </div><script async="" src="./OC调用swift代理协议_files/p.js"></script>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="http://blog.stackoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="http://data.stackexchange.com/">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com/" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="http://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (9)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="http://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="http://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (5)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com/">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo © 2016 Stack Exchange Inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2016.1.21.3203
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5620270-1');
+                        ga('set', 'dimension2', '|objective-c|swift|');         ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+            qc.async=true;
+            qc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+            s.parentNode.insertBefore(qc, s);
+            var sc=document.createElement('script');
+            sc.async=true;
+            sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+            s.parentNode.insertBefore(sc, s);
+        })();
+        _comscore.push({ c1: "2", c2: "17440561" });
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>
+            
+    
+<script async="" src="./OC调用swift代理协议_files/ados.js"></script></body></html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://allentofight.me/2015/02/20/swift-1-2xin-xing/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Swift 1.2新特性</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Swift 1.2新特性">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Swift 1.2新特性">
+    <meta property="og:description" content="">
+
+    <link rel="icon" type="image/png" href="http://allentofight.me/assets/images/favicon.png">
+    <link href="http://allentofight.me/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+    <link href="http://allentofight.me/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link rel="stylesheet" type="text/css" href="./Swift 1.2新特性_files/vno.css">
+    <link href="./Swift 1.2新特性_files/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./Swift 1.2新特性_files/tomorrow.css">
+    
+    <link rel="canonical" href="./Swift 1.2新特性_files/Swift 1.2新特性.html">
+    
+    <meta property="og:site_name" content="allentofight">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Swift 1.2新特性">
+    <meta property="og:description" content="What’s New in Swift 1.2学习笔记 Swift 1.2带来了一些显著的变化  * Speed improvements * Improved if-let optional binding * Changes to as when casting * Native Swift sets * Changes to initializing constants * Objective-C interop and bridging 为了更好地说明以上变化，我将试着用最新的Swift转换工具来看看它是如何将Swift 1.1的project转为Swift 1.2的 Speed Improvements...">
+    <meta property="og:url" content="http://allentofight.me/2015/02/20/swift-1-2xin-xing/">
+    <meta property="article:published_time" content="2015-02-20T07:19:31.159Z">
+    <meta property="article:modified_time" content="2015-02-24T06:15:47.583Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Swift 1.2新特性">
+    <meta name="twitter:description" content="What’s New in Swift 1.2学习笔记 Swift 1.2带来了一些显著的变化  * Speed improvements * Improved if-let optional binding * Changes to as when casting * Native Swift sets * Changes to initializing constants * Objective-C interop and bridging 为了更好地说明以上变化，我将试着用最新的Swift转换工具来看看它是如何将Swift 1.1的project转为Swift 1.2的 Speed Improvements...">
+    <meta name="twitter:url" content="http://allentofight.me/2015/02/20/swift-1-2xin-xing/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "allentofight",
+    "author": {
+        "@type": "Person",
+        "name": "allentofight",
+        "image": "//www.gravatar.com/avatar/27a0140c11f18fab9bf284743d2b2b4c?d=404&s=250",
+        "url": "http://allentofight.me/author/allentofight",
+        "sameAs": null
+    },
+    "headline": "Swift 1.2新特性",
+    "url": "http://allentofight.me/2015/02/20/swift-1-2xin-xing/",
+    "datePublished": "2015-02-20T07:19:31.159Z",
+    "dateModified": "2015-02-24T06:15:47.583Z",
+    "description": "What’s New in Swift 1.2学习笔记 Swift 1.2带来了一些显著的变化  * Speed improvements * Improved if-let optional binding * Changes to as when casting * Native Swift sets * Changes to initializing constants * Objective-C interop and bridging 为了更好地说明以上变化，我将试着用最新的Swift转换工具来看看它是如何将Swift 1.1的project转为Swift 1.2的 Speed Improvements..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.5">
+    <link rel="alternate" type="application/rss+xml" title="allentofight" href="http://allentofight.me/rss/">
+
+<script type="text/javascript" async="" src="./Swift 1.2新特性_files/embed.js"></script></head>
+<body class="post-template">
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    <header class="panel-cover panel-cover--collapsed">
+      <div class="panel-main">
+    
+        <div class="panel-main__inner panel-inverted">
+        <div class="panel-main__content">
+    
+            <a href="http://allentofight.me/" title="前往 allentofight 的主页"><img src="./Swift 1.2新特性_files/download.jpg" width="80" alt="allentofight logo" class="panel-cover__logo logo"></a>
+            <h1 class="panel-cover__title panel-title"><a href="http://allentofight.me/" title="link to homepage for allentofight">allentofight</a></h1>
+            <span class="panel-cover__subtitle panel-subtitle">上善若水，人淡如菊</span>
+            <hr class="panel-cover__divider">
+            <p class="panel-cover__description">Thoughts, stories and ideas.</p>
+            <hr class="panel-cover__divider panel-cover__divider--secondary">
+    
+            <div class="navigation-wrapper">
+              <div>
+              <nav class="cover-navigation cover-navigation--primary">
+                <ul class="navigation">
+                  <li class="navigation__item"><a href="http://allentofight.me/#blog" title="访问博客" class="blog-button">博客</a></li>
+                  <li class="navigation__item"><a href="http://eepurl.com/" title="邮件订阅本站" target="_blank">订阅</a></li>
+                </ul>
+              </nav>
+              </div>
+              <div>
+              <nav class="cover-navigation navigation--social">
+                <ul class="navigation">
+              
+              
+                <!-- Weibo -->
+                <li class="navigation__item">
+                  <a href="http://weibo.com/u/1876496750" title="谢kun 的微博" target="_blank">
+                    <i class="social fa fa-weibo"></i>
+                    <span class="label">Weibo</span>
+                  </a>
+                </li>
+              
+                <!-- Github -->
+                <li class="navigation__item">
+                  <a href="https://github.com/allentofight" title="@谢kun 的 Github" target="_blank">
+                    <i class="social fa fa-github"></i>
+                    <span class="label">Github</span>
+                  </a>
+                </li>
+              
+                <!-- RSS -->
+                <li class="navigation__item">
+                  <a href="http://allentofight.me/rss/" rel="author" title="RSS" target="_blank">
+                    <i class="social fa fa-rss"></i>
+                    <span class="label">RSS</span>
+                  </a>
+                </li>
+              
+                <!-- Email -->
+                <li class="navigation__item">
+                  <a href="mailto:dreamerxiekun@gmail.com" title="邮件联系我" target="_blank">
+                    <i class="social fa fa-envelope"></i>
+                    <span class="label">Email</span>
+                  </a>
+                </li>
+              
+                </ul>
+              </nav>
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
+    
+        <div class="panel-cover--overlay cover-blue"></div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            
+
+  <article class="post-container post-container--single">
+
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime="20 Feb 2015" class="post-meta__date date">20 Feb 2015</time> • <span class="post-meta__tags tags"></span>
+        <!--<span class="post-meta__author author"><img src="//www.gravatar.com/avatar/27a0140c11f18fab9bf284743d2b2b4c?d=404&amp;s=250" alt="profile image for allentofight" class="avatar post-meta__avatar" /> by allentofight</span>-->
+      </div>
+      <h1 class="post-title">Swift 1.2新特性</h1>
+    </header>
+
+    <section class="post">
+      <p><a href="http://www.raywenderlich.com/95181/whats-new-in-swift-1-2" target="_blank">What’s New in Swift 1.2</a>学习笔记
+Swift 1.2带来了一些显著的变化 <br>
+* Speed improvements
+* Improved if-let optional binding
+* Changes to as when casting
+* Native Swift sets
+* Changes to initializing constants
+* Objective-C interop and bridging</p>
+
+<p>为了更好地说明以上变化，我将试着用最新的Swift转换工具来看看它是如何将Swift 1.1的project转为Swift 1.2的</p>
+
+<h4 id="speedimprovements">Speed Improvements</h4>
+
+<p>Swift 1.2带来了能让你的app和开发更快的几个性能提升!</p>
+
+<ul>
+<li>增量编译(Incremental Builds):现在你每次编译和运行的时候Xcode不需要重新编译工程里的每一个文件了.编译系统的依赖管理器仍然没什么变化,不过你能感受到编译时间明显缩短了,这对大工程来说绝对是利好消息</li>
+<li>性能提升:标准库和运行时已经被优化了;比如,在release模式下,对多维数组的处理上速度明显提升了很多，你需要对app进行一些基准测试,因为在app间performance characteristics are so different
+<a href="http://www.jessesquires.com/apples-to-apples-part-two/" target="_blank">在某些用例下</a>,Swift已经比OC更快了,所以我们再看看有哪些提升</li>
+</ul>
+
+<h4 id="ifletimprovements">if-let improvements</h4>
+
+<p>"该死的金字塔"(<code>pyramid of doom</code>)已经不复存在了,Before Swift 1.2, you could only do optional binding on one thing at a time:
+在1.2前，一次只能到一个<code>if-let</code>的条件绑定</p>
+
+<pre><code class="language-objc hljs objectivec"><span class="hljs-comment">// Before Swift 1.2</span>
+<span class="hljs-keyword">if</span> let data = widget<span class="hljs-variable">.dataStream</span> {  
+  <span class="hljs-keyword">if</span> data<span class="hljs-variable">.isValid</span> {
+    <span class="hljs-keyword">if</span> let source = sourceIP() {
+      <span class="hljs-keyword">if</span> let dest = destIP() {
+        <span class="hljs-comment">// do something</span>
+      }
+    }
+  }
+}
+</code></pre>
+
+<p>现在你可以一次性地把所有绑定都放在一起</p>
+
+<pre><code class="language-objc hljs objectivec"><span class="hljs-comment">// After Swift 1.2</span>
+<span class="hljs-keyword">if</span> let data = widget<span class="hljs-variable">.data</span> where data<span class="hljs-variable">.isValid</span>, let source = sourceIP(), dest = destIP() {  
+  <span class="hljs-comment">// do something</span>
+}
+</code></pre>
+
+<p>注意最新的关键字<code>where</code>,能让你测试内嵌的条件语句,这能让你的条件语句更加紧凑并且避免了额外的缩进</p>
+
+<h4 id="upcastsanddowncasts">Upcasts and downcasts</h4>
+
+<p>关键字<code>as</code>现在能用来<code>upcasts</code>和<code>downcasts</code></p>
+
+<pre><code class="language-objc hljs objectivec"><span class="hljs-comment">// Before Swift 1.2</span>
+var aView: <span class="hljs-built_in">UIView</span> = someView()
+
+var object = aView as <span class="hljs-built_in">NSObject</span> <span class="hljs-comment">// upcast </span>
+
+var specificView = aView as <span class="hljs-built_in">UITableView</span> <span class="hljs-comment">// downcast  </span>
+</code></pre>
+
+<p><code>upcast</code>（从派生类转为基类）,在1.2之前能编译通过，<code>downcat</code>（基类转为派生类）可能会失败,因为你不能确定基类到底属于哪个派生类
+不过在1.2中，<code>downcast</code>可以用<code>as?</code>和<code>as!</code>来转换了</p>
+
+<pre><code class="language-objc hljs objectivec"><span class="hljs-comment">// After Swift 1.2</span>
+var aView: <span class="hljs-built_in">UIView</span> = someView()
+
+var tableView = aView as! <span class="hljs-built_in">UITableView</span>  
+<span class="hljs-comment">//or</span>
+<span class="hljs-keyword">if</span> let tableView = aView as? <span class="hljs-built_in">UITableView</span> {  
+  <span class="hljs-comment">// do something with tableView</span>
+}
+</code></pre>
+
+<h4 id="sets">Sets</h4>
+
+<p>Swift 1.0都有OC中<code>NSString</code>,<code>NSArray</code>和<code>NSDictionary</code>原生的表示形式,有人就问了:"sets呢",1.2终于问世了,即<code>Set</code>类型 <br>
+同array一样，<code>sets</code>是一个<code>generic collections</code>所以你需要指定存储的类型,不过它是不会存重复的元素的</p>
+
+<pre><code class="language-objc hljs objectivec">var dogs = Set&lt;String&gt;()
+
+dogs<span class="hljs-variable">.insert</span>(<span class="hljs-string">"Shiba Inu"</span>)  
+dogs<span class="hljs-variable">.insert</span>(<span class="hljs-string">"Doge"</span>)  
+dogs<span class="hljs-variable">.insert</span>(<span class="hljs-string">"Husky puppy"</span>)  
+dogs<span class="hljs-variable">.insert</span>(<span class="hljs-string">"Schnoodle"</span>)  
+dogs<span class="hljs-variable">.insert</span>(<span class="hljs-string">"Doge"</span>)
+
+<span class="hljs-comment">// prints "There are 4 known dog breeds"</span>
+println(<span class="hljs-string">"There are \(dogs.count) known dog breeds"</span>)  
+</code></pre>
+
+<p>所有<code>NSSet</code>能做的操作,<code>Set</code>也能操作</p>
+
+<p>This is a great addition to the standard library and fills a big abstraction hole where you still had to drop down to NSSet, which doesn’t feel very native in Swift. Hopefully, other missing types such as NSDate are next on the list to be Swift-ified. ;]</p>
+
+<p>这对标准库是个很好的补充,这样能用<code>Set</code>的地方你就无需求助于<code>NSSet</code>了,幸运的是，Swift也将有像<code>NSDate</code>等有native类型了</p>
+
+<h4 id="letconstants">let constants</h4>
+
+<p>1.2之前,使用constant的最大问题是:一旦声明就必须要赋值，而在1.2中，你可以先声明，以后再赋值</p>
+
+<pre><code class="language-objc hljs objectivec">let longEdge: <span class="hljs-built_in">CGFloat</span>
+
+<span class="hljs-keyword">if</span> isLandscape {  
+  longEdge = image<span class="hljs-variable">.calculateWidth</span>()
+} <span class="hljs-keyword">else</span> {
+  longEdge = image<span class="hljs-variable">.calculateHeight</span>()
+}
+
+<span class="hljs-comment">// you can access longEdge from this point on</span>
+</code></pre>
+
+<p>这样使用<code>let</code>就更方便，更灵活了</p>
+
+<h4 id="objectivecinterop">Objective-C interop</h4>
+
+<p>随着Swift的愈发成熟,默认的类将逐渐由Swift原生的类来取代，这种事情已经发生了，在Swift 1.2中，OC中与原生Swift同等的类(NSString, NSArray, NSDictionary等)将不再自动转换了，如何传一个<code>NSString</code>给一个<code>String</code>参数的函数会报错</p>
+
+<pre><code class="language-objc hljs objectivec">func mangleString(input: String) {  
+  <span class="hljs-comment">// do something with input</span>
+}
+let someString: <span class="hljs-built_in">NSString</span> = <span class="hljs-string">"hello"</span>  
+mangleString(someString) <span class="hljs-comment">// compile error!  </span>
+</code></pre>
+
+<p>想让它正常工作，可以作个类型转换</p>
+
+<pre><code class="language-objc hljs objectivec">mangleString(someString as String)  
+</code></pre>
+
+<h4 id="optional">如何与optional类型打交道</h4>
+
+<p>如果你至今一直紧跟Swift的变化，你会看到参数从<code>UIView</code>变到<code>UIView!</code>再到<code>UIView?</code>然后又变回来了，之所以这样，是因为在OC中可以发信息给<code>nil</code>类型，而Swift对此有严格限制
+如果你仍然在维护着OC代码，你在指定参数，变量，属性类型时，注意以下新的修饰符</p>
+
+<ul>
+<li><code>nonnull</code> 永远不会是<code>nil</code></li>
+<li><code>nullable</code> 可以是<code>nil</code></li>
+<li><code>null_unspecified</code> 无法得知是否是<code>nil</code>,(默认是非空类型)</li>
+</ul>
+
+<p>For example, consider how these Objective-C declarations would map to Swift: <br>
+比如，看看以下OC声明是如何映射到Swift的</p>
+
+<ul>
+<li>nonnull NSString *string – a regular object, String</li>
+<li>nullable NSString *string – this is an optional, String?</li>
+<li>null_unspecified NSString *string – unknown, thus implicitly unwrapped, String!</li>
+</ul>
+    </section>
+
+  </article>
+
+  <section class="post-comments">
+    <div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Swift 1.2新特性_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 321px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'allentofight'; // required: replace example with your forum shortname
+        
+  
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+    
+  </section>
+
+
+
+            <footer class="footer">
+                <span class="footer__copyright">© 2016  All rights reserved.</span>
+                <span class="footer__copyright"><a href="https://github.com/onevcat/vno" target="_blank">Vno</a> theme by <a href="http://im.onevcat.com/" target="_blank">@onevcat</a></span>
+            </footer>        </div>
+    </div>
+
+    <script src="./Swift 1.2新特性_files/jquery.min.js"></script>
+
+    <script type="text/javascript" src="./Swift 1.2新特性_files/main.js"></script>
+
+    <script type="text/javascript" src="./Swift 1.2新特性_files/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+</body></html>

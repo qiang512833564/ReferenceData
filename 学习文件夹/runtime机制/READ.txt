@@ -1,0 +1,15 @@
+runtime实现机制
+runtime是一套比较底层的纯C语言API，属于1个C语言库，包含了很多底层的C语言API。
+在我们平时编写的OC代码中，程序运行过程中，其实最终都是转成runtime的C语言代码，runtime算是OC的幕后工作者。
+例如：
+OC：[[MJPerson alloc]init]=====>
+runtime：objc_msgSend(objc_msgSend(“MJPerson”,”allow”),”init”)
+
+runtime用途：
+1.在程序运行过程中，动态创建一个类（比如KVO的底层实现—————MJExtension处理数据模型）
+2.在程序运行过程中，动态地为某个类添加属性\方法，修改属性值\方法（比如：对类别进行属性扩展，通过改变方法名指针指向来交换方法的实现）
+例如：交换方法实现
+Method ori_Method = class_getInstanceMethod([NSArray class], @selector(lastObject));
+Method my_Method = class_getInstanceMethod([NSArray class], @selector(myLastObject));
+method_exchangeImplementations(ori_Method, my_Method);
+3.遍历一个类的所有成员变量（属性）\所有方法（因为NSObject在runtime里就是一个结构体）
