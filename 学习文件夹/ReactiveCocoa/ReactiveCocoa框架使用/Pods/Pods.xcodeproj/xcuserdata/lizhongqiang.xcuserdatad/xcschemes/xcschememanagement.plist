@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Archimedes.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ReactiveCocoa框架使用.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ReactiveCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ReactiveCocoaLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ReactiveViewModel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2B66BD8BE60DFE23A736E047EAB8F41E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>325485D2FCD6C00D4237BE1590697CD2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43EB1501FE6EA67EF7DB8767B2B661B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C7D5AB5DA4B6859024078B9B7AB48D55</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7B61FBA6E3D629DE913D41CEEBA551F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

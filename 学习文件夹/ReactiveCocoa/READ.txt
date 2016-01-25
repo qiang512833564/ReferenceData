@@ -1,0 +1,18 @@
+| [leichunfeng/MVVMReactiveCocoa](https://github.com/leichunfeng/MVVMReactiveCocoa)| **推荐！一个完整的使用MVVM和RAC的Github客户端
+
+ReactiveCocoa简称为RAC
+ReactiveCocoa编程思想：
+ReactiveCocoa结合了几种编程风格：
+        函数式编程
+        响应式编程
+--ReactiveCocoa被描述为函数响应式编程框架。使用RAC解决问题，特点：
+       不需要考虑调用顺序，直接考虑结果
+       把每一次操作都写成一系列嵌套的方法中，使代码高聚合，方便管理
+
+——ReactiveCocoa开发中常见用法
+  代替代理
+  代替KVO
+  监听事件
+  代替通知
+  监听文本框文字改变
+  处理当界面多次请求时，需要都获取到数据时，才能展示界面
