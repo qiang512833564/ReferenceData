@@ -1,0 +1,10 @@
+
+整个WebViewJavascriptBridge实现的根本是
+   通过UIWebView去实现，OC与JS的通信，常用方法stringByEvaluatingJavaScriptFromString，是实现OC去调用JS的方法。
+  JS调用OC的方法，则是，直接通过把OC的block传入到JS中，然后在JS中直接去调用
+
+另外需要注意的是：
+   这个技术，貌似是跟JSBinding实现的方式是一样子的。
+
+OC和JS通过WebViewJavascriptBridge桥梁通信的时候，
+OC----需要注意，一切通信开始之前，需要在WebView第一次加载完之后才能开始，再把webView的代理设置为WebViewJavascriptBridge的对象。

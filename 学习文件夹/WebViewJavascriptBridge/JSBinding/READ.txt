@@ -1,0 +1,38 @@
+
+https://github.com/zynga/jsbindings
+https://opensource.apple.com/source/JavaScriptCore/JavaScriptCore-7537.65/API
+JS Binding
+
+---------->JS -------- Native（本地代码）
+JavaScripte Code           
+      0
+JSBinding Layer
+      0
+Native Code
+
+iOS7---->开放
+JavaScriptCore API
+
+JS调用OC的方法
+一般可以通过block函数调用
+另一种方式：
+    在OC里创建一个JS类<@interface Point3D : NSObject<Point3DExport>---@protocol  Point3DExport<JSExport>>
+    把这个类，放入JS context里
+    没有构造函数
+
+这样做的好处，可以各自发挥各自的好处。有的时候，native实现起来可能很难，这个时候js可能实现起来较为简单，这个时候就可以用js去实现然后早native中去调用。
+
+JS与native对象，相互引用会产生循环引用，造成内存泄露
+这个时候就需要通过JSManagedValue去处理，对对象进行包装。
+
+JSVirtualMachine
+通过一个JS虚拟机，创建的上下文，这些上下文，可以不需要注意一些线程锁等的问题。
+因为同一JS虚拟机创建的上下文，在同一个线程里面。
+所以如果想实现JS的同步运算，需要通过两个不同的JS虚拟机去实现。
+
+JSBinding VC  LuaBinding
+
+   Native
+   Web
+   Hybrid
+   ScriptBinding

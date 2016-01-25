@@ -7,6 +7,7 @@
 //
 
 #import "AnimationView.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 @interface AnimationView ()
 @property (nonatomic, strong)NSArray *imageArray;
 @property (nonatomic, strong)UIImageView *bgImageView1;

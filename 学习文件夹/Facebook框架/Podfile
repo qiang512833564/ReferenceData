@@ -1,0 +1,19 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+# use_frameworks!
+
+target 'Facebook框架' do
+use_frameworks!
+pod 'AsyncDisplayKit', '~> 1.9.5'
+pod 'pop', '~> 1.0.8'
+pod 'ReactiveCocoa', '2.5'
+##一般情况下在项目中使用ReactiveCocoa一般都会嵌入ReactiveViewModel或者ReactiveCocoaLayout联合处理UI、网络、动画布局、窗口切换等，组合使用时威力惊人。
+##pod 'ReactiveCocoa', '~> 4.0.4-alpha-4'
+pod 'ReactiveViewModel', '~> 0.3'
+pod 'ReactiveCocoaLayout', '~> 0.4'
+
+pod 'Masonry', '~> 0.6.4'
+
+end
+
