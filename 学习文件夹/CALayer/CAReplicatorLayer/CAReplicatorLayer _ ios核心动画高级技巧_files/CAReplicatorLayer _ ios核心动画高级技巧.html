@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html -->
+<html lang="zh-tw"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>CAReplicatorLayer | ios核心动画高级技巧</title>
+        
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.4">
+        <meta name="author" content="钟声">
+        
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://zsisme.gitbooks.io/ios-/content/gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="https://zsisme.gitbooks.io/ios-/content/gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="./CAReplicatorLayer _ ios核心动画高级技巧_files/style.css">
+    
+        
+        <link rel="stylesheet" href="./CAReplicatorLayer _ ios核心动画高级技巧_files/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="./CAReplicatorLayer _ ios核心动画高级技巧_files/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="./CAReplicatorLayer _ ios核心动画高级技巧_files/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="./CAReplicatorLayer _ ios核心动画高级技巧_files/website(1).css">
+        
+    
+    
+
+        
+    
+    
+    
+    
+    
+    
+    
+
+        
+    <link rel="prev" href="https://zsisme.gitbooks.io/ios-/content/chapter6/cagradientLayer.html"><link rel="next" href="https://zsisme.gitbooks.io/ios-/content/chapter6/cascrollLayer.html"></head>
+    <body>
+        
+        
+    <div class="book without-animation with-summary font-size-2 font-family-1" data-level="6.5" data-chapter-title="CAReplicatorLayer" data-filepath="chapter6/careplicatorLayer.md" data-basepath=".." data-revision="Sun Dec 06 2015 23:27:00 GMT+0000 (UTC)" data-innerlanguage="">
+    
+
+<div class="book-summary"><div class="book-search" role="search"><input type="text" class="form-control" placeholder="Type to search"></div>
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+                
+                <li>
+                    <a href="https://www.gitbook.com/book/zsisme/ios-" target="blank" class="custom-link">ios核心动画高级技巧</a>
+                </li>
+            
+            
+
+            
+            <li class="divider"></li>
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="chapter1/the-layer-tree.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter1/the-layer-tree.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        图层树
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="chapter1/layers-and-trees.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter1/layers-and-trees.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        图层与视图
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="chapter1/layer-capabilities.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter1/layer-capabilities.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        图层的能力
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="chapter1/working-with-layers.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter1/working-with-layers.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        使用图层
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="chapter1/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter1/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.4.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="chapter2/the-Backing-Image.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter2/the-Backing-Image.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        寄宿图
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="chapter2/the-contents-image.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter2/the-contents-image.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        contents属性
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="chapter2/custom-drawing.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter2/custom-drawing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        Custom Drawing
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="chapter2/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter2/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="chapter3/layer-geometry.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter3/layer-geometry.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        图层几何学
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1" data-path="chapter3/layout.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter3/layout.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.1.</b>
+                        
+                        布局
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="chapter3/anchor.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter3/anchor.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.2.</b>
+                        
+                        锚点
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="chapter3/coordinate-systens.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter3/coordinate-systens.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.3.</b>
+                        
+                        坐标系
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="chapter3/hit-testing.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter3/hit-testing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.4.</b>
+                        
+                        Hit Testing
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="chapter3/automatic-layout.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter3/automatic-layout.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.5.</b>
+                        
+                        自动布局
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="chapter3/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter3/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.6.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="chapter4/visual-effcts.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/visual-effcts.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        视觉效果
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="chapter4/rounded-corners.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/rounded-corners.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        圆角
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="chapter4/ayer-borders.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/ayer-borders.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        图层边框
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="chapter4/drop-shadows.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/drop-shadows.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.3.</b>
+                        
+                        阴影
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="chapter4/layer-masking.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/layer-masking.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.4.</b>
+                        
+                        图层蒙板
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.5" data-path="chapter4/scaling-filters.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/scaling-filters.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.5.</b>
+                        
+                        拉伸过滤
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.6" data-path="chapter4/group-opacity.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/group-opacity.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.6.</b>
+                        
+                        组透明
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.7" data-path="chapter4/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter4/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.7.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="chapter5/transforms.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter5/transforms.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        变换
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="chapter5/affine-fransforms.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter5/affine-fransforms.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        仿射变换
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="chapter5/3d-transform.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter5/3d-transform.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        3D变换
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="chapter5/solid-objects.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter5/solid-objects.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        固体对象
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="chapter5/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter5/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="chapter6/specialized-layers.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/specialized-layers.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        专用图层
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1" data-path="chapter6/cashapelayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cashapelayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.1.</b>
+                        
+                        CAShapeLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="chapter6/CATextLayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/CATextLayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.2.</b>
+                        
+                        CATextLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="chapter6/catransformlayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/catransformlayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.3.</b>
+                        
+                        CATransformLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="chapter6/cagradientLayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cagradientLayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.4.</b>
+                        
+                        CAGradientLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="6.5" data-path="chapter6/careplicatorLayer.html">
+            
+                
+                    <a href="./CAReplicatorLayer _ ios核心动画高级技巧_files/CAReplicatorLayer _ ios核心动画高级技巧.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.5.</b>
+                        
+                        CAReplicatorLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.6" data-path="chapter6/cascrollLayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cascrollLayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.6.</b>
+                        
+                        CAScrollLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.7" data-path="chapter6/catiledLayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/catiledLayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.7.</b>
+                        
+                        CATiledLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.8" data-path="chapter6/caemitterlayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/caemitterlayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.8.</b>
+                        
+                        CAEmitterLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.9" data-path="chapter6/caeagllayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/caeagllayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.9.</b>
+                        
+                        CAEAGLLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.10" data-path="chapter6/avplayerlayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/avplayerlayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.10.</b>
+                        
+                        AVPlayerLayer
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.11" data-path="chapter6/summarry.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/summarry.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.11.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7" data-path="chapter7/implicit-animations.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter7/implicit-animations.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        隐式动画
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.1" data-path="chapter7/transactions.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter7/transactions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.1.</b>
+                        
+                        事务
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="chapter7/completion-blocks.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter7/completion-blocks.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.2.</b>
+                        
+                        完成块
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="chapter7/layer-actions.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter7/layer-actions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.3.</b>
+                        
+                        图层行为
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="chapter7/presentation-versus-model.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter7/presentation-versus-model.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.4.</b>
+                        
+                        呈现与模型
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="chapter7/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter7/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8" data-path="chapter8/explicit-animations.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter8/explicit-animations.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        显式动画
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1" data-path="chapter8/property-animations.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter8/property-animations.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.1.</b>
+                        
+                        属性动画
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="chapter8/animation-groups.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter8/animation-groups.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.2.</b>
+                        
+                        动画组
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="chapter8/transitions.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter8/transitions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.3.</b>
+                        
+                        过渡
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="chapter8/changes-custom-transitions.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter8/changes-custom-transitions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.4.</b>
+                        
+                        在动画过程中取消动画
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.5" data-path="chapter8/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter8/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.5.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="9" data-path="chapter9/layer-time.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter9/layer-time.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.</b>
+                        
+                        图层时间
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="9.1" data-path="chapter9/the-cAMediaTiming-protocol.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter9/the-cAMediaTiming-protocol.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.1.</b>
+                        
+                        `CAMediaTiming`协议
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="9.2" data-path="chapter9/hierarchical-time.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter9/hierarchical-time.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.2.</b>
+                        
+                        层级关系时间
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="9.3" data-path="chapter9/manual-animation.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter9/manual-animation.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.3.</b>
+                        
+                        手动动画
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="9.4" data-path="chapter9/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter9/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>9.4.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="10" data-path="chapter10/easing.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter10/easing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.</b>
+                        
+                        缓冲
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="10.1" data-path="chapter10/animation-velocity.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter10/animation-velocity.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.1.</b>
+                        
+                        动画速度
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="chapter10/custom-easing-functions.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter10/custom-easing-functions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.2.</b>
+                        
+                        自定义缓冲函数
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="chapter10/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter10/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.3.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="11" data-path="chapter11/timer-based-animation.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter11/timer-based-animation.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.</b>
+                        
+                        基于定时器的动画
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="11.1" data-path="chapter11/frame-timing.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter11/frame-timing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.1.</b>
+                        
+                        定时帧
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.2" data-path="chapter11/physical-simulation.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter11/physical-simulation.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.2.</b>
+                        
+                        物理模拟
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.3" data-path="chapter11/summary.html">
+            
+            <span><b>11.3.</b> 总结</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="12" data-path="chapter12/tuning-for-speed.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter12/tuning-for-speed.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.</b>
+                        
+                        性能调优
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="12.1" data-path="chapter12/cpu-versus-gpu.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter12/cpu-versus-gpu.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.1.</b>
+                        
+                        CPU VS GPU
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.2" data-path="chapter12/measure-dont-guess.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter12/measure-dont-guess.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.2.</b>
+                        
+                        测量，而不是猜测
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.3" data-path="chapter12/instruments.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter12/instruments.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.3.</b>
+                        
+                        Instruments
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.4" data-path="chapter12/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter12/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.4.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="13" data-path="chapter13/efficient-drawing.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter13/efficient-drawing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.</b>
+                        
+                        高效绘图
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="13.1" data-path="chapter13/software-drawing-vector-graphics.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter13/software-drawing-vector-graphics.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.1.</b>
+                        
+                        软件绘图
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="13.2" data-path="chapter13/catiledLayer.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter13/catiledLayer.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.2.</b>
+                        
+                        矢量图形
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="13.3" data-path="chapter15/dirty-rectangles.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter15/dirty-rectangles.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.3.</b>
+                        
+                        脏矩形
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="13.4" data-path="chapter13/drawsasynchronously.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter13/drawsasynchronously.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.4.</b>
+                        
+                        异步绘制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="13.5" data-path="chapter13/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter13/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>13.5.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="14" data-path="chapter14/image-ioi.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter14/image-ioi.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.</b>
+                        
+                        图像IO
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="14.1" data-path="chapter14/loading-and-latency.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter14/loading-and-latency.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.1.</b>
+                        
+                        加载和潜伏
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="14.2" data-path="chapter14/caching.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter14/caching.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.2.</b>
+                        
+                        缓存
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="14.3" data-path="chapter14/file-format.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter14/file-format.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.3.</b>
+                        
+                        文件格式
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="14.4" data-path="chapter14/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter14/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>14.4.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="15" data-path="chapter15/layer-performance.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter15/layer-performance.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.</b>
+                        
+                        图层性能
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="15.1" data-path="chapter15/inexplicit-drawing-text.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter15/inexplicit-drawing-text.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.1.</b>
+                        
+                        隐式绘制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="15.2" data-path="chapter15/offscreen-rendering.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter15/offscreen-rendering.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.2.</b>
+                        
+                        离屏渲染
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="15.3" data-path="chapter15/blending-and-overdraw.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter15/blending-and-overdraw.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.3.</b>
+                        
+                        混合和过度绘制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="15.4" data-path="chapter15/blending-and-overdraw-reducing-layer-count.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter15/blending-and-overdraw-reducing-layer-count.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.4.</b>
+                        
+                        减少图层数量
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="15.5" data-path="chapter15/summary.html">
+            
+                
+                    <a href="https://zsisme.gitbooks.io/ios-/content/chapter15/summary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>15.5.</b>
+                        
+                        总结
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com/" target="blank" class="gitbook-link">
+                    本書使用 GitBook 釋出
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <a class="btn pull-left js-toolbar-action" aria-label="" href="https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html#"><i class="fa fa-align-justify"></i></a><a class="btn pull-left js-toolbar-action" aria-label="Search" href="https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html#"><i class="fa fa-search"></i></a><div class="dropdown pull-right  js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Share" href="https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html#"><i class="fa fa-share-alt"></i></a><div class="dropdown-menu dropdown-left"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-5 ">Facebook</button><button class="button size-5 ">Google+</button><button class="button size-5 ">Twitter</button><button class="button size-5 ">Weibo</button><button class="button size-5 ">Instapaper</button></div></div></div><a class="btn pull-right js-toolbar-action" aria-label="" href="https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html#"><i class="fa fa-facebook"></i></a><a class="btn pull-right js-toolbar-action" aria-label="" href="https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html#"><i class="fa fa-twitter"></i></a><div class="dropdown pull-left font-settings js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Font Settings" href="https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html#"><i class="fa fa-font"></i></a><div class="dropdown-menu dropdown-right"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-2 font-reduce">A</button><button class="button size-2 font-enlarge">A</button></div><div class="buttons"><button class="button size-2 ">Serif</button><button class="button size-2 ">Sans</button></div><div class="buttons"><button class="button size-3 ">White</button><button class="button size-3 ">Sepia</button><button class="button size-3 ">Night</button></div></div></div><h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="https://zsisme.gitbooks.io/ios-/content/">ios核心动画高级技巧</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="careplicatorlayer">CAReplicatorLayer</h2>
+<p class="comments-section"><code>CAReplicatorLayer</code>的目的是为了高效生成许多相似的图层。它会绘制一个或多个图层的子图层，并在每个复制体上应用不同的变换。看上去演示能够更加解释这些，我们来写个例子吧。<div class="comments-icon"><div class="marker">+</div></div></p>
+<h3 id="重复图层（repeating-layers）">重复图层（Repeating Layers）</h3>
+<p class="comments-section">清单6.8中，我们在屏幕的中间创建了一个小白色方块图层，然后用<code>CAReplicatorLayer</code>生成十个图层组成一个圆圈。<code>instanceCount</code>属性指定了图层需要重复多少次。<code>instanceTransform</code>指定了一个<code>CATransform3D</code>3D变换（这种情况下，下一图层的位移和旋转将会移动到圆圈的下一个点）。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">变换是逐步增加的，每个实例都是相对于前一实例布局。这就是为什么这些复制体最终不会出现在同意位置上，图6.8是代码运行结果。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">清单6.8 用<code>CAReplicatorLayer</code>重复图层<div class="comments-icon"><div class="marker">+</div></div></p>
+<pre><code class="lang-objective-c">@interface ViewController ()
+
+@property (nonatomic, weak) IBOutlet UIView *containerView;
+
+@end
+
+@implementation ViewController
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    //create a replicator layer and add it to our view
+    CAReplicatorLayer *replicator = [CAReplicatorLayer layer];
+    replicator.frame = self.containerView.bounds;
+    [self.containerView.layer addSublayer:replicator];
+
+    //configure the replicator
+    replicator.instanceCount = 10;
+
+    //apply a transform for each instance
+    CATransform3D transform = CATransform3DIdentity;
+    transform = CATransform3DTranslate(transform, 0, 200, 0);
+    transform = CATransform3DRotate(transform, M_PI / 5.0, 0, 0, 1);
+    transform = CATransform3DTranslate(transform, 0, -200, 0);
+    replicator.instanceTransform = transform;
+
+    //apply a color shift for each instance
+    replicator.instanceBlueOffset = -0.1;
+    replicator.instanceGreenOffset = -0.1;
+
+    //create a sublayer and place it inside the replicator
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(100.0f, 100.0f, 100.0f, 100.0f);
+    layer.backgroundColor = [UIColor whiteColor].CGColor;
+    [replicator addSublayer:layer];
+}
+@end
+</code></pre>
+<p><img src="./CAReplicatorLayer _ ios核心动画高级技巧_files/6.8.png" alt="图6.8"></p>
+<p class="comments-section">图6.8 用<code>CAReplicatorLayer</code>创建一圈图层<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">注意到当图层在重复的时候，他们的颜色也在变化：这是用<code>instanceBlueOffset</code>和<code>instanceGreenOffset</code>属性实现的。通过逐步减少蓝色和绿色通道，我们逐渐将图层颜色转换成了红色。这个复制效果看起来很酷，但是<code>CAReplicatorLayer</code>真正应用到实际程序上的场景比如：一个游戏中导弹的轨迹云，或者粒子爆炸（尽管iOS 5已经引入了<code>CAEmitterLayer</code>，它更适合创建任意的粒子效果）。除此之外，还有一个实际应用是：反射。<div class="comments-icon"><div class="marker">+</div></div></p>
+<h3 id="反射">反射</h3>
+<p class="comments-section">使用<code>CAReplicatorLayer</code>并应用一个负比例变换于一个复制图层，你就可以创建指定视图（或整个视图层次）内容的镜像图片，这样就创建了一个实时的『反射』效果。让我们来尝试实现这个创意：指定一个继承于<code>UIView</code>的<code>ReflectionView</code>，它会自动产生内容的反射效果。实现这个效果的代码很简单（见清单6.9），实际上用<code>ReflectionView</code>实现这个效果会更简单，我们只需要把<code>ReflectionView</code>的实例放置于Interface Builder（见图6.9），它就会实时生成子视图的反射，而不需要别的代码（见图6.10）.<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">清单6.9 用<code>CAReplicatorLayer</code>自动绘制反射<div class="comments-icon"><div class="marker">+</div></div></p>
+<pre><code class="lang-objective-c">#import "ReflectionView.h"
+#import <quartzcore quartzcore.h="">
+
+@implementation ReflectionView
+
++ (Class)layerClass
+{
+    return [CAReplicatorLayer class];
+}
+
+- (void)setUp
+{
+    //configure replicator
+    CAReplicatorLayer *layer = (CAReplicatorLayer *)self.layer;
+    layer.instanceCount = 2;
+
+    //move reflection instance below original and flip vertically
+    CATransform3D transform = CATransform3DIdentity;
+    CGFloat verticalOffset = self.bounds.size.height + 2;
+    transform = CATransform3DTranslate(transform, 0, verticalOffset, 0);
+    transform = CATransform3DScale(transform, 1, -1, 0);
+    layer.instanceTransform = transform;
+
+    //reduce alpha of reflection layer
+    layer.instanceAlphaOffset = -0.6;
+}
+￼
+- (id)initWithFrame:(CGRect)frame
+{
+    //this is called when view is created in code
+    if ((self = [super initWithFrame:frame])) {
+        [self setUp];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    //this is called when view is created from a nib
+    [self setUp];
+}
+@end
+</quartzcore></code></pre>
+<p><img src="./CAReplicatorLayer _ ios核心动画高级技巧_files/6.9.png" alt="图6.9"></p>
+<p class="comments-section">图6.9 在Interface Builder中使用<code>ReflectionView</code><div class="comments-icon"><div class="marker">+</div></div></p>
+<p><img src="./CAReplicatorLayer _ ios核心动画高级技巧_files/6.10.png" alt="图6.10"></p>
+<p class="comments-section">图6.10 <code>ReflectionView</code>自动实时产生反射效果。<div class="comments-icon"><div class="marker">+</div></div></p>
+<p class="comments-section">开源代码<code>ReflectionView</code>完成了一个自适应的渐变淡出效果（用<code>CAGradientLayer</code>和图层蒙板实现），代码见 <a href="https://github.com/nicklockwood/ReflectionView" target="_blank">https://github.com/nicklockwood/ReflectionView</a><div class="comments-icon"><div class="marker">+</div></div></p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cagradientLayer.html" class="navigation navigation-prev " aria-label="Previous page: CAGradientLayer"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cascrollLayer.html" class="navigation navigation-next " aria-label="Next page: CAScrollLayer" style="margin-right: 0px;"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="./CAReplicatorLayer _ ios核心动画高级技巧_files/app.js"></script>
+
+    
+    <script src="./CAReplicatorLayer _ ios核心动画高级技巧_files/plugin.js"></script>
+    
+
+    
+    <script src="./CAReplicatorLayer _ ios核心动画高级技巧_files/lunr.min.js"></script>
+    
+
+    
+    <script src="./CAReplicatorLayer _ ios核心动画高级技巧_files/search.js"></script>
+    
+
+    
+    <script src="./CAReplicatorLayer _ ios核心动画高级技巧_files/buttons.js"></script>
+    
+
+    
+    <script src="./CAReplicatorLayer _ ios核心动画高级技巧_files/buttons(1).js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"comment":{"highlightCommented":true},"autocover":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    
+    
+
+</body></html>
