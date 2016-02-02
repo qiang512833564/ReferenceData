@@ -6,7 +6,7 @@
 不管你的application当前设置是否忽略交互事件(application.beginIgnoringInteractionEvents) ，hitTest总会调用的，当然如果忽略了交互事件，之后的事件分发都不会调用了，事件会直接被废弃掉。假定我们没有忽略事件，如果hitTestView 无法处理这个事件，事件就通过响应链往上传递（hitTestView算是最早的Responder）,直到找到一个可以处理的Responder为止
 
 
-—————————需要注意的是，如果在ImageView或者Layer层上面加带事件的控件，则点击该控件的时候，该控件并不会去相应时间————————
+—————————需要注意的是，如果在ImageView或者Layer层上面加带事件的控件，则点击该控件的时候，该控件并不会去响应事件————————
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event用以确定事件发生的位置的
 1.默认的父子视图该方法调用的顺序是，父视图先调用，子视图后调用
 2.同级别子视图该方法调用的顺序是，优先检查顶部的子视图，如果发回为NO（或者hit-testing方法返回为nil）,则再检查底部的子视图
