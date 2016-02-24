@@ -14,6 +14,7 @@
 
 @implementation ViewController
 UIColorFromHexColor(Color);
+static void Unique_23(void) {}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.

@@ -1,0 +1,26 @@
+
+图片可以通过CALayer去展示，
+优点：直接可以直接通过CALayer去对图片添加动画
+let imageMask = CALayer()
+imageMask.contents = image.CGImage
+imageMask.bounds = imageFrame
+imageMask.position = imgCenterPoint
+
+获取图片大小的shapeLayer
+imageShape = CAShapeLayer()
+imageShape.bounds = imageFrame
+imageShape.position = imgCenterPoint
+imageShape.path = UIBezierPath(rect: imageFrame).CGPath
+imageShape.fillColor = imageColorOff.CGColor
+imageShape.actions = ["fillColor": NSNull()]
+self.layer.addSublayer(imageShape)
+        
+let imageMask = CALayer()
+imageMask.contents = image.CGImage
+imageMask.bounds = imageFrame
+imageMask.position = imgCenterPoint
+imageShape.mask = imageMask
+通过，这种方式，shapeLayer获取的仅仅只是图片的path,或者说只是图形,另外，可以通过这种方式，改变图型的颜色
+
+
+

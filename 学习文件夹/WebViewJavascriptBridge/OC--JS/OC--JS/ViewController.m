@@ -13,6 +13,7 @@
 
 - (void)callCamera;
 - (void)share:(NSString *)shareString;
+- (void)getCity;
 
 @end
 
@@ -36,7 +37,7 @@
     [super viewDidLoad];
     
     NSURL *url = [[NSBundle mainBundle]URLForResource:@"test" withExtension:@"html"];
-    [self.webView loadRequest:[[NSURLRequest alloc]initWithURL:url]];
+    [self.webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:@"http://172.16.10.13/hhr_system/demo.html"]]];//
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
@@ -45,11 +46,19 @@
      这样就可以获取到JS的context，然后为这个context注入我们的模型对象。
      */
     self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-    self.jsContext[@"Toyun"] = self;
+    self.jsContext[@"jsObj"] = self;//Toyun
+    //self.jsContext[@"Toyun"] = self;
+   // self.jsContext[@"logoutObject"] = self;
     self.jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue){
         context.exception = exceptionValue;
         NSLog(@"异常信息:%@",exceptionValue);
     };
+}
+- (void)logout{
+    NSLog(@"%s",__func__);
+}
+- (void)getCity{
+    NSLog(@"%s",__func__);
 }
 - (void)callCamera{
     NSLog(@"callCamera");

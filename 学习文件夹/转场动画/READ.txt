@@ -1,0 +1,20 @@
+
+一个视图视图控制器，通过自定义转场动画，过渡到另一个视图控制器，
+需要注意的是：设置动画展示样式为自定义
+1>NewViewController *newVC = [NewViewController new];
+newVC.modalPresentationStyle = UIModalPresentationCustom;
+2>
+在一个视图控制器转到另一个视图控制器时，会在中间多出来一层视图
+该视图为UIWindow->UITransitionView
+因此，添加该动画的原理就是：
+往视图上添加动画。
+3>
+过渡时期Transitioning的代理，可以是任意NSObject对象，只是需要注意的是
+该对象，必须遵循UIViewControllerTransitioningDelegate代理协议
+  另外：也需要实现两个方法：
+  方法一：- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
+  方法二： - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed;
+4>
+需要注意的是：
+代理的设定，必须是在fromViewController里去设置
+
