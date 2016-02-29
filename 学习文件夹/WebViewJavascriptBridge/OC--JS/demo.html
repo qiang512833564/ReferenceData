@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="zhinengfan">
+<title>滴滴打车注册页面</title>
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+<meta name="screen-orientation" content="portrait">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script type="text/javascript" src="http://www.jinyinmao.com.cn/static/js/jquery-1.11.3.min.js"></script>
+<style>
+    .demo,.link{ width:100px; height: 40px; background: #ccc; display: block; text-align: center; line-height:35px; color: #f00; margin-bottom: 10px;}    
+</style>
+</head>
+<body >
+<span class="demo">分享</span>
+<script>
+var data = {"title"	    : "好屋合伙人，一路陪伴房产经纪人成长！", 		//标题
+            "content"	: "111111111",		//内容
+            "imageUrl"	: "/static/images/TimeMachine/share.jpg",		//图片地址
+            "shareUrl"	: "www.baidu.com"		//链接地址
+            };
+var data = JSON.stringify(data);
+var type = "didi";
+$(".demo").click(function(){
+    window.jsObj.share(data,type);
+})
+</script>
+</body>
+</html>

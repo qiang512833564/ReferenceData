@@ -11,7 +11,7 @@
 @interface AppDelegate ()
 
 @end
-
+//// window.jsObj.myshare(data,type);
 @implementation AppDelegate
 
 

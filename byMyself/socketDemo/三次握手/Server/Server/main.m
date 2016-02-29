@@ -67,16 +67,17 @@ int main (int argc, const char * argv[])
         perror("listen error");
         return 1;
     }
-    //fd_set
+    //fd_set的数据结构，实际上是一long类型的数组，每一个数组元素都能与一打开的文件句柄建立联系
+    //
     fd_set server_fd_set;
     int max_fd = -1;
     struct timeval tv;
     tv.tv_sec = 20;
     tv.tv_usec = 0;
     while (1) {
-        FD_ZERO(&server_fd_set);
+        FD_ZERO(&server_fd_set);/*将set清零使集合中不含任何fd*/
         //标准输入
-        FD_SET(STDIN_FILENO, &server_fd_set);
+        FD_SET(STDIN_FILENO, &server_fd_set);/*将fd加入set集合*/
         if (max_fd < STDIN_FILENO) {
             max_fd = STDIN_FILENO;
         }

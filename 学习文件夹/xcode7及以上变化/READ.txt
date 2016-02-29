@@ -102,3 +102,19 @@ for (index, value) in targetArray.enumerate(){
       break
     }
 }
+
+————————————————————————————————swift中字符串截取方法——————————————
+1.将String转化为NSString再截取
+var s="1234567890"
+var ns1=(s as NSString).substringFromIndex(5)
+2.直接调用String的对应方法（推荐使用该方法），由于String对应的方法参数是String.Index类型而非Int类型，所以我们首先要创建String.Index类型参数值，：
+var s="1234567890"
+let index = s.startIndex.advancedBy(5) //swift 2.0+
+let index2 = s.endIndex.advancedBy(-6) //swift 2.0+
+var range = Range<String.Index>(start: index2,end: index)
+var s1:String=s.substringFromIndex(index)
+var s2:String=s.substringToIndex(index2)
+var s3=s.substringWithRange(range)
+通过String定义可以看出属性Index是个结构体
+
+——————————

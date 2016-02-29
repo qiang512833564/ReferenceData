@@ -16,6 +16,7 @@
 		2904CD391C6093DA0068FB70 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2904CD381C6093DA0068FB70 /* test.html */; };
 		2904CD3B1C609B5E0068FB70 /* Objective-C与JavaScript交互的那些事 - CocoaChina_让移动开发更简单.webarchive in Resources */ = {isa = PBXBuildFile; fileRef = 2904CD3A1C609B5E0068FB70 /* Objective-C与JavaScript交互的那些事 - CocoaChina_让移动开发更简单.webarchive */; };
 		2904CD3D1C609C7C0068FB70 /* iOS与JS交互实战篇（ObjC版）.webarchive in Resources */ = {isa = PBXBuildFile; fileRef = 2904CD3C1C609C7C0068FB70 /* iOS与JS交互实战篇（ObjC版）.webarchive */; };
+		2913ACB21C80396F00059B6C /* demo.html in Resources */ = {isa = PBXBuildFile; fileRef = 2913ACB11C80396F00059B6C /* demo.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		2904CD381C6093DA0068FB70 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		2904CD3A1C609B5E0068FB70 /* Objective-C与JavaScript交互的那些事 - CocoaChina_让移动开发更简单.webarchive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Objective-C与JavaScript交互的那些事 - CocoaChina_让移动开发更简单.webarchive"; sourceTree = "<group>"; };
 		2904CD3C1C609C7C0068FB70 /* iOS与JS交互实战篇（ObjC版）.webarchive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "iOS与JS交互实战篇（ObjC版）.webarchive"; sourceTree = "<group>"; };
+		2913ACB11C80396F00059B6C /* demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			children = (
 				2904CD3C1C609C7C0068FB70 /* iOS与JS交互实战篇（ObjC版）.webarchive */,
 				2904CD3A1C609B5E0068FB70 /* Objective-C与JavaScript交互的那些事 - CocoaChina_让移动开发更简单.webarchive */,
+				2913ACB11C80396F00059B6C /* demo.html */,
 				2904CD241C6093B60068FB70 /* AppDelegate.h */,
 				2904CD251C6093B60068FB70 /* AppDelegate.m */,
 				2904CD271C6093B60068FB70 /* ViewController.h */,
@@ -150,6 +153,7 @@
 				2904CD311C6093B60068FB70 /* LaunchScreen.storyboard in Resources */,
 				2904CD3D1C609C7C0068FB70 /* iOS与JS交互实战篇（ObjC版）.webarchive in Resources */,
 				2904CD2E1C6093B60068FB70 /* Assets.xcassets in Resources */,
+				2913ACB21C80396F00059B6C /* demo.html in Resources */,
 				2904CD2C1C6093B60068FB70 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +316,7 @@
 				2904CD371C6093B60068FB70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

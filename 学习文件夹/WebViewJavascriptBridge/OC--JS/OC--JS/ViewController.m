@@ -12,9 +12,10 @@
 @protocol JSObjectDelegate <JSExport>
 
 - (void)callCamera;
-- (void)share:(NSString *)shareString;
+//- (void)share:(NSString *)shareString;
 - (void)getCity;
-
+//- (void)share:(NSDictionary *)data,... ;
+- (void)share:(NSString *)data :(NSString*)type;
 @end
 
 @interface ViewController ()<UIWebViewDelegate,JSObjectDelegate>
@@ -36,8 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSURL *url = [[NSBundle mainBundle]URLForResource:@"test" withExtension:@"html"];
-    [self.webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:@"http://172.16.10.13/hhr_system/demo.html"]]];//
+    NSURL *url = [[NSBundle mainBundle]URLForResource:@"demo" withExtension:@"html"];
+    [self.webView loadRequest:[[NSURLRequest alloc]initWithURL:url]];//[NSURL URLWithString:@"http://172.16.10.13/hhr_system/demo.html"]
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
@@ -66,6 +67,39 @@
     JSValue *picCallback = self.jsContext[@"picCallback"];
     [picCallback callWithArguments:@[@"photos"]];
 }
+/*!
+ * @brief 把格式化的JSON格式的字符串转换成字典
+ * @param jsonString JSON格式的字符串
+ * @return 返回字典
+ */
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+- (void)share:(NSString *)data :(NSString*)type{
+    NSLog(@"%@---%@",[data class],data);
+    NSDictionary *dic = [ViewController dictionaryWithJsonString:data];
+    NSLog(@"%@",dic);
+}
+//- (void)share:(NSDictionary *)data,...{
+//    va_list args;
+//    va_start(args, data);
+//    NSString *type = va_arg(args, NSString*);
+//    NSLog(@"%@---%@",data,type);
+//}
+/*
 - (void)share:(NSString *)shareString{
     NSLog(@"share:%@",shareString);
     
@@ -74,6 +108,7 @@
     //这个是调用JS方法，并传入参数，
     [shareCallback callWithArguments:nil];
 }
+ */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
