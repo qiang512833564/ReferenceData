@@ -99,3 +99,24 @@ nonatomic不保证setter/getter的原语行，所以你可能会取不到完整�
 3.atomic的意思就是setter/getter这个函数是一个原子操作（原子操作（atomic operation）意为"不可被中断的一个或一系列操作" 。在多处理器上实现原子操作就变得有点复杂）（所谓原子操作，就是该操作绝不会在执行完毕前被任何其他任务或事件打断，也就说，它的最小的执行单位，不可能有比它更小的执行单位，因此这里的原子实际是使用了物理学里的物质微粒的概览）。如果有多个线程同时调用setter的话，不会出现某一个线程执行setter全部语句之前，另一个线程开始执行setter情况，相当于函数头尾加了锁一样。nonatomic不保证setter/getter的原语行，所以你可能会取不到完整的东西。比如setter函数里面该表两个成员变量，如果你nonatomic的话，getter可能会取到只更改了其中一个变量时候的状态。
 atomic是线程安全的,nonatomic是线程不安全的。如果只是单线程操作的话用nonatomic最好,因为后者效率高一些。
 
+——————————————————————————————————iOS中网络请求————————————————————————————
+iOS中，关于网络请求的接口自下至上有如下几层：
+CFSocket
+CFNetwork              —>ASIHttpRequest
+NSURLConnection        —>AFNetworking
+NSURLSession           —>AFNetworking2,Alamofire
+NSURLConnection 是基于 CFNetwork 的更高层的封装，提供面向对象的接口，AFNetworking 工作于这一层。
+NSURLSession 是 iOS7 中新增的接口，表面上是和 NSURLConnection 并列的，但底层仍然用到了 NSURLConnection 的部分功能 (比如 com.apple.NSURLConnectionLoader 线程)，AFNetworking2 和 Alamofire 工作于这一层。
+
+
+——————————————————————————————————苹果用Runloop实现的功能—————————————————————
+AutoreleasePool
+事件响应
+手势识别
+界面更新
+定时器
+PerformSelecter
+关于GCD
+
+Runloop的实际应用举例：
+       AFNetworking、AsyncDisplayKit

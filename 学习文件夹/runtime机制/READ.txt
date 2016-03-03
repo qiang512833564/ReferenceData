@@ -12,4 +12,6 @@ runtime用途：
 Method ori_Method = class_getInstanceMethod([NSArray class], @selector(lastObject));
 Method my_Method = class_getInstanceMethod([NSArray class], @selector(myLastObject));
 method_exchangeImplementations(ori_Method, my_Method);
+例如：动态添加方法
+是在类里，通过实现+ (BOOL)resolveInstanceMethod:(SEL)sel{}方法（而该方法由底层自己调用），去动态添加方法
 3.遍历一个类的所有成员变量（属性）\所有方法（因为NSObject在runtime里就是一个结构体）

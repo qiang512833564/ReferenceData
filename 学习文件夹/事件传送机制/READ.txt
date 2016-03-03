@@ -23,8 +23,10 @@ void STLogResponderChain(UIResponder *responder) {
   }
 }
 
-总结，系统会先通过- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event等方法去判断事件的发生位置，找到发生发生的最小控件之后（在这期间，如果一个控件的用户交互被关闭了，则- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event方法返回为nil,同时事件也不会往其子组件传递过去），再从该控件，往其父视图的方向去寻找是否有能处理该事件的控件。直到结束
+总结，系统会先通过- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event等方法去判断事件的发生位置，找到发生发生的最小控件之后（在这期间，如果一个控件的用户交互被关闭了，则- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event方法返回为nil,而pointInside方法不会被调用，同时事件也不会往其子组件传递过去），再从该控件，往其父视图的方向去寻找是否有能处理该事件的控件。直到结束
 
 
 注意当子视图超过父视图的frame之外时，是无法响应事件的：
 系统使用hit-testing来找到触摸下的视图，它检测一个触摸事件是否发生在相应视图对象的边界之内(即视图的frame属性，这也是为什么子视图如果在父视图的frame之外时，是无法响应事件的)
+事件传递的方向分两种情况：一种是：父子视图之间，先父视图，再子视图
+                 第二种是：同级视图之间，先最上层视图，再最底层视图（说白了，就是按照加入的先后顺序）！
