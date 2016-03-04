@@ -62,8 +62,8 @@
 // 方法一
 + (CoreTextData *)parseTemplateFile:(NSString *)path config:(CTFrameParserConfig*)config {
     NSMutableArray *imageArray = [NSMutableArray array];
-    NSAttributedString *content = [self loadTemplateFile:path config:config imageArray:imageArray];
-    CoreTextData *data = [self parseAttributedContent:content config:config];
+    NSAttributedString *content = [self loadTemplateFile:path config:config imageArray:imageArray];//获取带有配置信息的需要显示的NSAttributedString内容
+    CoreTextData *data = [self parseAttributedContent:content config:config];//将NSAttributedString转化成能够直接绘制的CTFrame
     data.imageArray = imageArray;
     return data;
 }
@@ -122,7 +122,7 @@ static CGFloat widthCallback(void *ref){
     unichar objectReplacementChar = 0xFFFC;
     NSString *content = [NSString stringWithCharacters:&objectReplacementChar length:1];
     NSDictionary *attributes = [self attributesWithConfig:config];
-    NSMutableAttributedString *space = [[NSMutableAttributedString alloc]initWithString:content attributes:attributes];;
+    NSMutableAttributedString *space = [[NSMutableAttributedString alloc]initWithString:content attributes:attributes];;//这里的attributes也可以不去设置，因为这里是用占位符填充的！
     CFAttributedStringSetAttribute((CFMutableAttributedStringRef)space, CFRangeMake(0, 1), kCTRunDelegateAttributeName, delegate);//把NSMutableAttributedString中指定位置CFRangeMake(0, 1)的字符串(在这里是占位符)与CTRunDelegateRef关联起来---关联关系为kCTRunDelegateAttributeName
     CFRelease(delegate);
     
@@ -183,14 +183,17 @@ static CGFloat widthCallback(void *ref){
         return nil;
     }
 }
-
+#pragma mark ---//CTFramesetter是CTFrame的创建工厂，NSAttributedString需要通过CTFrame绘制到界面上，得到CTFramesetter后，创建path（绘制路径），然后得到CTFrame，最后通过CTFrameDraw方法绘制到界面上。
 // 方法五
 + (CoreTextData *)parseAttributedContent:(NSAttributedString *)content config:(CTFrameParserConfig*)config {
+    
     // 创建 CTFramesetterRef 实例
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)content);
     
     // 获得要缓制的区域的高度
     CGSize restrictSize = CGSizeMake(config.width, CGFLOAT_MAX);
+    //CTFramesetterSuggestFrameSizeWithConstraints，用NSString的sizeWithFont算多行时会算不准的，因为在CoreText里，行间距也是你来控制的。
+    //第二个参数设置为CFRangeMake(0,0)，则会从内容的开始到结束算起
     CGSize coreTextSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), nil, restrictSize, nil);
     CGFloat textHeight = coreTextSize.height;
     

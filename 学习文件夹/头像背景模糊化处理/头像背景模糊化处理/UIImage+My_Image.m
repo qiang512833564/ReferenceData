@@ -16,12 +16,12 @@
 {
     
     //image must be nonzero size
-    
+    //floor(x),有时候也写做Floor(x)，其功能是“向下取整”，或者说“向下舍入”，即取不大于x的最大整数
     if (floorf(self.size.width) * floorf(self.size.height) <= 0.0f) return self;
     
     //boxsize must be an odd integer
     
-    uint32_t boxSize = (uint32_t)(radius * self.scale);//表示高斯函数中心焦点的半径（卷基函数）。---在这里要想有模糊效应，必须得是奇数
+    uint32_t boxSize = (uint32_t)(radius * self.scale);//表示高斯函数中心焦点的半径（卷积函数）。---在这里要想有模糊效应，必须得是奇数
     
     if (boxSize % 2 == 0) boxSize ++;
     

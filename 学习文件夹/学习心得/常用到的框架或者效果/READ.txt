@@ -27,7 +27,7 @@ UIKit和Core Graphics框架：(UIKit绘图，也是通过Quartz实现的)
    >当创建一个CGImage并使用CGContextDrawImage方法绘图就会引起图片颠倒的问题(即：创建和绘制一个CGImage对象时就会暴露出倒置问题)————另外，在UIGraphicsBeginImageContextWithOptions中获取的上下文，然后在获取图片，也是颠倒的
      >原因：因为原始的本地坐标系(坐标原点在左上角)与目标上下文(坐标原点在左下角)不匹配(究其原因是因为Core Graphics源于Mac OSX系统，在Mac OSX中，坐标原点在左下方并且正y坐标是朝上的，而在iOS中，原点坐标是在左上方并且正y坐标是朝下的。在大多数情况下，这不会出现任何问题，因为图形上下文的坐标系统会自动调节补偿的。)
         >修复方法：
-            >1:使用CGContextDrawImage方法先将CGImage绘制到UIImage上，然后获取UIImage对应的CGImage，此时就得到一个倒转的CGImage。当在调用CGContextDrawImage方法，就把倒转的图片再次倒转，还原回来了。
+            >1:使用CGContextDrawImage方法先将CGImage绘制到UIImage上，然后获取UIImage对应的CGImage，此时就得到一个倒转的CGImage。当再次调用CGContextDrawImage方法，就把倒转的图片再次倒转，还原回来了。
             >2:可以在绘图之前将CGImage包，装进UIImage中，再调用UIKit绘图的drawAtPoint方法，这样做有两大优点：
                >2.1当UIImage绘图时它会自动修复倒置问题
                >2.2当你从CGImage转化为UIImage时，可调用imageWithCGImage:scale:orientation:方法生成CGImage作为对缩放性的补偿。
@@ -77,3 +77,4 @@ CATransform3D 4*4矩阵(矩阵x对应第一列，y对应第二列，但是注意
 
 网络连接状态框架RealReachability
 Facebook推出的用户保护界面流畅性的框架AsyncDisplayKit
+用户保护界面流畅性YYKit

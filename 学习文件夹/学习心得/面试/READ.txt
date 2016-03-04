@@ -27,6 +27,10 @@ UIImagePickerController自定义导航栏—因为他也是一个导航控制器
 
 喜欢自定义func myLayoutSubviews()这样是因为系统的LayoutSubviews()不容易控制，在很多情况下会调用，这导致一个可变的frame，出现了可控制性
 
+CGContextFillPath，CGContextClip 使用的是非零绕组规则
+CGContextEOClip 使用的是奇偶规则
+
+卷积函数实现图片模糊化
 
 造成循环引用的三种场景：
 原因：可以简单地理解为A引用了B，而B又引用了A，双方都同时保持对对方的一个引用，导致任何时候引用计数都不为0，始终无法释放。
@@ -50,10 +54,38 @@ Method ori_Method = class_getInstanceMethod([NSArray class], @selector(lastObjec
 Method my_Method = class_getInstanceMethod([NSArray class], @selector(myLastObject));
 method_exchangeImplementations(ori_Method, my_Method);
 3.遍历一个类的所有成员变量（属性）\所有方法（因为NSObject在runtime里就是一个结构体）
+4.类别中关联对象
+
+
+——————————————————————————————————runloop——————————————————————————————
+Runloop实现自动释放池、延迟回调、触摸事件、屏幕刷新等功能(runloop说白了也就是一个do{}while循环，)
+线程与Runloop之间是一一对应的，其关系是保存在一个全局的Dictionary里。线程刚创建时并没有Runloop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。
+一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source/Timer/Observer。每次调用 RunLoop 的主函数时，只能指定其中一个 Mode，这个Mode被称作 CurrentMode。如果需要切换 Mode，只能退出 Loop，再重新指定一个 Mode 进入。这样做主要是为了分隔开不同组的 Source/Timer/Observer，让其互不影响。
+——————————————————————————————————苹果用Runloop实现的功能—————————————————————
+AutoreleasePool
+事件响应
+手势识别
+界面更新
+定时器
+PerformSelecter
+关于GCD
+
+Runloop的实际应用举例：
+       AFNetworking、AsyncDisplayKit
+
 
 设计模式：
 单例、代理、通知
 
+—————————————————————————————————————————————————
+面向对象的程序设置有一下三大原则：
+1.封装（Encapsulation），将一个相对独立的逻辑涉及的变量和函数放到一个类中，然后对外暴露少量接口，使其高内聚，低耦合。
+2.继承（Inheritance），子类可以继承父类的变量和函数，并且可以修改或扩展父类的行为。
+3.多态（Polymorphism），父类的指针可以指向子类的实例，在运行时程序语言支持找到子类对应的函数实现。
+在以上三大准则的基础上，再引入一些设计原则，比如：
+单一职责原则（Single Responsibility），每个类只应该做一件事情。
+不要重复原则（Don’t Repeat Yourself），相同（或相似）的代码不应该重复两次。
+好的组合优于继承（Better Composition over Inheritance），尽量使用组合而不是继承来设计。
 
 ##已知的编程思想：《参考代码———ReactiveCocoa文件夹》
 1>面向过程：处理事情以过程为核心，一步一步的实现。
@@ -66,7 +98,8 @@ method_exchangeImplementations(ori_Method, my_Method);
 5>函数式编程思想：是把操作尽量写成一系列嵌套的函数或者方法调用。
          函数式编程特点：每个方法必须有返回值（本身对象），把函数或者Block当做参数，block参数（需要操作的值）block返回值（操作结果）
          代表：ReactiveCocoa
-       
+
+—————————————————————————————————————————————————     
 
 StoryBoard——右击打开source code——>会看见，系统把storyboard转成xml,然后再解析xml,生成相应的代码
 
@@ -109,14 +142,63 @@ NSURLConnection 是基于 CFNetwork 的更高层的封装，提供面向对象�
 NSURLSession 是 iOS7 中新增的接口，表面上是和 NSURLConnection 并列的，但底层仍然用到了 NSURLConnection 的部分功能 (比如 com.apple.NSURLConnectionLoader 线程)，AFNetworking2 和 Alamofire 工作于这一层。
 
 
-——————————————————————————————————苹果用Runloop实现的功能—————————————————————
-AutoreleasePool
-事件响应
-手势识别
-界面更新
-定时器
-PerformSelecter
-关于GCD
+——————————————————————————————————如何保持高性能—————————————————————————————
+圆角效果高效地实现:对于只需要圆角的某些场合，也可以用一张已经绘制好的圆角图片覆盖到原本视图上面来模拟相同的视觉效果。最彻底的解决办法，就是把需要显示的图形在后台线程绘制为图片，避免使用圆角、阴影、遮罩等属性。
 
-Runloop的实际应用举例：
-       AFNetworking、AsyncDisplayKit
+目前主流的移动设备情况是：iOS设备会始终使用双缓存（即两个缓冲区）
+                     安卓系统是三缓存+垂直同步
+app主线程开始在CPU中计算显示内容（视图创建、布局计算、图片编码、文本绘制等），随后CPU会将计算好的内容提交到GPU中去，由GPU进行变换、合成、渲染。随后GPU会把渲染结果提交到帧缓冲区中去，等待下一次VSync信号到来时显示到屏幕上去。
+界面卡顿的原因：
+           如果在一个Sync时间内，CPU或者GPU没有完成内容提交，则那一帧就会被丢弃，等待下一次机会再显示，而这时显示屏会保留之前的内容不变。这就会造成界面的卡顿。
+           （CPU和GPU都可能会阻碍显示流程，造成掉帧现象）
+
+CPU处理时间延长，造成卡顿的主要原因是因为：主线程被阻碍了，而阻碍主线程的任务：主要分为三大类：
+     1.文本宽高计算、视图布局计算
+     2.文本渲染、图片解码、图片绘制
+     3.对象创建、对象调整、对象销毁
+文本和布局的计算、渲染、解码、绘制都可以通过各种方式异步执行，但 UIKit 和 Core Animation 相关操作必需在主线程进行。
+因此优化的目标是：就是尽量把这些任务从主线程挪走，而挪不走的，就尽量优化性能。
+
+需要注意的是：UIView 和 CALayer 不是线程安全的，并且只能在主线程创建、访问和销毁。
+性能优化方案：
+一：CPU优化方案
+1.对象的创建：——对象的创建会分配内存、调整属性、升职还有读取文件等操作，比较消耗CPU资源
+          对象复用（如果对象可以复用，并且复用的代价比释放、创建新对象要小，那么这类对象应当尽量放到一个缓存池里复用。）
+          推迟对象的创建时间（比如懒加载，尽量推迟对象创建的时间，并把对象的创建分散到多个任务中去。尽管这实现起来比较麻烦，并且带来的优势并不多，但如果有能力做，还是要尽量尝试一下。）
+          轻量级对象代替重量级的对象
+          性能敏感的界面不使用Storyboard(通过 Storyboard 创建视图对象时，其资源消耗会比直接通过代码创建对象要大非常多，在性能敏感的界面里，Storyboard 并不是一个好的技术选择。)
+
+2.对象调整：减少对CALayer与UIView关于显示相关的属性（比如frame/bounds/transform）等的修改
+          这里特别说一下 CALayer：CALayer 内部并没有属性，当调用属性方法时，它内部是通过运行时 resolveInstanceMethod 为对象临时添加一个方法，并把对应属性值保存到内部的一个 Dictionary 里，同时还会通知 delegate、创建动画等等，非常消耗资源。
+
+3.对象销毁：通常当容器类持有大量对象时，其销毁时的资源消耗就会非常明显。应该尽可能的放到后台线程去释放
+
+4.文本计算：大量文本显示，文本的高度计算尽可能的放到后台线程去，以免阻碍主线程。
+
+5.文本渲染：屏幕上能看到的所有文本内容空间，包括UIWebView，在顶层都是通过CoreText排版的，常见的文本控件 （UILabel、UITextView 等），其排版和绘制都是在主线程进行的，因此当显示大量文本时，CPU的压力会很大，此时，我们应该通过TextKit或最底层的CoreText对文本异步绘制。
+
+6.图片的解码：
+  当你使用UIImage或CGImageSource的那几个方法去创建图片时，图片数据并不会立刻解码。图片设置到UIImageView或者CALayer.contents中去，并且CALayer被提交到GPU前，CGImage中的数据才会得到解码。然而这一步是发生在主线程中，并且不可避免。如果想要绕开这个机制，常见的做法是在后台线程先把图片绘制到CGBitmapContext中，然后从Bit马屁直接创建图片。目前常见的网络图片库都自带这个功能。
+
+7.图像的绘制：
+  图像的绘制，通过后台线程实现CoreGraphic绘制，然后取得其CGImageRef，然后再回到主线程去显示
+
+二：GPU资源消耗
+1.纹理的渲染：当图片过大，超过 GPU 的最大纹理尺寸时，图片需要先由 CPU 进行预处理，这对 CPU 和 GPU 都会带来额外的资源消耗
+2.视图的混合：当多个视图（或者说 CALayer）重叠在一起显示时，GPU 会首先把他们混合到一起。如果视图结构过于复杂，混合的过程也会消耗很多 GPU 资源。为了减轻这种情况的 GPU 消耗，应用应当尽量减少视图数量和层次，
+3.图片的合成：
+  CALayer的border、圆角、阴影、遮盖（mask离屏渲染）
+  CASharpLayer 的矢量图形显示，通常会触发离屏渲染（offscreen rendering），而离屏渲染通常发生在 GPU 中.
+  当一个列表视图中出现大量圆角的 CALayer，并且快速滑动时，可以观察到 GPU 资源已经占满，而 CPU 资源消耗很少.
+  对于只需要圆角的某些场合，也可以用一张已经绘制好的圆角图片覆盖到原本视图上面来模拟相同的视觉效果。最彻底的解决办法，就是把需要显示的图形在后台线程绘制为图片，避免使用圆角、阴影、遮罩等属性。
+—————————————————————————————————————————————————————————————————————————————————————
+—————————————————————————————————后台线程的实现方式—————————————————————
+a.使用GCD
+   //切换到线程中执行
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // Do the work in background
+                [[MyManager shareInstance] myMethod];
+            });
+
+b.使用performSelectorInBackground方法
+  [self performSelectorInBackground:@selector(myMethod:) withObject:myObj];
