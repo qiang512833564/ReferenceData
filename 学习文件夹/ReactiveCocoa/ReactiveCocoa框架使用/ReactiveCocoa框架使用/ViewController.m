@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import <objc/runtime.h>
 @interface ViewController ()
 
 @end
@@ -99,23 +99,96 @@
     [btn sizeToFit];
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(sendNotes) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    MyRedView *redView = [[MyRedView alloc]initWithFrame:CGRectMake(100, 100, 200, 100)];
+    [self.view addSubview:redView];
+    
+    Method method = class_getInstanceMethod([MyRedView class], NSSelectorFromString(@"btnAction"));
+    
+    [[redView rac_signalForSelector:method_getName(method)]subscribeNext:^(id x) {//@selector(btnAction)
+        NSLog(@"点击红色按钮");
+    }];
+}
+- (void)click:(MyRedView *)redView{
+    NSLog(@"%@--%s",[self class],__func__);
 }
 - (void)sendNotes{
     TwoViewController *twoVC = [[TwoViewController alloc]init];
     //设置代理信号
     twoVC.delegateSignal = [RACSubject subject];
     //订阅代理信号
+    
     [twoVC.delegateSignal subscribeNext:^(id x) {
         NSLog(@"点击了通知按钮");
+        //创建请求信号
+        RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            NSLog(@"发送请求");
+            return nil;
+        }];
+        //订阅信号
+        [signal subscribeNext:^(id x) {
+            NSLog(@"接收数据1");
+        }];
+        //订阅信号
+        [signal subscribeNext:^(id x) {
+            NSLog(@"接收数据2");
+        }];
+        /*
+         运行结果，会执行两遍发送请求，也就是每次订阅都会发送一次请求
+         */
+        
+        //RACMulticastConnection:解决重复请求问题
+        //1.创建信号
+        RACSignal *signal2 = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            NSLog(@"发送请求2");
+            [subscriber sendNext:@1];
+            return nil;
+        }];
+        //2.创建链接
+        RACMulticastConnection *connection = [signal2 publish];
+        
+        //3.订阅信号
+        //注意：订阅信号，也不能激活信号，只是保存订阅者到数组，必须通过连接，当调用连接，就会
+        //一次性调用所有订阅者的sendNext:
+        [connection.signal subscribeNext:^(id x) {
+            NSLog(@"订阅者一信号");
+        }];
+        [connection.signal subscribeNext:^(id x) {
+            NSLog(@"订阅者二信号");
+        }];
+        
+        //4.连接，激活信号
+        [connection connect];
+        
     }];
+#pragma mark ---- 1.代替代理
+    
     
     [self presentViewController:twoVC animated:YES completion:^{
         
     }];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+@end
+@implementation MyRedView
+
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.btn.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        [self addSubview:self.btn];
+        self.btn.backgroundColor = [UIColor redColor];
+        [self.btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
+- (void)btnAction{
+    NSLog(@"%@--%s",[self class],__func__);
+}
 @end

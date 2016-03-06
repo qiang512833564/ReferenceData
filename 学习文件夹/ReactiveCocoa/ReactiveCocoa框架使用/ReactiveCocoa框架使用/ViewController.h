@@ -14,3 +14,6 @@
 
 @end
 
+@interface MyRedView : UIView
+@property (nonatomic, strong)UIButton *btn;
+@end

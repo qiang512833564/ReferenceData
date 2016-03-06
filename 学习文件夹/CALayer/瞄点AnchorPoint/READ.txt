@@ -4,4 +4,9 @@ anchorPoint——x与y一般设置为0~1，但是也可以设置为0~1范围以�
 一种是在设置frame前设置
     位置是以frame设置为准
 第二种是在设置frame后设置
-    位置是以position为准，但是需要注意的是position的位置是相对于anchorpoint的位置是一直的，也就是所以想这个时候，改变anchorpoint的位置，position的位置也相应的会变化（但是真实是不变的,变化的是相对于视图本身的位置），因此，这个时候，有两种方式去解决，一种是改变postion的位置，另一种是重新设置frame
+    位置是以position为准，但是需要注意的是position的位置是相对于anchorpoint的位置是一致的，也就是所以想这个时候，改变anchorpoint的位置，position的位置是不变的，与anchorPoint的相对位置也是保持一致的，因此，这个时候，有两种方式去解决，一种是改变postion的位置，另一种是重新设置frame
+
+
+anchorPoint：为了将视图精确地放置在屏幕的父视图上，需要设置该矩形的位置参考点，这个点就是anchorPoint
+             另外，anchorPoint的值，是相对于bounds的百分比来取值的
+position:视图的中心坐标

@@ -42,5 +42,10 @@
         // 有值，才需要通知
         [self.delegateSignal sendNext:nil];
     }
+    
+    
+}
+- (void)btnckick{
+    NSLog(@"%s----%@",__func__,[self class]);
 }
 @end

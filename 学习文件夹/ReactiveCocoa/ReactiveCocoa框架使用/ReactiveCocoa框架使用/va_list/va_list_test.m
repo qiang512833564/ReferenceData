@@ -7,7 +7,7 @@
 //
 
 #import "va_list_test.h"
-
+#import<objc/runtime.h>
 @implementation va_list_test
 /*
  在调用的时候要在参数结尾的时候加 nil，回想下 [NSMutableArray arrayWithObjects: 1, 2, 3, nil] 这个构造过程，最后一个 nil 能让 va_arg 取参数时碰到 nil 则断定为 NO，终止循环
