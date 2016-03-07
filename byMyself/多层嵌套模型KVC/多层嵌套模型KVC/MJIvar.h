@@ -8,7 +8,7 @@
 
 #import "MJMember.h"
 #import "MJType.h"
-@interface MJIvar : MJMember
+@interface MJIvar : MJMember//利用父类的_srcObject对象（父类是id，这里是NSDictionary对象），去存储关联对象propertyName与value
 @property (nonatomic, assign)Ivar ivar;
 @property (nonatomic, strong, readonly) MJType *type;
 

@@ -1,5 +1,5 @@
 | [leichunfeng/MVVMReactiveCocoa](https://github.com/leichunfeng/MVVMReactiveCocoa)| **推荐！一个完整的使用MVVM和RAC的Github客户端
-
+ReactiveCocoa也能有效地减少代码量
 ReactiveCocoa简称为RAC
 ReactiveCocoa编程思想：
 ReactiveCocoa结合了几种编程风格：

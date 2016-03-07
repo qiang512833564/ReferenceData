@@ -1,3 +1,5 @@
+MJExtension实现JSON和模型之间最快捷方便的转换。
+
 原理：
 首先先创建：
 MJMember类
