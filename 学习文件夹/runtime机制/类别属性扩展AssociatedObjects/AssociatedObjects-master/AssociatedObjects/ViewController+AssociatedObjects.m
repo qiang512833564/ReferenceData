@@ -23,6 +23,7 @@
 
 - (void)setAssociatedObject_assign:(NSString *)associatedObject_assign {
     objc_setAssociatedObject(self, @selector(associatedObject_assign), associatedObject_assign, OBJC_ASSOCIATION_ASSIGN);
+    
 }
 
 - (NSString *)associatedObject_retain {
@@ -50,5 +51,27 @@
 + (void)setAssociatedObject:(NSString *)associatedObject {
     objc_setAssociatedObject([self class], @selector(associatedObject), associatedObject, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
++ (void)load
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = [self class];
+        SEL originalSelector = @selector(viewWillAppear:);
+        SEL swizzledSelector = @selector(xxx_viewWillAppear:);
+        
+        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+        Method swizzledMthod = class_getInstanceMethod(class, swizzledSelector);
+        
+        BOOL didAddMethod = class_addMethod(class, originalSelector, method_getImplementation(swizzledMthod), method_getTypeEncoding(swizzledMthod));
+        if (didAddMethod) {//
+            class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+        }else{
+            method_exchangeImplementations(originalMethod, swizzledMthod);
+        }
+    });
+}
+- (void)xxx_viewWillAppear:(BOOL)animated {
+    [self xxx_viewWillAppear:animated];
+    NSLog(@"viewWillAppear: %@", self);
+}
 @end

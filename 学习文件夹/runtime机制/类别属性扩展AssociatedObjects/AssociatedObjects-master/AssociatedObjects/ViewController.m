@@ -36,5 +36,9 @@ __weak NSString *string_weak_copy   = nil;
     NSLog(@"self.associatedObject_retain: %@", self.associatedObject_retain);
     NSLog(@"self.associatedObject_copy:   %@", self.associatedObject_copy);
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"%s",_cmd);
+}
 
 @end
