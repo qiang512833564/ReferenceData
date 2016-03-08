@@ -32,19 +32,24 @@
 }
 
 #pragma mark Managing Subscribers
-
+//注意这里subscribe方法的调用时间：
+//RACSignal里面方法：- (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock内部调用
 - (RACDisposable *)subscribe:(id<RACSubscriber>)subscriber {
 	NSCParameterAssert(subscriber != nil);
 
 	RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];
+    //将disposable与subscriber关联起来
 	subscriber = [[RACPassthroughSubscriber alloc] initWithSubscriber:subscriber signal:self disposable:disposable];
 
 	if (self.didSubscribe != NULL) {
+        //schedule函数，会在内部调用传入的block参数，并返回一个RACDisposable对象
 		RACDisposable *schedulingDisposable = [RACScheduler.subscriptionScheduler schedule:^{
-			RACDisposable *innerDisposable = self.didSubscribe(subscriber);
+            //这里才真正的开始传递信号
+			RACDisposable *innerDisposable = self.didSubscribe(subscriber);//调用创建信号是传入的block函数
 			[disposable addDisposable:innerDisposable];
 		}];
-
+        //通过销毁通过schedule方法返回的RACDisposable对象
+        //来去掉已经在调度中（scheduling）的block
 		[disposable addDisposable:schedulingDisposable];
 	}
 	

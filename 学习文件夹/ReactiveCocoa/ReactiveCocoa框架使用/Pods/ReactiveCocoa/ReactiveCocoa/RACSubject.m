@@ -52,6 +52,8 @@
 #pragma mark Subscription
 
 - (RACDisposable *)subscribe:(id<RACSubscriber>)subscriber {
+    //RACSubject的这个方法，与RACDynamic的方法，实现原理不一样，RACSubject的原理，仅仅是把RACSubscriber加入到自身的数组里，
+    //然后再通过RACSubscriber的方法sendNext去调用
 	NSCParameterAssert(subscriber != nil);
 
 	RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];

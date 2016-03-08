@@ -93,6 +93,7 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 	#endif
 
 	if (otherDisposables.count > RACCompoundDisposableInlineCount) {
+        //创建一个_disposables数组
 		_disposables = RACCreateDisposablesArray();
 
 		CFRange range = CFRangeMake(RACCompoundDisposableInlineCount, (CFIndex)otherDisposables.count - RACCompoundDisposableInlineCount);

@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-#pragma mark ---- RACSignal
+#pragma mark ---- RACSignal发送信号与接收信号，顺序是：必须先接收信号（即订阅），再发送信号（因为实质上，都是RACSubscriber对象进行的操作）
     //1、创建信号-----从下面的实现步骤（先是生成信号，然后在对信号进行订阅）来看：信号类（RACSiganl）,默认是一个冷信号，也就是只有值发生改变时，才会触发，（换句话说：只有订阅了该信号，这个信号才会变成热信号，才会被触发）
     RACSignal *siganl = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         //block调用时刻：每当有订阅者订阅信号，就会调用block
@@ -39,20 +39,25 @@
             NSLog(@"信号被销毁");
         }];
     }];
-    
-    //3.订阅信号，才会激活信号。
+    //信号创建时，传入的block，只有在订阅信号，即subscribeNext方法调用的时候，才会被调用
+    //如果创建信号的时候，传入的block中有发送信号的方法sendNext:方法（RACSubscriber调用sendNext:方法的时候，会在其内部调用subscribeNext:传入的block（next）函数），就会调用其nextblock函数（也就是所谓的发送信号）
+    //另外在sendNext:方法内部，也会去调用订阅信号传入的nextblock
+    //3.订阅信号，才会激活信号。subscribeNext方法内部会根据传入的block创建RACSubscriber
     [siganl subscribeNext:^(id x) {
         //block调用时刻：每当有信号发出数据，就会调用block
         NSLog(@"接收到数据:%@",x);
     }];
+    //总结，创建RACSignal的时候，仅仅只是把block存起来
+    //RACSubscriber订阅激活信号后，先调用createSignal:传入的block，然后在调用subscribeNext:传入的next传入的block
+    //
 
 #pragma mark -- RACSubject
     // RACReplaySubject使用步骤:
     // 1.创建信号 [RACSubject subject]，跟RACSiganl不一样，创建信号时没有block。
-    // 2.可以先订阅信号，也可以先发送信号。
+    // 2.可以先订阅信号，也可以先发送信号。经测试只有先订阅信号，后发送信号，才能有效
     // 2.1 订阅信号 - (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock
     // 2.2 发送信号 sendNext:(id)value
-    //1.创建信号
+    //1.创建信号(这个类的大致思路是：一个信号对象，存储着一个subscribers数组，然后每订阅一次信号，就会添加一个subscriber对象，然后每发送一次信号，就会遍历一次subscribers数组，然后对每个subscriber进行发送信号一次)
     RACSubject *subject = [RACSubject subject];
     //订阅信号
     [subject subscribeNext:^(id x) {
@@ -106,8 +111,29 @@
     
     Method method = class_getInstanceMethod([MyRedView class], NSSelectorFromString(@"btnAction"));
     
+    //rac_signalForSelector通过runtime的方法消息机制，来实现的
+    //根据selector产生RACSubject(继承自RACSignal)信号,
+    //RACSubject:信号提供者，自己可以充当信号，又能发送信号。
+    //使用场景:通常用来代替代理，有了它，就不必要定义代理了
+    //点击事件发生的时候，默认会发送一条信息
     [[redView rac_signalForSelector:method_getName(method)]subscribeNext:^(id x) {//@selector(btnAction)
         NSLog(@"点击红色按钮");
+        CGPoint center = redView.center;
+        center.x+=10;
+        redView.center =center;
+    }];
+    //KVO
+    //追根溯源：[strongTarget addObserver:RACKVOProxy.sharedProxy forKeyPath:self.keyPath options:options context:(__bridge void *)self];也是通过KVO实现的
+    //只是中间会生成一个对象RACKVOProxy.sharedProxy去充当观察者，然后再去发送一个信号，
+    //这个方法会返回一个RACSignal信号对象，再对该信号对象进行订阅
+    /*
+     RACSubscriber调用sendNext:方法的时候，会在其内部调用subscribeNext:传入的block（next）函数
+     */
+    [[redView rac_valuesAndChangesForKeyPath:@"center" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld observer:nil]subscribeNext:^(id x) {
+        
+    }];
+    [RACObserve(redView, center)subscribeNext:^(id center) {
+        NSLog(@"%@", center);
     }];
 }
 - (void)click:(MyRedView *)redView{
@@ -152,7 +178,7 @@
         //注意：订阅信号，也不能激活信号，只是保存订阅者到数组，必须通过连接，当调用连接，就会
         //一次性调用所有订阅者的sendNext:
         [connection.signal subscribeNext:^(id x) {
-            NSLog(@"订阅者一信号");
+            NSLog(@"%@订阅者一信号",x);
         }];
         [connection.signal subscribeNext:^(id x) {
             NSLog(@"订阅者二信号");
@@ -189,6 +215,8 @@
     return self;
 }
 - (void)btnAction{
-    NSLog(@"%@--%s",[self class],__func__);
+    NSLog(@"%@--%s----%s",[self class],__func__,_cmd);
+    //通过打印方法SEL即（_cmd）可知道（rac_alias_btnAction），这里的方法，已经在内部被修改了，虽然名字这里看到的没有变，但是仅仅是把方法的实现部分copy到另一个，也就是内部调用的方法中。
 }
+
 @end

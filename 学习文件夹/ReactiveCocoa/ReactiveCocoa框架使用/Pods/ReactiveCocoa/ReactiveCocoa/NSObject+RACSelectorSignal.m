@@ -40,33 +40,40 @@ static NSMutableSet *swizzledClasses() {
 @implementation NSObject (RACSelectorSignal)
 
 static BOOL RACForwardInvocation(id self, NSInvocation *invocation) {
-	SEL aliasSelector = RACAliasForSelector(invocation.selector);
+	SEL aliasSelector = RACAliasForSelector(invocation.selector);//获取到NSObjectRACSignalForSelector方法里动态创建的方法 alias选择器
 	RACSubject *subject = objc_getAssociatedObject(self, aliasSelector);
+    //根据方法aliasSelector，获取信号subject（从中可以看出，RAC的信号是可以传递和绑定的）
 
 	Class class = object_getClass(invocation.target);
 	BOOL respondsToAlias = [class instancesRespondToSelector:aliasSelector];
 	if (respondsToAlias) {
 		invocation.selector = aliasSelector;
-		[invocation invoke];
+		[invocation invoke];//调用方法
 	}
 
 	if (subject == nil) return respondsToAlias;
-
+    //触发事件的时候(比如点击button事件等)，会发送一个消息
 	[subject sendNext:invocation.rac_argumentsTuple];
 	return YES;
 }
-
 static void RACSwizzleForwardInvocation(Class class) {
+    //- (void)forwardInvocation:(NSInvocation *)anInvocation---这里runtime自带的方法
+    //如果一个对象收到一条无法处理的消息，运行时系统会在抛出错误前，给该对象发送一条forwardInvocation:消息，该消息的唯一参数是个NSInvocation类型的对象——该对象封装了原始的消息和消息的参数
+    //您可以实现forwardInvocation:方法来对不能处理的消息做一些默认的处理，也可以以其它的某种方式来避免错误被抛出
+    //如forwardInvocation:的名字所示，它通常用来将消息转发给其它的对象。
+    //假设您希望您的对象和另外一个类的对象对negotiate的消息的响应完全一致。一种可能的方式就是让您的类继承其它类的方法实现。
+    //注意： forwardInvocation:方法只有在消息接收对象中无法正常响应消息时才会被调用。
+    //所以，如果您希望您的对象将negotiate消息转发给其它对象，您的对象不能有negotiate方法。否则，forwardInvocation:将不可能会被调用。
 	SEL forwardInvocationSEL = @selector(forwardInvocation:);
 	Method forwardInvocationMethod = class_getInstanceMethod(class, forwardInvocationSEL);
 
-	// Preserve any existing implementation of -forwardInvocation:.
+	// Preserve any existing implementation of -forwardInvocation:.保留forwardInvocation:方法的实现部分
 	void (*originalForwardInvocation)(id, SEL, NSInvocation *) = NULL;
 	if (forwardInvocationMethod != NULL) {
 		originalForwardInvocation = (__typeof__(originalForwardInvocation))method_getImplementation(forwardInvocationMethod);
 	}
 
-	// Set up a new version of -forwardInvocation:.
+	// Set up a new version of -forwardInvocation:.重新设置forwardInvocation:方法
 	//
 	// If the selector has been passed to -rac_signalForSelector:, invoke
 	// the aliased method, and forward the arguments to any attached signals.
@@ -85,7 +92,6 @@ static void RACSwizzleForwardInvocation(Class class) {
 			originalForwardInvocation(self, forwardInvocationSEL, invocation);
 		}
 	};
-
 	class_replaceMethod(class, forwardInvocationSEL, imp_implementationWithBlock(newForwardInvocation), "v@:@");
 }
 
@@ -113,7 +119,7 @@ static void RACSwizzleRespondsToSelector(Class class) {
 
 		return originalRespondsToSelector(self, respondsToSelectorSEL, selector);
 	};
-
+    //class_replaceMethod替换方法的实现
 	class_replaceMethod(class, respondsToSelectorSEL, imp_implementationWithBlock(newRespondsToSelector), method_getTypeEncoding(respondsToSelectorMethod));
 }
 
@@ -179,16 +185,20 @@ static RACSignal *NSObjectRACSignalForSelector(NSObject *self, SEL selector, Pro
 		RACSubject *subject = objc_getAssociatedObject(self, aliasSelector);
 		if (subject != nil) return subject;
 
-		Class class = RACSwizzleClass(self);
+        Class class = RACSwizzleClass(self);
+        //这里得到的是一个动态创建的类
+        NSLog(@"self----%@---other -----%@",self,class);
+        
 		NSCAssert(class != nil, @"Could not swizzle class of %@", self);
 
 		subject = [[RACSubject subject] setNameWithFormat:@"%@ -rac_signalForSelector: %s", self.rac_description, sel_getName(selector)];
 		objc_setAssociatedObject(self, aliasSelector, subject, OBJC_ASSOCIATION_RETAIN);
-
+        //RACDisposable:用于取消订阅或者清理资源，当信号发送完成或者发送错误的时候，就会自动触发它。
 		[self.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
 			[subject sendCompleted];
+            //如果不在发送数据，最好发送信号完成，内部会自动调用[RACDisposable disposable]取消订阅信号。
 		}]];
-
+        
 		Method targetMethod = class_getInstanceMethod(class, selector);
 		if (targetMethod == NULL) {
 			const char *typeEncoding;
@@ -224,14 +234,14 @@ static RACSignal *NSObjectRACSignalForSelector(NSObject *self, SEL selector, Pro
 			const char *typeEncoding = method_getTypeEncoding(targetMethod);
 
 			RACCheckTypeEncoding(typeEncoding);
-
-			BOOL addedAlias __attribute__((unused)) = class_addMethod(class, aliasSelector, method_getImplementation(targetMethod), typeEncoding);
+            NSLog(@"%@",class);
+			BOOL addedAlias __attribute__((unused)) = class_addMethod(class, aliasSelector, method_getImplementation(targetMethod), typeEncoding);//动态添加aliasSelector方法（实现内容为事件的自定义处理内容）
 			NSCAssert(addedAlias, @"Original implementation for %@ is already copied to %@ on %@", NSStringFromSelector(selector), NSStringFromSelector(aliasSelector), class);
 
 			// Redefine the selector to call -forwardInvocation:.
+            // 用空的实现，去替换forwardInvocation:里原先的实现内容
 			class_replaceMethod(class, selector, _objc_msgForward, method_getTypeEncoding(targetMethod));
 		}
-
 		return subject;
 	}
 }
@@ -256,7 +266,9 @@ static const char *RACSignatureForUndefinedSelector(SEL selector) {
 static Class RACSwizzleClass(NSObject *self) {
 	Class statedClass = self.class;
 	Class baseClass = object_getClass(self);
-
+   // NSLog(@"%@----%@",statedClass,baseClass);
+    //If you replace Class obj = [NSObject class]; with NSObject *obj = [NSObject new];, the result will be the same when printing cls and cls2. That is,
+    
 	// The "known dynamic subclass" is the subclass generated by RAC.
 	// It's stored as an associated object on every instance that's already
 	// been swizzled, so that even if something else swizzles the class of
@@ -295,10 +307,13 @@ static Class RACSwizzleClass(NSObject *self) {
 	Class subclass = objc_getClass(subclassName);
 
 	if (subclass == nil) {
+        //动态创建类（为self的子类）
+        //objc_allocateClassPair([NSObject class], className, 0);
 		subclass = [RACObjCRuntime createClass:subclassName inheritingFromClass:baseClass];
 		if (subclass == nil) return nil;
 
-		RACSwizzleForwardInvocation(subclass);
+		RACSwizzleForwardInvocation(subclass);//这个是代理实现的主要方法
+        //下面的基本上都是对系统方法的，根据自己需要去改变
 		RACSwizzleRespondsToSelector(subclass);
 
 		RACSwizzleGetClass(subclass, statedClass);
@@ -326,5 +341,6 @@ static Class RACSwizzleClass(NSObject *self) {
 
 	return NSObjectRACSignalForSelector(self, selector, protocol);
 }
+
 
 @end

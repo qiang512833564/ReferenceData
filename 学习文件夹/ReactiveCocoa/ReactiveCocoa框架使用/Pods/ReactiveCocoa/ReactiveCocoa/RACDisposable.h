@@ -26,6 +26,7 @@
 
 /// Performs the disposal work. Can be called multiple times, though subsequent
 /// calls won't do anything.
+//执行清理和释放内存的操作
 - (void)dispose;
 
 /// Returns a new disposable which will dispose of this disposable when it gets

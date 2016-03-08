@@ -11,8 +11,18 @@ ReactiveCocoa结合了几种编程风格：
 
 ——ReactiveCocoa开发中常见用法
   代替代理
-  代替KVO
+  代替KVO(此外不需要担心会造成内存问题，因为对于KVO没有添加观察者与移除观察者的概念)
   监听事件
   代替通知
   监听文本框文字改变
   处理当界面多次请求时，需要都获取到数据时，才能展示界面
+
+基础类：
+RACSignal：信号流
+RACSubscriber：接受者（也有只要遵循RACSubscriber协议，都可以成为RACSubscriber）
+RACDisposable：用来清理和释放内存的
+RACCommand:类用于表示事件的执行，一般来说是在UI上的某些动作来触发这些事件，比如点击一个按钮。
+RACSequence:RAC中的集合类，用于代替NSArray,NSDictionary,可以使用它来快速遍历数组和字典。
+
+RACCompoundDisposable是一个RACDisposable管理工具
+RACScheduler通过调度block来完成对事件传送的操作，可以通过销毁通过schedule方法返回的RACDisposable对    象来去掉已经在调度中（scheduling）的block

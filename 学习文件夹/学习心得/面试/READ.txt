@@ -227,3 +227,7 @@ b.使用performSelectorInBackground方法
 堆，一般是由程序员自己分配的new,malloc方法分配的，若程序员不释放，程序结束时可能由OS回收 
 一个对象在生成时：
    runtime实现swizzling通过修改类的分发表中selector对应的函数，来修改方法的实现(依旧是修改了method对应的函数指针—貌似可以理解为IMP)
+———————————————————————————————keychain—————————————————————————————————
+  userdefault适合保存一些轻量级的数据，使用userdefault保存的数据加载的时候要快一些，数据以明文的形式保存在.plist文件中，不适合用来保存密码信息。
+  keychain采用的是将数据加密之后再保存到本地的，这样对数据而言有更高的安全性，适合保存密码之类的数据。在mac上可以安装钥匙串应用，一般情况下只有用户正确输入了mac系统的用户名和密码才能查看到用户保存在keychain中的密码。Apple自带的浏览器Safari就是用的keychain来保存密码的，当用户在一个网页中输入了用户名和密码之后，Safari会询问用户是否需要记住密码。如
+  SSKeyChain的方法中涉及到的变量主要有三个，分别如这一小节的标题所示，是password、service、account。password、account分别保存的是密码和用户名信息。service保存的是服务的类型(通常在程序中可以用包的名称来作为service的标识).

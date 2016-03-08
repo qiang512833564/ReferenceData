@@ -29,7 +29,7 @@
 + (instancetype)subscriberWithNext:(void (^)(id x))next error:(void (^)(NSError *error))error completed:(void (^)(void))completed {
 	RACSubscriber *subscriber = [[self alloc] init];
 
-	subscriber->_next = [next copy];
+	subscriber->_next = [next copy];//这里是获取到接收到信号的block操作
 	subscriber->_error = [error copy];
 	subscriber->_completed = [completed copy];
 
@@ -69,7 +69,7 @@
 		void (^nextBlock)(id) = [self.next copy];
 		if (nextBlock == nil) return;
 
-		nextBlock(value);
+		nextBlock(value);//接收到信号的block操作调用
 	}
 }
 
@@ -103,6 +103,7 @@
 
 	// If this subscription terminates, purge its disposable to avoid unbounded
 	// memory growth.
+    //如果这个订阅终止,清除其可支配的内存，避免内存的无限增长
 	[otherDisposable addDisposable:[RACDisposable disposableWithBlock:^{
 		@strongify(otherDisposable);
 		[selfDisposable removeDisposable:otherDisposable];

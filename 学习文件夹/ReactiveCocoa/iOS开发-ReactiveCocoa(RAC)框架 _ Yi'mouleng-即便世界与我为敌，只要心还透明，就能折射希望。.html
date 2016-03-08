@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<!-- saved from url=(0133)http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u5373_u65F6_u641C_u7D22_u4F18_u5316__28throttle_2CdistinctUntilChanged_2Cignore_29 -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/id.php" charset="utf-8"></script>
+  <meta charset="utf-8">
+  
+  <title>iOS开发-ReactiveCocoa(RAC)框架 | Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言  本文是根据DeveloperLx在斗鱼直播ReactiveCocoa时整理的文章，同时加上本人的见解，若有错误希望指出。  感谢 DeveloperLx 为大家做出的贡献，虽然直播声音小了点，但满满的都是干货 ^v^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发-ReactiveCocoa(RAC)框架">
+<meta property="og:url" content="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/index.html">
+<meta property="og:site_name" content="Yi&#39;mouleng-即便世界与我为敌，只要心还透明，就能折射希望。">
+<meta property="og:description" content="前言  本文是根据DeveloperLx在斗鱼直播ReactiveCocoa时整理的文章，同时加上本人的见解，若有错误希望指出。  感谢 DeveloperLx 为大家做出的贡献，虽然直播声音小了点，但满满的都是干货 ^v^">
+<meta property="og:image" content="http://yimouleng.com/image/RAC.gif">
+<meta property="og:updated_time" content="2015-12-23T09:16:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发-ReactiveCocoa(RAC)框架">
+<meta name="twitter:description" content="前言  本文是根据DeveloperLx在斗鱼直播ReactiveCocoa时整理的文章，同时加上本人的见解，若有错误希望指出。  感谢 DeveloperLx 为大家做出的贡献，虽然直播声音小了点，但满满的都是干货 ^v^">
+  
+    <link rel="alternative" href="http://yimouleng.com/atom.xml" title="Yi&#39;mouleng-即便世界与我为敌，只要心还透明，就能折射希望。" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/avatar.jpg">
+  
+  <link rel="stylesheet" href="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/style.css" type="text/css">
+<script type="text/javascript" async="" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/embed.js" charset="UTF-8"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="/js/pc.js" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/pc.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="/fancybox/jquery.fancybox.js" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/jquery.fancybox.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="/js/jquery.lazyload.js" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/jquery.lazyload.js"></script><style type="text/css">.fancybox-margin{margin-right:10px;}</style><link type="text/css" rel="stylesheet" href="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/embed.default.css"><style type="text/css">/*多说UA开始*/
+span.ua{
+	margin: 0 1px!important;
+	color:#FFFFFF!important;
+	/*text-transform: Capitalize!important;
+	float: right!important;
+	line-height: 18px!important;*/
+}
+
+.ua_other.os_other{
+	background-color: #ccc!important;
+	color: #fff;
+	border: 1px solid #BBB!important;
+	border-radius: 4px;
+}
+
+.ua_ie{
+	background-color: #428bca!important;
+	border-color: #357ebd!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_firefox{
+	background-color: #f0ad4e!important;
+	border-color: #eea236!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_maxthon{
+	background-color: #7373B9!important;
+	border-color: #7373B9!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_ucweb{
+	background-color: #FF740F!important;
+	border-color: #d43f3a!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_sogou{
+	background-color: #78ACE9!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_2345explorer{
+	background-color: #2478B8!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_2345chrome{
+	background-color: #F9D024!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_mi{
+	background-color: #FF4A00!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_lbbrowser{
+	background-color: #FC9D2E!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_chrome{
+	background-color: #EE6252!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_qq{
+	background-color: #3D88A8!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_apple{
+	background-color: #E95620!important;
+	border-color: #4cae4c!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.ua_opera{
+	background-color: #d9534f!important;
+	border-color: #d43f3a!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+
+
+.os_vista,.os_2000,.os_windows,.os_xp,.os_7,.os_8,.os_8_1 {
+	background-color: #39b3d7!important;
+	border-color: #46b8da!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+
+.os_android {
+	background-color: #98C13D!important;
+	border-color: #01B171!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.os_ubuntu{
+	background-color: #DD4814!important;
+	border-color: #01B171!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.os_linux {
+	background-color: #3A3A3A!important;
+	border-color: #1F1F1F!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.os_mac{
+	background-color: #666666!important;
+	border-color: #1F1F1F!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.os_unix{
+	background-color: #006600!important;
+	border-color: #1F1F1F!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.os_nokia{
+	background-color: #014485!important;
+	border-color: #1F1F1F!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+}
+
+.sskadmin{
+background-color: #00a67c!important;
+	border-color: #01B171!important;
+	border-radius: 4px;
+	padding: 0 5px!important;
+
+}
+
+/*多说UA结束*/
+/*Head Start*/
+#ds-thread #ds-reset ul.ds-comments-tabs li.ds-tab a.ds-current {
+    border: 0px;
+    color: #6D6D6B;
+    text-shadow: none;
+    background: #F3F3F3;
+}
+
+
+#ds-thread #ds-reset .ds-highlight {
+    font-family: Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, Sans-serif;
+    ;font-size: 100%;
+    color: #6D6D6B !important;
+}
+
+
+#ds-thread #ds-reset ul.ds-comments-tabs li.ds-tab a.ds-current:hover {
+    color: #696a52;
+    background: #F2F2F2;
+}
+
+
+#ds-thread #ds-reset a.ds-highlight:hover {
+    color: #696a52 !important;
+}
+
+
+#ds-thread {
+    padding-left: 30px;
+}
+
+
+#ds-thread #ds-reset li.ds-post,#ds-thread #ds-reset #ds-hot-posts {
+    overflow: visible;
+}
+
+
+#ds-thread #ds-reset .ds-post-self {
+    padding: 10px 0 10px 10px;
+}
+
+
+#ds-thread #ds-reset li.ds-post,#ds-thread #ds-reset .ds-post-self {
+    border: 0 !important;
+}
+
+
+#ds-reset .ds-avatar, #ds-thread #ds-reset ul.ds-children .ds-avatar {
+    top: 15px;
+    left: -20px;
+    padding: 5px;
+    width: 36px;
+    height: 36px;
+    box-shadow: -1px 0 1px rgba(0,0,0,.15) inset;
+    border-radius: 46px;
+    background: #FAFAFA;
+}
+
+
+#ds-thread .ds-avatar a {
+    display: inline-block;
+    padding: 1px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #b9baa6;
+    border-radius: 50%;
+    background-color: #fff !important;
+}
+
+
+#ds-thread .ds-avatar a:hover {
+}
+
+#ds-thread #ds-reset .ds-textarea-wrapper textarea {
+background: url("http://7xowg4.com1.z0.glb.clouddn.com/longmao.png") bottom right no-repeat;}
+
+#ds-thread .ds-avatar > img {
+    margin: 2px 0 0 2px;
+}
+
+
+#ds-thread #ds-reset .ds-replybox {
+    box-shadow: none;
+}
+
+
+#ds-thread #ds-reset ul.ds-children .ds-replybox.ds-inline-replybox a.ds-avatar,
+#ds-reset .ds-replybox.ds-inline-replybox a.ds-avatar {
+    left: 0;
+    top: 0;
+    padding: 0;
+    width: 32px !important;
+    height: 32px !important;
+    background: none;
+    box-shadow: none;
+}
+
+
+#ds-reset .ds-replybox.ds-inline-replybox a.ds-avatar img {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50%;
+}
+
+
+#ds-reset .ds-replybox a.ds-avatar,
+#ds-reset .ds-replybox .ds-avatar img {
+    padding: 0;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 5px;
+}
+
+
+#ds-reset .ds-avatar img {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 32px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+    -webkit-transition: .8s all ease-in-out;
+    -moz-transition: .4s all ease-in-out;
+    -o-transition: .4s all ease-in-out;
+    -ms-transition: .4s all ease-in-out;
+    transition: .4s all ease-in-out;
+}
+
+
+.ds-post-self:hover .ds-avatar img {
+    -webkit-transform: rotateX(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+
+#ds-thread #ds-reset .ds-comment-body {
+    -webkit-transition-delay: initial;
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-property: all;
+    -webkit-transition-timing-function: initial;
+    background: #F7F7F7;
+    padding: 15px 15px 15px 47px;
+    border-radius: 5px;
+    box-shadow: #B8B9B9 0 1px 3px;
+    border: white 1px solid;
+}
+
+
+#ds-thread #ds-reset ul.ds-children .ds-comment-body {
+    padding-left: 15px;
+}
+
+
+#ds-thread #ds-reset .ds-comment-body p {
+    color: #787968;
+}
+
+
+#ds-thread #ds-reset .ds-comments {
+    border-bottom: 0px;
+}
+
+
+#ds-thread #ds-reset .ds-powered-by {
+    display: none;
+}
+
+
+#ds-thread #ds-reset .ds-comments a.ds-user-name {
+    font-weight: normal;
+    color: #3D3D3D !important;
+}
+
+
+#ds-thread #ds-reset .ds-comments a.ds-user-name:hover {
+    color: #D32 !important;
+}
+
+
+#ds-thread #ds-reset #ds-bubble {
+    display: none !important;
+}
+
+
+#ds-thread #ds-reset #ds-hot-posts {
+    border: 0;
+}
+
+
+#ds-reset #ds-hot-posts .ds-gradient-bg {
+    background: none;
+}
+
+
+#ds-thread #ds-reset .ds-comment-body:hover {
+    background-color: #F1F1F1;
+    -webkit-transition-delay: initial;
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-property: all;
+    -webkit-transition-timing-function: initial;
+}
+
+/*Head End*/
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div><link href="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/jiathis_utility.html" style="display: none;"></iframe>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="http://yimouleng.com/" class="profilepic">
+			
+			<img lazy-src="/resources/avatar.jpg" class="js-avatar show" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/avatar.jpg">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="http://yimouleng.com/">Yi'mouleng</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">知止安能定,定而知静,静方可虑,虑而后能得。---iOS交流群67784110</p>
+		
+				
+
+		
+			<div class="switch-btn" id="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area" id="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="http://yimouleng.com/archives">目录</a></li>
+				        
+							<li><a href="http://yimouleng.com/categories/iOS%E5%BC%80%E5%8F%91">iOS开发</a></li>
+				        
+							<li><a href="http://yimouleng.com/categories/%E4%BA%8C%E4%B8%89%E4%BA%8B">二三事</a></li>
+				        
+							<li><a href="http://yimouleng.com/tags/">标签云</a></li>
+				        
+							<li><a href="http://yimouleng.com/about/">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/yimouleng" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/yimouleng" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="http://yimouleng.com/atom.xml" title="rss">rss</a>
+					        
+								<a class="QQ" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=ac73346414b7bc620d16a1553318221a96d0fb90832d39995c539098731e21b6" title="QQ">QQ</a>
+					        
+								<a class="mail" target="_blank" href="mailto:yimouleng@gamil.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="http://yimouleng.com/tags/AFNetworking/" style="font-size: 12px;" class="color3">AFNetworking</a> <a href="http://yimouleng.com/tags/ASIHTTPRequest/" style="font-size: 12px;" class="color5">ASIHTTPRequest</a> <a href="http://yimouleng.com/tags/Animation/" style="font-size: 12px;" class="color5">Animation</a> <a href="http://yimouleng.com/tags/AppStore/" style="font-size: 12px;" class="color4">AppStore</a> <a href="http://yimouleng.com/tags/AsyncSocket/" style="font-size: 12px;" class="color2">AsyncSocket</a> <a href="http://yimouleng.com/tags/Autolayout/" style="font-size: 12px;" class="color1">Autolayout</a> <a href="http://yimouleng.com/tags/CALayer/" style="font-size: 12px;" class="color3">CALayer</a> <a href="http://yimouleng.com/tags/CoreGraphics/" style="font-size: 12px;" class="color3">CoreGraphics</a> <a href="http://yimouleng.com/tags/Dota2/" style="font-size: 12px;" class="color1">Dota2</a> <a href="http://yimouleng.com/tags/GCD/" style="font-size: 12px;" class="color4">GCD</a> <a href="http://yimouleng.com/tags/HTTPS/" style="font-size: 12px;" class="color1">HTTPS</a> <a href="http://yimouleng.com/tags/IOS-9/" style="font-size: 12px;" class="color1">IOS 9</a> <a href="http://yimouleng.com/tags/KVC/" style="font-size: 12px;" class="color4">KVC</a> <a href="http://yimouleng.com/tags/KVO/" style="font-size: 12px;" class="color4">KVO</a> <a href="http://yimouleng.com/tags/LLPictureShow/" style="font-size: 12px;" class="color4">LLPictureShow</a> <a href="http://yimouleng.com/tags/MKNetworkingKit/" style="font-size: 12px;" class="color1">MKNetworkingKit</a> <a href="http://yimouleng.com/tags/Masonry/" style="font-size: 12px;" class="color3">Masonry</a> <a href="http://yimouleng.com/tags/QRCode/" style="font-size: 12px;" class="color2">QRCode</a> <a href="http://yimouleng.com/tags/ReactiveCocoa/" style="font-size: 12px;" class="color4">ReactiveCocoa</a> <a href="http://yimouleng.com/tags/Socket/" style="font-size: 12px;" class="color2">Socket</a> <a href="http://yimouleng.com/tags/TouchID/" style="font-size: 12px;" class="color3">TouchID</a> <a href="http://yimouleng.com/tags/UIActionSheet/" style="font-size: 12px;" class="color4">UIActionSheet</a> <a href="http://yimouleng.com/tags/UIAlertview/" style="font-size: 12px;" class="color2">UIAlertview</a> <a href="http://yimouleng.com/tags/UIBezierPath/" style="font-size: 12px;" class="color3">UIBezierPath</a> <a href="http://yimouleng.com/tags/UIKeyboardType/" style="font-size: 12px;" class="color5">UIKeyboardType</a> <a href="http://yimouleng.com/tags/UITextField/" style="font-size: 12px;" class="color2">UITextField</a> <a href="http://yimouleng.com/tags/WOW/" style="font-size: 12px;" class="color4">WOW</a> <a href="http://yimouleng.com/tags/ZXingObj/" style="font-size: 12px;" class="color4">ZXingObj</a> <a href="http://yimouleng.com/tags/block/" style="font-size: 12px;" class="color1">block</a> <a href="http://yimouleng.com/tags/iOS/" style="font-size: 12px;" class="color4">iOS</a> <a href="http://yimouleng.com/tags/ios/" style="font-size: 12px;" class="color4">ios</a> <a href="http://yimouleng.com/tags/javascript/" style="font-size: 12px;" class="color1">javascript</a> <a href="http://yimouleng.com/tags/js/" style="font-size: 12px;" class="color3">js</a> <a href="http://yimouleng.com/tags/runtime/" style="font-size: 12px;" class="color3">runtime</a> <a href="http://yimouleng.com/tags/scrollView/" style="font-size: 12px;" class="color1">scrollView</a> <a href="http://yimouleng.com/tags/skill/" style="font-size: 12px;" class="color1">skill</a> <a href="http://yimouleng.com/tags/%E5%86%85%E8%B4%AD/" style="font-size: 12px;" class="color3">内购</a> <a href="http://yimouleng.com/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12px;" class="color3">动画</a> <a href="http://yimouleng.com/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/" style="font-size: 12px;" class="color5">即时通讯</a> <a href="http://yimouleng.com/tags/%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5/" style="font-size: 12px;" class="color5">四舍五入</a> <a href="http://yimouleng.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 12px;" class="color4">多线程</a> <a href="http://yimouleng.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 12px;" class="color4">字符串</a> <a href="http://yimouleng.com/tags/%E6%92%95%E8%A3%82%E6%95%88%E6%9E%9C/" style="font-size: 12px;" class="color5">撕裂效果</a> <a href="http://yimouleng.com/tags/%E6%94%AF%E4%BB%98/" style="font-size: 12px;" class="color3">支付</a> <a href="http://yimouleng.com/tags/%E6%A8%A1%E5%BC%8F%E6%A1%86%E6%9E%B6/" style="font-size: 12px;" class="color5">模式框架</a> <a href="http://yimouleng.com/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12px;" class="color3">正则</a> <a href="http://yimouleng.com/tags/%E7%BD%91%E7%BB%9C%E6%A1%86%E6%9E%B6/" style="font-size: 12px;" class="color5">网络框架</a> <a href="http://yimouleng.com/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 12px;" class="color3">语法</a> <a href="http://yimouleng.com/tags/%E9%94%AE%E7%9B%98/" style="font-size: 12px;" class="color3">键盘</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yimouleng.com/">我的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Yi'mouleng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/resources/avatar.jpg" class="js-avatar show" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/avatar.jpg">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Yi'mouleng</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">知止安能定,定而知静,静方可虑,虑而后能得。---iOS交流群67784110</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://yimouleng.com/archives">目录</a></li>
+		        
+					<li><a href="http://yimouleng.com/categories/iOS%E5%BC%80%E5%8F%91">iOS开发</a></li>
+		        
+					<li><a href="http://yimouleng.com/categories/%E4%BA%8C%E4%B8%89%E4%BA%8B">二三事</a></li>
+		        
+					<li><a href="http://yimouleng.com/tags/">标签云</a></li>
+		        
+					<li><a href="http://yimouleng.com/about/">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yimouleng" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/yimouleng" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="http://yimouleng.com/atom.xml" title="rss">rss</a>
+			        
+						<a class="QQ" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=ac73346414b7bc620d16a1553318221a96d0fb90832d39995c539098731e21b6" title="QQ">QQ</a>
+			        
+						<a class="mail" target="_blank" href="mailto:yimouleng@gamil.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-ios-ReactiveCocoa" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/" class="article-date">
+  	<time datetime="2015-12-19T16:00:00.000Z" itemprop="datePublished">2015-12-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS开发-ReactiveCocoa(RAC)框架
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="color4" href="http://yimouleng.com/tags/ReactiveCocoa/" style="font-size: 12px;">ReactiveCocoa</a></li><li class="article-tag-list-item"><a class="color5" href="http://yimouleng.com/tags/%E6%A8%A1%E5%BC%8F%E6%A1%86%E6%9E%B6/" style="font-size: 12px;">模式框架</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="color1" href="http://yimouleng.com/categories/iOS%E5%BC%80%E5%8F%91/" style="font-size: 12px;">iOS开发</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h2 id="u524D_u8A00"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>  本文是根据<a href="http://www.weibo.com/DeveloperLx?is_all=1#1450678339204" target="_blank" rel="external">DeveloperLx</a>在斗鱼直播<code>ReactiveCocoa</code>时整理的文章，同时加上本人的见解，若有错误希望指出。<br>  感谢 DeveloperLx 为大家做出的贡献，虽然直播声音小了点，但满满的都是干货 ^v^<br><a id="more"></a></p>
+<h2 id="u7B80_u4ECB"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><p>  神马是RAC？ReactiveCocoa（简称为RAC）,是由Github开源的一个应用于iOS和OS开发的新框架,Cocoa是苹果整套框架的简称，因此很多苹果框架喜欢以Cocoa结尾。借用<strong>RayWenderlich</strong>上面的话：</p>
+<blockquote>
+<p>As an iOS developer, nearly every line of code you write is in reaction to some event; a button tap, a received network message, a property change (via Key Value Observing) or a change in user’s location via CoreLocation are all good examples. However, these events are all encoded in different ways; as actions, delegates, KVO, callbacks and others. ReactiveCocoa defines a standard interface for events, so they can be more easily chained, filtered and composed using a basic set of tools.</p>
+</blockquote>
+<p>翻译过来就是：</p>
+<blockquote>
+<p>作为一个iOS开发者，你写的每一行代码几乎都是在响应某个事件，例如按钮的点击，收到网络消息，属性的变化（通过KVO）或者用户位置的变化（通过CoreLocation）。但是这些事件都用不同的方式来处理，比如action、delegate、KVO、callback等。ReactiveCocoa为事件定义了一个标准接口，从而可以使用一些基本工具来更容易的连接、过滤和组合。</p>
+</blockquote>
+<p>  RAC是由 <code>Mattt Thompson</code> 大神开发的，很多开发者对其的评价是<code>开启一个新Objective-C纪元</code>，可见对其评价有多高。<br> 以下是RAC的Github主页：<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a><br> 以及官方给出的<a href="https://github.com/ReactiveCocoa/ReactiveCocoa/tree/master/Documentation/Legacy" target="_blank" rel="external">用法链接</a></p>
+<h2 id="u5B89_u88C5"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><p>  ReactiveCocoa安装教程我就不说了，用pod安装即可。<br>  本文的Demo可在文章最后下载,在阅读本文的时候，强烈推荐边看Demo边看博文。<br>  项目中加入了ReactiveCocoa 和 DeveloperLx 大神的打印插件 <a href="https://github.com/DeveloperLx/LxDBAnything" target="_blank" rel="external">LxDBAnything</a>。<br>  同时加入了键盘相应的第三方<a href="https://github.com/hackiftekhar/IQKeyboardManager" target="_blank" rel="external">IQKeyboardManager</a>，然而没有怎么用到。<br>  以及<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">Masonry</a>,使用方法可以看这篇文章，<a href="http://yimouleng.com/2014/12/02/ios-Masonry/">iOS - Masonry自动布局(Autolayout)</a>。</p>
+<h2 id="u64B8_u4EE3_u7801"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u64B8_u4EE3_u7801" class="headerlink" title="撸代码"></a>撸代码</h2><h3 id="u7B2C_u4E00_u90E8_u5206__u7B80_u5355_u4F7F_u7528"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7B2C_u4E00_u90E8_u5206__u7B80_u5355_u4F7F_u7528" class="headerlink" title="第一部分 简单使用"></a>第一部分 简单使用</h3><h4 id="u6587_u672C_u6846_u4E8B_u4EF6"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u6587_u672C_u6846_u4E8B_u4EF6" class="headerlink" title="文本框事件"></a>文本框事件</h4><p>原来我们在使用<code>textFiled</code>的时候我们需要写到</p>
+<figure class="highlight groovy"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[textField <span class="string">addTarget:</span>self <span class="string">action:</span><span class="annotation">@selector</span>(<span class="string">textChanged:</span>) <span class="string">forControlEvents:</span>UIControlEventEditingChanged];</span><br></pre></td></tr></tbody></table></figure>
+<p> 然后实现<code>textChanged:</code>方法，在RAC中，对于文本框的监听，是非常简单的一件事情，看如下代码：</p>
+<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">UITextField * textField = ({</span><br><span class="line">       UITextField * textField = [[UITextField alloc]init]<span class="comment">;</span></span><br><span class="line">       textField.backgroundColor = [UIColor cyanColor]<span class="comment">;</span></span><br><span class="line">       </span><br><span class="line">       textField<span class="comment">;</span></span><br><span class="line">   })<span class="comment">;</span></span><br><span class="line">  [self.view addSubview:textField]<span class="comment">;</span></span><br><span class="line">   </span><br><span class="line">   @weakify(self)<span class="comment">; //  __weak __typeof__(self) self_weak_ = self;</span></span><br><span class="line">   </span><br><span class="line">   [textField mas_makeConstraints:^(MASConstraintMaker *make) {</span><br><span class="line">       </span><br><span class="line">       @strongify(self)<span class="comment">;    // __strong __typeof__(self) self = self_weak_;</span></span><br><span class="line">       make.size.mas_equalTo(CGSizeMake(180, 40))<span class="comment">;</span></span><br><span class="line">       make.center.equalTo(self.view)<span class="comment">;</span></span><br><span class="line">   }]<span class="comment">;</span></span><br><span class="line">   </span><br><span class="line">   [[textField rac_signalForControlEvents:UIControlEventEditingChanged]</span><br><span class="line">    subscribeNext:^(id x) {</span><br><span class="line">        </span><br><span class="line">        LxDBAnyVar(x)<span class="comment">;</span></span><br><span class="line">    }]<span class="comment">;</span></span><br><span class="line">   [textField.rac_textSignal subscribeNext:^(NSString *x) {</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar(x)<span class="comment">;</span></span><br><span class="line">   }]<span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>打印结果：</p>
+<figure class="highlight groovy"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">📍__31-[ViewController textFiledTest]_block_invoke_2 + <span class="number">215</span>🎈 x = <span class="number">12</span></span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke241 + <span class="number">211</span>🎈 x = &lt;<span class="string">UITextField:</span> <span class="number">0x7fe810c51a90</span>; frame = (<span class="number">97.5</span> <span class="number">313.5</span>; <span class="number">180</span> <span class="number">40</span>); text = <span class="string">'123'</span>; clipsToBounds = YES; opaque = NO; gestureRecognizers = &lt;<span class="string">NSArray:</span> <span class="number">0x7fe810f58fb0</span>&gt;; layer = &lt;<span class="string">CALayer:</span> <span class="number">0x7fe810c51600</span>&gt;&gt;</span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke_2 + <span class="number">215</span>🎈 x = <span class="number">123</span></span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke241 + <span class="number">211</span>🎈 x = &lt;<span class="string">UITextField:</span> <span class="number">0x7fe810c51a90</span>; frame = (<span class="number">97.5</span> <span class="number">313.5</span>; <span class="number">180</span> <span class="number">40</span>); text = <span class="string">'1231'</span>; clipsToBounds = YES; opaque = NO; gestureRecognizers = &lt;<span class="string">NSArray:</span> <span class="number">0x7fe810f58fb0</span>&gt;; layer = &lt;<span class="string">CALayer:</span> <span class="number">0x7fe810c51600</span>&gt;&gt;</span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke_2 + <span class="number">215</span>🎈 x = <span class="number">1231</span></span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke241 + <span class="number">211</span>🎈 x = &lt;<span class="string">UITextField:</span> <span class="number">0x7fe810c51a90</span>; frame = (<span class="number">97.5</span> <span class="number">313.5</span>; <span class="number">180</span> <span class="number">40</span>); text = <span class="string">'12312'</span>; clipsToBounds = YES; opaque = NO; gestureRecognizers = &lt;<span class="string">NSArray:</span> <span class="number">0x7fe810f58fb0</span>&gt;; layer = &lt;<span class="string">CALayer:</span> <span class="number">0x7fe810c51600</span>&gt;&gt;</span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke_2 + <span class="number">215</span>🎈 x = <span class="number">12312</span></span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke241 + <span class="number">211</span>🎈 x = &lt;<span class="string">UITextField:</span> <span class="number">0x7fe810c51a90</span>; frame = (<span class="number">97.5</span> <span class="number">313.5</span>; <span class="number">180</span> <span class="number">40</span>); text = <span class="string">'123123'</span>; clipsToBounds = YES; opaque = NO; gestureRecognizers = &lt;<span class="string">NSArray:</span> <span class="number">0x7fe810f58fb0</span>&gt;; layer = &lt;<span class="string">CALayer:</span> <span class="number">0x7fe810c51600</span>&gt;&gt;</span><br><span class="line">📍__31-[ViewController textFiledTest]_block_invoke_2 + <span class="number">215</span>🎈 x = <span class="number">123123</span></span><br></pre></td></tr></tbody></table></figure>
+<p>我们很容易的监听到<code>textFiled</code>中发生的变化，其中x的类型默认为id类型， 我们已知它的类型的时候我们可以将其改变，就像上面代码，将id改成了NSString类型。</p>
+<h4 id="u624B_u52BF"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u624B_u52BF" class="headerlink" title="手势"></a>手势</h4><figure class="highlight objectivec"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.view</span><span class="variable">.userInteractionEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="built_in">UITapGestureRecognizer</span> * tap = [[<span class="built_in">UITapGestureRecognizer</span> alloc]init];</span><br><span class="line">    [[tap rac_gestureSignal] subscribeNext:^(<span class="built_in">UITapGestureRecognizer</span> * tap) {</span><br><span class="line">        </span><br><span class="line">        LxDBAnyVar(tap);</span><br><span class="line">    }];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:tap];</span><br></pre></td></tr></tbody></table></figure>
+<p>为了方便，我们直接添加到self.view上，点击屏幕，得到打印结果：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">📍__29-[ViewController gestureTest]_block_invoke + <span class="number">184</span>🎈 tap = &lt;UITapGestureRecognizer: <span class="number">0x7fa2e3e1f9f0</span>; state = Ended; view = &lt;UIView <span class="number">0x7fa2e3e20b70</span>&gt;; target= &lt;(action=sendNext:, target=&lt;RACPassthroughSubscriber <span class="number">0x7fa2e3c064f0</span>&gt;)&gt;&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="u901A_u77E5"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u901A_u77E5" class="headerlink" title="通知"></a>通知</h4><figure class="highlight clojure"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[NSNotificationCenter defaultCenter]</span> rac_addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil]</span> subscribeNext:^<span class="list">(<span class="keyword">NSNotification</span> * notification)</span> <span class="collection">{</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar<span class="list">(<span class="keyword">notification</span>)</span><span class="comment">;</span></span><br><span class="line">   }</span>]</span><span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>我们建立了一个通知，叫做进入后台， 当程序进入后台的时候通知相应，当我们用RAC写通知的时候，我们有一个好处，就是不用removeObserver通知，因为RAC通知的监听者师RAC自己，它会帮你管理释放方法。可以看方法实现如下：</p>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">RACSignal</span> *)rac_addObserverForName:(<span class="type">NSString</span> *)notificationName <span class="class"><span class="keyword">object</span>:</span>(id)<span class="class"><span class="keyword">object</span> {</span></span><br><span class="line">	<span class="annotation">@unsafeify</span>(<span class="class"><span class="keyword">object</span>);</span></span><br><span class="line">	<span class="keyword">return</span> [[<span class="type">RACSignal</span> createSignal:^(id&lt;<span class="type">RACSubscriber</span>&gt; subscriber) {</span><br><span class="line">		<span class="annotation">@strongify</span>(<span class="class"><span class="keyword">object</span>);</span></span><br><span class="line">		id observer = [self addObserverForName:notificationName <span class="class"><span class="keyword">object</span>:</span><span class="class"><span class="keyword">object</span> <span class="title">queue</span>:</span>nil usingBlock:^(<span class="type">NSNotification</span> *note) {</span><br><span class="line">			[subscriber sendNext:note];</span><br><span class="line">		}];</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> [<span class="type">RACDisposable</span> disposableWithBlock:^{</span><br><span class="line">			[self removeObserver:observer];</span><br><span class="line">		}];</span><br><span class="line">	}] setNameWithFormat:@<span class="string">"-rac_addObserverForName: %@ object: &lt;%@: %p&gt;"</span>, notificationName, [<span class="class"><span class="keyword">object</span> <span class="title">class</span>], <span class="title">object</span>];</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="u5B9A_u65F6_u5668"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u5B9A_u65F6_u5668" class="headerlink" title="定时器"></a>定时器</h4><figure class="highlight scss"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 延迟某个时间后再做某件事</span></span><br><span class="line"><span class="attr_selector">[[RACScheduler mainThreadScheduler]</span>afterDelay<span class="value">:<span class="number">2</span> schedule:^{</span><br><span class="line">    </span><br><span class="line">    <span class="function">LxPrintAnything</span>(rac);</span></span><br><span class="line">}];</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 每间隔多长时间做一件事</span></span><br><span class="line"><span class="attr_selector">[[RACSignal interval:1 onScheduler:[RACScheduler mainThreadScheduler]</span>]subscribeNext<span class="value">:^(NSDate * date) {</span><br><span class="line">    </span><br><span class="line">    <span class="function">LxDBAnyVar</span>(date);</span></span><br><span class="line">}];</span><br></pre></td></tr></tbody></table></figure>
+<p>这是定时器最常用的两种写法，第一种方法，延迟时间去做某件事，更改<code>afterDelay</code>的属性。<br>第二种方法，每间隔多长时间做一件事，更改<code>interval</code>属性。</p>
+<h4 id="u4EE3_u7406"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u4EE3_u7406" class="headerlink" title="代理"></a>代理</h4><figure class="highlight groovy"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">UIAlertView * alertView = [[UIAlertView alloc]<span class="string">initWithTitle:</span>@<span class="string">"RAC"</span> <span class="string">message:</span>@<span class="string">"ReactiveCocoa"</span> <span class="string">delegate:</span>self <span class="string">cancelButtonTitle:</span>@<span class="string">"Cancel"</span> <span class="string">otherButtonTitles:</span>@<span class="string">"Ensure"</span>, nil];</span><br><span class="line">   </span><br><span class="line">   [[self <span class="string">rac_signalForSelector:</span><span class="annotation">@selector</span>(<span class="string">alertView:</span><span class="string">clickedButtonAtIndex:</span>) <span class="string">fromProtocol:</span><span class="annotation">@protocol</span>(UIAlertViewDelegate)] <span class="string">subscribeNext:</span>^(RACTuple * tuple) {</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar(tuple);</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar(tuple.first);</span><br><span class="line">       LxDBAnyVar(tuple.second);</span><br><span class="line">       LxDBAnyVar(tuple.third);</span><br><span class="line">   }];</span><br><span class="line">   [alertView show];</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="comment">//	更简单的方式：</span></span><br><span class="line">   [[alertView rac_buttonClickedSignal]<span class="string">subscribeNext:</span>^(id x) {</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar(x);</span><br><span class="line">   }];</span><br></pre></td></tr></tbody></table></figure>
+<p>用RAC去写代理的时候，会有局限，只能取代没有返回值的代理方法，什么是没有返回值的代理呢？比如说tableView的代理方法：</p>
+<figure class="highlight erlang"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(<span class="variable">CGFloat</span>)</span>tableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView heightForRowAtIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- <span class="params">(void)</span>tableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView didSelectRowAtIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath</span></span><br></pre></td></tr></tbody></table></figure>
+<p>这两个方法一个返回的是<code>CGFloat</code>，一个是<code>void</code>，RAC只能取代void的代理。</p>
+<h4 id="KVO"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#KVO" class="headerlink" title="KVO"></a>KVO</h4><figure class="highlight objectivec"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIScrollView</span> * scrollView = [[<span class="built_in">UIScrollView</span> alloc]init];</span><br><span class="line">scrollView<span class="variable">.delegate</span> = (<span class="keyword">id</span>&lt;<span class="built_in">UIScrollViewDelegate</span>&gt;)<span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:scrollView];</span><br><span class="line"></span><br><span class="line"><span class="built_in">UIView</span> * scrollViewContentView = [[<span class="built_in">UIView</span> alloc]init];</span><br><span class="line">scrollViewContentView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> yellowColor];</span><br><span class="line">[scrollView addSubview:scrollViewContentView];</span><br><span class="line"></span><br><span class="line">@weakify(<span class="keyword">self</span>);</span><br><span class="line"></span><br><span class="line">[scrollView mas_makeConstraints:^(MASConstraintMaker *make) {</span><br><span class="line">    </span><br><span class="line">    @strongify(<span class="keyword">self</span>);</span><br><span class="line">    make<span class="variable">.edges</span><span class="variable">.equalTo</span>(<span class="keyword">self</span><span class="variable">.view</span>)<span class="variable">.insets</span>(<span class="built_in">UIEdgeInsetsMake</span>(<span class="number">80</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">80</span>));</span><br><span class="line">}];</span><br><span class="line"></span><br><span class="line">[scrollViewContentView mas_makeConstraints:^(MASConstraintMaker *make) {</span><br><span class="line">    </span><br><span class="line">    @strongify(<span class="keyword">self</span>);</span><br><span class="line">    make<span class="variable">.edges</span><span class="variable">.equalTo</span>(scrollView);</span><br><span class="line">    make<span class="variable">.size</span><span class="variable">.mas_equalTo</span>(<span class="built_in">CGSizeMake</span>(<span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span>), <span class="built_in">CGRectGetHeight</span>(<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span>)));</span><br><span class="line">}];</span><br><span class="line"></span><br><span class="line">[RACObserve(scrollView, contentOffset) subscribeNext:^(<span class="keyword">id</span> x) {</span><br><span class="line">   </span><br><span class="line">    LxDBAnyVar(x);</span><br><span class="line">}];</span><br></pre></td></tr></tbody></table></figure>
+<p>用RAC写KVO的好处就是方法简单，keypath有代码提示。</p>
+<h3 id="u7B2C_u4E8C_u90E8_u5206__u8FDB_u9636"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7B2C_u4E8C_u90E8_u5206__u8FDB_u9636" class="headerlink" title="第二部分 进阶"></a>第二部分 进阶</h3><h4 id="u4FE1_u53F7"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u4FE1_u53F7" class="headerlink" title="信号"></a>信号</h4><figure class="highlight groovy"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">- (RACSignal *)loginSignal</span><br><span class="line">  {</span><br><span class="line">      <span class="keyword">return</span> [RACSignal <span class="string">createSignal:</span>^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {</span><br><span class="line">          </span><br><span class="line">          RACDisposable * schedulerDisposable = [[RACScheduler mainThreadScheduler]<span class="string">afterDelay:</span><span class="number">2</span> <span class="string">schedule:</span>^{</span><br><span class="line">             </span><br><span class="line">              <span class="keyword">if</span> (arc4random()%<span class="number">10</span> &gt; <span class="number">1</span>) {</span><br><span class="line">                  </span><br><span class="line">                  [subscriber <span class="string">sendNext:</span>@<span class="string">"Login response"</span>];</span><br><span class="line">                  [subscriber sendCompleted];</span><br><span class="line">              }</span><br><span class="line">              <span class="keyword">else</span> {</span><br><span class="line">                  </span><br><span class="line">                  [subscriber <span class="string">sendError:</span>[NSError <span class="string">errorWithDomain:</span>@<span class="string">"LOGIN_ERROR_DOMAIN"</span> <span class="string">code:</span><span class="number">444</span> <span class="string">userInfo:</span>@{}]];</span><br><span class="line">              }</span><br><span class="line">          }];</span><br><span class="line">          </span><br><span class="line">          <span class="keyword">return</span> [RACDisposable <span class="string">disposableWithBlock:</span>^{</span><br><span class="line">              </span><br><span class="line">              [schedulerDisposable dispose];</span><br><span class="line">          }];</span><br><span class="line">      }];</span><br><span class="line">  }</span><br></pre></td></tr></tbody></table></figure>
+<p>RAC的核心就是RACSignal，也就是信号，我们可以直接创建信号<code>createSignal</code>，并发送它<code>sendNext</code>，当信号完成后我们同时用<code>dispose</code>方法销毁它。发送信号，我们同时也要订阅信号，订阅信号代码如下：<br></p><figure class="highlight clojure"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[signal subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">{</span><br><span class="line">     </span><br><span class="line">     LxDBAnyVar<span class="list">(<span class="keyword">x</span>)</span><span class="comment">;</span></span><br><span class="line"> }</span> error:^<span class="list">(<span class="keyword">NSError</span> *error)</span> <span class="collection">{</span><br><span class="line">     </span><br><span class="line">     LxDBAnyVar<span class="list">(<span class="keyword">error</span>)</span><span class="comment">;</span></span><br><span class="line"> }</span> completed:<span class="comment">^{</span><br><span class="line">     </span><br><span class="line">     LxPrintAnything(completed);</span><br><span class="line"> }</span>]</span><span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>在信号发送的时候， 错误的时候，以及完成的时候，我们都可以得到相应。</p>
+<h4 id="u4FE1_u53F7_u7684_u5904_u7406"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u4FE1_u53F7_u7684_u5904_u7406" class="headerlink" title="信号的处理"></a>信号的处理</h4><h5 id="map__uFF08_u6620_u5C04_uFF09"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#map__uFF08_u6620_u5C04_uFF09" class="headerlink" title="map （映射）"></a>map （映射）</h5><figure class="highlight mel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">UITextField * <span class="keyword">textField</span> = ({</span><br><span class="line">        UITextField * <span class="keyword">textField</span> = [[UITextField alloc]init];</span><br><span class="line">        <span class="keyword">textField</span>.backgroundColor = [UIColor cyanColor];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">textField</span>;</span><br><span class="line">    });</span><br><span class="line">    [self.view addSubview:<span class="keyword">textField</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="variable">@weakify</span>(self); <span class="comment">//  __weak __typeof__(self) self_weak_ = self;</span></span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">textField</span> mas_makeConstraints:^(MASConstraintMaker <span class="variable">*make</span>) {</span><br><span class="line">        </span><br><span class="line">        <span class="variable">@strongify</span>(self);    <span class="comment">// __strong __typeof__(self) self = self_weak_;</span></span><br><span class="line">        make.<span class="keyword">size</span>.mas_equalTo(CGSizeMake(<span class="number">180</span>, <span class="number">40</span>));</span><br><span class="line">        make.center.equalTo(self.view);</span><br><span class="line">    }];</span><br><span class="line"></span><br><span class="line">    [[<span class="keyword">textField</span>.rac_textSignal map:^id(NSString <span class="variable">*text</span>) {</span><br><span class="line">        </span><br><span class="line">       LxDBAnyVar(<span class="keyword">text</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="variable">@(</span><span class="keyword">text</span>.length);</span><br><span class="line">        </span><br><span class="line">    }] subscribeNext:^(id x) {</span><br><span class="line">         LxDBAnyVar(x);</span><br><span class="line">    }];</span><br></pre></td></tr></tbody></table></figure>
+<p>map这个函数，在这里不是地图的意思，代表映射。map能做的事情就是把监听的<code>rac_textSignal</code>所返回的值，替换成别的就像上面代码中的text的长度。</p>
+<h5 id="filter"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#filter" class="headerlink" title="filter"></a>filter</h5><p>为了方便演示，我就不再赋值创建<code>textField</code>的代码了，请到Demo中查看<br></p><figure class="highlight clojure"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[textField.rac_textSignal map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSString</span> *text)</span> <span class="collection">{</span><br><span class="line">        </span><br><span class="line">       LxDBAnyVar<span class="list">(<span class="keyword">text</span>)</span><span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">        return @<span class="list">(<span class="keyword">text.length</span>)</span><span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">    }</span>]</span>filter:<span class="comment">^BOOL</span><span class="list">(<span class="keyword">NSNumber</span> *value)</span> <span class="collection">{</span><br><span class="line">        </span><br><span class="line">        return value.integerValue &gt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">    }</span>]</span> subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">{</span><br><span class="line">         LxDBAnyVar<span class="list">(<span class="keyword">x</span>)</span><span class="comment">;</span></span><br><span class="line">    }</span>]</span><span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>filter是个BOOL值，它代表的是一个条件，当这个条件发生的时候才会作出相应，比如上面代码中，当长度大于3的时候，才会打印x的值。</p>
+<h5 id="delay"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#delay" class="headerlink" title="delay"></a>delay</h5><figure class="highlight groovy"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建信号</span></span><br><span class="line">    RACSignal * signal = [[RACSignal <span class="string">createSignal:</span>^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {</span><br><span class="line">        [subscriber <span class="string">sendNext:</span>@<span class="string">"rac"</span>];</span><br><span class="line">        [subscriber sendCompleted];</span><br><span class="line">        <span class="keyword">return</span> nil;</span><br><span class="line">    }]<span class="string">delay:</span><span class="number">2</span>];</span><br><span class="line">    LxPrintAnything(start);</span><br><span class="line">    <span class="comment">//创建订阅者</span></span><br><span class="line">    [signal <span class="string">subscribeNext:</span>^(id x) {</span><br><span class="line">        LxDBAnyVar(x);</span><br><span class="line">    }];</span><br></pre></td></tr></tbody></table></figure>
+<p><code>delay</code>的作用就是延迟，或者说等待，如上，等待2秒之后打印了x。</p>
+<h5 id="startWith"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#startWith" class="headerlink" title="startWith"></a>startWith</h5><figure class="highlight prolog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">RACSignal</span> * <span class="atom">signal</span> = [[<span class="name">RACSignal</span> <span class="atom">createSignal</span>:^<span class="name">RACDisposable</span> *(<span class="atom">id</span>&lt;<span class="name">RACSubscriber</span>&gt; <span class="atom">subscriber</span>) {</span><br><span class="line">        </span><br><span class="line">//        [<span class="atom">subscriber</span> <span class="atom">sendNext</span>:@<span class="string">"123"</span>];//<span class="atom">startWith</span>:@<span class="string">"123"</span>等同于这句话 也就是第一个发送，主要是位置</span><br><span class="line">        [<span class="atom">subscriber</span> <span class="atom">sendNext</span>:@<span class="string">"rac"</span>];</span><br><span class="line">        [<span class="atom">subscriber</span> <span class="atom">sendCompleted</span>];</span><br><span class="line">        <span class="atom">return</span> <span class="atom">nil</span>;</span><br><span class="line">    }]<span class="atom">startWith</span>:@<span class="string">"123"</span>];</span><br><span class="line">    <span class="name">LxPrintAnything</span>(<span class="atom">start</span>);</span><br><span class="line">    //创建订阅者</span><br><span class="line">    [<span class="atom">signal</span> <span class="atom">subscribeNext</span>:^(<span class="atom">id</span> <span class="atom">x</span>) {</span><br><span class="line">        <span class="name">LxDBAnyVar</span>(<span class="atom">x</span>);</span><br><span class="line">    }];</span><br></pre></td></tr></tbody></table></figure>
+<p><code>startWith</code>也就是最开始的意思，看以上代码 <code>startWith:@"123"</code>等同于<code>[subscriber sendNext:@"123"]</code> 也就是第一个发送，主要是位置.</p>
+<h5 id="timeOut"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#timeOut" class="headerlink" title="timeOut"></a>timeOut</h5><figure class="highlight clojure"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[RACSignal createSignal:<span class="comment">^RACDisposable</span> *<span class="list">(<span class="keyword">id&lt;RACSubscriber&gt;</span> subscriber)</span> <span class="collection">{</span><br><span class="line">        </span><br><span class="line">        <span class="collection">[<span class="collection">[RACScheduler mainThreadScheduler]</span>afterDelay:3 schedule:<span class="comment">^{</span><br><span class="line">            </span><br><span class="line">            [subscriber sendNext:@"rac"];</span><br><span class="line">            [subscriber sendCompleted];</span><br><span class="line">        }</span>]</span><span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">        return <span class="literal">nil</span><span class="comment">;</span></span><br><span class="line">    }</span>]</span> timeout:2 onScheduler:<span class="collection">[RACScheduler mainThreadScheduler]</span>]</span></span><br><span class="line">     subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">{</span><br><span class="line">         </span><br><span class="line">         LxDBAnyVar<span class="list">(<span class="keyword">x</span>)</span><span class="comment">;</span></span><br><span class="line">     }</span> error:^<span class="list">(<span class="keyword">NSError</span> *error)</span> <span class="collection">{</span><br><span class="line">         </span><br><span class="line">         LxDBAnyVar<span class="list">(<span class="keyword">error</span>)</span><span class="comment">;</span></span><br><span class="line">     }</span> completed:<span class="comment">^{</span><br><span class="line">         </span><br><span class="line">         LxPrintAnything(completed);</span><br><span class="line">     }</span>]</span><span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>上面代码的意思就是，我等待3秒中发送(<code>afterDelay</code>),但是我超时了(<code>timeout</code>)2秒钟才发送，所以这条信息发生错误，会走<code>error</code>的方法。  这种情况可以用在封装<code>http client</code>中，当然你可能遇到别的需求，也需要它。</p>
+<h5 id="take__u2013_skip"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#take__u2013_skip" class="headerlink" title="take – skip"></a>take – skip</h5><figure class="highlight groovy"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">RACSignal * signal = [[RACSignal <span class="string">createSignal:</span>^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {</span><br><span class="line">       [subscriber <span class="string">sendNext:</span>@<span class="string">"rac1"</span>];</span><br><span class="line">       [subscriber <span class="string">sendNext:</span>@<span class="string">"rac2"</span>];</span><br><span class="line">       [subscriber <span class="string">sendNext:</span>@<span class="string">"rac3"</span>];</span><br><span class="line">       [subscriber <span class="string">sendNext:</span>@<span class="string">"rac4"</span>];</span><br><span class="line">       [subscriber sendCompleted];</span><br><span class="line">       <span class="keyword">return</span> nil;</span><br><span class="line">   }]<span class="string">take:</span><span class="number">2</span>];<span class="comment">//Skip</span></span><br><span class="line"></span><br><span class="line">   [signal <span class="string">subscribeNext:</span>^(id x) {</span><br><span class="line">       LxDBAnyVar(x);</span><br><span class="line">   }];</span><br></pre></td></tr></tbody></table></figure>
+<p>比如说我们发送了很多次请求</p>
+<blockquote>
+<p>take表示我们只取前两次<br>skip表示跳过前两次<br>takeLast表示倒数的前两次<br>takeUntil这个值比较特殊，他后面的参数是个信号，它的意思是，当takeUntil发送这个信号的时候，上面的发送信号就会停止发送。</p>
+</blockquote>
+<p>接下来是几个block回调方法</p>
+<blockquote>
+<p>takeWhileBlock BOOL值，意思是当返回YES的时候，订阅者才能收到信号<br>skipWhileBlock BOOL值，意思是当返回YES的时候，订阅者就会跳过信号，NO的时候才接受<br>skipUntilBlock BOOL值，意思是 返回NO的时候，不会收到消息， 直到返回YES的时候才开始收消息。</p>
+</blockquote>
+<h5 id="u5373_u65F6_u641C_u7D22_u4F18_u5316__28throttle_2CdistinctUntilChanged_2Cignore_29"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u5373_u65F6_u641C_u7D22_u4F18_u5316__28throttle_2CdistinctUntilChanged_2Cignore_29" class="headerlink" title="即时搜索优化 (throttle,distinctUntilChanged,ignore)"></a>即时搜索优化 (throttle,distinctUntilChanged,ignore)</h5><figure class="highlight objectivec"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UITextField</span> * textField = [[<span class="built_in">UITextField</span> alloc]init];</span><br><span class="line">   textField<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> cyanColor];</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.view</span> addSubview:textField];</span><br><span class="line">   </span><br><span class="line">   @weakify(<span class="keyword">self</span>);</span><br><span class="line">   </span><br><span class="line">   [textField mas_makeConstraints:^(MASConstraintMaker *make) {</span><br><span class="line">       </span><br><span class="line">       @strongify(<span class="keyword">self</span>);</span><br><span class="line">       make<span class="variable">.size</span><span class="variable">.mas_equalTo</span>(<span class="built_in">CGSizeMake</span>(<span class="number">180</span>, <span class="number">40</span>));</span><br><span class="line">       make<span class="variable">.center</span><span class="variable">.equalTo</span>(<span class="keyword">self</span><span class="variable">.view</span>);</span><br><span class="line">   }];</span><br><span class="line">   <span class="comment">//throttle 后面是个时间 表示rac_textSignal发送消息，0.3秒内没有再次发送就会相应，若是0.3内又发送消息了，便会在新的信息处重新计时</span></span><br><span class="line">   <span class="comment">//distinctUntilChanged 表示两个消息相同的时候，只会发送一个请求</span></span><br><span class="line">   <span class="comment">//ignore 表示如果消息和ignore后面的消息相同，则会忽略掉这条消息，不让其发送</span></span><br><span class="line">   [[[[[[textField<span class="variable">.rac_textSignal</span> throttle:<span class="number">0.3</span>] distinctUntilChanged] ignore:<span class="string">@""</span>] map:^<span class="keyword">id</span>(<span class="keyword">id</span> value) {</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">return</span> [RACSignal createSignal:^RACDisposable *(<span class="keyword">id</span>&lt;RACSubscriber&gt; subscriber) {</span><br><span class="line">           </span><br><span class="line">           <span class="comment">//  network request</span></span><br><span class="line">           [subscriber sendNext:value];</span><br><span class="line">           [subscriber sendCompleted];</span><br><span class="line">           </span><br><span class="line">           <span class="keyword">return</span> [RACDisposable disposableWithBlock:^{</span><br><span class="line">               </span><br><span class="line">               <span class="comment">//  cancel request</span></span><br><span class="line">           }];</span><br><span class="line">       }];</span><br><span class="line">   }]switchToLatest] subscribeNext:^(<span class="keyword">id</span> x) {</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar(x);</span><br><span class="line">   }];</span><br></pre></td></tr></tbody></table></figure>
+<p>以上代码，是用textField模拟一个即时搜索优化的功能，其中参数如下：</p>
+<blockquote>
+<p>throttle 后面是个时间 表示rac_textSignal发送消息，0.3秒内没有再次发送就会相应，若是0.3内又发送消息了，便会在新的信息处重新计时<br>distinctUntilChanged 表示两个消息相同的时候，只会发送一个请求<br>ignore 表示如果消息和ignore后面的消息相同，则会忽略掉这条消息，不让其发送</p>
+</blockquote>
+<p>这样做，是不是给服务器减小了很多的压力，更是节省了我们大量的代码。 其中我们用map建立了一个新的信号，我们知道textField的改变是一个信号， map就是在这个信号上，又加了一个信号，即<code>signal of signals</code>。<br>订阅者所打印的消息x则是，map发出的信号。我们可以再map中发送新的信号，以及取消信号<code>disposable</code>.<br>当我们用map发送信号的时候，我们则需要使用 <code>switchToLatest</code>这个参数来获取最后一个信号，也就是我们最后所打印的x，就是map最后发错的这个信号。</p>
+<h5 id="repeat"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#repeat" class="headerlink" title="repeat"></a>repeat</h5><figure class="highlight clojure"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[<span class="collection">[<span class="collection">[RACSignal createSignal:<span class="comment">^RACDisposable</span> *<span class="list">(<span class="keyword">id&lt;RACSubscriber&gt;</span> subscriber)</span> <span class="collection">{</span><br><span class="line">       </span><br><span class="line">       <span class="collection">[subscriber sendNext:@<span class="string">"rac"</span>]</span><span class="comment">;</span></span><br><span class="line">       <span class="collection">[subscriber sendCompleted]</span><span class="comment">;</span></span><br><span class="line">       </span><br><span class="line">       return <span class="literal">nil</span><span class="comment">;</span></span><br><span class="line">   }</span>]</span>delay:1]</span>repeat]</span>take:3]</span> subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">{</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar<span class="list">(<span class="keyword">x</span>)</span><span class="comment">;</span></span><br><span class="line">   }</span> completed:<span class="comment">^{</span><br><span class="line">       </span><br><span class="line">       LxPrintAnything(completed);</span><br><span class="line">   }</span>]</span><span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>repeat,顾名思义，就是重复发送这条消息，当我们在后面添加了delay和take的时候，意思就是每隔1秒发送一次这条消息，发送3次后停止。</p>
+<h5 id="merge__u2013_concat__u2013_zipWith"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#merge__u2013_concat__u2013_zipWith" class="headerlink" title="merge –  concat – zipWith"></a>merge –  concat – zipWith</h5><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">RACSignal * signalA = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {</span><br><span class="line">       </span><br><span class="line">       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{</span><br><span class="line">           LxPrintAnything(a)<span class="comment">;</span></span><br><span class="line">           [subscriber sendNext:@"a"]<span class="comment">;</span></span><br><span class="line">           [subscriber sendCompleted]<span class="comment">;</span></span><br><span class="line">       })<span class="comment">;</span></span><br><span class="line">       </span><br><span class="line">       return nil<span class="comment">;</span></span><br><span class="line">   }]<span class="comment">;</span></span><br><span class="line">   </span><br><span class="line">   RACSignal * signalB = [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) {</span><br><span class="line">       </span><br><span class="line">       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{</span><br><span class="line">           LxPrintAnything(b)<span class="comment">;</span></span><br><span class="line">           [subscriber sendNext:@"b"]<span class="comment">;</span></span><br><span class="line">           [subscriber sendCompleted]<span class="comment">;</span></span><br><span class="line">       })<span class="comment">;</span></span><br><span class="line">       </span><br><span class="line">       return nil<span class="comment">;</span></span><br><span class="line">   }]<span class="comment">;</span></span><br><span class="line">   </span><br><span class="line">   [[RACSignal merge:@[signalA, signalB]]subscribeNext:^(id x) {</span><br><span class="line">       </span><br><span class="line">       LxDBAnyVar(x)<span class="comment">;</span></span><br><span class="line">   }]<span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>我们创建了两个请求，A和B，用GCD的方法A延迟两秒钟，B延迟了3秒钟，我们用<code>merge</code>方法合并了A和B，打印结果为<br></p><figure class="highlight livecodeserver"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">📍__23-[ViewController <span class="built_in">merge</span>]<span class="title">_block</span>_invoke_2 + <span class="number">66</span>🎈 <span class="operator">a</span></span><br><span class="line">📍__23-[ViewController <span class="built_in">merge</span>]<span class="title">_block</span>_invoke29 + <span class="number">87</span>🎈 x = <span class="operator">a</span></span><br><span class="line">📍__23-[ViewController <span class="built_in">merge</span>]<span class="title">_block</span>_invoke_215 + <span class="number">77</span>🎈 b</span><br><span class="line">📍__23-[ViewController <span class="built_in">merge</span>]<span class="title">_block</span>_invoke29 + <span class="number">87</span>🎈 x = b</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>也就是A和B不管谁发送都会打印x，简单的说就是A和B的打印方法用的是同一个。他们之间关系是独立的，如果A发送失败，B依然会执行。</p>
+<p>当我们用<code>concat</code>方法链接A和B之后，意思就是当A执行完了之后才会执行B，他们之间是依赖的关系，如果A发送失败，B也不会执行。</p>
+<p>请注意合并(merge)和链接(concat)的区别。</p>
+<p><code>zipWith</code>，当用<code>zipWith</code>链接A和B的时候，只有在A.B每隔都至少发送过一次消息的时候才会执行zipWith的方法，它的返回值是一个集合，也就是数组，同时包含了A和B的打印结果。<br><code>zipWith</code>的写法等同于 ：</p>
+<figure class="highlight clojure"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[RACSignal combineLatestWith:@<span class="collection">[signalA, signalB]</span>subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">{</span><br><span class="line">        </span><br><span class="line">        LxDBAnyVar<span class="list">(<span class="keyword">x</span>)</span><span class="comment">;</span></span><br><span class="line">    }</span>]</span><span class="comment">;</span></span></span><br></pre></td></tr></tbody></table></figure>
+<p>亦或者</p>
+<figure class="highlight clojure"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[RACSignal combineLatest:@<span class="collection">[signalA, signalB]</span>]</span>subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">{</span><br><span class="line">        </span><br><span class="line">        LxDBAnyVar<span class="list">(<span class="keyword">x</span>)</span><span class="comment">;</span></span><br><span class="line">    }</span>]</span><span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>但是使用<code>combineLatest</code>，可以再后面添加更多的信号.</p>
+<h3 id="RAC_28_26lt_3B_23TARGET_2C__u2026_23_26gt_3B_29__u5B8F"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#RAC_28_26lt_3B_23TARGET_2C__u2026_23_26gt_3B_29__u5B8F" class="headerlink" title="RAC(&lt;#TARGET, …#&gt;) 宏"></a>RAC(&lt;#TARGET, …#&gt;) 宏</h3><figure class="highlight armasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//<span class="keyword">button </span>setBackgroundColor:forState:</span><br><span class="line">    </span><br><span class="line">    UIButton * <span class="keyword">button </span>= [UIButton <span class="keyword">buttonWithType:UIButtonTypeCustom];</span><br><span class="line"></span>    [<span class="keyword">self.view </span><span class="keyword">addSubview:button];</span><br><span class="line"></span>    </span><br><span class="line">    <span class="comment">@weakify(self);</span></span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">button </span>mas_makeConstraints:^(MASConstraintMaker *make) {</span><br><span class="line">        </span><br><span class="line">        <span class="comment">@strongify(self);</span></span><br><span class="line">        make.size.mas_equalTo(CGSizeMake(<span class="number">180</span>, <span class="number">40</span>))<span class="comment">;</span></span><br><span class="line">        make.center.equalTo(<span class="keyword">self.view);</span><br><span class="line"></span>    }]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    RAC(<span class="keyword">button, </span><span class="keyword">backgroundColor) </span>= [RACObserve(<span class="keyword">button, </span><span class="keyword">selected) </span><span class="preprocessor">map</span>:^UIColor *(NSNumber * <span class="keyword">selected) </span>{</span><br><span class="line">        </span><br><span class="line">        return [<span class="keyword">selected </span><span class="keyword">boolValue] </span>? [UIColor redColor] : [UIColor greenColor]<span class="comment">;</span></span><br><span class="line">    }]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    [[<span class="keyword">button </span>rac_signalForControlEvents:UIControlEventTouchUpInside]<span class="keyword">subscribeNext:^(UIButton </span>* <span class="keyword">btn) </span>{</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">btn.selected </span>= !<span class="keyword">btn.selected;</span><br><span class="line"></span>    }]<span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>比如Btn的设置背景颜色的属性，OC中并没有<code>button setBackgroundColor:forState:</code>这种方法，我们不能直接设置其选中后的颜色。在RAC中，则可以很简单的改变BTN的背景颜色。不得不说RAC的简单和强大。</p>
+<h4 id="u505A_u4E00_u4E2A_u79D2_u8868"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u505A_u4E00_u4E2A_u79D2_u8868" class="headerlink" title="做一个秒表"></a>做一个秒表</h4><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">UILabel * label = ({</span><br><span class="line">      </span><br><span class="line">       UILabel * label = [[UILabel alloc]init]<span class="comment">;</span></span><br><span class="line">       label.backgroundColor = [UIColor cyanColor]<span class="comment">;</span></span><br><span class="line">       label<span class="comment">;</span></span><br><span class="line">   })<span class="comment">;</span></span><br><span class="line">   [self.view addSubview:label]<span class="comment">;</span></span><br><span class="line">   </span><br><span class="line">   @weakify(self)<span class="comment">;</span></span><br><span class="line">   </span><br><span class="line">   [label mas_makeConstraints:^(MASConstraintMaker *make) {</span><br><span class="line">       @strongify(self)<span class="comment">;</span></span><br><span class="line">       </span><br><span class="line">       make.size.mas_equalTo(CGSizeMake(240, 40))<span class="comment">;</span></span><br><span class="line">       make.center.equalTo(self.view)<span class="comment">;</span></span><br><span class="line">       </span><br><span class="line">   }]<span class="comment">;</span></span><br><span class="line">   </span><br><span class="line">   RAC(label, text) = [[RACSignal interval:1 onScheduler:[RACScheduler mainThreadScheduler]] map:^NSString *(NSDate * date) {</span><br><span class="line">       </span><br><span class="line">       return date.description<span class="comment">;</span></span><br><span class="line">   }]<span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>只有这么多代码，我们便可以完美的做一个秒表，是否很cool？</p>
+<p><a href="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/RAC.gif" title="" rel="fancy-group" class="fancy-ctn fancybox"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/RAC.gif" title=""></a></p>
+<h2 id="u7ED3_u675F"><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7ED3_u675F" class="headerlink" title="结束"></a>结束</h2><p>当我们大量使用RAC写代码的时候，会把一个个事件封装成一个个信号，通过触发信号，订阅这个信号来返回各种信息。RAC使我们的代码耦合性根底，聚合性更高。</p>
+<p>若有不懂得地方可以留言，若有写错的地方，请及时与我联系，可以留言或者Email等。</p>
+<p>文本所用的Demo，下载地址 <a href="https://github.com/yimouleng/RACDemo" target="_blank" rel="external">戳这里</a>.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/">iOS开发-ReactiveCocoa(RAC)框架</a></p>
+  <p><span>文章作者:</span><a href="http://yimouleng.com/" title="访问 Yi&#39;mouleng 的个人博客">Yi'mouleng</a></p>
+  <p><span>发布时间:</span>2015年12月20日 - 00时00分</p>
+  <p><span>最后更新:</span>2015年12月23日 - 17时16分</p>
+  <p>
+    <span>原始链接:</span><a class="post-url" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/" title="iOS开发-ReactiveCocoa(RAC)框架">http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/</a>
+    <span class="copy-path" data-clipboard-text="原文: http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/　　作者: Yi&#39;mouleng" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.copy-path'); </script>
+</div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="http://yimouleng.com/2016/01/13/ios-QRCode/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          iOS开发-QRCode-二维码识别与生成
+        
+      </div>
+    </a>
+  
+  
+    <a href="http://yimouleng.com/2015/12/17/ios-AppStore/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS开发之内购-AppStore</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7B80_u4ECB"><span class="toc-number">2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u5B89_u88C5"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u64B8_u4EE3_u7801"><span class="toc-number">4.</span> <span class="toc-text">撸代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7B2C_u4E00_u90E8_u5206__u7B80_u5355_u4F7F_u7528"><span class="toc-number">4.1.</span> <span class="toc-text">第一部分 简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u6587_u672C_u6846_u4E8B_u4EF6"><span class="toc-number">4.1.1.</span> <span class="toc-text">文本框事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u624B_u52BF"><span class="toc-number">4.1.2.</span> <span class="toc-text">手势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u901A_u77E5"><span class="toc-number">4.1.3.</span> <span class="toc-text">通知</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u5B9A_u65F6_u5668"><span class="toc-number">4.1.4.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u4EE3_u7406"><span class="toc-number">4.1.5.</span> <span class="toc-text">代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#KVO"><span class="toc-number">4.1.6.</span> <span class="toc-text">KVO</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7B2C_u4E8C_u90E8_u5206__u8FDB_u9636"><span class="toc-number">4.2.</span> <span class="toc-text">第二部分 进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u4FE1_u53F7"><span class="toc-number">4.2.1.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u4FE1_u53F7_u7684_u5904_u7406"><span class="toc-number">4.2.2.</span> <span class="toc-text">信号的处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#map__uFF08_u6620_u5C04_uFF09"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">map （映射）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#filter"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">filter</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#delay"><span class="toc-number">4.2.2.3.</span> <span class="toc-text">delay</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#startWith"><span class="toc-number">4.2.2.4.</span> <span class="toc-text">startWith</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#timeOut"><span class="toc-number">4.2.2.5.</span> <span class="toc-text">timeOut</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#take__u2013_skip"><span class="toc-number">4.2.2.6.</span> <span class="toc-text">take – skip</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u5373_u65F6_u641C_u7D22_u4F18_u5316__28throttle_2CdistinctUntilChanged_2Cignore_29"><span class="toc-number">4.2.2.7.</span> <span class="toc-text">即时搜索优化 (throttle,distinctUntilChanged,ignore)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#repeat"><span class="toc-number">4.2.2.8.</span> <span class="toc-text">repeat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#merge__u2013_concat__u2013_zipWith"><span class="toc-number">4.2.2.9.</span> <span class="toc-text">merge –  concat – zipWith</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#RAC_28_26lt_3B_23TARGET_2C__u2026_23_26gt_3B_29__u5B8F"><span class="toc-number">4.3.</span> <span class="toc-text">RAC(&lt;#TARGET, …#&gt;) 宏</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u505A_u4E00_u4E2A_u79D2_u8868"><span class="toc-number">4.3.1.</span> <span class="toc-text">做一个秒表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/#u7ED3_u675F"><span class="toc-number">5.</span> <span class="toc-text">结束</span></a></li></ol>
+</div>
+
+<style>
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+<script>
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  toc_button.onclick=function(){
+    if(toc_div.style.display=="none"){
+      toc_div.style.display="block";
+      toc_button.value="隐藏目录";
+      document.getElementById("switch-btn").style.display="none";
+      document.getElementById("switch-area").style.display="none";
+    }
+    else{
+      toc_div.style.display="none";
+      toc_button.value="显示目录";
+      document.getElementById("switch-btn").style.display="block";
+      document.getElementById("switch-area").style.display="block";
+    }
+  }
+</script>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+		<a class="jiathis_button_cqq" title="分享到QQ好友"><span class="jiathis_txt jtico jtico_cqq"></span></a>
+		<a class="jiathis_button_douban" title="分享到豆瓣"><span class="jiathis_txt jtico jtico_douban"></span></a>
+		<a class="jiathis_button_weixin" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin"></span></a>
+		<a class="jiathis_button_tumblr" title="分享到Tumblr"><span class="jiathis_txt jtico jtico_tumblr"></span></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/jia.js" charset="utf-8"></script><script type="text/javascript" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/plugin.client.js" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ios-ReactiveCocoa" data-title="iOS开发-ReactiveCocoa(RAC)框架" data-url="http://yimouleng.com/2015/12/20/ios-ReactiveCocoa/" id="ds-thread"><div id="ds-reset"><div class="ds-meta" style="display: none;"><a href="javascript:void(0)" class="ds-like-thread-button ds-rounded"><span class="ds-icon ds-icon-heart"></span> <span class="ds-thread-like-text">喜欢</span><span class="ds-thread-cancel-like">取消喜欢</span></a><span class="ds-like-panel"><span class="ds-highlight">1</span> 人喜欢</span></div><div class="ds-comments-info"><div class="ds-sort"><a class="ds-order-desc">最新</a><a class="ds-order-asc ds-current">最早</a><a class="ds-order-hot">最热</a></div><ul class="ds-comments-tabs"><li class="ds-tab"><a class="ds-comments-tab-duoshuo ds-current" href="javascript:void(0);"><span class="ds-highlight">6</span>条评论</a></li><li class="ds-tab"><a class="ds-comments-tab-weibo" href="javascript:void(0);"><span class="ds-highlight">38</span>条新浪微博</a></li></ul></div><ul class="ds-comments"><li class="ds-post" data-post-id="6231445859783934722"><div class="ds-post-self" data-post-id="6231445859783934722" data-thread-id="6231401995975000833" data-root-id="0" data-source="duoshuo"><div class="ds-avatar" data-user-id="11371258"><a rel="nofollow author" target="_blank" href="http://weibo.com/2137010049" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=11371258&#39;;" title="我叫大大虾米"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/1" alt="我叫大大虾米"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://weibo.com/2137010049" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=11371258&#39;;" rel="nofollow" target="_blank" data-user-id="11371258">我叫大大虾米</a><span class="ua"></span> <span class="ua"><span class="ua_chrome">Chrome|47.0.2526.106</span> </span><span class="ua"><span class="os_mac">Mac OS X</span></span></div><p>如果请求A merge 请求B ，即是 A 和B建立了依赖关系，这里指的等到A请求成功之后(block 回调)会走打印x 呢，还是只要发了请求不管结果，就打印x</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-12-23T19:52:30+08:00" title="2015年12月23日 下午7:52:30">2015年12月23日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div><ul class="ds-children"><li class="ds-post" data-post-id="6231450243955688193"><div class="ds-post-self" data-post-id="6231450243955688193" data-thread-id="6231401995975000833" data-root-id="6231445859783934722" data-source="duoshuo"><div class="ds-avatar" data-user-id="13260856"><a rel="nofollow author" target="_blank" href="http://yimouleng.com/" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=13260856&#39;;" title="丶伊眸冷"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/100" alt="丶伊眸冷"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://yimouleng.com/" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=13260856&#39;;" rel="nofollow" target="_blank" data-user-id="13260856">丶伊眸冷</a><span class="ua"><span class="sskadmin">博主</span> </span><span class="ua"><span class="ua_chrome">Chrome|31.0.1650.63</span> </span><span class="ua"><span class="os_8_1">Windows 10</span></span></div><p>merge 是合并，并不会产生依赖关系。 concat才是产生依赖关系。merge 后，你可以理解为A和B，共同走一个结果方法，他们两个是独立关系</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-12-23T20:09:31+08:00" title="2015年12月23日 下午8:09:31">2015年12月23日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li></ul></li><li class="ds-post" data-post-id="6231466870214492930"><div class="ds-post-self" data-post-id="6231466870214492930" data-thread-id="6231401995975000833" data-root-id="0" data-source="duoshuo"><div class="ds-avatar" data-user-id="11273408"><a rel="nofollow author" target="_blank" href="http://zanderzhang.gitcafe.io/" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=11273408&#39;;" title="张勇"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/207266.jpg" alt="张勇"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://zanderzhang.gitcafe.io/" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=11273408&#39;;" rel="nofollow" target="_blank" data-user-id="11273408">张勇</a><span class="ua"></span> <span class="ua"><span class="ua_chrome">Chrome|47.0.2526.106</span> </span><span class="ua"><span class="os_mac">Mac OS X</span></span></div><p>mark</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-12-23T21:14:02+08:00" title="2015年12月23日 下午9:14:02">2015年12月23日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li><li class="ds-post" data-post-id="6231684203692425986"><div class="ds-post-self" data-post-id="6231684203692425986" data-thread-id="6231401995975000833" data-root-id="0" data-source="duoshuo"><div class="ds-avatar"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/205023.jpg" alt="soul"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name" data-qqt-account="">soul</span><span class="ua"></span> <span class="ua"><span class="ua_apple">Apple Safari|600.8.9</span> </span><span class="ua"><span class="os_mac">Mac OS X</span></span></div><p>我想问一个比较小白的问题！ 在添加约束外面的时候 @weakify(self);    里面@strongify(self);   不怎么明白这2个的实现过程以及效果！</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-12-24T11:17:24+08:00" title="2015年12月24日 上午11:17:24">2015年12月24日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div><ul class="ds-children"><li class="ds-post" data-post-id="6231716874262938369"><div class="ds-post-self" data-post-id="6231716874262938369" data-thread-id="6231401995975000833" data-root-id="6231684203692425986" data-source="duoshuo"><div class="ds-avatar" data-user-id="13260856"><a rel="nofollow author" target="_blank" href="http://yimouleng.com/" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=13260856&#39;;" title="丶伊眸冷"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/100" alt="丶伊眸冷"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://yimouleng.com/" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=13260856&#39;;" rel="nofollow" target="_blank" data-user-id="13260856">丶伊眸冷</a><span class="ua"><span class="sskadmin">博主</span> </span><span class="ua"><span class="ua_chrome">Chrome|47.0.2526.106</span> </span><span class="ua"><span class="os_mac">Mac OS X</span></span></div><p>这两个是RAC中对宏的一个非常经典的利用，@weakify(self);即__weak __typeof__(self) self_weak_ = self;@strongify(self);即__strong __typeof__(self) self = self_weak_;，一个弱引用，一个强引用，他们两个师成对出现的。你可以直接点击它们来查看他们的实现方法，在RAC的RACEXTScope.h中</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-12-24T13:24:10+08:00" title="2015年12月24日 下午1:24:10">2015年12月24日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li></ul></li><li class="ds-post" data-post-id="6232956318982865666"><div class="ds-post-self" data-post-id="6232956318982865666" data-thread-id="6231401995975000833" data-root-id="0" data-source="duoshuo"><div class="ds-avatar" data-user-id="421989"><a rel="nofollow author" target="_blank" href="http://weibo.com/2138000474" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=421989&#39;;" title="jones_ios"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/1(1)" alt="jones_ios"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://weibo.com/2138000474" onclick="this.href=&#39;http://yimouleng.duoshuo.com/user-url/?user_id=421989&#39;;" rel="nofollow" target="_blank" data-user-id="421989">jones_ios</a><span class="ua"></span> <span class="ua"><span class="ua_chrome">Chrome|47.0.2526.106</span> </span><span class="ua"><span class="os_mac">Mac OS X</span></span></div><p> <img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/vw_org.gif" alt="[威武]" title="[威武]" class="ds-smiley"> </p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-12-27T21:33:51+08:00" title="2015年12月27日 下午9:33:51">2015年12月27日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶(1)</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li></ul><div class="ds-paginator" style="display: none;"><div class="ds-border"></div><a data-page="1" href="javascript:void(0);" class="ds-current">1</a></div><a name="respond"></a><div class="ds-login-buttons"><p>社交帐号登录:</p><div class="ds-social-links"><ul class="ds-service-list"><li><a href="http://yimouleng.duoshuo.com/login/weibo/" rel="nofollow" class="ds-service-link ds-weibo">微博</a></li><li><a href="http://yimouleng.duoshuo.com/login/qq/" rel="nofollow" class="ds-service-link ds-qq">QQ</a></li><li><a href="http://yimouleng.duoshuo.com/login/renren/" rel="nofollow" class="ds-service-link ds-renren">人人</a></li><li><a href="http://yimouleng.duoshuo.com/login/douban/" rel="nofollow" class="ds-service-link ds-douban">豆瓣</a></li><li><a class="ds-more-services" href="javascript:void(0)">更多»</a></li></ul><ul class="ds-service-list ds-additional-services"><li><a href="http://yimouleng.duoshuo.com/login/kaixin/" rel="nofollow" class="ds-service-link ds-kaixin">开心</a></li><li><a href="http://yimouleng.duoshuo.com/login/netease/" rel="nofollow" class="ds-service-link ds-netease">网易</a></li><li><a href="http://yimouleng.duoshuo.com/login/sohu/" rel="nofollow" class="ds-service-link ds-sohu">搜狐</a></li><li><a href="http://yimouleng.duoshuo.com/login/baidu/" rel="nofollow" class="ds-service-link ds-baidu">百度</a></li><li><a href="http://yimouleng.duoshuo.com/login/google/" rel="nofollow" class="ds-service-link ds-google">谷歌</a></li></ul></div></div><div class="ds-replybox"><a class="ds-avatar" href="javascript:void(0);" onclick="return false"><img src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/205023.jpg" alt=""></a><form method="post"><input type="hidden" name="thread_id" value="6231401995975000833">
+<input type="hidden" name="parent_id" value="">
+<input type="hidden" name="nonce" value="56de638777f87"><div class="ds-textarea-wrapper ds-rounded-top"><textarea name="message" title="Ctrl+Enter快捷提交" placeholder="说点什么吧…"></textarea><pre class="ds-hidden-text"></pre></div><div class="ds-post-toolbar"><div class="ds-post-options ds-gradient-bg"><span class="ds-sync"></span></div><button class="ds-post-button" type="submit">发布</button><div class="ds-toolbar-buttons"><a class="ds-toolbar-button ds-add-emote" title="插入表情"></a></div></div></form></div><p class="ds-powered-by"><a href="http://duoshuo.com/" target="_blank" rel="nofollow">多说</a></p></div></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yimouleng"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//yimouleng.com/js/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		© 2016 本站由 <a href="https://weibo.com/yimouleng" target="_blank">@yimouleng</a> 创建，采用
+        <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> 作为主题并加以修改
+    	</div>
+      	<div class="footer-right">
+      		感谢 <a href="https://pages.github.com/" target="_blank">Github Pages</a> 提供稳定的空间服务
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config;executed=true">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="./iOS开发-ReactiveCocoa(RAC)框架 _ Yi'mouleng-即便世界与我为敌，只要心还透明，就能折射希望。_files/MathJax.js">
+</script>
+
+
+  </div>
+
+</body></html>
