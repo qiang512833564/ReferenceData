@@ -7,7 +7,9 @@
 //
 
 #import "TwoViewController.h"
-
+@interface TwoViewController()
+@property (nonatomic, strong)RACCommand *command;
+@end
 @implementation TwoViewController
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -60,6 +62,19 @@
     [signal subscribeNext:^(id x) {
         NSLog(@"第一次订阅消息%@",x);
     }];
+    
+    //1.创建命令
+    RACCommand *command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:@"请求数据"];
+            [subscriber sendCompleted];
+            return nil;
+        }];
+    }];
+    
+    self.command = command;
+    
+    //[command.executionSignals subscribeNext:<#^(id x)nextBlock#>];
 }
 - (void)notice{
     // 通知第一个控制器，告诉它，按钮被点了

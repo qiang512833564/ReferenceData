@@ -5,12 +5,17 @@ coreAnimation
 ———>http://www.cocoachina.com/ios/20150104/10814.html
 
 ##########动画###########
+CAAnimation:
+  >CAAnimationGroup    动画组
+  >CAPropertyAnimation
+  >CATransition
+
 CoreAnimation——是针对CALayer实现的，核心动画包含在Quartz核心框架(Quartz Core framework)
   >CAPropertyAnimation 是一个抽象的子类，它支持动画显示图层的关键路径中指定的属性
                        (一般不直接使用，而是使用它的子类：CABasicAnimation、                                             CAkeyframeAnimation)
   >CABasicAnimation    简单的为图层的属性提供修改（如大小、透明度、颜色等）
   >CAkeyframeAnimation 支持关键帧动画，可以指定图层属性的关键路径动画，包括动画的每个阶段的价值，以及关键帧时间和计时功能的一系列值
-  >CAAnimationGroup    动画组
+  
 
 ##########绘图###############
 iOS支持两套图形API族：CoreGraphics/Quartz2D和OpenGL ES（其中OpenGL ES是跨平台的图形API，属于OpenGL的一个简化版本）
@@ -24,7 +29,8 @@ UIKit和Core Graphics框架：(UIKit绘图，也是通过Quartz实现的)
    >
 #####绘制图片的颠倒情况#####
 图片绘制的时候需注意：在单分辨率和双分辨率下，一个UIImage对象的size属性值都是一样的，但是双分辨率UImage对应的CGImage是单分辨率下的两倍大）
-   >当创建一个CGImage并使用CGContextDrawImage方法绘图就会引起图片颠倒的问题(即：创建和绘制一个CGImage对象时就会暴露出倒置问题)————另外，在UIGraphicsBeginImageContextWithOptions中获取的上下文，然后在获取图片，也是颠倒的
+  >当创建一个CGImage并使用CGContextDrawImage方法绘图就会引起图片颠倒的问题(即：创建和绘制一个CGImage对象时就会暴露出倒置问题)————另外，在UIGraphicsBeginImageContextWithOptions中获取的上下文，然后在获取图片，也是颠倒的
+  >使用CGContextShowTextAtPoint时，经常会遇到字体翻转问题
      >原因：因为原始的本地坐标系(坐标原点在左上角)与目标上下文(坐标原点在左下角)不匹配(究其原因是因为Core Graphics源于Mac OSX系统，在Mac OSX中，坐标原点在左下方并且正y坐标是朝上的，而在iOS中，原点坐标是在左上方并且正y坐标是朝下的。在大多数情况下，这不会出现任何问题，因为图形上下文的坐标系统会自动调节补偿的。)
         >修复方法：
             >1:使用CGContextDrawImage方法先将CGImage绘制到UIImage上，然后获取UIImage对应的CGImage，此时就得到一个倒转的CGImage。当再次调用CGContextDrawImage方法，就把倒转的图片再次倒转，还原回来了。

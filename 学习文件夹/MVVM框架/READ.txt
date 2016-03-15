@@ -1,7 +1,7 @@
 MVC是系统框架MVP（Model-View-Presenter）是用在某个特定页面上的，也就是说MVP的灵活性要远远大于MVC，实现起来也极为复杂MVVM（Model-View-ViewModel）三者依次进化而成MVC->MVP->MVVMMVVM模式—————ReactiveCocoa框架个人理解：
 MVVM
 Model、View都是与MVC的一样的
-主要区分在VM，即ViewModel是用于在Model和View之间起一个桥梁的作用，处理Model的数据，并且把数据需要被处理的逻辑关系已经视图显示逻辑，在VM里去处理
+主要区分在VM，即ViewModel是用于在Model和View之间起一个桥梁的作用，处理Model的数据，并且把数据需要被处理的逻辑关系以及视图显示逻辑，在VM里去处理
 
 另外可以在ViewModel与Model之间，添加一个DOM，就相当于Model数据源的管理者，因为一个视图的显示，可能有不同的数据源，
 
