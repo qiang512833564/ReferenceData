@@ -1,0 +1,4 @@
+
+在使用injection for xcode的时候需注意：
+如果要想实现实时参数调整，则须操作点击 Product > 你的工程名 > Patch Project for Injection 选项, 之后插件会在 Prefix.pch 和 main.m 中插入两段代码,需要特别注意的是：该pch的文件，必须为Prefix.pch，否则无效
+因为这样子才能使用插件提供的额全局数组变量 INParameters 和 INColors
