@@ -25,6 +25,13 @@
 			return [RACSignal return:self];
 		}]
 		concat:[self rac_signalForControlEvents:UIControlEventAllEditingEvents]]
+              /*
+               通过
+               调用，rac_signalForControlEvents产生信号
+               [self addTarget:subscriber action:@selector(sendNext:) forControlEvents:controlEvents];
+               方式，响应编辑事件，
+               同时，再调用subscriberNext传入的block
+               */
 		map:^(UITextField *x) {
 			return x.text;
 		}]

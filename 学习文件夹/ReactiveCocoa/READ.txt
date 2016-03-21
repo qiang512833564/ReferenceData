@@ -22,7 +22,20 @@ RACSignal：信号流
 RACSubscriber：接受者（也有只要遵循RACSubscriber协议，都可以成为RACSubscriber）
 RACDisposable：用来清理和释放内存的
 RACCommand:类用于表示事件的执行，一般来说是在UI上的某些动作来触发这些事件，比如点击一个按钮。
+          按钮的点击事件，会触发RACCommand调用execute方法
+          同时RACCommand的SignalBlock会在execute的时候调用
+          注意：SignalBlock调用的时候，返回值需要是RACSignal,这个时候，可以对该信号进行订阅等操作
+          RACCommand的executing属性，用于判断是否正在执行RACCommand的execute操作，其实本质还是一  个RACSignal信号默认是以startWith:@NO开始的，发送的信号值是NSNmuber类型的
 RACSequence:RAC中的集合类，用于代替NSArray,NSDictionary,可以使用它来快速遍历数组和字典。
 
 RACCompoundDisposable是一个RACDisposable管理工具
 RACScheduler通过调度block来完成对事件传送的操作，可以通过销毁通过schedule方法返回的RACDisposable对    象来去掉已经在调度中（scheduling）的block
+
+RACTuple只是NSInvocation的一种映射，可以获取到NSInvocation传入的参数，一般可以通过first、second等获取第一个参数、第二个参数等，以此类推。
+宏：
+RACObserve其实就是简单的对rac_valuesForKeyPath:observer:进行包装，因此它返回的也是一个信号
+
+takeUntil:(RACSignal *):获取信号直到某个信号执行完成
+
+方法：
+rac_signalForSelector中创建了一个subject(一个可以手动控制进行sendNext的信号), 做了很复杂的swizzling, 其中和发送信号相关的是RACSwizzleForwardInvocation, 这个方法改写了原本的forwardInvocation. 然后将自己的对应selector的方法替换成forwardInvocation，这个forwardInvocation里面会调用[subject sendNext:]发送信号给subscriber.

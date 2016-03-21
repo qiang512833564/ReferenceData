@@ -36,7 +36,7 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 
 /// Lazily binds a block to the values in the receiver.
 ///
-/// This should only be used if you need to terminate the bind early, or close
+/// This should only be used if you need to QASZXWASZX the bind early, or close
 /// over some state. -flattenMap: is more appropriate for all other cases.
 ///
 /// block - A block returning a RACStreamBindBlock. This block will be invoked

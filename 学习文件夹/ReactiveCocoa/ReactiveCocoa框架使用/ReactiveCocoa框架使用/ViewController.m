@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <objc/runtime.h>
+#import <RACSubscriber.h>
 @interface ViewController ()
 
 @end
@@ -25,6 +26,7 @@
     // Do any additional setup after loading the view, typically from a nib.
 #pragma mark ---- RACSignal发送信号与接收信号，顺序是：必须先接收信号（即订阅），再发送信号（因为实质上，都是RACSubscriber对象进行的操作）
     //1、创建信号-----从下面的实现步骤（先是生成信号，然后在对信号进行订阅）来看：信号类（RACSiganl）,默认是一个冷信号，也就是只有值发生改变时，才会触发，（换句话说：只有订阅了该信号，这个信号才会变成热信号，才会被触发）
+    
     RACSignal *siganl = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         //block调用时刻：每当有订阅者订阅信号，就会调用block
         //2.发送信号
@@ -49,7 +51,7 @@
     }];
     //总结，创建RACSignal的时候，仅仅只是把block存起来
     //RACSubscriber订阅激活信号后，先调用createSignal:传入的block，然后在调用subscribeNext:传入的next传入的block
-    //
+    //需要注意的是：只要有sendNext发出，就会调用subscribeNext传入的block一次！，createSignal:传入的block只是相当于一个媒介，可有可无
 
 #pragma mark -- RACSubject
     // RACReplaySubject使用步骤:
@@ -111,11 +113,14 @@
     
     Method method = class_getInstanceMethod([MyRedView class], NSSelectorFromString(@"btnAction"));
     
-    //rac_signalForSelector通过runtime的方法消息机制，来实现的
-    //根据selector产生RACSubject(继承自RACSignal)信号,
+    //rac_signalForSelector
+    //创建一个信号，并通过runtime的方法消息机制来动态的创建一个类，并替换其forwardInvocation方法，在自定义的方法中利用该信号对象发送一个信号，被发送的消息对象为RACTuple:类
+    //(值得注意的是这个函数返回的是一个 RACTuple。 这个 RACTuple 包含了 Selector 方法里面所有的参数。这样需要用到的时候主要按照顺序来获取。)
+    //根据selector产生RACSubject(继承自RACSignal)信号,（也就是rac_signalForSelector后面的selector被执行的时候，调用！）
     //RACSubject:信号提供者，自己可以充当信号，又能发送信号。
     //使用场景:通常用来代替代理，有了它，就不必要定义代理了
     //点击事件发生的时候，默认会发送一条信息
+    //
     [[redView rac_signalForSelector:method_getName(method)]subscribeNext:^(id x) {//@selector(btnAction)
         NSLog(@"点击红色按钮");
         CGPoint center = redView.center;

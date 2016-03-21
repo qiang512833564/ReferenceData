@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="CustomImageViewId" id="EjZ-JQ-NL9" customClass="CustomImageView">
+            <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eo-gz-RGz">
+                    <rect key="frame" x="0.0" y="99" width="90" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="rnx-0E-uyc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fYG-xe-pD6">
+                    <rect key="frame" x="0.0" y="3" width="87" height="96"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="5Eo-gz-RGz" firstAttribute="leading" secondItem="EjZ-JQ-NL9" secondAttribute="leading" id="5u3-4x-NwZ"/>
+                <constraint firstAttribute="bottom" secondItem="5Eo-gz-RGz" secondAttribute="bottom" id="DPl-TN-1CA"/>
+                <constraint firstItem="fYG-xe-pD6" firstAttribute="leading" secondItem="EjZ-JQ-NL9" secondAttribute="leading" id="MYa-7X-cqb"/>
+                <constraint firstItem="5Eo-gz-RGz" firstAttribute="top" secondItem="fYG-xe-pD6" secondAttribute="bottom" id="Ut5-ab-AgI"/>
+                <constraint firstAttribute="trailing" secondItem="fYG-xe-pD6" secondAttribute="trailing" constant="4" id="eYR-3O-1QZ"/>
+                <constraint firstItem="fYG-xe-pD6" firstAttribute="top" secondItem="EjZ-JQ-NL9" secondAttribute="top" constant="3" id="hbY-3o-pIm"/>
+                <constraint firstAttribute="trailing" secondItem="5Eo-gz-RGz" secondAttribute="trailing" id="sgo-Gd-h97"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="fYG-xe-pD6" id="Vtm-Vq-n9q"/>
+                <outlet property="titleLabel" destination="5Eo-gz-RGz" id="dhy-mP-Y1M"/>
+            </connections>
+            <point key="canvasLocation" x="305" y="177"/>
+        </view>
+    </objects>
+</document>

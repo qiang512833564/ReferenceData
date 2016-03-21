@@ -108,7 +108,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 		}];
 
 		if (indexes.count == 0) return;
-
+        //手动调用KVO
 		[self willChange:NSKeyValueChangeRemoval valuesAtIndexes:indexes forKey:@keypath(self.activeExecutionSignals)];
 		[_activeExecutionSignals removeObjectsAtIndexes:indexes];
 		[self didChange:NSKeyValueChangeRemoval valuesAtIndexes:indexes forKey:@keypath(self.activeExecutionSignals)];
@@ -134,7 +134,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 
 	_activeExecutionSignals = [[NSMutableArray alloc] init];
 	_signalBlock = [signalBlock copy];
-
+    
 	// A signal of additions to `activeExecutionSignals`.
 	RACSignal *newActiveExecutionSignals = [[[[[self
 		rac_valuesAndChangesForKeyPath:@keypath(self.activeExecutionSignals) options:NSKeyValueObservingOptionNew observer:nil]
@@ -144,7 +144,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 
 			return [signals.rac_sequence signalWithScheduler:RACScheduler.immediateScheduler];
 		}]
-		concat]
+		concat]//当我们用concat方法链接A和B之后，意思就是当A执行完了之后才会执行B，他们之间是依赖的关系，如果A发送失败，B也不会执行。
 		publish]
 		autoconnect];
 
@@ -228,7 +228,7 @@ const NSInteger RACCommandErrorNotEnabled = 1;
 
 		return [RACSignal error:error];
 	}
-
+    //RACCommand在执行execute调用方法的时候，会调用RACCommand创建的时候传入的signalBlock代码块
 	RACSignal *signal = self.signalBlock(input);
 	NSCAssert(signal != nil, @"nil signal returned from signal block for value: %@", input);
 

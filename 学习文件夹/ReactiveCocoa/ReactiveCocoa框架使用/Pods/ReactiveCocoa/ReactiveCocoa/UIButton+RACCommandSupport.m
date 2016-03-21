@@ -45,7 +45,7 @@ static void *UIButtonEnabledDisposableKey = &UIButtonEnabledDisposableKey;
 			return;
 		}
 	}
-	
+	//每次点击button，都会触发这个command,使其执行相应的代码块
 	[self addTarget:self action:hijackSelector forControlEvents:UIControlEventTouchUpInside];
 }
 

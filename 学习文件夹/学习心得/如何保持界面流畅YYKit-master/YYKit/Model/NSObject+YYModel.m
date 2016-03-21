@@ -1206,6 +1206,7 @@ static id ModelToJSONObjectRecursive(NSObject *model) {
 
 + (instancetype)modelWithJSON:(id)json {
     NSDictionary *dic = [self _yy_dictionaryWithJSON:json];
+    NSLog(@"%@",dic);
     return [self modelWithDictionary:dic];
 }
 

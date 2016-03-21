@@ -40,7 +40,9 @@
         _font = [UIFont fontWithName:@"Courier" size:14];
         _subFont = [UIFont fontWithName:@"Courier" size:4];
     }
-    
+    //CADisplayLink是一个能让我们以和屏幕刷新率相同的频率将内容画到屏幕上的定时器。
+    //CADisplayLink本身就是跟屏幕刷新同步的
+    //CADisplayLink默认每秒运行60次，通过它的frameInterval属性改变每秒运行帧数，如设置为2，意味CADisplayLink每隔一帧运行一次，有效的逻辑每秒运行30次。
     _link = [CADisplayLink displayLinkWithTarget:[YYWeakProxy proxyWithTarget:self] selector:@selector(tick:)];
     [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     return self;
@@ -53,7 +55,7 @@
 - (CGSize)sizeThatFits:(CGSize)size {
     return kSize;
 }
-
+//这里是模拟，FPS，通过获取CADisplayLink每秒能调用的次数，来间接反映FPS的大小
 - (void)tick:(CADisplayLink *)link {
     if (_lastTime == 0) {
         _lastTime = link.timestamp;
@@ -70,7 +72,7 @@
     CGFloat progress = fps / 60.0;
     UIColor *color = [UIColor colorWithHue:0.27 * (progress - 0.2) saturation:1 brightness:0.9 alpha:1];
     
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d FPS",(int)round(fps)]];
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d FPS",(int)round(fps)]];//round函数是进行四舍五入的取整数字
     [text setColor:color range:NSMakeRange(0, text.length - 3)];
     [text setColor:[UIColor whiteColor] range:NSMakeRange(text.length - 3, 3)];
     text.font = _font;

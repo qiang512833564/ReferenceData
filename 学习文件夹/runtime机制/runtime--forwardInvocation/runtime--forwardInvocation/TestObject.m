@@ -48,6 +48,14 @@
     }
     return self;
 }
+/*
+ 首先说一下向一个实例发送一个消息后，系统是处理的流程：
+ 1. 发送消息如：[self startwork]
+ 2. 系统会check是否能response这个消息
+ 3. 如果能response则调用相应方法，不能则抛出异常
+ 在第二步中，系统是如何check实例是否能response消息呢？如果实例本身就有相应的response,那么就会相应之，如果没有系统就会发出methodSignatureForSelector消息，寻问它这个消息是否有效？有效就返回对应的方法地址之类的，无效则返回nil。如果是nil,Runtime则会发出-doesNotRecognizeSelector:消息，程序这时也就挂掉了. 如果不是nil接着发送forwardInvocation消息。
+ 所以我们在重写methodSignatureForSelector的时候就人工让其返回有效实例。
+ */
 
 -(void)doSomething
 {

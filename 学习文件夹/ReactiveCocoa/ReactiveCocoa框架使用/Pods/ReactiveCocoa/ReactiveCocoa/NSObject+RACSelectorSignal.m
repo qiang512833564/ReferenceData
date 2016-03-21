@@ -201,6 +201,7 @@ static RACSignal *NSObjectRACSignalForSelector(NSObject *self, SEL selector, Pro
         
 		Method targetMethod = class_getInstanceMethod(class, selector);
 		if (targetMethod == NULL) {
+            //执行的前提是：如果target没有selector这个实例方法的话
 			const char *typeEncoding;
 			if (protocol == NULL) {
 				typeEncoding = RACSignatureForUndefinedSelector(selector);
