@@ -5,7 +5,6 @@ runtime是一套比较底层的纯C语言API，属于1个C语言库，包含了�
 OC：[[MJPerson alloc]init]=====>
 runtime：objc_msgSend(objc_msgSend(“MJPerson”,”allow”),”init”)
 
-+load能保证在类的初始化过程中被加载，并保证这种改变应用级别的行为的一致性。相比之下，+initialize在其执行时不提供这种保证—事实上，如果在应用中没为给这个类发送消息，则它可能永远不会被调用。
 
 runtime用途：
 1.在程序运行过程中，动态创建一个类（比如KVO的底层实现—————MJExtension处理数据模型）
@@ -28,7 +27,35 @@ category对类进行扩展的时候需要注意的有两点：
 1)、category的方法没有“完全替换掉”原来类已经有的方法，也就是说如果category和原来类都有methodA，那么category附加完成之后，类的方法列表里会有两个methodA
 2)、category的方法被放到了新方法列表的前面，而原来类的方法被放到了新方法列表的后面，这也就是我们平常所说的category的方法会“覆盖”掉原来类的同名方法，这是因为运行时在查找方法的时候是顺着方法列表的顺序查找的，它只要一找到对应名字的方法，就会罢休^_^，殊不知后面可能还有一样名字的方法。
 
+——————————————————————————————————load与initialize————————————————————————————————
+load与initialize的作用是：在Objective-C的类被加载和初始化的时候，也可以收到方法回调，可以在适当的情况下做一些定制处理。（总之一般load与initialize是给类初始化实例钱做好环境铺垫，有点像在Java语言中也有类似的过程，JVM的ClassLoader也对类进行了加载、连接、初始化。）
+注意：
+一般不管调用几次alloc、init方法，编译器都只会调用一次Load与initialize方法
++load能保证在类的初始化过程中被加载，并保证这种改变应用级别的行为的一致性。相比之下，+initialize在其执行时不提供这种保证—事实上，如果在应用中没为给这个类发送消息，则它可能永远不会被调用。
+load调用的顺序先于initialize
 
+initialize：
+    在一个类被第一次调用之前,或者任何从这个类继承的子类第一次调用时,runtime都会初始化这个类.程序会给它发送第一条消息.runtime以线程安全的方式发送了initialize信息.
+    父类比子类更先收到这个消息.父类也许会被重复调用几次,如果子类并没有实现这个initialize方法.runtime会调用这个继承来的inherited方法.或者,或者子类明确的调用了[super initialize].如果,你想保护你自己,防止被多次调用,你可以用如下的方式来避免:
+    + (void)initialize {
+       if (self == [ClassName self]) {
+    // ... do the initialization ...
+    }
+   }
+小结：
+1. 调用的时机：initialize每个类只执行一次,是在第一次调用这个类之前执行（懒加载—节省内存资源以及提升效率）
+2. 在这个initialize方法中,尽量以线性的方式来执行代码,且需要做轻量级的工作
+3. initialize具有继承树关系,如果继承的子类没有实现initialize方法,那他就会到父类去寻找此方法实现,为了
+4. initialize很实用,经常用来封装类中的单例(这是利用initialize方法调用的唯一性，以及利用该方法是线程安全的)
+5. initialize是线程安全的
+6. initialize是通过objc_msgSend方式发送消息的
+
+load:
+1. 直接使用函数内存地址的方式 (*load_method)(cls, SEL_load); 对 +load 方法进行调用的
+2. 子类、父类和分类中的 +load 方法的实现是被区别对待的。也就是说如果子类没有实现 +load 方法，那么当它被加载时 runtime 是不会去调用父类的 +load 方法的。同理，当一个类和它的分类都实现了 +load 方法时，两个方法都会被调用。
+3. 调用的时机：被添加到runtime时
+4. 一个类的load方法不用写明[super load]，父类就会收到调用，并且在子类之前。
+5. 可用于Method Swizzling:由于load类方法是程序运行时这个类被加载到内存中就调用的一个方法，执行比较早，并且不需要我们手动调用。而且这个方法具有唯一性，也就是只会被调用一次，不用担心资源抢夺的问题。
 ————————————————————————————————————————————————————————————————————————————————————
 ————————category类别————————————
 category的另外两个使用场景1
@@ -101,3 +128,22 @@ class_addMethod的实现会覆盖父类的方法实现，但不会取代本类�
 一种是performSelector:withObject；
 再一种就是NSInvocation。
 第一种方式比较简单，能完成简单的调用。但是对于>2个的参数或者有返回值的处理，那performSelector:withObject就显得有点有心无力了，那么在这种情况下，我们就可以使用NSInvocation来进行这些相对复杂的操作
+
+———————————————————————————元类metaclass————————————————————————————
+个人理解是：
+struct objc_class {
+    Class isa  OBJC_ISA_AVAILABILITY;因为类也是对象，所以我们也可以给类对象发送消息。但是，类对象能否响应这个消息需要通过isa找到类对象所属的类（元类）才能知道。
+    总结：实例方法是保存在类中的，而类方法是保存在元类中的。
+
+#if !__OBJC2__
+    Class super_class                                        OBJC2_UNAVAILABLE;
+    const char *name                                         OBJC2_UNAVAILABLE;
+    long version                                             OBJC2_UNAVAILABLE;
+    long info                                                OBJC2_UNAVAILABLE;
+    long instance_size                                       OBJC2_UNAVAILABLE;
+    struct objc_ivar_list *ivars                             OBJC2_UNAVAILABLE;
+    struct objc_method_list **methodLists                    OBJC2_UNAVAILABLE;
+    struct objc_cache *cache                                 OBJC2_UNAVAILABLE;
+    struct objc_protocol_list *protocols                     OBJC2_UNAVAILABLE;
+#endif
+} 

@@ -127,7 +127,7 @@
 
 			if (removeDisposable) [compoundDisposable removeDisposable:finishedDisposable];
 		};
-
+#pragma mark --- bind传入的block被调用是，会返回一个signal，改信号被subscribeNext订阅后，会调用其创建时候传入的block，而该block里面又包含一个[subscriber sendNext:@value]调用，因此，此时会触发对bind传入block返回的signal订阅方法，再然后因为对block返回signal的订阅方法里面调用了[subscriber sendNext:x]相关操作，当它们执行的时候，会触发bind方法返回RACSiganl的订阅方法block
 		void (^addSignal)(RACSignal *) = ^(RACSignal *signal) {
 			@synchronized (signals) {
 				[signals addObject:signal];
@@ -153,7 +153,7 @@
 		@autoreleasepool {
 			RACSerialDisposable *selfDisposable = [[RACSerialDisposable alloc] init];
 			[compoundDisposable addDisposable:selfDisposable];
-
+#pragma mark --- 当外面的RACSiganl有信号发出的时候，触发subscribeNext传入的block，然后再去调用bind传入的block
 			RACDisposable *bindingDisposable = [self subscribeNext:^(id x) {
 				// Manually check disposal to handle synchronous errors.
 				if (compoundDisposable.disposed) return;

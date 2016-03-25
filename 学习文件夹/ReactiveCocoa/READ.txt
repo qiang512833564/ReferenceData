@@ -35,7 +35,17 @@ RACTuple只是NSInvocation的一种映射，可以获取到NSInvocation传入的
 宏：
 RACObserve其实就是简单的对rac_valuesForKeyPath:observer:进行包装，因此它返回的也是一个信号
 
-takeUntil:(RACSignal *):获取信号直到某个信号执行完成
 
 方法：
 rac_signalForSelector中创建了一个subject(一个可以手动控制进行sendNext的信号), 做了很复杂的swizzling, 其中和发送信号相关的是RACSwizzleForwardInvocation, 这个方法改写了原本的forwardInvocation. 然后将自己的对应selector的方法替换成forwardInvocation，这个forwardInvocation里面会调用[subject sendNext:]发送信号给subscriber.
+distinctUntilChanged直到收到不同值才响应，可以过滤掉那些不必要的网络请求等
+deliverOn:[RACScheduler mainThreadScheduler]切换到主线程上，进行相应的操作
+takeUntil:(RACSignal *):获取信号直到某个信号执行完成
+[RACReturnSignal return:@100]方法内部会调用sendNext方法
+
+multicast
+subscribeOn:[RACScheduler mainThreadScheduler]切换到主线程上，进行相应的操作
+defer
+concat
+RACMulticastConnection
+RACPassthroughSubscriber
