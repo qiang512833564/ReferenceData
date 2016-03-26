@@ -17,7 +17,7 @@
 @implementation ViewController
 - (IBAction)btnClick:(id)sender {
     //[self.object doesNotRecognizeSelector:@selector(run:)];
-    [self.object doSomething];
+    //[self.object doSomething];
     [self.object doSomethingElse];
     //[self.object anyAction];
     //[self.subObject doSomething];

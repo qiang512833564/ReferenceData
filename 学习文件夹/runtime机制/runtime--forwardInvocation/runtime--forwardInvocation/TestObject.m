@@ -40,11 +40,24 @@
 @end
 
 @implementation SomeClass
-
++ (void)load{
+    Method method = class_getClassMethod(self, @selector(objc_messageForward));
+    BOOL addedAlias = class_addMethod(self, NSSelectorFromString(@"_objc_msgForward"), class_getMethodImplementation(self, @selector(objc_messageForward)), method_getTypeEncoding(method));
+    if (addedAlias) {
+        
+    }else{
+        class_replaceMethod(self, NSSelectorFromString(@"_objc_msgForward"), class_getMethodImplementation(self, @selector(objc_messageForward)), method_getTypeEncoding(method));
+    }
+}
+- (void)objc_messageForward{
+    NSLog(@"%s",__func__);
+}
 -(id)init
 {
     if (self = [super init]) {
         forwardClass = [ForwardClass new];
+        
+       
     }
     return self;
 }
