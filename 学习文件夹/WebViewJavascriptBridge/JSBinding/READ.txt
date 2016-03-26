@@ -36,3 +36,5 @@ JSBinding VC  LuaBinding
    Web
    Hybrid
    ScriptBinding
+
+JS调用OC方法的时候，传入的参数，有时候，可能是JS与OC类型，不匹配，使得方法，无法调用，因此，最好用id类型接受参数

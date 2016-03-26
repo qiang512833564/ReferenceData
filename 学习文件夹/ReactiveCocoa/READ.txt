@@ -42,10 +42,18 @@ distinctUntilChanged直到收到不同值才响应，可以过滤掉那些不必
 deliverOn:[RACScheduler mainThreadScheduler]切换到主线程上，进行相应的操作
 takeUntil:(RACSignal *):获取信号直到某个信号执行完成
 [RACReturnSignal return:@100]方法内部会调用sendNext方法
+deliverOnMainThread事件的处理，交付给主线程
+deliverOn:[RACScheduler scheduler]]
+collect收集信号值,直到信号发出completed,然后用一个NSArray返回给订阅者
+ignore
+reduceEach
++combineLatest:只需要传入的信号源，发送信号，就可以触发
+-combineLatestWith:只有前后两个信号都发送信号的时候，才会调用
+combineLatest:reduce: 通过调用 reduceEach, 而reduceEach再调用map
 
 multicast
 subscribeOn:[RACScheduler mainThreadScheduler]切换到主线程上，进行相应的操作
 defer
 concat
 RACMulticastConnection
-RACPassthroughSubscriber
+RACPassthroughSubscriber私有的一种订阅者
