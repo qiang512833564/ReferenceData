@@ -15,6 +15,8 @@
 		296504CB1C91751000ED25D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296504C91C91751000ED25D0 /* LaunchScreen.storyboard */; };
 		296504D41C919B0800ED25D0 /* MyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 296504D31C919B0800ED25D0 /* MyClass.m */; };
 		29805B8C1CA6540E0046909F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805B8B1CA6540E0046909F /* main.m */; };
+		29805BA51CA661A80046909F /* Runtime_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BA41CA661A80046909F /* Runtime_Object.m */; };
+		29805BA81CA6763F0046909F /* MRC_Copy_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BA71CA6763F0046909F /* MRC_Copy_Block.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +57,10 @@
 		29805B7E1CA64E6C0046909F /* Block_底层实现原理 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Block_底层实现原理"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29805B891CA6540E0046909F /* Block__底层实现原理 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Block__底层实现原理"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29805B8B1CA6540E0046909F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29805BA31CA661A80046909F /* Runtime_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Runtime_Object.h; sourceTree = "<group>"; };
+		29805BA41CA661A80046909F /* Runtime_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Runtime_Object.m; sourceTree = "<group>"; };
+		29805BA61CA6763F0046909F /* MRC_Copy_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRC_Copy_Block.h; sourceTree = "<group>"; };
+		29805BA71CA6763F0046909F /* MRC_Copy_Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRC_Copy_Block.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +145,10 @@
 			isa = PBXGroup;
 			children = (
 				29805B8B1CA6540E0046909F /* main.m */,
+				29805BA31CA661A80046909F /* Runtime_Object.h */,
+				29805BA41CA661A80046909F /* Runtime_Object.m */,
+				29805BA61CA6763F0046909F /* MRC_Copy_Block.h */,
+				29805BA71CA6763F0046909F /* MRC_Copy_Block.m */,
 			);
 			path = "Block__底层实现原理";
 			sourceTree = "<group>";
@@ -309,6 +319,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				29805B8C1CA6540E0046909F /* main.m in Sources */,
+				29805BA81CA6763F0046909F /* MRC_Copy_Block.m in Sources */,
+				29805BA51CA661A80046909F /* Runtime_Object.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
