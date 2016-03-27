@@ -17,7 +17,7 @@
  　　在第二步中，如果实例本身就有相应的response，那么就会响应之，如果没有,系统就会向实例对象发出methodSignatureForSelector消息，检测它这个消息是否有效？有效就会继续发出forwardInvocation消息，无效则返回nil。如果是nil就会crash。
  */
 #import "TestObject.h"
-
+#import <objc/message.h>
 @interface ForwardClass ()
 -(void)doSomethingElse;
 @end
@@ -40,7 +40,11 @@
 @end
 
 @implementation SomeClass
+void _objc_msgForward(){
+    
+}
 + (void)load{
+    IMP msgForwardIMP = _objc_msgForward;
     Method method = class_getClassMethod(self, @selector(objc_messageForward));
     BOOL addedAlias = class_addMethod(self, NSSelectorFromString(@"_objc_msgForward"), class_getMethodImplementation(self, @selector(objc_messageForward)), method_getTypeEncoding(method));
     if (addedAlias) {
@@ -61,6 +65,20 @@
     }
     return self;
 }
+- (void)methodImpletion{
+    
+}
+#pragma mark --- 最先调用
+//This method is called before the Objective-C forwarding mechanism is invoked
+//SEL方法被调用前调用该方法
++ (BOOL)resolveInstanceMethod:(SEL)sel{
+    class_addMethod(self, sel, class_getMethodImplementation(self, @selector(methodImpletion)), method_getTypeEncoding(class_getInstanceMethod(self, @selector(methodImpletion))));
+    return YES;//YES if the method was found and added to the receiver, otherwise NO
+    //YES 表示不进行后续的消息转发，返回  NO 则表示要进行后续的消息转发。
+    
+
+}
+
 /*
  首先说一下向一个实例发送一个消息后，系统是处理的流程：
  1. 发送消息如：[self startwork]
@@ -113,6 +131,5 @@
     
 }
 */
-
 
 @end

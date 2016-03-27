@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29805BB61CA78F940046909F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BB51CA78F940046909F /* main.m */; };
+		29805BBE1CA7AE2D0046909F /* Object_weak.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BBD1CA7AE2D0046909F /* Object_weak.m */; };
+		29805BC61CA7C2240046909F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BC51CA7C2240046909F /* main.m */; };
+		29805BCC1CA7C2450046909F /* CYLBlockExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BCB1CA7C2450046909F /* CYLBlockExecutor.m */; };
+		29805BCF1CA7C2EB0046909F /* NSObject+CYLRunAtDealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BCE1CA7C2EB0046909F /* NSObject+CYLRunAtDealloc.m */; };
+		29805BD21CA7C7DA0046909F /* Weak_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 29805BD11CA7C7DA0046909F /* Weak_Object.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		29805BB01CA78F940046909F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		29805BC11CA7C2240046909F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		29805BB21CA78F940046909F /* Runtime实现weak */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Runtime实现weak"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29805BB51CA78F940046909F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29805BBC1CA7AE2D0046909F /* Object_weak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object_weak.h; sourceTree = "<group>"; };
+		29805BBD1CA7AE2D0046909F /* Object_weak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Object_weak.m; sourceTree = "<group>"; };
+		29805BC31CA7C2240046909F /* Runtime实现weak属性 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Runtime实现weak属性"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29805BC51CA7C2240046909F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29805BCA1CA7C2450046909F /* CYLBlockExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLBlockExecutor.h; sourceTree = "<group>"; };
+		29805BCB1CA7C2450046909F /* CYLBlockExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLBlockExecutor.m; sourceTree = "<group>"; };
+		29805BCD1CA7C2EB0046909F /* NSObject+CYLRunAtDealloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CYLRunAtDealloc.h"; sourceTree = "<group>"; };
+		29805BCE1CA7C2EB0046909F /* NSObject+CYLRunAtDealloc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CYLRunAtDealloc.m"; sourceTree = "<group>"; };
+		29805BD01CA7C7DA0046909F /* Weak_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weak_Object.h; sourceTree = "<group>"; };
+		29805BD11CA7C7DA0046909F /* Weak_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weak_Object.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29805BAF1CA78F940046909F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29805BC01CA7C2240046909F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29805BA91CA78F940046909F = {
+			isa = PBXGroup;
+			children = (
+				29805BB41CA78F940046909F /* Runtime实现weak */,
+				29805BC41CA7C2240046909F /* Runtime实现weak属性 */,
+				29805BB31CA78F940046909F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		29805BB31CA78F940046909F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29805BB21CA78F940046909F /* Runtime实现weak */,
+				29805BC31CA7C2240046909F /* Runtime实现weak属性 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29805BB41CA78F940046909F /* Runtime实现weak */ = {
+			isa = PBXGroup;
+			children = (
+				29805BB51CA78F940046909F /* main.m */,
+				29805BBC1CA7AE2D0046909F /* Object_weak.h */,
+				29805BBD1CA7AE2D0046909F /* Object_weak.m */,
+			);
+			path = "Runtime实现weak";
+			sourceTree = "<group>";
+		};
+		29805BC41CA7C2240046909F /* Runtime实现weak属性 */ = {
+			isa = PBXGroup;
+			children = (
+				29805BC51CA7C2240046909F /* main.m */,
+				29805BD01CA7C7DA0046909F /* Weak_Object.h */,
+				29805BD11CA7C7DA0046909F /* Weak_Object.m */,
+				29805BCA1CA7C2450046909F /* CYLBlockExecutor.h */,
+				29805BCB1CA7C2450046909F /* CYLBlockExecutor.m */,
+				29805BCD1CA7C2EB0046909F /* NSObject+CYLRunAtDealloc.h */,
+				29805BCE1CA7C2EB0046909F /* NSObject+CYLRunAtDealloc.m */,
+			);
+			path = "Runtime实现weak属性";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29805BB11CA78F940046909F /* Runtime实现weak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29805BB91CA78F940046909F /* Build configuration list for PBXNativeTarget "Runtime实现weak" */;
+			buildPhases = (
+				29805BAE1CA78F940046909F /* Sources */,
+				29805BAF1CA78F940046909F /* Frameworks */,
+				29805BB01CA78F940046909F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Runtime实现weak";
+			productName = "Runtime实现weak";
+			productReference = 29805BB21CA78F940046909F /* Runtime实现weak */;
+			productType = "com.apple.product-type.tool";
+		};
+		29805BC21CA7C2240046909F /* Runtime实现weak属性 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29805BC71CA7C2240046909F /* Build configuration list for PBXNativeTarget "Runtime实现weak属性" */;
+			buildPhases = (
+				29805BBF1CA7C2240046909F /* Sources */,
+				29805BC01CA7C2240046909F /* Frameworks */,
+				29805BC11CA7C2240046909F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Runtime实现weak属性";
+			productName = "Runtime实现weak属性";
+			productReference = 29805BC31CA7C2240046909F /* Runtime实现weak属性 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29805BAA1CA78F940046909F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = lizhongqiang;
+				TargetAttributes = {
+					29805BB11CA78F940046909F = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					29805BC21CA7C2240046909F = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 29805BAD1CA78F940046909F /* Build configuration list for PBXProject "Runtime实现weak" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 29805BA91CA78F940046909F;
+			productRefGroup = 29805BB31CA78F940046909F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29805BB11CA78F940046909F /* Runtime实现weak */,
+				29805BC21CA7C2240046909F /* Runtime实现weak属性 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29805BAE1CA78F940046909F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29805BBE1CA7AE2D0046909F /* Object_weak.m in Sources */,
+				29805BB61CA78F940046909F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29805BBF1CA7C2240046909F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29805BC61CA7C2240046909F /* main.m in Sources */,
+				29805BCC1CA7C2450046909F /* CYLBlockExecutor.m in Sources */,
+				29805BD21CA7C7DA0046909F /* Weak_Object.m in Sources */,
+				29805BCF1CA7C2EB0046909F /* NSObject+CYLRunAtDealloc.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		29805BB71CA78F940046909F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		29805BB81CA78F940046909F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		29805BBA1CA78F940046909F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		29805BBB1CA78F940046909F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		29805BC81CA7C2240046909F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		29805BC91CA7C2240046909F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29805BAD1CA78F940046909F /* Build configuration list for PBXProject "Runtime实现weak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29805BB71CA78F940046909F /* Debug */,
+				29805BB81CA78F940046909F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29805BB91CA78F940046909F /* Build configuration list for PBXNativeTarget "Runtime实现weak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29805BBA1CA78F940046909F /* Debug */,
+				29805BBB1CA78F940046909F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		29805BC71CA7C2240046909F /* Build configuration list for PBXNativeTarget "Runtime实现weak属性" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29805BC81CA7C2240046909F /* Debug */,
+				29805BC91CA7C2240046909F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29805BAA1CA78F940046909F /* Project object */;
+}
