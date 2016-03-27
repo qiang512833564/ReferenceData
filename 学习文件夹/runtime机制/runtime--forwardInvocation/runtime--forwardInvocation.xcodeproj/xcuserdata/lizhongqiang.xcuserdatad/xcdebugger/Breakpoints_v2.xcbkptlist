@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "runtime--forwardInvocation/TestObject.m"
-            timestampString = "480761536.276003"
+            timestampString = "480776716.223766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-methodSignatureForSelector:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "runtime--forwardInvocation/TestObject.m"
-            timestampString = "480761563.23014"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-forwardInvocation:"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "-forwardingTargetForSelector:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

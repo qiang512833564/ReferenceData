@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29805BD41CA812620046909F /* 消息转发的全过程.png in Resources */ = {isa = PBXBuildFile; fileRef = 29805BD31CA812620046909F /* 消息转发的全过程.png */; };
 		29FBD22B1C8E709C00C6D7AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29FBD22A1C8E709C00C6D7AE /* main.m */; };
 		29FBD22E1C8E709C00C6D7AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29FBD22D1C8E709C00C6D7AE /* AppDelegate.m */; };
 		29FBD2311C8E709C00C6D7AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29FBD2301C8E709C00C6D7AE /* ViewController.m */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29805BD31CA812620046909F /* 消息转发的全过程.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消息转发的全过程.png"; sourceTree = "<group>"; };
 		29FBD2261C8E709C00C6D7AE /* runtime--forwardInvocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "runtime--forwardInvocation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29FBD22A1C8E709C00C6D7AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29FBD22C1C8E709C00C6D7AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				29FBD2411C8E70B800C6D7AE /* TestObject.m */,
 				29FBD2431C8E787000C6D7AE /* SubSomeClass.h */,
 				29FBD2441C8E787000C6D7AE /* SubSomeClass.m */,
+				29805BD31CA812620046909F /* 消息转发的全过程.png */,
 				29FBD2321C8E709C00C6D7AE /* Main.storyboard */,
 				29FBD2351C8E709C00C6D7AE /* Assets.xcassets */,
 				29FBD2371C8E709C00C6D7AE /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29FBD2391C8E709C00C6D7AE /* LaunchScreen.storyboard in Resources */,
+				29805BD41CA812620046909F /* 消息转发的全过程.png in Resources */,
 				29FBD2361C8E709C00C6D7AE /* Assets.xcassets in Resources */,
 				29FBD2341C8E709C00C6D7AE /* Main.storyboard in Resources */,
 			);
@@ -312,6 +316,7 @@
 				29FBD23F1C8E709C00C6D7AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

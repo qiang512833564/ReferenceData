@@ -1,0 +1,29 @@
+
+消息转发的全过程，基本如图中显示的这样子，但是：
+当resolveInstanceMethod方法返回YES的时候，系统会再次进入cache list和method list里面去寻找方法的实现，如果此时并没有在resolveInstanceMethod方法>里面动态的添加传入方法selector的实现，系统仍然会进入后面的消息转发
+消息的转发，就是resolveInstanceMethod方法返回NO，之后的方法调用
+
+一般方法runtime的相应流程如下：
+1. runtime消息传递
+   objc_msgSend
+2. 动态方法解析
+   + (BOOL)resolveInstanceMethod
+3. 消息转发（前提是：动态方法解析，返回值为NO）
+   forwardingTargetForSelector（）
+   methodSignatureForSelector(前提是forwardingTargetForSelector方法返回为nil)
+   forwardInvocation
+以下情况会crash
+   forwardingTargetForSelector方法返回的target不能处理改selector
+   methodSignatureForSelector返回不能为空
+   forwardInvocation不能正常响应，或者调用doesNotRecognizeSelector方法
+
+-methodSignatureForSelector与-forwardingTargetForSelector:，两个方法就相当于一个是返回方法的method，另一个则根据前者方法返回的method生成相应的NSInvocation,然后再确定target去调用。
+
+一般方法规则：
+Objective-C中的方法默认被隐藏了两个参数：self和_cmd。self指向对象本身，_cmd指向方法本身。 
+被指定为动态实现的方法的参数类型有如下的要求： 
+A.第一个参数类型必须是id（就是self的类型） 
+B.第二个参数类型必须是SEL（就是_cmd的类型） 
+C.从第三个参数起，可以按照原方法的参数类型定义， 
+如:-(void)setName:(NSString)*name 对应Type Encoding为v@:@ 
+最后的@表示参数name的类型
