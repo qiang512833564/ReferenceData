@@ -76,7 +76,11 @@ void methodImpletion(id self, SEL _cmd){
 #pragma mark --- 最先调用
 
 //This method is called before the Objective-C forwarding mechanism is invoked
-//转发机制forwardInvocation方法被调用前调用该方法(前提是：查找 method list，未查到)
+//转发机制forwardInvocation方法被调用前调用该方法(前提是：查找 method list，未查到,还有就是
+/* IMP msgForwardIMP = _objc_msgForward;
+  class_replaceMethod(self, NSSelectorFromString(@"forwardSelector"), msgForwardIMP, "v@:");
+   方法本身，的实现不能被_objc_msgForward替换，否则，forwardInvocation方法也不会被调用
+)*/
 //作用是：在cache和method list中，没有找到方法的实现时，再给一次机会，去动态添加方法的实现
 + (BOOL)resolveInstanceMethod:(SEL)sel{
     class_addMethod(self, sel, (IMP)methodImpletion, "v@:");

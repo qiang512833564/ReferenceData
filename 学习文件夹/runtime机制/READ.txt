@@ -105,6 +105,9 @@ Objective-C在编译时，会依据每一个方法的名字、参数序列，生
 当然，不同的类可以拥有相同的selector，这个没有问题。不同类的实例对象执行相同的selector时，会在各自的方法列表中去根据selector去寻找自己对应的IMP。
 
 2.IMP实际上是一个函数指针，指向方法实现的首地址
+例如：
+void methodImpletion(id self, SEL _cmd){ }
+class_addMethod(self, sel, (IMP)methodImpletion, "v@:");
 
 3.Method
 typedef struct objc_method *Method;

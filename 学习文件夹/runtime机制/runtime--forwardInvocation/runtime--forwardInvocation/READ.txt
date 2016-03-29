@@ -27,6 +27,10 @@ objc的运行时会给出三次拯救程序崩溃的机会：
     3. Normal forwarding
        这一步是Runtime最后一次给你挽救的机会。首先它会发送-methodSignatureForSelector:消息获得函数的参数和返回值类型。如果-methodSignatureForSelector:返回nil，Runtime则会发出-doesNotRecognizeSelector:消息，程序这时也就挂掉了。如果返回了一个函数签名，Runtime就会创建一个NSInvocation对象并发送-forwardInvocation:消息给目标对象
 
+注意：
+    _objc_msgForward就是会向forwardingTargetForSelector、methodSignatureForSelector、forwardInvocation这三个方法发送消息调用，因此，如果一个自定义方法的实现被替换成了_objc_msgForward，则会跳过resolveInstanceMethod方法，使得其无法被调用
+    一般方法的动态改变，会写在+load/+自定义类方法 里面
+
 一般方法规则：
 Objective-C中的方法默认被隐藏了两个参数：self和_cmd。self指向对象本身，_cmd指向方法本身。 
 被指定为动态实现的方法的参数类型有如下的要求： 

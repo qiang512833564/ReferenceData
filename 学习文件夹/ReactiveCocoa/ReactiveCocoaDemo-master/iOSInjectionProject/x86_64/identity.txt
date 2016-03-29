@@ -1,0 +1,2 @@
+/Users/lizhongqiang/Library/Developer/Xcode/DerivedData/ReactiveCocoaDemo-fatkyyitbthdnmaeejumdfmfozcq/Build/Products/Debug-iphonesimulator/ReactiveCocoaDemo.app
+

@@ -1,0 +1,38 @@
+
+JS的function对象定义的属性 length 声明了函数的参数个数
+
+在函数代码中，使用特殊对象 arguments，开发者无需明确指出参数名，就能访问它们
+
+在函数代码中，使用this关键字，访问当前调用方法的对象
+
+arguments像数组(并不是真的数组，是一个Arguments对象， 再次强调)一样，有length属性，可以代表传给函数的参数的个数
+
+Array.prototype.slice.call(arguments)可以将具有length属性的对象转成数组
+
+另外，函数function(){}的()括号里，不需要指名参数的个数，调用的时候，可以传入任意个数的参数
+
+array就可以充当真正的数组，也可以充当字典使用
+
+对象的创建：
+    var objc = {}
+对象的赋值
+    objc[key] = value
+对象的长度判断
+    var length = 0;
+    for(var jsObjc in a){
+      length ++;
+    }    
+对象的值删除
+    delete objc[key]
+
+数组的操作
+array.splice(0,1)//splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+                            //参数一，表示添加或者删除元素的位置
+                            //参数二，为1时，表示删除元素，为0时，表示添加元素
+                            //参数三，只有当参数二为0时，才会有参数三，此时表示添加的元素对象
+
+----------------------------------------node.js与Javascript的关系--------------
+Node.js不是JS应用、而是JS运行平台
+Node.js 是运行在服务端的 JavaScript
+因此在js里面可以使用node.js的方法去加载一个模块生成一个对象
+var http = require('http');
