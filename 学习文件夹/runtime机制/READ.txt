@@ -6,7 +6,7 @@ OC：[[MJPerson alloc]init]=====>
 runtime：objc_msgSend(objc_msgSend(“MJPerson”,”allow”),”init”)
 
 
-runtime用途：
+runtime用途：（具体实例：想一想JSPatch、ReactiveCocoa、Push的实现）
 1.在程序运行过程中，动态创建一个类（比如KVO的底层实现—————MJExtension处理数据模型）
 2.在程序运行过程中，动态地为某个类添加属性\方法，修改属性值\方法（比如：对类别进行属性扩展，通过改变方法名指针指向来交换方法的实现）
 例如：交换方法实现

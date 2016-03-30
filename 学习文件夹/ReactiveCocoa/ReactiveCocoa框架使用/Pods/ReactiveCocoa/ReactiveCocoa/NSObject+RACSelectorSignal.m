@@ -57,6 +57,7 @@ static BOOL RACForwardInvocation(id self, NSInvocation *invocation) {
 	return YES;
 }
 static void RACSwizzleForwardInvocation(Class class) {
+   
     //- (void)forwardInvocation:(NSInvocation *)anInvocation---这里runtime自带的方法
     //如果一个对象收到一条无法处理的消息，运行时系统会在抛出错误前，给该对象发送一条forwardInvocation:消息，该消息的唯一参数是个NSInvocation类型的对象——该对象封装了原始的消息和消息的参数
     //您可以实现forwardInvocation:方法来对不能处理的消息做一些默认的处理，也可以以其它的某种方式来避免错误被抛出

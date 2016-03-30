@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if !IE]><!--> <html> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="description"  content="Objective-C的runtime语言使它具备了动态语言的特性，也就是平时所说的“运行时”。在runtime的基础上，可以做很多平时难以想到事，或者化简原先较为繁杂的解决方案。相对于静态语言，比如C的以下程序#includevoidrun(){}intmain(...">
+  <meta property="wb:webmaster" content="294ec9de89e7fadb" />
+  <meta property="qc:admins" content="104102651453316562112116375" />
+  <meta property="qc:admins" content="11635613706305617" />
+  <meta property="qc:admins" content="1163561616621163056375" />
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4" />
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI" />
+  <meta http-equiv="mobile-agent" content="format=html5; url=http://www.jianshu.com/p/a55fe91c826c">
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/1623074">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="Runtime基础元素解析" property="twitter:title">
+  <meta content="Objective-C的runtime语言使它具备了动态语言的特性，也就是平时所说的“运行时”。在runtime的基础上，可以做很多平时难以想到事，或者化简原先较为繁杂的解决方案。相对于静态语言，比如C的以下程序#includevoidrun(){}intmain(..." property="twitter:description">
+  <meta content="http://www.jianshu.com/p/a55fe91c826c" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="Runtime基础元素解析">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://www.jianshu.com/p/a55fe91c826c">
+  <meta property="og:description" content="Objective-C的runtime语言使它具备了动态语言的特性，也就是平时所说的“运行时”。在runtime的基础上，可以做很多平时难以想到事，或者化简原先较为繁杂的解决方案。相对于静态语言...">
+
+    <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/608238-6ac85f8b7011cbe2.png" />
+    <meta property="og:image:width" content="546" />
+    <meta property="og:image:height" content="564" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/608238-bcd509a070878d15.png" />
+    <meta property="og:image:width" content="337" />
+    <meta property="og:image:height" content="554" />
+    <meta property="og:image:type" content="image/png" />
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/1623074" />
+  <meta property="al:ios:app_store_id" content="888237539" />
+  <meta property="al:ios:app_name" content="简书" />
+
+  <meta property="al:android:url" content="jianshu://notes/1623074" />
+  <meta property="al:android:package" content="com.jianshu.haruki" />
+  <meta property="al:android:app_name" content="简书" />
+  <!-- End -->
+
+  <title>Runtime基础元素解析 - 简书</title>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="9CLONvf7XeR54NHoBOuO9ZWsAzfwfRyNNycH40Kwq5OaaKDneCpBI8vhSgEC6QWYeF8sDpsvtXDiE32vCCiM8g==" />
+  <!--[if lte IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/base-f935477e8faba16f29c6f9e4f0e1d032.css" />
+
+    <link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/reading-note-4158a6eeb7c4e4a9fd15332778cfb52c.css" />
+  <link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/base-read-mode-64acccf6966299cfa3d580140a2582fe.css" />
+  <script src="http://cdn-qn0.jianshu.io/assets/modernizr-613ea63b5aa2f0e2a1946e9c28c8eedb.js"></script>
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if IE 8]><link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/scaffolding/for_ie-7f1c477ffedc13c11315103e8787dc6c.css" /><![endif]-->
+  <!--[if lt IE 9]><link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/scaffolding/for_ie-7f1c477ffedc13c11315103e8787dc6c.css" /><![endif]-->
+  <link href="http://baijii-common.b0.upaiyun.com/icons/favicon.ico" rel="icon">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/57-7597f1cff93b0f41cd16ca7641e477eb.png" sizes="57x57" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/72-e02c647005f01e2d24778ac8e7f9dc45.png" sizes="72x72" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/76-4788ffdcd445555b5b93bfb4d1f4747c.png" sizes="76x76" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/114-e89d888a7bce6222606e46082dcab634.png" sizes="114x114" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/120-c7cdad6dd50db5a93175a6e015d6dc08.png" sizes="120x120" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/152-21fa4ed7968f6503816524e90dcb3d91.png" sizes="152x152" />
+    <meta id="user_access_temp_token" value="add8ce6b25be"></meta>
+    <meta id="current_user_id" value="1296229"></meta>
+    <meta id="current_user_slug" value="818c189c4b8a"></meta>
+  <!-- Baidu stats -->
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</head>
+
+<body class="post output zh cn mac reader-day-mode reader-font2" data-js-module="note-show" data-locale="zh-CN">
+  
+  <div class="navbar navbar-jianshu shrink">
+  <div class="dropdown">
+    <a class="dropdown-toggle logo" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0)">
+      简
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><a href="/"><i class="fa fa-home"></i> 首页</a></li>
+      <li><a href="/collections"><i class="fa fa-th"></i> 专题</a></li>
+      <li><a href="/user_invitations"><i class="fa fa-money"></i> 发钱啦</a></li>
+        <li><a href="/timeline"><i class="fa fa-users"></i> 简友圈</a></li>
+        <li><a href="/writer#/"><i class="fa fa-pencil"></i> 写文章</a></li>
+    </ul>
+  </div>
+</div>
+<div class="navbar-user">
+    <a class="user avatar" data-toggle="dropdown" href="javascript:void(0)">
+      <img src="http://cdn-qn0.jianshu.io/assets/default_avatar/6-c3a19bc117a55e66cd3be55684d8191c.jpg" alt="6" /> <b class="caret"></b>
+</a>    <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dLabel">
+      <li>
+  <a href="/writer#/"><i class="fa fa-pencil"></i> 写文章</a>
+</li>
+<li>
+  <a target="_blank" href="/users/818c189c4b8a"><i class="fa fa-user"></i> 我的主页</a>
+</li>
+  <li>
+    <a href="/favourites">
+      <i class="fa fa-heart"></i> 我喜欢的
+</a>  </li>
+  <li>
+    <a href="/bookmarks">
+      <i class="fa fa-bookmark"></i> 我的收藏
+</a>  </li>
+  <li>
+    <a href="/notifications">
+      <i class="fa fa-bell"></i> 提醒
+</a>  </li>
+  <li>
+    <a href="/chats">
+      <i class="fa fa-envelope"></i> 简信
+</a>  </li>
+  <li><a href="/settings"><i class="fa fa-cogs"></i> 设置</a></li>
+  <li>
+    <a href="/wallet">
+      <i class="fa fa-credit-card"></i> 钱包
+</a>  </li>
+  <li><a target="_blank" href="/user_invitations"><i class="fa fa-money"></i> 简书发钱啦</a></li>
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="#"><i class="fa fa-question-circle"></i> 帮助</a>
+    <ul class="dropdown-menu">
+      <li><a href="http://www.jianshu.com/notebooks/547/latest" target="_blank">帮助中心</a></li>
+      <li><a target="_blank" href="/contact">联系我们</a></a></li>
+    </ul>
+  </li>
+  <li>
+    <a rel="nofollow" data-method="DELETE" href="/sign_out">
+      <i class="fa fa-sign-out"></i> 登 出
+</a>  </li>
+
+    </ul>
+    <a class="daytime set-view-mode pull-right" href="javascript:void(0)"><i class="fa fa-moon-o"></i></a>
+</div>
+<div class="navbar navbar-jianshu expanded">
+  <div class="dropdown">
+      <a class="active logo" role="button" data-original-title="个人主页" data-container="div.expanded" href="/">
+        <b>简</b><i class="fa fa-home"></i><span class="title">首页</span>
+</a>      <a data-toggle="tooltip" data-placement="right" data-original-title="专题" data-container="div.expanded" href="/collections">
+        <i class="fa fa-th"></i><span class="title">专题</span>
+</a>        <a data-toggle="tooltip" data-placement="right" data-original-title="简友圈" data-container="div.expanded" href="/timeline">
+          <i class="fa fa-users"></i><span class="title">简友圈</span>
+</a>        <a data-toggle="tooltip" data-placement="right" data-original-title="写文章" data-container="div.expanded" href="/writer#/">
+          <i class="fa fa-pencil"></i><span class="title">写文章</span>
+</a>    <a class="ad-selector" href="/apps">
+      <i class="fa fa-mobile"></i><span class="title">下载手机应用</span>
+</a>    <div class="ad-container ad-container-signed">
+      <div class="ad-pop">
+        <img class="ad-logo" src="http://cdn-qn0.jianshu.io/assets/apple-touch-icons/114-8dae53b3bcea3f06bb139e329d1edab3.png" alt="114" />
+        <p class="ad-title">简书</p>
+        <p class="ad-subtitle">交流故事，沟通想法</p>
+        <img class="ad-qrcode" src="http://cdn-qn0.jianshu.io/assets/app-page/download-app-qrcode-053849fa25f9b44573ef8dd3c118a20f.png" alt="Download app qrcode" />
+        <div>
+          <a class="ad-link" href="https://itunes.apple.com/cn/app/jian-shu/id888237539?ls=1&amp;mt=8">iOS</a>·
+          <a class="ad-link" href="http://downloads.jianshu.io/apps/haruki/JianShu-1.10.4.apk">Android</a>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <div class="nav-user">
+      <a data-toggle="tooltip" data-placement="right" data-original-title="我的主页" data-container="div.expanded" href="/users/818c189c4b8a">
+        <i class="fa fa-user"></i><span class="title">我的主页</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="我的收藏" data-container="div.expanded" href="/bookmarks">
+          <i class="fa fa-bookmark"></i><span class="title">我的收藏</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="提醒" data-container="div.expanded" href="/notifications">
+
+          <i id="notify-icon" class="fa fa-bell"></i><span class="title">提醒</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="简信" data-container="div.expanded" href="/chats">
+            <i id="chat-message-icon" class="fa fa-envelope"></i><span class="title">简信</span>
+</a>
+        <a href='#view-mode-modal' data-toggle='modal'><i class="fa fa-font"></i><span class="title">显示模式</span></a>
+
+        <a data-toggle="tooltip" data-placement="right" data-original-title="设置" data-container="div.expanded" href="/settings">
+          <i class="fa fa-cogs"></i><span class="title">设置</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="登 出" data-container="div.expanded" rel="nofollow" data-method="delete" href="/sign_out">
+          <i class="fa fa-sign-out"></i><span class="title">登 出</span>
+</a>
+          </div>
+  </div>
+
+  
+    <div class="fixed-btn">
+    <a class="go-top hide-go-top" href="#"> <i class="fa fa-angle-up"></i></a>
+    <a class="qrcode" data-target="#bottom-qrcode" data-toggle="modal" href="javascript:void(0)"><i class="fa fa-qrcode"></i></a>
+    <a class="writer" href="/writer#/" data-toggle="tooltip" data-placement="left" title="写篇文章"><i class="fa fa-pencil"></i></a>
+    <!-- qrcode modal -->
+    <div id="bottom-qrcode" class="modal panel-modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <h4>下载简书移动应用</h4>
+      <div class="panel-body"><img src="http://cdn0.jianshu.io/assets/app-page/download-app-qrcode-85008f146773a25ce86bcc4d7858af68.png" alt="Download app qrcode" /></div>
+    </div>
+  </div>
+
+
+  <div id="show-note-container">
+    
+
+<div class="post-bg" id="flag">
+  <div class="wrap-btn">
+    <!-- Notebook and collections button upper left -->
+      <div class="article-related pull-left">
+          <a class="collection-menu-btn" data-toggle="modal" data-target="#collection-menu" href="javascript:void(null);">
+            <i class="fa fa-th"></i>
+</a>          <a class="notebooks-menu-btn" data-toggle="modal" data-target="#notebooks-menu" href="javascript:void(null);"><i class="fa fa-list-ul"></i></a>
+        <div class="related-avatar-group activities"></div>
+      </div>
+    <!-- ******* -->
+
+      <a class="user avatar" data-toggle="dropdown" href="javascript:void(0)">
+    <img src="http://cdn-qn0.jianshu.io/assets/default_avatar/6-c3a19bc117a55e66cd3be55684d8191c.jpg" alt="6" /> <b class="caret"></b>
+</a>  <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dLabel">
+    <li>
+  <a href="/writer#/"><i class="fa fa-pencil"></i> 写文章</a>
+</li>
+<li>
+  <a target="_blank" href="/users/818c189c4b8a"><i class="fa fa-user"></i> 我的主页</a>
+</li>
+  <li>
+    <a href="/favourites">
+      <i class="fa fa-heart"></i> 我喜欢的
+</a>  </li>
+  <li>
+    <a href="/bookmarks">
+      <i class="fa fa-bookmark"></i> 我的收藏
+</a>  </li>
+  <li>
+    <a href="/notifications">
+      <i class="fa fa-bell"></i> 提醒
+</a>  </li>
+  <li>
+    <a href="/chats">
+      <i class="fa fa-envelope"></i> 简信
+</a>  </li>
+  <li><a href="/settings"><i class="fa fa-cogs"></i> 设置</a></li>
+  <li>
+    <a href="/wallet">
+      <i class="fa fa-credit-card"></i> 钱包
+</a>  </li>
+  <li><a target="_blank" href="/user_invitations"><i class="fa fa-money"></i> 简书发钱啦</a></li>
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="#"><i class="fa fa-question-circle"></i> 帮助</a>
+    <ul class="dropdown-menu">
+      <li><a href="http://www.jianshu.com/notebooks/547/latest" target="_blank">帮助中心</a></li>
+      <li><a target="_blank" href="/contact">联系我们</a></a></li>
+    </ul>
+  </li>
+  <li>
+    <a rel="nofollow" data-method="DELETE" href="/sign_out">
+      <i class="fa fa-sign-out"></i> 登 出
+</a>  </li>
+
+  </ul>
+
+
+    <!-- Buttons upper right -->
+      <div class="btn-group editor-article">
+                  <a class='daytime set-view-mode' href='javascript:void(0)'><i class="fa fa-moon-o"></i></a>
+        <span>
+          
+          
+          
+
+            <a data-type="json" data-mcomponent="easy-bookmark" class="bookmark" data-remote="true" rel="nofollow" data-method="post" href="/notes/1623074/bookmark">
+    <i class="fa fa-bookmark-o"></i><span>收藏文章</span>
+</a>
+        </span>
+      </div>
+    <!-- ******* -->
+  </div>
+
+  <div class="container">
+    <!-- Article activities for width under 768px -->
+    <div class="related-avatar-group activities"></div>
+      <div class="article">
+        <div class="preview">
+          <div class="author-info">
+              <div class="btn btn-small btn-success follow" id="follow_user_608238">
+    <a data-type="json" data-user-slug="97e39e95c2cc" data-remote="true" rel="nofollow" data-method="post" href="/users/97e39e95c2cc/toggle_like"><i class="fa fa-plus"></i>  <span>添加关注</span></a>
+  </div>
+
+            <a class="avatar" href="/users/97e39e95c2cc">
+              <img src="http://cdn-qn0.jianshu.io/assets/default_avatar/10-f47ea4d685571bcb63f5b1ea99527d09.jpg" alt="10" />
+</a>            <span class="label">
+                作者
+            </span>
+            <a class="author-name blue-link" href="/users/97e39e95c2cc">
+              <span>tripleCC</span>
+</a>              <span data-toggle='tooltip' data-original-title='最后编辑于 2015.09.04 21:42'>2015.07.11 15:27*</span>
+            <div>
+              <span>写了25639字</span>，<span>被465人关注</span>，<span>获得了303个喜欢</span>
+            </div>
+          </div>
+          <h1 class="title">Runtime基础元素解析</h1>
+          <div class="meta-top">
+            <span class="wordage"></span>
+            <span class="views-count"></span>
+            <span class="comments-count"></span>
+            <span class="likes-count"></span>
+          </div>
+
+          <!-- Collection/Bookmark/Share for width under 768px -->
+          <div class="article-share"></div>
+          <!-- -->
+
+          <div class="show-content"><p>Objective-C的runtime语言使它具备了动态语言的特性，也就是平时所说的“运行时”。在runtime的基础上，可以做很多平时难以想到事，或者化简原先 较为繁杂的解决方案。</p>
+<p>相对于静态语言，比如C的以下程序</p>
+<pre><code class="objc">#include 
+void run()
+{}
+int main()
+{
+    return 0;
+}</code></pre>
+<p>执行<code>clang -c</code>进行编译后，获取符号表<code>nm run.o</code>，可以得到全局唯一的符号<code>_run</code>，对函数run的调用直接参考链接后_run符号在代码段的地址</p>
+<pre><code class="objc">0000000000000010 T _main
+0000000000000000 T _run</code></pre>
+<p>对比Objective-C的以下函数</p>
+<pre><code class="objc">@implementation Dog : NSObject
+- (void)run
+{}
+@end
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        Dog *dog = [[Dog alloc] init];
+        [dog run];
+    }
+    return 0;
+}</code></pre>
+<p>执行<code>clang -rewrite-objc main.m</code>将其转换成底层C++文件后可以得到</p>
+<pre><code class="objc">int main(int argc, const char * argv[]) {
+    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool;
+        Dog *dog = ((Dog *(*)(id, SEL))(void *)objc_msgSend)((id)((Dog *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("Dog"), sel_registerName("alloc")), sel_registerName("init"));
+        ((void (*)(id, SEL))(void *)objc_msgSend)((id)dog, sel_registerName("run"));
+    }
+    return 0;
+}</code></pre>
+<p>可以看到，对Objective-C编译前期，会将内部的方法调用，转换成调用<code>objc_msgSend</code>。也就是说，编译完成后，方法地址是不能确定的，需要在运行时，通过Selector进行查找，而这正是runtime的关键，也就是发送消息机制。</p>
+<h2>runtime的基本要素</h2>
+<p>如上面例子所示，在编译后<code>[dog run]</code>被编译器转化成了</p>
+<pre><code class="objc">((void (*)(id, SEL))(void *)objc_msgSend)((id)dog, sel_registerName("run"));
+
+// 假设能省略(void (*)(id, SEL))(void *)和id指针强转[实际上还是需要的]
+// sel_registerName表示注册一个selector
+objc_msgSend(dog, sel_registerName("run"));</code></pre>
+<p>将上面的情况抽取成统一的说法就是，在编译器编译后<code>[receiver message]</code>会被转化成以下形式</p>
+<pre><code class="objc">objc_msgSend(receiver, selector)</code></pre>
+<p><code>objc_msgSend</code>是一个消息发送函数，它以消息接收者和方法名作为基础参数。</p>
+<p>在有参数的情况下，则会被转换为</p>
+<pre><code class="objc">objc_msgSend(receiver, selector, arg1, arg2, ...)</code></pre>
+<p>消息的接收者receiver在接受到消息后，查找对应selector的实现，根据查找的结果可以进行若干种种不同的处理。</p>
+<p>更深层的了解，需要了解下对应的数据结构</p>
+<h3>id</h3>
+<p>上文中<code>objc_msgSend</code>的第一个参数有个强转类型，即id。id是可以指向对象的万能指针，查看runtime源码，得知其定义如下：</p>
+<pre><code class="objc">typedef struct objc_object *id;
+
+// objc_object
+struct objc_object {
+private:
+    isa_t isa;
+}
+
+// isa_t
+union isa_t
+{
+    Class cls;
+    uintptr_t bits;
+}</code></pre>
+<p>根据<code>union</code>联合的存储空间以大成员的存储空间计算性质，可以猜测<code>isa_t</code>的作用只是真不同位数处理器的优化，我们可以直接这样表示：</p>
+<pre><code class="objc">struct objc_object {
+private:
+    Class isa;
+}</code></pre>
+<p>可以看出，<code>id</code>是一个指向<code>objc_object</code>结构体的指针（注意，在runtime中对象可以用结构体进行表示）。</p>
+<p><code>objc_object</code>结构体包含了<code>Class isa</code>成员，而<code>isa</code>就是我们常说的创建一个对象时，用来指向所属类的<code>指针</code>。因此根据<code>isa</code>就可以获取对应的类。</p>
+<ul>
+<li>注：C++中结构的作用被拓宽了，也表示定义一个类的类型，struct和class的区别就在默认类型上一个是public,一个是private，这里就直接描述为结构体了</li>
+</ul>
+<h3>Class</h3>
+<p>上文中，<code>isa</code>为<code>Class</code>类型，而<code>Class</code>则是<code>objc_class</code>指针类型的别名：</p>
+<pre><code class="objc">typedef struct objc_class *Class;</code></pre>
+<p>而<code>objc_class</code>具体的定义如下：</p>
+<pre><code class="objc">struct objc_class : objc_object {
+    // Class ISA;
+    Class superclass;
+    cache_t cache;             // formerly cache pointer and vtable
+    class_data_bits_t bits;    // class_rw_t * plus custom rr/alloc flags
+}
+
+// class_data_bits_t
+struct class_data_bits_t {
+    ...
+public:
+    class_rw_t* data() {
+        return (class_rw_t *)(bits &amp; FAST_DATA_MASK);
+    }
+    ...
+}
+
+// class_rw_t
+struct class_rw_t {
+    uint32_t flags;
+    uint32_t version;
+
+    const class_ro_t *ro;
+
+    union {
+        method_list_t **method_lists;  // RW_METHOD_ARRAY == 1
+        method_list_t *method_list;    // RW_METHOD_ARRAY == 0
+    };
+    struct chained_property_list *properties;
+    const protocol_list_t ** protocols;
+
+    Class firstSubclass;
+    Class nextSiblingClass;
+
+    char *demangledName;
+}
+
+// class_ro_t
+struct class_ro_t {
+    uint32_t flags;
+    uint32_t instanceStart;
+    uint32_t instanceSize;
+#ifdef __LP64__
+    uint32_t reserved;
+#endif
+
+    const uint8_t * ivarLayout;
+
+    const char * name;
+    const method_list_t * baseMethods;
+    const protocol_list_t * baseProtocols;
+    const ivar_list_t * ivars;
+
+    const uint8_t * weakIvarLayout;
+    const property_list_t *baseProperties;
+};</code></pre>
+<p>在上文中已经介绍过<code>objc_object</code>结构体，<code>objc_class</code>继承自结构体<code>objc_object</code>。可以看出<code>objc_object</code>的<code>isa</code>为<code>private</code>类型成员变量，<code>objc_class</code>继承后无法访问，所以<code>objc_object</code>提供了以下两个成员函数:</p>
+<pre><code class="objc">Class ISA();
+
+// getIsa内部调用ISA返回isa_t联合中cls成员
+Class getIsa();</code></pre>
+<p>所以，对<code>objc_class</code>重要的成员变量进行下解释:</p>
+<ul>
+<li>
+<code>isa</code>为指向对象对应类的指针（这里注意一点，由于类也是一个对象（单例），所以这个单例中也有一个<code>isa</code>指针指向类对象所属的类-&gt;<code>metaClass</code>，即元类）</li>
+<li>
+<code>superclass</code>为指向父类的指针</li>
+<li>
+<code>cache</code>用于对调用方法的缓存，类似CPU先访问L1、L2、L3缓存的目的相似，它也是推断<code>最近调用的方法极有可能被二次调用</code>，并将其存入<code>cache</code>，在二次调用时先在<code>cache</code>查找方法，而不是直接在类的方法列表中查找</li>
+<li>
+<code>properties</code>为属性列表</li>
+<li>
+<code>protocols</code>为协议列表</li>
+<li>
+<code>method_lists</code>/<code>method_list</code>为方法列表</li>
+<li>
+<code>ivars</code>为成员变量列表</li>
+<li>
+<p><code>class_ro_t</code>结构体中存储的都是类基本的东西，比如获取<code>'load'</code>方法时，是从<code>baseMethods</code>获取相应的IMP函数实现的：</p>
+<pre><code class="objc">IMP objc_class::getLoadMethod()
+{
+  rwlock_assert_locked(&amp;runtimeLock);
+
+  const method_list_t *mlist;
+  uint32_t i;
+
+  assert(isRealized());
+  assert(ISA()-&gt;isRealized());
+  assert(!isMetaClass());
+  assert(ISA()-&gt;isMetaClass());
+
+  mlist = ISA()-&gt;data()-&gt;ro-&gt;baseMethods;
+  if (mlist) {
+      for (i = 0; i &lt; mlist-&gt;count; i++) {
+          method_t *m = method_list_nth(mlist, i);
+          const char *name = sel_cname(m-&gt;name);
+          if (0 == strcmp(name, "load")) {
+              return m-&gt;imp;
+          }
+      }
+  }
+
+  return nil;
+}</code></pre>
+</li>
+</ul>
+<p>其中先了解下<code>ivar_list_t</code>、<code>method_list_t</code>、<code>cache_t</code>的结构定义：</p>
+<p><code>ivar_list_t</code>的结构为：</p>
+<ul>
+<li>
+<code>ivar_t</code>就是对应的成员变量</li>
+</ul>
+<pre><code class="objc">struct ivar_list_t {
+    uint32_t entsize;
+    uint32_t count;
+    ivar_t first;
+};</code></pre>
+<p><code>method_list_t</code>为：</p>
+<ul>
+<li>其中<code>method_iterator</code>为结构体自己构造的一个迭代器，用来访问方法，可以看到，构造的迭代器结构体中包含了<code>method</code>成员变量</li>
+</ul>
+<pre><code class="objc">struct method_list_t {
+    uint32_t entsize_NEVER_USE;  // high bits used for fixup markers
+    uint32_t count;
+    method_t first;
+
+    // iterate methods, taking entsize into account
+    // fixme need a proper const_iterator
+    struct method_iterator {
+        uint32_t entsize;
+        uint32_t index;  // keeping track of this saves a divide in operator-
+        method_t* method;
+    ...
+    }</code></pre>
+<p><code>cache_t</code>为：</p>
+<ul>
+<li>可以看出<code>bucket_t</code>包含了一个<code>IMP</code>类型的私有成员，供查找后调用实现</li>
+<li>
+<code>_occupied</code>和<code>_mask</code>分别表示<code>实际占用</code>的缓存_buckets总数和<code>分配</code>的缓存_buckets总数</li>
+</ul>
+<pre><code class="objc">struct cache_t {
+    struct bucket_t *_buckets;
+    mask_t _mask;
+    mask_t _occupied;
+...
+}
+
+// bucket_t
+struct bucket_t {
+private:
+    cache_key_t _key;
+    IMP _imp;
+...
+}</code></pre>
+<p>上文还涉及到了一个概念<code>metaClass</code>元类，元类为类对象所属的类，以实例解释：</p>
+<p>当我们调用类方法时，消息的接收者即为类，如文中一开始的代码：</p>
+<pre><code class="objc">Dog *dog = [[Dog alloc] init];</code></pre>
+<p>这里的<code>alloc</code>消息即发送给了<code>Dog</code>类，编译转换后的代码为:</p>
+<pre><code class="objc">Dog *dog = ((Dog *(*)(id, SEL))(void *)objc_msgSend)((id)((Dog *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("Dog"), sel_registerName("alloc")), sel_registerName("init"));</code></pre>
+<p>我们只需要关注这一行：</p>
+<ul>
+<li>这里获取到的是类对象，只要再获取一次就得到了元类</li>
+</ul>
+<pre><code class="objc">// objc_getClass表示根据对象名获取对应的类
+objc_getClass("Dog")
+
+// 获取元类
+objc_getClass(objc_getClass("Dog"))</code></pre>
+<p>关于元类，苹果提供了这么一张表：</p>
+<div class="image-package">
+<img src="http://upload-images.jianshu.io/upload_images/608238-6ac85f8b7011cbe2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240/format/jpg" data-original-src="http://upload-images.jianshu.io/upload_images/608238-6ac85f8b7011cbe2.png?imageMogr2/auto-orient/strip%7CimageView2/2/format/jpg"><br><div class="image-caption">对象－类－元类－超类</div>
+</div><p><br>图中的实线是<code>superclass</code>指针，虚线是<code>isa</code>指针。可以看到，根元类的超类<code>NSObject</code>(Root class)并没有对应的超类，并且，它的<code>isa</code>指针指向了自己。<br>总结一下：</p>
+<ul>
+<li>每个实例对象的<code>isa</code>都指向了所属的<code>类</code>
+</li>
+<li>每个类对象的<code>isa</code>都指向了所属的类，即<code>元类</code>，其<code>superclass</code>指针指向继承的<code>父类</code>
+</li>
+<li>每个元类的<code>isa</code>都指向了<code>超类</code>，即<code>NSObject</code>
+</li>
+</ul>
+<h3>Ivar</h3>
+<p><code>Ivar</code>，我把它理解成<code>instance variable</code>，也就是实例变量，可以观察它的定义：</p>
+<pre><code class="objc">typedef struct ivar_t *Ivar;
+
+// ivar_t
+struct ivar_t {
+    int32_t *offset;
+    const char *name;
+    const char *type;
+    // alignment is sometimes -1; use alignment() instead
+    uint32_t alignment_raw;
+    uint32_t size;
+    // 内存中数据对齐（如字对齐、半字对齐等）
+    uint32_t alignment() {
+        if (alignment_raw == ~(uint32_t)0) return 1U &lt;&lt; WORD_SHIFT;
+        return 1 &lt;&lt; alignment_raw;
+    }
+};</code></pre>
+<p><code>Ivar</code>其实是指向<code>ivar_t</code>结构体的指针，它包含了实例变量名（name）、类型（type）、相对对象地址偏移（offset）以及内存数据对齐等信息。</p>
+<p>跟多关于实例变量的剖析可以查看<a href="http://quotation.github.io/objc/2015/05/21/objc-runtime-ivar-access.html" target="_blank">Objective-C类成员变量深度剖析</a></p>
+<h3>Method</h3>
+<p>从以下定义的结构体可以看出，<code>Method</code>主要住用为关联了方法名<code>SEL</code>和方法的实现<code>IMP</code>，当遍通过<code>Method</code>自己的定义的迭代器查找方法名<code>SEL</code>时，就可以找到对应的方法实现<code>IMP</code>，从而调用方法的实现执行相关的操作。<code>types</code>表示方法实现的参数以及返回值类型。</p>
+<pre><code class="objc">typedef struct method_t *Method;
+
+// method_t
+struct method_t {
+    SEL name;
+    const char *types;
+    IMP imp;
+    ...
+}</code></pre>
+<h3>SEL</h3>
+<p><code>SEL</code>为方法选择器，观察下它的定义：</p>
+<pre><code class="objc">typedef struct objc_selector *SEL;</code></pre>
+<p>可以看出<code>SEL</code>实际是<code>objc_selector</code>指针类型的别名，它用于表示运行时方法的名字，以便进行方法实现的查找。因为要对应方法实现，所以每一个方法对应的<code>SEL</code>都是唯一的。因此它不具备C++可以进行函数重载的特性，当两个方法名一样时，会发生编译错误，即使参数不一样。</p>
+<h3>IMP</h3>
+<p><code>IMP</code>的定义如下：</p>
+<pre><code class="objc">#if !OBJC_OLD_DISPATCH_PROTOTYPES
+typedef void (*IMP)(void /* id, SEL, ... */ );
+#else
+typedef id (*IMP)(id, SEL, ...);
+#endif</code></pre>
+<p>可以看出<code>IMP</code>其实就是一个函数指针的别名，也可以把它理解为函数名。它有两个必须的参数：</p>
+<ul>
+<li>
+<code>id</code>，为<code>self</code>指针，表示消息接收者</li>
+<li>
+<code>SEL</code>，方法选择器，表示一个方法的<code>selector</code>指针</li>
+<li>后面的为传送消息的一些参数</li>
+</ul>
+<p>在某些情况下，通过获取<code>IMP</code>而直接调用方法实现，可以直接跳过消息传递机制，像C语言调用函数那样，在一定程度上，可以提供程序的性能。</p>
+<h3>消息传递</h3>
+<p>了解完runtime中一些必要的元素，继续回到文章开头的代码：</p>
+<pre><code class="objc">@implementation Dog : NSObject
+- (void)run
+{}
+@end
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        Dog *dog = [[Dog alloc] init];
+        [dog run];
+    }
+    return 0;
+}</code></pre>
+<p>编译器将其转换成了：</p>
+<ul>
+<li>为了看起来简洁点，我把一些强制转换变为别名</li>
+</ul>
+<pre><code class="objc">typedef (Dog *(*)(id, SEL))(void *) MyImp;
+
+int main(int argc, const char * argv[]) {
+    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool;
+        Dog *dog = ((MyImp)objc_msgSend)((id)((MyImp)objc_msgSend)((id)objc_getClass("Dog"), sel_registerName("alloc")), sel_registerName("init"));
+        ((MyImp)objc_msgSend)((id)dog, sel_registerName("run"));
+    }
+    return 0;
+}</code></pre>
+<p>从上面的代码可以看出，第二个<code>objc_msgSend</code>返回值是作为第一个<code>objc_msgSend</code>的首个参数的。</p>
+<p>上文已经说过，<code>[receiver message]</code>会被转化成以下形式</p>
+<pre><code class="objc">objc_msgSend(receiver, selector, ...)</code></pre>
+<p>接下来看看它主要做了哪几件事情：</p>
+<ul>
+<li>根据<code>receiver</code>的<code>isa</code>指针，获取到所属类，先在类的<code>cache</code>即缓存中查找<code>selector</code>，如果没有找到，再在类的<code>method_lists</code>即方法列表中查找</li>
+<li>如果没有找到<code>selector</code>，则会沿着下图类的联系路径一直查找，直到<code>NSObject</code>类</li>
+<li>如果找到了<code>selector</code>，则获取实现方法并调用，并传入接收者对象以及方法的所有参数；没有找到时走方法解析和消息转发流程。</li>
+<li>将实现的返回值作为它自己的返回值</li>
+</ul>
+<div class="image-package">
+<img src="http://upload-images.jianshu.io/upload_images/608238-bcd509a070878d15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240/format/jpg" data-original-src="http://upload-images.jianshu.io/upload_images/608238-bcd509a070878d15.png?imageMogr2/auto-orient/strip%7CimageView2/2/format/jpg"><br><div class="image-caption">方法列表查找路径</div>
+</div><p><br>除此之外，<code>objc_msgSend</code>还会传递两个隐藏参数：</p>
+<ul>
+<li>消息接收对象（<code>self</code>引用的对象）</li>
+<li>方法选择器（<code>_cmd</code>，调用的方法）</li>
+</ul>
+<p><code>objc_msgSend</code>找到方法实现后，会在调用该实现时，传入这两个隐藏参数，这样就能够在方法实现里面里面获取消息接受对象，即方法调用者了。</p>
+<p><code>隐藏参数</code>表示这两个参数在源代码方法的定义中并没有声明这两个参数，这两个参数是在<code>代码编译期间</code>，被<code>插入</code>到实现中的。</p>
+<h3>self和super的联系</h3>
+<p>根据上文对<code>objc_msgSend</code>的了解，可以解决以下代码输出一致问题</p>
+<pre><code class="objc">@implementation Dog : NSObject
+
+- (void)run
+{
+    NSLog(@"%@", [self class]);
+    NSLog(@"%@", [super class]);
+}
+
+@end
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        Dog *dog = [[Dog alloc] init];
+
+        [dog run];
+    }
+    return 0;
+}</code></pre>
+<p>输出为：</p>
+<pre><code class="objc">[5491:173185] Dog
+[5491:173185] Dog</code></pre>
+<p>这是为什么呢？先来看看编译后的<code>-run</code>方法的情况:</p>
+<pre><code class="objc">static void _I_Dog_run(Dog * self, SEL _cmd) {
+    NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_50_3f5nr6h10h1csn8byghy30q80000gn_T_main_d06ff4_mi_0, ((Class (*)(id, SEL))(void *)objc_msgSend)((id)self, sel_registerName("class")));
+    NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_50_3f5nr6h10h1csn8byghy30q80000gn_T_main_d06ff4_mi_1, ((Class (*)(__rw_objc_super *, SEL))(void *)objc_msgSendSuper)((__rw_objc_super){ (id)self, (id)class_getSuperclass(objc_getClass("Dog")) }, sel_registerName("class")));
+}</code></pre>
+<p>这里面只要关注两句：</p>
+<pre><code class="objc">// [self class]
+((Class (*)(id, SEL))(void *)objc_msgSend)((id)self, sel_registerName("class"))
+
+// [super class]
+((Class (*)(__rw_objc_super *, SEL))(void *)objc_msgSendSuper)((__rw_objc_super){ (id)self, (id)class_getSuperclass(objc_getClass("Dog")) }, sel_registerName("class"))</code></pre>
+<p>首先我们需要了解<code>self</code>和<code>super</code>的差异：</p>
+<ul>
+<li>
+<code>super</code>：<code>编译标识符</code>，告诉编译器，调用方法时，去调用父类的方法，而不是本类的方法</li>
+<li>
+<code>self</code>：<code>隐藏参数</code>，每个方法的实现第一个参数就是<code>self</code>
+</li>
+</ul>
+<p>这里可以看出，编译后，经过<code>super</code>标识符修饰的方法调用，会调用<code>objc_msgSendSuper</code>函数来进行消息的发送，而不是<code>objc_msgSend</code>。先来了解下<code>objc_msgSendSuper</code>的声明：</p>
+<pre><code>id objc_msgSendSuper ( struct objc_super *super, SEL op, ... );</code></pre>
+<p>其中<code>objc_super</code>的定义为：</p>
+<pre><code>// receiver   消息实际接收者
+// class      指向当前类的父类
+struct objc_super { id receiver; Class class; };</code></pre>
+<p>结合以上信息，我们可以知道：</p>
+<pre><code>(__rw_objc_super){ (id)self, (id)class_getSuperclass(objc_getClass("Dog")) }</code></pre>
+<p>就是对结构体<code>objc_super</code>的赋值，也就是说<code>objc_super-&gt;receiver=self</code>。到这里可能就有点明了了，<code>super</code>只是告诉编译器，去查找父类中的<code>class</code>方法，当找到之后，使用<code>objc_super-&gt;receiver</code>即<code>self</code>进行调用。用流程表示就是：</p>
+<p><code>[super class]-&gt;objc_msgSendSuper(objc_super{self, superclass)}, sel_registerName("class"))-&gt;objc_msgSend(objc_super-&gt;self, sel_registerName("class"))＝[self class]</code>。</p>
+<p>可以看出两者输出结果一致的关键就是，<code>[self class]</code>的消息接收者和<code>[super class]</code>的消息接收者一样，都是调用方法的实例对象。</p>
+<h3>方法解析和消息转发</h3>
+<p>当上文<code>objc_msgSend</code>处理流程中，<code>selector</code>没有找到时，会触发三个阶段，在这三个阶段都可以进行相关处理使程序不抛出异常：</p>
+<ul>
+<li>Method Resolution  (动态方法解析)</li>
+<li>Fast Forwarding    (备用接收者)</li>
+<li>Normal Forwarding  (完整转发)</li>
+</ul>
+<p>由于实际代码中很少有看到这种操作，所以这里不做详细解释，参考这个资料即可<a href="http://southpeak.github.io/blog/2014/11/03/objective-c-runtime-yun-xing-shi-zhi-san-:fang-fa-yu-xiao-xi-zhuan-fa/" target="_blank">Objective-C Runtime 运行时之三：方法与消息</a></p>
+<h3>参考</h3>
+<p>1.<a href="http://southpeak.github.io/blog/2014/10/25/objective-c-runtime-yun-xing-shi-zhi-lei-yu-dui-xiang/" target="_blank">Objective-C Runtime 运行时之一：类与对象</a></p>
+<p>2.<a href="http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/" target="_blank">Objective-C Runtime</a></p>
+</div>
+        </div>
+      </div>
+
+      <div class="visitor_edit">
+        <!-- further readings -->
+        <div id="further-readings" data-user-slug="818c189c4b8a" data-user-nickname="818c189c4b8a">
+          <div id="further-reading-line" class="hide further-reading-line"></div>
+          <ul id="further-readings-list" class="reading-list unstyled"></ul>
+          <div id="further-reading-new" class="reading-edit">
+              <a id="further-reading-new-prompt" href="javascript:void(null)">
+                <i class="fa fa-plus-circle"></i> 推荐拓展阅读
+</a>            <div id="further-reading-form"></div>
+          </div>
+        </div>
+        <div class="pull-right">
+          <!-- abuse report -->
+          <div id="abuse-report" class="report_article dropdown pull-right" data-js-module="report">
+              <a data-toggle="dropdown" href="#"><i class="fa fa-flag-o"></i> 举报文章</a>
+              <ul class="dropdown-menu arrow-top">
+                <li><a data-type="json" data-remote="true" rel="nofollow" data-method="post" href="/notes/1623074/abuse_reports?type=ad">广告及垃圾信息</a></li>
+                <li><a data-type="json" data-remote="true" rel="nofollow" data-method="post" href="/notes/1623074/abuse_reports?type=plagiarism">抄袭或未授权转载</a></li>
+                <li><a data-toggle="modal" data-url="/notes/1623074/abuse_reports" href="#report-modal">其他</a></li>
+              </ul>
+          </div>
+          <!-- copyright -->
+          <div class="author-copyright pull-right" data-toggle="tooltip" data-html="true" title="转载请联系作者获得授权，并标注“简书作者”。">
+            <a><i class="fa fa-copyright"></i> 著作权归作者所有</a>
+          </div>
+        </div>   
+      </div>
+
+      <!-- Reward / Support Author -->
+        <div class="support-author">
+          <p>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</p>
+            <a class="btn btn-pay" data-toggle="modal" href="#pay-modal">¥ 打赏支持</a>
+          <div class="avatar-list"></div>
+        </div>
+
+      <!-- article meta bottom -->
+      <div class="meta-bottom clearfix">
+        <!--  Like Button -->
+        <div class="like ">
+            <div class="like-button">
+              <a class="like-content" data-remote="true" rel="nofollow" data-method="post" href="/notes/1623074/like">
+                <i class="fa fa-heart-o"></i>  喜欢
+</a></div>          <span id="likes-count" data-toggle="tooltip" data-placement="right" title="查看所有喜欢的用户">
+            <i class="fa fa-spinner fa-pulse"></i>
+</span>        </div>
+        <!--  share group -->
+        <div class="share-group pull-right">
+          <a href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;http://cwb.assets.jianshu.io/notes/images/1623074/weibo/image_4f7e7de99b0d.jpg&#39;, &#39;推荐 tripleCC 的文章《Runtime基础元素解析》（ 分享自 @简书 ）&#39;,&#39;http://www.jianshu.com/p/a55fe91c826c&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-name="weibo">
+            <i class="fa fa-weibo"></i><span>分享到微博</span>
+          </a>
+          <a data-toggle="modal" href="#share-weixin-modal" data-name="weixin">
+            <i class="fa fa-weixin"></i><span>分享到微信</span>
+          </a>
+          <div class="more">
+            <a href="javascript:void(0)" data-toggle="dropdown">更多分享<i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu arrow-top">
+                <li><a href="http://cwb.assets.jianshu.io/notes/images/1623074/weibo/image_4f7e7de99b0d.jpg" target="_blank" data-name="changweibo"><i class="fa fa-arrow-circle-o-down"></i> 下载长微博图片</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://share.v.t.qq.com/index.php?c=share&amp;a=index&amp;url=&#39;+e(&#39;http://www.jianshu.com/p/a55fe91c826c&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 tripleCC 的文章《Runtime基础元素解析》（ 分享自 @jianshuio ）&#39;),x=function(){if(!window.open(r,&#39;tweibo&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="tweibo"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/tweibo.png">分享到腾讯微博</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;http://www.jianshu.com/p/a55fe91c826c&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 tripleCC 的文章《Runtime基础元素解析》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="qzone"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/qzone.png">分享到QQ空间</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/a55fe91c826c&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 tripleCC 的文章《Runtime基础元素解析》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="twitter"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/twitter.png">分享到Twitter</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://www.facebook.com/sharer.php?s=100&amp;p[url]=&#39;+e(&#39;http://www.jianshu.com/p/a55fe91c826c&#39;)+&#39;&amp;p[title]=&#39;+e(&#39;Runtime基础元素解析 - 简书社&#39;)+&#39;&amp;p[summary]=&#39;+e(&#39;推荐 tripleCC 的文章《Runtime基础元素解析》&#39;),x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="facebook"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/facebook.png">分享到Facebook</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/a55fe91c826c&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="google_plus"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/google_plus.png">分享到Google+</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://widget.renren.com/dialog/share?resourceUrl=&#39;+e(&#39;http://www.jianshu.com/p/a55fe91c826c&#39;)+&#39;&amp;description=&#39;+e(&#39;推荐 tripleCC 的文章《Runtime基础元素解析》&#39;)+&#39;&amp;title=&#39;+e(&#39;Runtime基础元素解析&#39;),x=function(){if(!window.open(r,&#39;renren&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="renren"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/renren.png">分享到人人网</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;http://www.jianshu.com/p/a55fe91c826c&#39;)+&#39;&amp;title=&#39;+e(&#39;Runtime基础元素解析&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()" data-name="douban"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/douban.png">分享到豆瓣</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modals -->
+      <div id="share-weixin-modal" class="modal hide fade share-weixin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+  <div class="modal-body">
+    <h5>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</h5>
+  </div>
+</div>
+
+      <div id="contribute-modal" tabindex="-1" class="arrow-top user-editor-actions modal hide fade">
+  <div class="modal-header">
+    <b>
+      添加到我管理的专题
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    </b>
+  </div>
+  <div class="modal-body">
+    <div class="search">
+      <input type="text" name="search_term" id="search_term" class="input-large search-query" placeholder="搜索我管理的专题" data-search-collections-url="/collections/search?note_id=1623074" />
+    </div>
+    <ul class="add-list"></ul>
+  </div>
+</div>
+
+      <div id="notebooks-menu" class="panel notebooks-menu arrow-top modal hide fade"><img class="loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" alt="Tiny" /></div>
+      <div id="collection-menu" class="panel collection-menu arrow-top modal hide fade"><img class="loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" alt="Tiny" /></div>
+      
+      <div id="likes-modal" class="modal modal_new support_list-modal fullscreen hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>喜欢的用户</h3>
+      </div>
+      <div class="modal-body">
+        <ul class="unstyled users">
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Comments -->
+    <div id="comments" class="comment-list clearfix">
+        <div class="comment-head clearfix">
+          7条评论
+          <span class="order">
+            （
+            <a data-order="asc" class="active" href="javascript:void(0)">按时间正序</a>·
+            <a data-order="desc" href="javascript:void(0)">按时间倒序</a>·
+            <a data-order="likes_count" href="javascript:void(0)">按喜欢排序</a>
+            ）
+          </span>
+            <a href="javascript:void(null)" class="goto-comment pull-right"><i class="fa fa-pencil"></i>添加新评论</a>
+        </div>
+        <div id="comment-list">
+          <img class="loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" alt="Tiny" />
+        </div>
+          <form class="new_comment" id="new_comment" data-type="json" action="/notes/1623074/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+    <div class="comment-text">
+      <textarea maxlength="2000" placeholder="写下你的评论…" class="mousetrap" name="comment[content]" id="comment_content">
+</textarea>
+      <div>
+        <input type="submit" name="commit" value="发 表" class="btn btn-info" data-disable-with="提交中..." />
+          <div class="emoji">
+    <a href="#emoji-modal" data-toggle="modal"><i class="fa fa-smile-o"></i></a>
+    <div id="emoji-modal" class="emoji-modal arrow-top hide" tabindex="-1" aria-hidden="true">
+      <ul id="emojiTab" class="emoji-nav-tabs modal-header">
+          <li class="active"><a href="#emoji-pane-1" data-toggle="tab">1</a></li>
+          <li class=""><a href="#emoji-pane-2" data-toggle="tab">2</a></li>
+          <li class=""><a href="#emoji-pane-3" data-toggle="tab">3</a></li>
+          <li class=""><a href="#emoji-pane-4" data-toggle="tab">4</a></li>
+      </ul>
+      <div id="emojiTabContent" class="tab-content">
+          <div class="tab-pane fade active in" id="emoji-pane-1">
+          <ul>
+          </ul>
+        </div>
+          <div class="tab-pane fade  in" id="emoji-pane-2">
+          <ul>
+          </ul>
+        </div>
+          <div class="tab-pane fade  in" id="emoji-pane-3">
+          <ul>
+          </ul>
+        </div>
+          <div class="tab-pane fade  in" id="emoji-pane-4">
+          <ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+          <span class="hotkey">⌘+Return 发表</span>
+        <span class="warning" style="display: none"><i class="fa fa-exclamation-circle"></i><span class="warning-text"></span></span>
+      </div>
+    </div>
+</form>
+    </div>
+    <!-- -->
+
+  </div>
+
+  <script type='application/json' data-name='note'>
+    {"id":1623074,"abbr":"Objective-C的runtime语言使它具备了动态语言的特性，也就是平时所说的“运行时”。在runtime的基础上，可以做很多平时难以想到事，或者化简原先较为繁杂的解决方案。相对于静态语言，比如C的以下程序#includevoidrun(){}intmain(...","slug":"a55fe91c826c","url":"http://www.jianshu.com/p/a55fe91c826c","image_url":"http://cwb.assets.jianshu.io/notes/images/1623074/weibo/image_4f7e7de99b0d.jpg","wordage":3488,"has_further_readings":false,"views_count":558,"likes_count":16,"comments_count":7,"rewards_total_count":0}
+  </script>
+
+  <script type='application/json' data-name='uuid'>
+    {"uuid":"c7670c40-d7ed-0133-3a2a-52540095852f"}
+  </script>
+
+  <script type='application/json' data-name='author'>
+    {"id":608238,"nickname":"tripleCC","slug":"97e39e95c2cc","public_notes_count":14,"followers_count":465,"total_likes_count":303,"is_current_user":false,"is_signed_author":false}
+  </script>
+
+    <script type='application/json' data-name='current-user'>
+      {"id":1296229,"slug":"818c189c4b8a","nickname":"818c189c4b8a","avatar_url":"http://cdn-qn0.jianshu.io/assets/default_avatar/6-c3a19bc117a55e66cd3be55684d8191c.jpg","blocked_by_author":false,"blocked_user_ids":[],"balance_in_cent":0,"is_a_collection_editor":false}
+    </script>
+
+    <script type='application/json' data-name='comment-participants'>
+      []
+    </script>
+
+
+
+    <div class="include-collection">
+      <div class="content">
+        <h5>被以下专题收入，发现更多相似内容：</h5>
+        <ul id="all-collections" class="unstyled collections-list">
+            <li>
+              <a class="avatar" href="/collection/3233d1a249ca"><img src="http://upload.jianshu.io/collections/images/1276/162902612251cbd95971b82.png?imageMogr2/auto-orient/strip|imageView2/2/w/180" alt="180" /></a>              <div class="collections-info">
+                <h5>
+                  <a href="/collection/3233d1a249ca">iOS Developer</a>
+                </h5>
+                
+  <div class="btn btn-success follow" id=subscribe_collection_1276>
+    <a data-type="json" data-collection-id="1276" data-remote="true" rel="nofollow" data-method="post" href="/collections/1276/subscribe">
+      <i class="fa fa-fw fa-plus"></i>  <span>添加关注</span>
+</a>    <span>15.1K</span>
+  </div>
+
+                <p class="description">分享 iOS 开发的知识，解决大家遇到的问题，讨论iOS开发的前沿，欢迎大家投稿~</p>
+                <p>
+                  <a class="blue-link" href="/collection/3233d1a249ca">3720篇文章</a> · 15108人关注
+                </p>
+              </div>
+            </li>
+            <li>
+              <a class="avatar" href="/collection/19dbe28002a3"><img src="http://upload.jianshu.io/collections/images/6919/c4409daa19d59b1950bf3bed66a49495.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/180" alt="180" /></a>              <div class="collections-info">
+                <h5>
+                  <a href="/collection/19dbe28002a3">iOS开发技巧</a>
+                </h5>
+                
+  <div class="btn btn-success follow" id=subscribe_collection_6919>
+    <a data-type="json" data-collection-id="6919" data-remote="true" rel="nofollow" data-method="post" href="/collections/6919/subscribe">
+      <i class="fa fa-fw fa-plus"></i>  <span>添加关注</span>
+</a>    <span>12.2K</span>
+  </div>
+
+                <p class="description"> 【简介】
+专题内容主要包括OC、swift等涉及到iOS开发进阶的内容。
+swift可以关注下我的另一个专题：
+swift开发...</p>
+                <p>
+                  <a class="blue-link" href="/collection/19dbe28002a3">982篇文章</a> · 12266人关注
+                </p>
+              </div>
+            </li>
+            <li>
+              <a class="avatar" href="/collection/ee25d429d275"><img src="http://upload.jianshu.io/collections/images/3106/CollectionImage.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/180" alt="180" /></a>              <div class="collections-info">
+                <h5>
+                  <a href="/collection/ee25d429d275">iOS Development</a>
+                </h5>
+                
+  <div class="btn btn-success follow" id=subscribe_collection_3106>
+    <a data-type="json" data-collection-id="3106" data-remote="true" rel="nofollow" data-method="post" href="/collections/3106/subscribe">
+      <i class="fa fa-fw fa-plus"></i>  <span>添加关注</span>
+</a>    <span>5.5K</span>
+  </div>
+
+                <p class="description">沟通想法，分享知识，欢迎大家分享一些好的文章。</p>
+                <p>
+                  <a class="blue-link" href="/collection/ee25d429d275">402篇文章</a> · 5564人关注
+                </p>
+              </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+  <!-- Modal -->
+    <div class="modal pay-modal text-center hide fade" id="pay-modal">
+  <div class="modal-header clearfix">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <form id="new_reward" class="new_reward" target="_blank" action="/notes/1623074/rewards" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="MAF113HgJoSFTCAhqQks+icivci7YHAnEKSucbK9oIReSxsG/jE6QzdNu8ivC6eXytGS8dAy2drFkNQ9+CWH5Q==" />
+    <div class="modal-body">
+      <a href="/users/97e39e95c2cc">
+        <div class="avatar"><img src="http://cdn-qn0.jianshu.io/assets/default_avatar/10-f47ea4d685571bcb63f5b1ea99527d09.jpg" alt="10" /></div>
+</a>      <p><i class="fa fa-quote-left pull-left"></i>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！<i class="fa fa-quote-right pull-right"></i></p>
+      <div class="main-inputs text-left">
+        <div class="control-group">
+          <label for="reward_amount">打赏金额</label><i class="fa fa-yen"></i>
+          <input value="2.00" type="text" name="reward[amount_in_yuan]" id="reward_amount_in_yuan" />
+        </div>
+        <div class="control-group message">
+          <textarea placeholder="给Ta留言" name="reward[message]" id="reward_message">
+</textarea>
+        </div>
+      </div>
+      <div class="choose-pay text-left">
+        <h5>选择支付方式：</h5>
+        <div>
+          <label for="reward_channel_alipay">
+            <input type="radio" value="alipay" checked="checked" name="reward[channel]" id="reward_channel_alipay" />
+            <span class="alipay-bg"></span>
+</label>
+          <label for="reward_channel_balance">
+            <input type="radio" value="balance" name="reward[channel]" id="reward_channel_balance" />
+            简书余额（ 余额：¥ 0.00 ）
+</label>
+          <label for="reward_channel_wx_pub_qr">
+            <input type="radio" value="wx_pub_qr" name="reward[channel]" id="reward_channel_wx_pub_qr" />
+            微信支付
+</label>        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button name="button" type="submit" class="btn btn-large btn-pay">立即支付</button>
+    </div>
+</form></div>
+
+    <div class="modal success-pay text-center hide fade" id="success-pay">
+  <div class="modal-header clearfix">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <div class="modal-body">
+    <h3><i class="icon-ok"></i>打赏成功</h3>
+    <img src="http://cdn-qn0.jianshu.io/assets/complete-pay-25426877089eb23bd76d9d0e6aad89c1.png" alt="Complete pay" />
+  </div>
+  <div class="modal-footer">
+    <a class="blue-link" href="/wallet">查看打赏记录</a>
+  </div>
+</div>
+
+</div>
+  </div>
+  <div id="flash" class="hide"></div>
+  
+  <div id="view-mode-modal" tabindex="-1" class="modal hide read-modal" aria-hidden="false" data-js-module='view-mode-modal'>
+    <div class="btn-group change-background" data-toggle="buttons-radio">
+
+      <a class="btn btn-daytime active" data-mode="day" data-remote="true" rel="nofollow" data-method="put" href="/preferences?read_mode=day">
+        <i class="fa fa-sun-o"></i>
+</a>      <a class="btn btn-nighttime " data-mode="night" data-remote="true" rel="nofollow" data-method="put" href="/preferences?read_mode=night">
+        <i class="fa fa-moon-o"></i>
+</a>    </div>
+    <div class="btn-group change-font" data-toggle="buttons-radio">
+      <a class="btn font " data-font="font1" data-remote="true" rel="nofollow" data-method="put" href="/preferences?default_font=font1">宋体</a>
+      <a class="btn font hei active" data-font="font2" data-remote="true" rel="nofollow" data-method="put" href="/preferences?default_font=font2">黑体</a>
+    </div>
+    <div class="btn-group change-locale" data-toggle="buttons-radio">
+      <a class="btn font active" data-locale="zh-CN" data-remote="true" rel="nofollow" data-method="put" href="/preferences/set_locale?locale=zh-CN">简</a>
+      <a class="btn font hei " data-locale="zh-TW" data-remote="true" rel="nofollow" data-method="put" href="/preferences/set_locale?locale=zh-TW">繁</a>
+    </div>
+  </div>
+
+  <div id="report-modal" class="modal hide fade modal_report fullscreen" tabindex="-1" role="dialog"
+  aria-labelledby="reportModal" aria-hidden="true" data-js-module="report-modal">
+  <form id="report-form" data-type="json" action="javascript:void(0)" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+    <input type="hidden" name="type" id="type" value="other" />
+
+    <div class="modal-header">
+      <b>举报原因</b>
+    </div>
+    <div class="modal-body">
+      <textarea name="content" id="content" maxlength="2000" placeholder="写下你的举报原因...">
+</textarea>
+    </div>
+    <div class="modal-footer">
+      <a class="btn" data-dismiss="modal" aria-hidden="true" href="javascript:void(0)">取消</a>
+      <input type="submit" name="commit" value="确认" class="btn btn-info" />
+    </div>
+</form></div>
+
+
+  <script src="http://cdn-qn0.jianshu.io/assets/base-8f20b806c8514691a8ea324f286cacdd.js"></script>
+  
+  <script src="http://cdn-qn0.jianshu.io/assets/reading-base-9132a81390eb5b2cc4f21734b0e9cd08.js"></script>
+  <script src="http://cdn-qn0.jianshu.io/assets/reading/module_sets/note_show-a3248fb70ead7874e0a2172b3f221274.js"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35169517-1']);
+  _gaq.push(['_setCustomVar', 2, 'User Type', 'Member', 1 ]);
+  _gaq.push(['_trackPageview']);
+
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+</html>

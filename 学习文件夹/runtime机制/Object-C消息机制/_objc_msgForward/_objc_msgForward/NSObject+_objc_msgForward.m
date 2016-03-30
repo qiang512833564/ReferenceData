@@ -26,7 +26,7 @@ void msgSendImpletion(id target){
     
     IMP msgForwardIMP = _objc_msgForward;
     
-    class_replaceMethod(self, NSSelectorFromString(@"forwardSelector"), msgForwardIMP, "v@:");
+    //class_replaceMethod(self, NSSelectorFromString(@"forwardSelector"), msgForwardIMP, "v@:");
 }
 
 - (void)sendMessage{

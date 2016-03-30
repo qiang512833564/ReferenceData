@@ -10,4 +10,6 @@
 #import "NSObject+_objc_msgForward.h"
 @interface Responder_Object : NSObject
 
+- (void)methodSignature;
+
 @end

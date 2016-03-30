@@ -14,7 +14,8 @@ int main(int argc, const char * argv[]) {
         Responder_Object *objc = [[Responder_Object alloc]init];
         
         [objc sendMessage];
-        [objc test];
+     
+        [objc methodSignature];
     }
     return 0;
 }
