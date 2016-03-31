@@ -1,0 +1,1732 @@
+<!DOCTYPE html>   
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="zh-CN" prefix="og: http://ogp.me/ns#" class="no-js"> <!--<![endif]-->
+
+
+<!-- BEGIN head -->
+<head>
+
+	<!-- Title -->
+	<title>UITableView 的完美平滑滚动 - IOS - 伯乐在线</title>
+	
+	<!-- Meta Tags -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!-- Favicon & Mobileicon -->
+	<link rel="shortcut icon" href="http://ios.jobbole.com/wp-content/uploads/sites/12/2014/12/favicon.png" />
+	<link rel="apple-touch-icon" href="http://ios.jobbole.com/wp-content/themes/jobboleblogv3/mobileicon.png" />
+	
+	<!-- RSS, Atom & Pingbacks -->
+		<link rel="alternate" title="IOS &#8211; 伯乐在线 RSS Feed" href="http://ios.jobbole.com/feed/" />
+		<link rel="alternate" title="RSS .92" href="http://ios.jobbole.com/feed/rss/" />
+	<link rel="alternate" title="Atom 0.3" href="http://ios.jobbole.com/feed/atom/" />
+	<link rel="pingback" href="http://ios.jobbole.com/xmlrpc.php" />
+	
+	<!-- Theme Hook -->
+	
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.4.13 - http://yoast.com/wordpress/seo/ -->
+<meta name="description" content="我曾在最好的手机开发平台——iOS 上有几年经验。在此期间，我见过许多 iOS 应用和 iOS 工程师。我们的世界从来就不缺优秀的开发者，但有时候我发现有些人却不知道如何使用这世界最流行的移动设备如何去做一些真正流畅的应用。"/>
+<link rel="canonical" href="http://ios.jobbole.com/84360/" />
+<meta property='og:locale' content='zh_CN'/>
+<meta property='og:type' content='article'/>
+<meta property='og:title' content='UITableView 的完美平滑滚动 - IOS - 伯乐在线'/>
+<meta property='og:description' content='我曾在最好的手机开发平台——iOS 上有几年经验。在此期间，我见过许多 iOS 应用和 iOS 工程师。我们的世界从来就不缺优秀的开发者，但有时候我发现有些人却不知道如何使用这世界最流行的移动设备如何去做一些真正流畅的应用。'/>
+<meta property='og:url' content='http://ios.jobbole.com/84360/'/>
+<meta property='og:site_name' content='IOS - 伯乐在线'/>
+<meta property='og:image' content='http://ww1.sinaimg.cn/mw690/6941baebgw1f2dtex3kmkj20xc0upn94.jpg'/>
+<meta property='og:image' content='http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtexoytuj20xc02dt9z.jpg'/>
+<meta property='og:image' content='http://ww2.sinaimg.cn/mw690/6941baebgw1f2dto8ya5bj20dw0opq6q.jpg'/>
+<meta property='og:image' content='http://ww4.sinaimg.cn/mw690/6941baebgw1f2dto44rlaj20dw0opad4.jpg'/>
+<meta property='og:image' content='http://ww2.sinaimg.cn/mw690/6941baebgw1f2dto346dyj20go0tmaf1.jpg'/>
+<meta property='og:image' content='http://ww3.sinaimg.cn/mw690/6941baebgw1f2dto1fjt1j20go0tmq6v.jpg'/>
+<meta property='og:image' content='http://ww3.sinaimg.cn/mw690/6941baebgw1f2dtnzubiwj20m706eaai.jpg'/>
+<meta property='og:image' content='http://ww2.sinaimg.cn/mw690/6941baebgw1f2dtnz8l9bj20xc0yttjz.jpg'/>
+<meta property='og:image' content='http://ww2.sinaimg.cn/mw690/6941baebgw1f2dtnxrqo5j20ge08cq4m.jpg'/>
+<meta property='og:image' content='http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtnwzmouj20go0tm78k.jpg'/>
+<meta property='og:image' content='http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtnvzbt2j20go0tmn17.jpg'/>
+<meta property='og:image' content='http://ww3.sinaimg.cn/mw690/6941baebgw1f2dtnudb8zj20go0tmaed.jpg'/>
+<meta property='og:image' content='http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtntnqklj20go0tmn1j.jpg'/>
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel='stylesheet' id='thickbox-css'  href='http://ios.jobbole.com/wp-includes/js/thickbox/thickbox.css?ver=20121105' type='text/css' media='all' />
+<link rel='stylesheet' id='fancybox-css-css'  href='http://ios.jobbole.com/wp-content/plugins/jobbole-wp-plugin/css/jquery.fancybox.css?ver=2.1.5' type='text/css' media='all' />
+<link rel='stylesheet' id='jobbole-wp-css-css'  href='http://ios.jobbole.com/wp-content/plugins/jobbole-wp-plugin/css/jobbole-wp-plugin.css?ver=1.0.23' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-css'  href='http://ios.jobbole.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=2.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='v48fv_images-css'  href='http://ios.jobbole.com/wp-content/plugins/mu-widgets/library/base/public/css/images.css?ver=1.2.v48fv' type='text/css' media='all' />
+<link rel='stylesheet' id='v48fv_front-css'  href='http://ios.jobbole.com/wp-content/plugins/mu-widgets/library/base/public/css/front.css?ver=1.2.v48fv' type='text/css' media='all' />
+<link rel='stylesheet' id='v48fv_common-css'  href='http://ios.jobbole.com/wp-content/plugins/mu-widgets/library/base/public/css/common.css?ver=1.2.v48fv' type='text/css' media='all' />
+<script type='text/javascript' src='http://ios.jobbole.com/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-includes/js/comment-reply.min.js?ver=3.5.2'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/plugins/jobbole-wp-plugin/js/jquery.fancybox.pack.js?ver=2.1.5'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/plugins/jobbole-wp-plugin/js/superfish.js?ver=1.4.8'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/plugins/jobbole-wp-plugin/js/menu-effects.js?ver=1.5.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var JobboleAjax = {"ajaxurl":"http:\/\/ios.jobbole.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/plugins/jobbole-wp-plugin/js/jobbole-wp-plugin.js?ver=1.0.51'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.7.1","is_admin":"0","ajaxurl":"http:\/\/ios.jobbole.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u7528 %s \u7c98\u8d34\u3002","minimize":"\u70b9\u51fb\u5c55\u5f00\u4ee3\u7801"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=2.7.1'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/modernizr.js?ver=2.5.3'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://ios.jobbole.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://ios.jobbole.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='http://ios.jobbole.com/?p=84360' />
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'http://dtmvdvtzf8rz0.cloudfront.net/static/';
+	window._wp_rp_wp_ajax_url = "http://ios.jobbole.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '2.8';
+	window._wp_rp_post_id = '84360';
+	window._wp_rp_num_rel_posts = '10';
+</script>
+	
+	<!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ios.jobbole.com/wp-content/themes/jobboleblogv3/style.css?ver=1.0.63">
+	<style>
+				*::selection { background: #0099cc; }
+		*::-moz-selection { background: #0099cc; }
+		body {
+            background: #ffffff         }
+
+        a,
+        .tabs ul.nav li a:hover,
+        .tabs ul.nav li.active a,
+        .dropcap,
+        .toggle.hover .toggle-title,
+        li.comment cite a:hover,
+        h3.widget-title,
+        .post-meta .meta-title:hover,
+        .the-latest a:hover h4,
+        .aw_socialcounter_widget li a:hover,
+        .aw_tabbed_widget #tab-latest-comments a:hover
+        {
+            color: #0099cc;
+        }
+
+		a:hover { color: #b30000; }
+		input:focus, textarea:focus { border-color: #0099cc; }
+
+		#searchsubmit,
+        .highlight,
+        .aw_tabbed_widget .tabs ul.nav li.active a, footer .aw_tabbed_widget .tabs ul.nav li.active a,
+        #top .aw_tabbed_widget .tabs ul.nav li.active a,
+        .aw_tabbed_widget .tabs ul.nav li a:hover,
+        footer .aw_tabbed_widget .tabs ul.nav li a:hover,
+        #top .aw_tabbed_widget .tabs ul.nav li a:hover,
+        .aw_twitter_widget .twitter-icon, .testimonial-icon,
+        #top-closed:hover,
+        .flex-control-nav a:hover,
+        .flex-control-nav a.flex-active {
+            background-color: #0099cc;
+        }
+
+		.submit { background-color: #0099cc; border-color: #007399; }
+		.submit:hover { background-color: #b30000; border-color: #860000; }
+		#searchsubmit:hover { background-color: #b30000; }
+		.toggle.hover .toggle-icon { border-top-color: #0099cc; }
+		.toggle.hover.active .toggle-icon { border-bottom-color: #0099cc; }
+		.flex-direction-nav li .flex-prev:hover { border-right-color: #0099cc; }
+		.flex-direction-nav li .flex-next:hover { border-left-color: #0099cc; }
+		@media only screen and (min-width: 768px) and (max-width: 959px) {
+			.aw_tabbed_widget .tabs ul.nav li a:hover, .tabs ul.nav li.active a { color: #0099cc; }
+		}
+		@media screen and (max-width: 767px) {
+			.tabs ul.nav li a:hover, .tabs ul.nav li.active a { color: #0099cc; }
+		}
+	</style>
+
+	<!--[if IE 8]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+    <![endif]-->
+
+	<!-- Links: RSS + Atom Syndication + Pingback etc. -->
+	<link rel="alternate" type="application/rss+xml" title="IOS &#8211; 伯乐在线 RSS Feed" href="http://ios.jobbole.com/feed/" />
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://ios.jobbole.com/feed/rss/" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://ios.jobbole.com/feed/atom/" />
+	<link rel="pingback" href="http://ios.jobbole.com/xmlrpc.php" />
+
+<!-- END head -->
+</head>
+
+<!-- BEGIN body -->
+<body class="single single-post postid-84360 single-format-standard gecko">
+
+		
+	    <nav id="top-nav" class="menu-nav">
+
+        <!-- BEGIN .container -->
+        <div class="container">
+
+            <div class="grid-7 hide-on-480 hide-on-767">
+                <ul id="menu-main-menu" class="menu left">
+                    <li class="menu-item">
+                        <a href="http://www.jobbole.com">首页</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://top.jobbole.com">头条</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://blog.jobbole.com">文章</a>
+                    </li>
+                    <li class="menu-item">
+                        <span><a href="#">频道 <i class="fa fa-angle-double-down"></i></a></span>
+                        <ul class="sub-menu sf-js-enabled">
+                            <li class="menu-item"><a href="http://design.jobbole.com">设计频道</a></li>
+                            <li class="menu-item"><a href="http://web.jobbole.com">Web前端</a></li>
+                            <li class="menu-item"><a href="http://python.jobbole.com">Python开发</a></li>
+                            <li class="menu-item"><a href="http://www.importnew.com/?utm_source=home-top-nav">Java技术</a></li>
+                            <li class="menu-item"><a href="http://android.jobbole.com">Android应用</a></li>
+                            <li class="menu-item"><a href="http://ios.jobbole.com">iOS应用</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://hao.jobbole.com">资源</a>
+                    </li>
+
+                    
+                    <li class="menu-item">
+                        <a href="http://group.jobbole.com">小组</a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="http://date.jobbole.com"><i class="fa fa-heart-o pinkiconcolor"></i> 相亲</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="grid-5">
+                <ul id="menu-main-menu" class="menu">
+                    <li class="menu-item hide-on-768-wider left">
+                        <span><a href="#">频道 <i class="fa fa-angle-double-down"></i></a></span>
+                        <ul class="sub-menu sf-js-enabled">
+                            <li class="menu-item"><a href="http://www.jobbole.com">首页</a></li>
+                            <li class="menu-item"><a href="http://top.jobbole.com">头条</a></li>
+                            <li class="menu-item"><a href="http://blog.jobbole.com">文章</a></li>
+                            <li class="menu-item"><a href="http://group.jobbole.com">小组</a></li>
+                            <li class="menu-item"><a href="http://date.jobbole.com">相亲 <i class="fa fa-heart-o pinkiconcolor"></i></a></li>
+                            <li class="menu-item"><a href="http://hao.jobbole.com">资源</a></li>
+                            <li class="menu-item"><a href="http://design.jobbole.com">设计</a></li>
+                            <li class="menu-item"><a href="http://web.jobbole.com">前端</a></li>
+                            <li class="menu-item"><a href="http://python.jobbole.com">Python</a></li>
+                            <li class="menu-item"><a href="http://www.importnew.com/">Java</a></li>
+                            <li class="menu-item"><a href="http://android.jobbole.com">安卓</a></li>
+                            <li class="menu-item"><a href="http://ios.jobbole.com">iOS</a></li>
+
+                                                    </ul>
+                    </li>
+
+                                            <li class="menu-item"><a href="http://www.jobbole.com/login?redirect=http%3A%2F%2Fios.jobbole.com%2F84360%2F"><i class="fa fa-sign-in"></i> 登录</a></li>
+                        <li class="menu-item"><a href="http://www.jobbole.com/register"><i class="fa fa-user-plus"></i> 注册</a></li>
+                    
+                    
+                    <li class="menu-item"><a title="帮助" href="http://blog.jobbole.com/87622/"><i class="fa fa-question-circle fa-lg"></i></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .container -->
+
+    </nav>
+    <!-- END #top-nav -->
+  	
+	<!-- BEGIN #wrapper -->
+	<div id="wrapper" class="container">
+
+		<!-- BEGIN header -->
+		<header>
+		
+						
+			<div class="header-wrapper">
+								
+				<!-- BEGIN #logo -->
+				<div id="logo" class="leaderboard-true">
+                    <a href="http://ios.jobbole.com"><img src="http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/img/jobbole-logo.png" alt="IOS &#8211; 伯乐在线" /></a>
+				</div>
+				<!-- END #logo -->
+				
+				<!-- BEGIN #leaderboard -->
+				<div id="leaderboard">
+				
+					<script language=javascript> 
+var randomNumTop = Math.round(Math.random()*2);
+var imageTop=new Array(3);
+imageTop[0]="http://ww4.sinaimg.cn/mw690/bfdcef89gw1exedqtrpwij20j602daao.jpg";
+imageTop[1]="http://ww2.sinaimg.cn/mw690/bfdcef89gw1exemeekfydj20j602d74y.jpg";
+imageTop[2]="http://ww1.sinaimg.cn/mw690/bfdcef89gw1exedm1rzkpj20j602d757.jpg";
+var imageUrlTop=imageTop[randomNumTop];
+var urlsTop=new Array(3);
+urlsTop[0]="http://group.jobbole.com/category/feedback/writer-team/?utm_source=ios.jobbole.com&utm_medium=topBanner&utm_content=2015.10.26";
+urlsTop[1]="http://blog.jobbole.com/93269/?utm_source=ios.jobbole.com&utm_medium=topBanner&utm_content=2015.10.26";
+urlsTop[2]="http://group.jobbole.com/7843/?utm_source=ios.jobbole.com&utm_medium=topBanner&utm_content=2015.10.26";
+var urlTop = urlsTop[randomNumTop];
+var adHTML = "<a href='"+urlTop+"' target='_blank'><img width='728' height='90'  src='"+imageUrlTop+"' border='0'></a>";
+document.write(adHTML);
+</script>				
+				</div>
+				<!-- END #leaderboard -->
+				
+				<div class="clear"></div>
+			
+			</div>
+			
+						
+			<div class="clear"></div>
+
+            			<!-- BEGIN #main-nav -->
+			<nav id="main-nav" class="grid-12 menu-nav">
+                <div class="menu-sub-menu-container"><ul id="main-nav-menu" class="menu"><li id="menu-item-80800" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-80800"><a href="http://ios.jobbole.com/">首页</a></li>
+<li id="menu-item-80799" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-80799"><a href="http://ios.jobbole.com/all-posts/">所有文章</a></li>
+<li id="menu-item-80821" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-80821"><a href="http://ios.jobbole.com/category/news/">业界动态</a></li>
+<li id="menu-item-80855" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-80855"><a href="http://ios.jobbole.com/category/ios-dev/">iOS开发</a></li>
+<li id="menu-item-80856" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-80856"><a href="http://ios.jobbole.com/category/swift-dev/">Swift开发</a></li>
+<li id="menu-item-80857" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-80857"><a href="http://ios.jobbole.com/category/marketing/">产品推广</a></li>
+<li id="menu-item-80858" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-80858"><a href="http://ios.jobbole.com/category/product/">产品设计</a></li>
+<li id="menu-item-80860" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80860"><a href="http://top.jobbole.com">我要投稿</a></li>
+<li id="menu-item-81507" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81507"><a href="#">更多频道 ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-81511" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81511"><a href="http://www.importnew.com">Java</a></li>
+	<li id="menu-item-81510" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81510"><a href="http://android.jobbole.com">Android</a></li>
+	<li id="menu-item-81512" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81512"><a href="http://python.jobbole.com">Python</a></li>
+	<li id="menu-item-81513" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81513"><a href="http://web.jobbole.com">Web前端</a></li>
+</ul>
+</li>
+</ul></div>				<div class="clear"></div>
+			</nav>
+			<!-- END #main-nav -->
+                        <div class="clear"></div>
+
+		</header>
+		<!-- END header -->
+		
+		<div id="breadcrumb" class="grid-12 margin-20"><div class="breadcrumb-wrapper"><!-- Breadcrumb NavXT 4.4.0 -->
+<a title="Go to 伯乐在线." href="http://www.jobbole.com" class="main-home">伯乐在线</a> &gt; <a title="Go to IOS - 伯乐在线." href="http://ios.jobbole.com" class="home">IOS - 伯乐在线</a> &gt; <a title="Go to 所有文章." href="http://ios.jobbole.com/all-posts/" class="post-root post-post">所有文章</a> &gt; <a title="Go to the iOS开发 category archives." href="http://ios.jobbole.com/category/ios-dev/" class="category">iOS开发</a> &gt; UITableView 的完美平滑滚动</div></div><div class="clear"></div>
+
+<!-- BEGIN .grid-8 -->
+<div class="grid-8">
+
+		
+	<!-- BEGIN .post -->
+<div class="post-84360 post type-post status-publish format-standard hentry category-ios-dev tag-uitableview odd" id="post-84360">
+	
+	<!-- BEGIN .entry-header -->
+	<div class="entry-header">
+	
+				
+		<h1>UITableView 的完美平滑滚动</h1>
+		
+							
+	</div>
+	<!-- BEGIN .entry-header -->
+	
+	<!-- BEGIN .entry-meta -->
+	<div class="entry-meta">
+	
+		<p class="entry-meta-hide-on-mobile">
+
+            2016/03/30 &middot;  <a href="http://ios.jobbole.com/category/ios-dev/" title="查看 iOS开发 中的全部文章" rel="category tag">iOS开发</a>
+            
+            
+
+            
+             &middot;  <a href="http://ios.jobbole.com/tag/uitableview/">UITableView</a>
+            
+</p>
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style" style="display: block; margin: 0 0px; clear: both;"><span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_qzone"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_readitlater"></a>
+<a class="jiathis_button_evernote"></a>
+<a class="jiathis_button_ydnote"></a>
+<a href="http://www.jiathis.com/share?uid=1745061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<!-- JiaThis Button END -->
+
+
+	</div>
+	<!-- END .entry-meta -->
+
+	<!-- BEGIN .entry -->
+	<div class="entry">
+
+        
+		<div class='copyright-area'>本文由 <a href='http://ios.jobbole.com'>伯乐在线</a> - <a href='http://www.jobbole.com/members/hearingdog'>BEAST丨Q</a> 翻译，<a href='http://www.jobbole.com/members/nathanw'>nathanw</a> 校稿。未经许可，禁止转载！<br/>英文出处：<a target='_blank' href='https://medium.com/ios-os-x-development/perfect-smooth-scrolling-in-uitableviews-fd609d5275a5#.jrgpmd3bc'>Alexander Orlov</a>。欢迎加入<a target='_blank' href='http://group.jobbole.com/category/feedback/trans-team/'>翻译组</a>。</div><p>我曾在最好的手机开发平台——iOS 上有几年经验。在此期间，我见过许多 iOS 应用和 iOS 工程师。<br />
+我们的世界从来就不缺优秀的开发者，但有时候我发现有些人却不知道如何使用这世界最流行的移动设备如何去做一些<strong>真正</strong>流畅的应用。</p>
+<p>现在我将阐述我所了解的优化常识，来让 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 更快和更流畅。</p>
+<p>随文章开始，其内容的难度和深度将会逐渐增加，所以我会从一些大家都比较熟悉的东西讲起。而更深层次的 iOS 的绘图系统和 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/">UIKit</a> 方面的内容放在文章最后。</p>
+<h3>内置工具</h4>
+<p>我确信大多数人看到这里时都知道这它，但有些人即使用过这些内置工具，都没能领会它们的正确用法。</p>
+<p>第一点是即使要显示更多内容，也要重用 cell/header/footer 的单个实例（single instance）。这是优化 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/">UIScrollView</a>（<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 的父类）最显著的方式，苹果工程师已在回收机制上做了处理。正确的做法是，你应该持有唯一的 cell/header/footer 类，且只初始化了一次，并返回给 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 来<strong>重用</strong>该对象。</p>
+<p>我觉得在这里没必要做详细的回顾，因为重用 cell 的工作流程在文档有详细<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/index.html#//apple_ref/occ/instm/UITableView/dequeueReusableCellWithIdentifier:">描述</a>。</p>
+<p>但有一点需要重视：需要在 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 的<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/#//apple_ref/occ/instp/UITableView/dataSource">数据源</a>中实现 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewDataSource_Protocol/index.html#//apple_ref/occ/intfm/UITableViewDataSource/tableView:cellForRowAtIndexPath:">tableView:cellForRowAtIndexPath:</a> 方法，在方法中调用每个 cell 并应尽可能让方法<strong>快速</strong>运行。所以你必须尽可能迅速地返回<strong>重用</strong>的 cell 对象。</p>
+<p>在该方法中，<strong>不要</strong>进行数据绑定（perform data binding），因为在当前在界面上还没有 cell。为此，你可以在 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 的<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/#//apple_ref/occ/instp/UITableView/delegate">委托（代理）</a>中使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewDelegate_Protocol/index.html#//apple_ref/occ/intfm/UITableViewDelegate/tableView:willDisplayCell:forRowAtIndexPath:">tableView:willDisplayCell:forRowAtIndexPath:</a> 方法，该方法会在 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView 的</a> <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/#//apple_ref/occ/instp/UIView/bounds">bounds</a> 里显示 cell 之前被准确调用。</p>
+<p>第二点不是很难理解，但有一件事需要说明。</p>
+<p>该工具只用于设置 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 的固定行高是没意义的，但如果你的上下文出于某种原因需要动态设置 cell 的高度，那么你可能<strong>很</strong>容易得到起伏不定的滚动。</p>
+<p>我们知道，<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 只是 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/">UIScrollView</a> 的子类，可以让用户在比可视范围更大的区域内进行交互。任何 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/">UIScrollView</a> 对象通过诸如 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/#//apple_ref/occ/instp/UIScrollView/contentSize">contentSize</a>、<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/#//apple_ref/occ/instp/UIScrollView/contentOffset">contentOffset</a> 等东西来显示符合要求的矩形给用户。</p>
+<p>但 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 哪里出问题了？正如前面讲到的，<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 不会同时保留所有的 cell。相反，它仅仅显示必要的 cell 给用户。</p>
+<p>那么，<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 是如何得知它的 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/#//apple_ref/occ/instp/UIScrollView/contentSize">contentSize</a> 的呢？它仅仅是计算了<strong>所有</strong> cell 的高度总和。</p>
+<p><a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableView</a> 的 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewDelegate_Protocol/index.html#//apple_ref/occ/intfm/UITableViewDelegate/tableView:heightForRowAtIndexPath:">tableView: heightForRowAtIndexPath:</a><a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/#//apple_ref/occ/instp/UITableView/delegate">委托</a>方法会为每个 cell（即使它不显示）调用一次，所以你应当<strong>非常</strong>迅速返回当前 cell 的高度。</p>
+<p>大多数人会犯<strong>巨大</strong>的错误，通过通过边界（bound）数据布局初始化过的 cell，并取得它们高度。如果你想提高滚动性能，那么就不该用这种方式去计算 cell 的高度，因为这样会造成一切的东西都极其的慢，60 FPS 是 iOS 的显示标准，这样做就会下降到 15~20，并且你的滚动操作会变得迟缓、卡顿。</p>
+<p>如果我们没有 cell 对象，如何计算进一步的 cell 的高度呢？下面是 cell 代码的一个例子，它利用<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/General/Conceptual/DevPedia-CocoaCore/ClassMethod.html">类方法</a>，基于传递的宽度和显示数据（cell 的连接器）来返回高度：</p>
+<p><img alt="" src="http://ww1.sinaimg.cn/mw690/6941baebgw1f2dtex3kmkj20xc0upn94.jpg" /></p>
+<p>它是使用这种方式返回值给 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 的：</p>
+<p><img alt="" src="http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtexoytuj20xc02dt9z.jpg" /></p>
+<p>在实现所有这些代码的过程中，你获得了多少乐趣？你们大多数会说一丢丢都没有啊。但我没说这是易事啊。当然，我们可以建立自己的类来进行手动布局和高度计算，但有时候，我们并没有足够的时间。你可以从在 Telegram 网站的 iOS 应用代码中找案例去实现它。</p>
+<p>从 iOS8 开始，我们可以使用<strong>自动</strong>高度计算，而无需实现上面提到的 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 的<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/#//apple_ref/occ/instp/UITableView/delegate">委托</a>方法。要做到这一点，你可以使用 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/Introduction/Introduction.html">AutoLayout</a> 工具，并把 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/#//apple_ref/occ/instp/UITableView/rowHeight">行高</a> 设置为 UITableViewAutomaticDimension。更多的详细信息可以在 <a style="font-weight: normal" href="http://stackoverflow.com/a/18746930">StackOverflow</a> 网站上找到，上面有很好的解释。</p>
+<p>尽管可以使用这些工具，但我还是强烈建议你不要这么做。另外，我建议<strong>不要</strong>使用更复杂的数学运算来确定 cell 的高度，而尽可能仅仅使用加、减、乘、除。</p>
+<p>那 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/Introduction/Introduction.html">AutoLayout</a> 呢？难道真如我所那么<strong>慢</strong>？也许你会感到惊讶，但这的确是事实。如果你的应用运行在所有的生命周期长的真实设备（特别是相对于安卓设备），想看到完美的平滑滚动，那么结果会是慢得<strong>令人难以置信</strong>的。而且你拥有越多的子视图，你的 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/Introduction/Introduction.html">AutoLayout</a> 就运行得越慢。</p>
+<p>AutoLayout 相对低性能的原因是在 <a style="font-weight: normal" href="https://en.wikipedia.org/wiki/Cassowary_%28software%29">Cassowary</a> 布局引擎下处理的。你需要要处理的的子视图布局约束越多，你花费在返回 cell 给 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 的时间就越多。</p>
+<p>什么是速度更快：执行一些数值较小的基本数学运算，或者处理大量的线性等式、不等式？现在想象一下，用户希望<strong>很快速</strong>滚动，然后<strong>每个</strong> cell 的 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/Introduction/Introduction.html">AutoLayout</a> 执行<strong>所有</strong>这些疯狂的计算。</p>
+<p>使用内置工具优化 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 的正确方式：</p>
+<ul>
+<li>重用 cell 对象：对于特定的 cell 类型，你应该只初始化<strong>一次</strong></li>
+<li>不要在 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/#//apple_ref/occ/instm/UITableView/cellForRowAtIndexPath:">cellForRowAtIndexPath:</a> 方法绑定数据，因为这时 cell 还没显示，而是使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 的委托方法 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewDelegate_Protocol/index.html#//apple_ref/occ/intfm/UITableViewDelegate/tableView:willDisplayCell:forRowAtIndexPath:">tableView:willDisplayCell:forRowAtIndexPath:</a>。</li>
+<li>进一步计算 cell 的高度要<strong>迅速</strong>。虽然这是工程师的日常事务，但是要想平滑滚动复杂的 cell，你要多点耐心。</li>
+</ul>
+<h3>我们探讨更深入的问题</h4>
+<p>上面提及的几点还不足以实现<strong>真正的</strong>平滑滚动，而且尤其当你需要实现复杂的 cell，有着许多梯度渐变、视图、交互元素、装饰元素等更多的内容时，其滚动效果更为突出。</p>
+<p>此时，我们即使完成了上述的需求，也很容易造成 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 的卡顿。你给 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewCell_Class/">UITableViewCell</a> 添加的视图越多，其滚动时的 FPS 下降的幅度就越大。现在有了手工布局和高度计算优化，但<strong>现在</strong>问题不在于<strong>布局</strong>，而是<strong>渲染</strong>。</p>
+<p>让我们把注意力转移到 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/">UIView</a> 的一个叫 “<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/#//apple_ref/occ/instp/UIView/opaque">opaque</a>” 的属性上。文档中写道，它有助于绘图系统，以确定 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/">UIView</a> 是否为透明。如果不是，绘图系统在呈现该视图时会做一些优化并提高性能。</p>
+<p>我们所需的性能，会不会是它呢？用户可能很密集地滚动表格，例如使用 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIScrollView_Class/#//apple_ref/occ/instp/UIScrollView/scrollsToTop">scrollsToTop</a> 功能，且用户不一定有最新的 iPhone，因此 cell 必须要<strong>非常快地</strong>渲染。比“正常”的视图还要快。</p>
+<p>最慢的一种渲染方式是<strong>混合</strong>。它在设备的 GPU 支持下执行，这种硬件正是为了混合渲染（不仅仅混合渲染）开发而产生的。</p>
+<p>正如你可能已经猜到，提高性能的方法是减少混合操作。但在减少一些东西之前，你该找到它。我们来试试。</p>
+<p>在 iOS 模拟器运行你的应用，点击“Debug”菜单，然后选择“Color Blended Layers”选项。这时 iOS 模拟器会将所有区域的显示划分成两种颜色：绿色和红色。</p>
+<p>绿色区域是没有混合渲染的，红色区域是经过有混合渲染的。</p>
+<p><img alt="" src="http://ww2.sinaimg.cn/mw690/6941baebgw1f2dto8ya5bj20dw0opq6q.jpg" /></p>
+<p><img alt="" src="http://ww4.sinaimg.cn/mw690/6941baebgw1f2dto44rlaj20dw0opad4.jpg" /></p>
+<p>如你所见，在 cell 里有至少两个区域是经过混合渲染的，但你可能没有看到之间有什么不同（而且这种混合渲染是多余的！）。</p>
+<p>每次遇到这样的情况，你都应当仔细研究，并在不同的情况下，使用不同的方式来避免混合渲染。在我的这种情况下，将 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/#//apple_ref/occ/instp/UIView/backgroundColor">背景色</a> 设置不透明就已经实现目标了。</p>
+<p>但有时候我们会遇到更复杂的事情。看这里：我们有一个梯度渐变，但混合是不存在的。</p>
+<p><img alt="" src="http://ww2.sinaimg.cn/mw690/6941baebgw1f2dto346dyj20go0tmaf1.jpg" /></p>
+<p><img alt="" src="http://ww3.sinaimg.cn/mw690/6941baebgw1f2dto1fjt1j20go0tmq6v.jpg" /></p>
+<p>如果你想使用 <a style="font-weight: normal" href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CAGradientLayer_class/">CAGradientLayer</a> 来实现这个效果，你会失望的，因为在 iPhone 6 其 FPS 会下降到 25~30，并且无法达到快速滚动。</p>
+<p>它毕竟是会发生的，因为我们已经将两个不同图层的内容混合了，分别是 <a href="https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UILabel_Class/index.html">UILabel</a> 的 <a href="https://developer.apple.com/library/prerelease/mac/documentation/GraphicsImaging/Reference/CATextLayer_class/index.html">CATextLayer</a> 和我们构想的 <a href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CAGradientLayer_class/">CAGradientLayer</a>。</p>
+<p>当正确使用 CPU 和 GPU 资源，它们是负载均衡的，FPS 保持约为 60。如下所示：</p>
+<p><img alt="" src="http://ww3.sinaimg.cn/mw690/6941baebgw1f2dtnzubiwj20m706eaai.jpg" /></p>
+<p>当设备需要显示执行大量的混合操作时问题就会出现，GPU 将会满载，但 CPU 却会保持低负荷运行。</p>
+<p>在2010的夏末，恰好是 iPhone 4 发布后，许多工程师都面临着这个问题。然后苹果推出了革命性的视网膜屏，但搭配相当普通的 GPU。然而，它却还有足够的能力去支持显示，但上述问题就出现得更频繁了。</p>
+<p>这个决定的结果就是，你可以看到目前在 iOS 7 下的 iPhone 4 上的所有应用甚至是最简单的应用的操作都变得卡顿。无论如何，通过本文的所有建议，你将能够让你的应用即使在这种情况下都可以达到 60 FPS，尽管其过程有些难度。</p>
+<p>那么那是做什么用的呢？事实上，解决方法就在这里：用 CPU 来渲染！去载 GPU，让它只在必须用 GPU 的地方执行混合渲染。例如，由 <a style="font-weight: normal" href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CALayer_class/">CALayers</a> 执行动画的地方。</p>
+<p>我们可以通过在 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/">UIView</a> 的 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/#//apple_ref/occ/instm/UIView/drawRect:">drawRect:</a> 方法中使用 <a style="font-weight: normal" href="https://developer.apple.com/library/prerelease/ios/documentation/CoreGraphics/Reference/CoreGraphics_Framework/index.html">CoreGraphics</a> 操作，如：</p>
+<p><img alt="" src="http://ww2.sinaimg.cn/mw690/6941baebgw1f2dtnz8l9bj20xc0yttjz.jpg" /></p>
+<p>这些代码就很好？即使是我，也会说不是真的。另外这种方式是撤销所有在 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/">UIView</a> 上的缓存优化（在任何情况下，它们都是不必要的）。但正是这种做法将禁用一些混合操作，不加载 GPU 并能让 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 更流畅。</p>
+<p>但要注意：使用这种方式增加渲染性能<strong>不是</strong>因为 CPU 比 GPU 快！而是因为 CPU 在多数情况下都<strong>不会</strong> 100% 满载，这种方式能让我们通过负载 CPU 来实现在一些渲染任务中去载 GPU。</p>
+<p>优化混合操作的关键是<strong>平衡</strong> CPU 和 GPU 的负载。</p>
+<p>简单总结一下优化在 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 中绘制数据的操作：</p>
+<ul>
+<li>减少 iOS <strong>没必要的</strong>混合渲染区域：通过 iOS 模拟器和 <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/Introduction/Introduction.html">Instruments</a> 工具对应用进行检查，不使用透明背景；如果可以的话，不渲染梯度渐变，其效果会更好。</li>
+<li>优化代码，实现 CPU 和 GPU 负载<strong>均衡</strong>。你应清晰了解哪一部分的渲染必须通过 GPU 来完成，哪一部分的渲染可以通过 CPU 来保持均衡。</li>
+<li>根据不同类型 cell 写不同的代码。</li>
+</ul>
+<h3>像素探索</h4>
+<p>你知道像素长什么样的吗？我指的是，屏幕中的物理像素。我相信你知道的，但我还是要告诉你：</p>
+<p><img alt="" src="http://ww2.sinaimg.cn/mw690/6941baebgw1f2dtnxrqo5j20ge08cq4m.jpg" /></p>
+<p>不同的屏幕有不同的制作工艺，但这其中都有共同之处。实际上，每个物理像素是通过红、绿、蓝三种颜色子像素组成的。</p>
+<p>这就造成了每个像素并不是原子单元的，尽管在应用中看起来是这样。<br />
+直到搭配视网膜屏的 iPhone 4 出现，物理像素可以被描述为整形坐标。因为视网膜显示屏是多倍于屏幕点，而不是 Cocoa Touch 环境中的像素，而且他们可以为浮点数。</p>
+<p>在完美（我们试图构建的）世界，屏幕点总是被处理成物理像素的整数坐标。但在现实生活中，它可能是浮点数值，例如，直线可能开始于横坐标的 0.25 处。并从这时，iOS 将<a style="font-weight: normal" href="https://en.wikipedia.org/wiki/Subpixel_rendering">对子像素进行着色</a>。</p>
+<p>当这种技术运用于特定类型的内容（如文本）确实比较合理。但如果我们只是绘制设计的平滑直线时就没必要使用这种技术。</p>
+<p>如果你的所有的平滑直线都进行子像素渲染（这将是不可见的，因为你的直线只是设计成平滑的），那么你会让 iOS 做无用功，同时也降低了 FPS。</p>
+<p>如何获得与不必要的子像素抗锯齿的问题？最经常发生的情况是在需要代码计算的视图中，其坐标系数值变成了浮点数值或者使用不适合的图片素材，图片尺寸不对齐屏幕的物理像素（例如，你有一张 60&#215;61 而不是 60&#215;60 的图片给视网膜屏显示）</p>
+<p>就如前面内容提到的，在减少一些东西前，我们应去找到它。在 iOS 模拟器运行你的应用，并点选“Debug”菜单的“Color Misaligned Images”选项。</p>
+<p>这次，模拟器上有两大高亮的区域：紫红色区域执行了子像素渲染，黄色区域渲染的图片尺寸没有对齐到它们所在的区域。</p>
+<p><img alt="" src="http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtnwzmouj20go0tm78k.jpg" /></p>
+<p><img alt="" src="http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtnvzbt2j20go0tmn17.jpg" /></p>
+<p>如何在你的代码中找到发生问题的地方？我总是使用部分自定义绘制进行手工布局的，所以对我来说没问题。如果你是使用 <a style="font-weight: normal" href="https://developer.apple.com/xcode/interface-builder/">Interface Builder</a>，那么我只能<a style="font-weight: normal" href="https://twitter.com/theonlylars/status/603610088675246082">同情</a>你了。</p>
+<p>一般情况下，解决这个问题只需要简单使用下 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/System/Conceptual/ManPages_iPhoneOS/man3/ceilf.3.html">ceilf</a>、<a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/System/Conceptual/ManPages_iPhoneOS/man3/floorf.3.html">floorf</a> 和 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CGGeometry/#//apple_ref/c/func/CGRectIntegral">CGRectIntegral</a> 来凑整你的坐标系即可。</p>
+<p>通过探索的结果，我有以下几点建议：</p>
+<ul>
+<li>凑整所有像素相关的数据：<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/">UIView</a> 的点坐标、宽高和其他数据。</li>
+<li>追踪你的图像资源：图片必须是像素完美的，否则当它们在视网膜屏上渲染时，它会做一些无必要的抗锯齿处理。</li>
+<li>定期检查你的环境和上述的问题，因为它可以很快修正。</li>
+</ul>
+<h3>异步 UI</h4>
+<p>可能这看起来有点奇怪，但如果你知道自己在做什么，那么这是让 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 更平滑滚动的很有效的办法。</p>
+<p>现在我们将讨论一些你<strong>应该</strong>做和<strong>可能</strong>要做的事情。</p>
+<p>每个中等以上级别的应用都有必要使用带自定义多媒体内容的 cell，如：文本、图片、动画，甚至有时是视频。</p>
+<p>而所有这些东西都被修饰：头像是圆的、文字带话题标签、用户名等。</p>
+<p>我们注意到，对于需要尽快返回的 cell，在这点上我们有些麻烦： <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/#//apple_ref/occ/instp/UIView/clipsToBounds">clipsToBounds</a> 慢，图片从网络加载，字符串要关联话题标签等其他一些麻烦。</p>
+<p>优化似乎是这样的：你<strong>应</strong>执行这些操作，但如果你执行在主线程，那么它不会让你快速返回 cell。</p>
+<p>后台加载图片并处理圆角，然后将处理过的图片赋值给 <a style="font-weight: normal" href="https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIImageView_Class/index.html">UIImageView</a>。</p>
+<p>一次显示所有文本，但在后台关联话题标签，然后刷新带样式的文本。</p>
+<p>具体的操作取决于你的 cell 的具体内容，但主要的想法是让它在后台运行大量的操作。这些操作不仅是网络相关代码并且使用 <a style="font-weight: normal" href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/Introduction/Introduction.html">Instruments</a> 工具来找出所在需要在代码运行的操作。</p>
+<p>记得尽量迅速返回 cell。</p>
+<p>有时候，我们即使用尽了上面所有的技术都无补于事。GPU 仍然不奏效（iPhone 4 + iOS 7），cell 中有大量内容，我们将要通过 <a style="font-weight: normal" href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CALayer_class/">CALayers</a> 来实现动画，因为它真的很难通过 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/#//apple_ref/occ/instm/UIView/drawRect:">drawRect:</a> 方法实现效果。</p>
+<p>在这种情况下，我们应该在后台渲染其他的一切。除此之外，当用户快速滚动 <a style="font-weight: normal" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableView_Class/">UITableViews</a> 时，它对提高 FPS 非常有效。</p>
+<p>你比如说 Facebook 应用，它做的正是这一点。为了检测这一点，你可以充分往下滚动，然后点击状态栏。列表马上就滚动起来，这样你就可以清楚看到，cell 不会在此时渲染。如果要说的更精确下，cell 还不能及时获得。</p>
+<p>你可以自己做一遍因为它足够简单。为此，你应该设置 <a style="font-weight: normal" href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CALayer_class/">CALayers</a> 的 <a style="font-weight: normal" href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CALayer_class/#//apple_ref/occ/instp/CALayer/drawsAsynchronously">drawsAsynchronously</a> 为 YES。</p>
+<p>但是，我们可以检查此操作的必要性。在 iOS 模拟器运行应用，选择“Debug”菜单的“Color Offscreen-Rendered”选项。现在所有在后台渲染的区域会以黄色突出显示。</p>
+<p><img alt="" src="http://ww3.sinaimg.cn/mw690/6941baebgw1f2dtnudb8zj20go0tmaed.jpg" /></p>
+<p><img alt="" src="http://ww4.sinaimg.cn/mw690/6941baebgw1f2dtntnqklj20go0tmn1j.jpg" /></p>
+<p>如果对一些层启用该模式，但它并没有高亮突出显示，那么这个地方是还不够慢。</p>
+<p>为了找到 <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/Introduction/Introduction.html">CALayers](https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CALayer_class/) 的瓶颈并进一步缩小它，你可以使用 XCode Instruments</a> 的 Time Profiler 工具。</p>
+<p>下面是实现异步 UI 的操作列表：</p>
+<ul>
+<li>找到那个不能让你快速返回 cell 的渲染瓶颈。</li>
+<li>将操作移至后台并更新在主线程的显示内容。</li>
+<li>最后一招是设置你的 <a href="https://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CALayer_class/">CALayers</a> 为异步显示模式（即使它们简单的文本或图片），者将帮助你提高 FPS。​</li>
+</ul>
+<h3>总结</h3>
+<p>我试图解释 iOS 绘图系统的主要观点（不使用 OpenGL，因为它更少情况下才使用的）。当然，这其中的一些似乎模糊了，但实际最合适的<strong>方向</strong>是：研究你的代码，找到所有影响滚动性能的问题。</p>
+<p>在不同的情况，可以用不同的方式进行优化，但<strong>原则</strong>是永远不会变的。</p>
+<p>实现完美的平滑滚动的关键是非常特殊的代码，它允许你使用 iOS 设备所有的力量让应用变得真正的流畅。</p>
+
+        
+        
+        
+    <div class="post-adds">
+        <span data-post-id="84360" class=" btn-bluet-bigger href-style vote-post-up   register-user-only "><i class="fa  fa-thumbs-o-up"></i> <h10 id="84360votetotal">1</h10> 赞</span>
+        <span data-book-type="1" data-site-id="12" data-item-id="84360" data-item-type="1" class=" btn-bluet-bigger href-style bookmark-btn  register-user-only "><i class="fa fa-bookmark-o  "></i> 1 收藏</span>
+
+                    <a href="#article-comment"><span class="btn-bluet-bigger href-style hide-on-480"><i class="fa fa-comments-o"></i>  评论</span></a>
+        
+        
+        
+        <!-- JiaThis Button BEGIN -->
+        <div class="jiathis_style_24x24" style="display: inline-flex; position: relative; margin: 0; clear: both;float: right;">
+            <a class="jiathis_button_tsina"></a>
+            <a class="jiathis_button_weixin"></a>
+            <a class="jiathis_button_qzone"></a>
+            <a class="jiathis_button_fb hide-on-480"></a>
+            <a href="http://www.jiathis.com/share?uid=1745061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+        </div>
+
+    </div>
+
+
+
+
+        <!-- BEGIN #author-bio -->
+
+<div id="author-bio">
+	
+	<h3 class="widget-title">
+	关于作者：<a target="_blank" href="http://www.jobbole.com/members/hearingdog">BEAST丨Q</a>
+	</h3>
+	<div class="alignleft">
+		<a target="_blank" href="http://www.jobbole.com/members/hearingdog">
+			<img src="http://tp1.sinaimg.cn/2149670764/180/0/1" />
+		</a>
+	</div>
+
+    <div class="author-bio-info">
+
+        <span class="author-bio-info-block">
+            奋力游~        </span>
+        <span class="author-bio-info-block">
+            <a href="http://www.jobbole.com/members/hearingdog" target="_blank"><i class="fa fa-user"></i> 个人主页</a> &middot; 
+            <a href="http://ios.jobbole.com/author/hearingdog/" target="_blank"><i class="fa fa-file-text-o"></i> 我的文章</a>
+
+             &middot; <a title='声望值' target='_blank' href='http://www.jobbole.com/members/hearingdog/reputation/'><i class='fa fa-graduation-cap'></i> 10</a> &middot; <a title='微博主页' target='_blank' href='http://weibo.com/hearingdog'><i class='fa fa-weibo'></i></a>&nbsp;<a title='GitHub主页' target='_blank' href='https://github.com/bqlin/'><i class='fa fa-github'></i></a>&nbsp;        </span>
+    </div>
+	<div class="clear"></div>
+</div>
+
+<!-- END #author-bio -->
+	</div>
+	<!-- END .entry -->
+
+
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:false,
+	title:"分享从伯乐在线看到的一篇好文章 ",
+	summary:"《UITableView 的完美平滑滚动》",
+	pic:"http://ww1.sinaimg.cn/mw690/6941baebgw1f2dtex3kmkj20xc0upn94.jpg",
+	appkey:{
+         "tsina": 1473879058    },
+	ralateuid:{
+		"tsina": 5314643524	},
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1745061" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+			<div class="textwidget"><p><a href='http://blog.jobbole.com/84342/?utm_source=ios.jobbole.com&amp;utm_medium=articleBanner&amp;utm_content=2015.9.16' target='_blank'><img src='http://ww2.sinaimg.cn/mw690/e5298966gw1evykwqsj8wj20h802smxh.jpg' border='0' /></a></p>
+</div>
+		
+</div>
+<!-- END .post -->
+    
+<div class="wp_rp_wrap  wp_rp_m_modern" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp" style="visibility: visible"><li ><a href="http://ios.jobbole.com/82614/" class="wp_rp_title">有了Auto Layout，为什么还怕写UITabelView的自适应布局?</a></li><li ><a href="http://ios.jobbole.com/56704/" class="wp_rp_title">iOS列表UITableView提速指南</a></li><li ><a href="http://ios.jobbole.com/84377/" class="wp_rp_title">你真的会用UITableView嘛</a></li><li ><a href="http://ios.jobbole.com/83731/" class="wp_rp_title">做哪些优化，才能让 UITabelView 更顺滑？</a></li><li ><a href="http://ios.jobbole.com/84232/" class="wp_rp_title">解析 iOS 动画原理与实现</a></li><li ><a href="http://ios.jobbole.com/82380/" class="wp_rp_title">iOS开发网络篇之文件下载、大文件下载、断点下载</a></li><li ><a href="http://ios.jobbole.com/69689/" class="wp_rp_title">objc系列译文（1.1）：更轻量的 View Controllers</a></li><li ><a href="http://ios.jobbole.com/83248/" class="wp_rp_title">iOS开发之表视图爱上CoreData</a></li><li ><a href="http://ios.jobbole.com/82124/" class="wp_rp_title">iOS开发中可以节省50%编译等待时间的几个措施</a></li><li ><a href="http://ios.jobbole.com/81906/" class="wp_rp_title">13个小技巧帮你征服Xcode</a></li></ul></div></div>
+
+    
+<div style="text-align: left;">
+    <h3>可能感兴趣的话题</h3>
+    <ul style="font-size: 13px; list-style: disc inside;">
+                        <li>
+                    <a href="http://group.jobbole.com/16196/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="Java新手问题" target="_blank">Java新手问题</a>
+                     &middot; <a href="http://group.jobbole.com/16196/#comments" target="_blank"><i class="fa fa-comments-o"></i> 5</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/16393/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="为什么过去了那么久，声望还是1？" target="_blank">为什么过去了那么久，声望还是1？</a>
+                     &middot; <a href="http://group.jobbole.com/16393/#comments" target="_blank"><i class="fa fa-comments-o"></i> 1</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/16431/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="网易互娱2017实习生招聘在线笔试题" target="_blank">网易互娱2017实习生招聘在线笔试题</a>
+                                    </li>
+                            <li>
+                    <a href="http://group.jobbole.com/16366/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="Inter2016在线评测题(数据结构问题)" target="_blank">Inter2016在线评测题(数据结构问题)</a>
+                     &middot; <a href="http://group.jobbole.com/16366/#comments" target="_blank"><i class="fa fa-comments-o"></i> 1</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6816/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="有哪些值得关注的【.Net】网站、博客、微博？" target="_blank">有哪些值得关注的【.Net】网站、博客、...</a>
+                     &middot; <a href="http://group.jobbole.com/6816/#comments" target="_blank"><i class="fa fa-comments-o"></i> 1</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/16401/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="申请加入翻译小组" target="_blank">申请加入翻译小组</a>
+                                    </li>
+                            <li>
+                    <a href="http://group.jobbole.com/14898/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="程序员用什么样的键盘？" target="_blank">程序员用什么样的键盘？</a>
+                     &middot; <a href="http://group.jobbole.com/14898/#comments" target="_blank"><i class="fa fa-comments-o"></i> 45</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/15460/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="请问python生成pdf报告有什么好的思路？" target="_blank">请问python生成pdf报告有什么好的思路？</a>
+                     &middot; <a href="http://group.jobbole.com/15460/#comments" target="_blank"><i class="fa fa-comments-o"></i> 1</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/16025/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="你最喜欢的粤语歌，求推荐" target="_blank">你最喜欢的粤语歌，求推荐</a>
+                     &middot; <a href="http://group.jobbole.com/16025/#comments" target="_blank"><i class="fa fa-comments-o"></i> 35</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/15142/?utm_source=ios.jobbole.com&utm_medium=article-related-group-topic" title="现在做php，想转大前端，希望大家给点意见。" target="_blank">现在做php，想转大前端，希望大家给点意...</a>
+                     &middot; <a href="http://group.jobbole.com/15142/#comments" target="_blank"><i class="fa fa-comments-o"></i> 13</a>                </li>
+                </ul>
+</div>
+    
+        <!-- BEGIN .navigation -->
+        <div class="navigation margin-20">
+
+            <div class="alignleft"><a href="http://ios.jobbole.com/84357/" rel="prev">&laquo; 页面间跳转的性能优化(一)</a></div>
+            <div class="alignright"><a href="http://ios.jobbole.com/84365/" rel="next">iOS系统右滑返回全局控制方案 &raquo;</a></div>
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .navigation -->
+
+    
+	
+            <div id="article-comment" class="dot-box center-align">
+
+                        <a href="http://www.jobbole.com/login?redirect=http://ios.jobbole.com/84360/"><button type="button" class="btn btn-non-transparent">登录后评论</button></a>
+            
+            <a target="_blank" href="http://www.jobbole.com/register"><button type="button" class="btn btn-primary">新用户注册</button></a>
+
+            <br/><br/>
+            <span>直接登录</span>
+            <style type="text/css">.t_login_text{margin:0; padding:0;}.t_login_button{margin:0; padding: 5px 0;}.t_login_button a{margin:0; padding-right:3px; line-height:25px}.t_login_button img{display:inline; border:none;}</style><!-- 使用社交帐号登录 来自 WordPress连接微博 插件 --><span class="connectBox1 t_login_button"><a href="http://ios.jobbole.com/wp-content/plugins/wp-connect/login.php?go=qzone&redirect_url=http%3A%2F%2Fios.jobbole.com%2F84360%2F" title="QQ" rel="nofollow"><img src="http://ios.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_qzone.png" /></a><a href="http://ios.jobbole.com/wp-content/plugins/wp-connect/login.php?go=sina&redirect_url=http%3A%2F%2Fios.jobbole.com%2F84360%2F" title="新浪微博" rel="nofollow"><img src="http://ios.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_sina.png" /></a><a href="http://ios.jobbole.com/wp-content/plugins/wp-connect/login.php?go=douban&redirect_url=http%3A%2F%2Fios.jobbole.com%2F84360%2F" title="豆瓣" rel="nofollow"><img src="http://ios.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_douban.png" /></a><a href="http://ios.jobbole.com/wp-content/plugins/wp-connect/login.php?go=github&redirect_url=http%3A%2F%2Fios.jobbole.com%2F84360%2F" title="GitHub" rel="nofollow"><img src="http://ios.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_github.png" /></a></span>        </div>
+    
+
+    <div id="comment_list" class="comments">
+
+        
+    </div>
+		
+
+	
+</div>
+<!-- END .grid-8 -->
+
+<!-- BEGIN #sidebar -->
+<div id="sidebar" class="grid-4">
+
+	    <div class="nav-search-box ">
+                <form method="get" id="searchform" action="http://ios.jobbole.com">
+            <select id="searchselect">
+                                    <option  value="http://blog.jobbole.com">博客</option>
+                                    <option  value="http://hao.jobbole.com">资源</option>
+                                    <option  value="http://design.jobbole.com">设计</option>
+                                    <option  value="http://web.jobbole.com">WEB前端</option>
+                                    <option selected value="http://ios.jobbole.com">IOS</option>
+                                    <option  value="http://python.jobbole.com">Python</option>
+                                    <option  value="http://android.jobbole.com">安卓</option>
+                                    <option  value="http://top.jobbole.com">头条</option>
+                                    <option  value="http://group.jobbole.com">小组</option>
+                                    <option  value="http://date.jobbole.com">面向对象</option>
+                            </select>
+            <div class="input-wrapper">
+                <input type="text" value="" name="s" id="s" placeholder="输入搜索关键字">
+            </div>
+            <input type="submit" id="searchsubmit" value="搜索">
+        </form>
+    </div>
+
+        <h3 class="widget-title">
+            <a target="_blank" href="http://group.jobbole.com/category/tech/ios-tech/?utm_source=ios.jobbole.com&utm_medium=sidebar-group-topics-more">iOS小组话题</a>
+            <span style="float:right;"><a target="_blank" href="http://group.jobbole.com/newtopic/?group=54">我有新话题 <i class='fa fa-commenting-o'></i></a></span>
+        </h3>
+
+        <!-- BEGIN .container -->
+        <div class="container">
+
+            
+                <!-- BEGIN .grid-4 -->
+                <div class="grid-4 floated-thumb">
+
+                    
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/Jc_xin16" ">
+                                    <img src="http://www.jobbole.com/wp-content/uploads/2016/03/19f6a0954de720c092b86a0f654dcdca.jpg" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" title="如果看待一个本科不是计算机专业的妹子, 走上了一条iOS的路?" href="http://group.jobbole.com/13433/?utm_source=ios.jobbole.com&utm_medium=sidebar-group-topic">如果看待一个本科不是计算机专业的妹...</a><br />
+                                <a href="http://group.jobbole.com/author/jc_xin16/">Jc_鑫16</a> 发起
+                                                                    • 180 回复
+                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/wx3183016871" ">
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" title="当我开发的App终将成了无人维护的僵尸应用" href="http://group.jobbole.com/15218/?utm_source=ios.jobbole.com&utm_medium=sidebar-group-topic">当我开发的App终将成了无人维护的僵...</a><br />
+                                <a href="http://group.jobbole.com/author/wx3183016871/">Larry.Hwang</a> 发起
+                                                                    • 7 回复
+                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/wx1677063684" ">
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" title="iOS开发新手，求不吝赐教" href="http://group.jobbole.com/15815/?utm_source=ios.jobbole.com&utm_medium=sidebar-group-topic">iOS开发新手，求不吝赐教</a><br />
+                                <a href="http://group.jobbole.com/author/wx1677063684/">Jimmy</a> 发起
+                                                                    • 2 回复
+                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/5639257977" ">
+                                    <img src="http://tp4.sinaimg.cn/5639257977/180/0/1" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" title="我的iOS开发入门自学路径" href="http://group.jobbole.com/16056/?utm_source=ios.jobbole.com&utm_medium=sidebar-group-topic">我的iOS开发入门自学路径</a><br />
+                                <a href="http://group.jobbole.com/author/5639257977/">游薪渝</a> 发起
+                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/wx2038801979" ">
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" title="应用程序拍好的视频转存到系统相册里" href="http://group.jobbole.com/15707/?utm_source=ios.jobbole.com&utm_medium=sidebar-group-topic">应用程序拍好的视频转存到系统相册里</a><br />
+                                <a href="http://group.jobbole.com/author/wx2038801979/">邹道利</a> 发起
+                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/gouhanghang" ">
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" title="求推荐几本 iOS 经典书籍（不要初级的那种）" href="http://group.jobbole.com/14878/?utm_source=ios.jobbole.com&utm_medium=sidebar-group-topic">求推荐几本 iOS 经典书籍（不要...</a><br />
+                                <a href="http://group.jobbole.com/author/gouhanghang/">gouhanghang</a> 发起
+                                                                    • 1 回复
+                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                </div>
+                <!-- END .grid-4 -->
+
+            
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .container -->
+
+        <div id="text-2" class="widget widget_text">			<div class="textwidget"><p><a href='http://blog.jobbole.com/84342/?utm_source=ios.jobbole.com&#038;utm_medium=rightBanner-1&#038;utm_content=2015.9.16' target='_blank'><img src='http://ww2.sinaimg.cn/mw690/e5298966gw1evyjrd4iqcj208c03c0t0.jpg' /></a></p>
+</div>
+		</div><div class="tabs tabbed_widget"><ul class="nav clearfix"><li><a id="link-tab1" href="#tab1" title="本月热门iOS文章">本月热门iOS文章</a></li><li><a id="link-tab2" href="#tab2" title="年度热门">年度热门</a></li><li><a id="link-tab3" href="#tab3" title="热门标签">热门标签</a></li></ul><div id="tab1" class="tab"><div class="floated-thumb">
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">0</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84257/" title="iOS知识树，知识点（包括对象、Block、消息转发、GCD、运行时、runloop、动画、Push、KVO、tableview，UIViewController、提交AppStore）">iOS知识树，知识点（包括对象、Block、消息转发、GCD、运行时、run...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">1</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84351/" title="iOS RSA的网络安全模型、iOS签名机制总结（登录、token安全、签名）">iOS RSA的网络安全模型、iOS签名...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">2</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84028/" title="Objective-C Runtime 1小时入门教程">Objective-C Runtime 1小时入...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">3</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84148/" title="饿了么移动APP的架构演进">饿了么移动APP的架构演进</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">4</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84232/" title="解析 iOS 动画原理与实现">解析 iOS 动画原理与实现</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">5</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84081/" title="史上最详细的iOS之事件的传递和响应机制">史上最详细的iOS之事件的传递和响...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">6</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84321/" title="iOS 关于navigationBar的一些：毛玻璃、透明、动态缩放、动态隐藏">iOS 关于navigationBar的一些：...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">7</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84146/" title="iOS开发：音频播放、录音、视频播放、拍照、视频录制">iOS开发：音频播放、录音、视频播...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">8</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/84219/" title="谈谈UIView的几个layout方法：layoutSubviews、layoutIfNeeded、setNeedsLayout...">谈谈UIView的几个layout方法：layoutSubviews、layou...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">9</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/83518/" title="两个 AutoLayout 的小建议">两个 AutoLayout 的小建议</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                </div></div><div id="tab2" class="tab"><div class="floated-thumb">
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">0</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/82222/" title="学习iOS开发前应该知道的（1）">学习iOS开发前应该知道的（1）</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">1</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/82124/" title="iOS开发中可以节省50%编译等待时间的几个措施">iOS开发中可以节省50%编译等待时间...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">2</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/82077/" title="理解 ARC 下的循环引用">理解 ARC 下的循环引用</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">3</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/83907/" title="iOS 资源大全">iOS 资源大全</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">4</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/81932/" title="Objective-C开发编码规范">Objective-C开发编码规范</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">5</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/82081/" title="ReactiveCocoa 3.0 初窥">ReactiveCocoa 3.0 初窥</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">6</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/82614/" title="有了Auto Layout，为什么还怕写UITabelView的自适应布局?">有了Auto Layout，为什么还怕写UITa...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">7</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/83085/" title="Xcode 装逼插件 ActivatePowerMode">Xcode 装逼插件 ActivatePowerMo...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">8</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/81869/" title="开发一个App的成本是多少？">开发一个App的成本是多少？</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                
+                    
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">9</span>
+                            <a class="meta-title" target="_blank" href="http://ios.jobbole.com/82232/" title="Reactive Cocoa 3.0 在 MVVM 中的应用">Reactive Cocoa 3.0 在 MV...</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                </div></div><div id="tab3" class="tab"><p><a href='http://ios.jobbole.com/tag/android/' class='tag-link-3639' title='17 个话题' style='font-size: 14.24px;'>android</a>
+<a href='http://ios.jobbole.com/tag/app/' class='tag-link-3690' title='6 个话题' style='font-size: 10.96px;'>app</a>
+<a href='http://ios.jobbole.com/tag/apple/' class='tag-link-180' title='35 个话题' style='font-size: 16.64px;'>apple</a>
+<a href='http://ios.jobbole.com/tag/apple-pay/' class='tag-link-3764' title='3 个话题' style='font-size: 8.96px;'>Apple Pay</a>
+<a href='http://ios.jobbole.com/tag/apple-watch/' class='tag-link-3768' title='6 个话题' style='font-size: 10.96px;'>Apple Watch</a>
+<a href='http://ios.jobbole.com/tag/app-store/' class='tag-link-3619' title='8 个话题' style='font-size: 11.76px;'>app store</a>
+<a href='http://ios.jobbole.com/tag/arc/' class='tag-link-3861' title='2 个话题' style='font-size: 8px;'>ARC</a>
+<a href='http://ios.jobbole.com/tag/autolayout/' class='tag-link-3927' title='7 个话题' style='font-size: 11.36px;'>autolayout</a>
+<a href='http://ios.jobbole.com/tag/block/' class='tag-link-3832' title='3 个话题' style='font-size: 8.96px;'>Block</a>
+<a href='http://ios.jobbole.com/tag/cocoa/' class='tag-link-2919' title='4 个话题' style='font-size: 9.76px;'>Cocoa</a>
+<a href='http://ios.jobbole.com/tag/cocoapods/' class='tag-link-3636' title='4 个话题' style='font-size: 9.76px;'>CocoaPods</a>
+<a href='http://ios.jobbole.com/tag/core-data/' class='tag-link-3704' title='3 个话题' style='font-size: 8.96px;'>Core Data</a>
+<a href='http://ios.jobbole.com/tag/core-image/' class='tag-link-3846' title='3 个话题' style='font-size: 8.96px;'>Core Image</a>
+<a href='http://ios.jobbole.com/tag/cpp/' class='tag-link-3644' title='4 个话题' style='font-size: 9.76px;'>cpp</a>
+<a href='http://ios.jobbole.com/tag/crash/' class='tag-link-3867' title='2 个话题' style='font-size: 8px;'>Crash</a>
+<a href='http://ios.jobbole.com/tag/c%e8%af%ad%e8%a8%80/' class='tag-link-4057' title='5 个话题' style='font-size: 10.4px;'>C语言</a>
+<a href='http://ios.jobbole.com/tag/dropbox/' class='tag-link-3643' title='2 个话题' style='font-size: 8px;'>Dropbox</a>
+<a href='http://ios.jobbole.com/tag/facebook/' class='tag-link-3674' title='3 个话题' style='font-size: 8.96px;'>facebook</a>
+<a href='http://ios.jobbole.com/tag/featuredpost/' class='tag-link-3615' title='5 个话题' style='font-size: 10.4px;'>featuredpost</a>
+<a href='http://ios.jobbole.com/tag/gcd/' class='tag-link-3655' title='6 个话题' style='font-size: 10.96px;'>gcd</a>
+<a href='http://ios.jobbole.com/tag/gpu/' class='tag-link-3847' title='2 个话题' style='font-size: 8px;'>GPU</a>
+<a href='http://ios.jobbole.com/tag/ios/' class='tag-link-3640' title='170 个话题' style='font-size: 22px;'>ios</a>
+<a href='http://ios.jobbole.com/tag/ios-7/' class='tag-link-3686' title='18 个话题' style='font-size: 14.4px;'>ios 7</a>
+<a href='http://ios.jobbole.com/tag/ios8/' class='tag-link-3617' title='2 个话题' style='font-size: 8px;'>ios8</a>
+<a href='http://ios.jobbole.com/tag/ios-8/' class='tag-link-3622' title='8 个话题' style='font-size: 11.76px;'>ios 8</a>
+<a href='http://ios.jobbole.com/tag/ios9/' class='tag-link-3900' title='5 个话题' style='font-size: 10.4px;'>iOS9</a>
+<a href='http://ios.jobbole.com/tag/ios-9/' class='tag-link-3971' title='4 个话题' style='font-size: 9.76px;'>iOS 9</a>
+<a href='http://ios.jobbole.com/tag/ipad/' class='tag-link-3741' title='3 个话题' style='font-size: 8.96px;'>ipad</a>
+<a href='http://ios.jobbole.com/tag/iphone/' class='tag-link-414' title='26 个话题' style='font-size: 15.6px;'>iPhone</a>
+<a href='http://ios.jobbole.com/tag/java/' class='tag-link-3836' title='2 个话题' style='font-size: 8px;'>Java</a>
+<a href='http://ios.jobbole.com/tag/kiwi/' class='tag-link-3649' title='2 个话题' style='font-size: 8px;'>Kiwi</a>
+<a href='http://ios.jobbole.com/tag/kvo/' class='tag-link-3702' title='3 个话题' style='font-size: 8.96px;'>kvo</a>
+<a href='http://ios.jobbole.com/tag/lldb/' class='tag-link-3818' title='2 个话题' style='font-size: 8px;'>LLDB</a>
+<a href='http://ios.jobbole.com/tag/mac/' class='tag-link-1622' title='14 个话题' style='font-size: 13.6px;'>Mac</a>
+<a href='http://ios.jobbole.com/tag/mvc/' class='tag-link-3868' title='2 个话题' style='font-size: 8px;'>MVC</a>
+<a href='http://ios.jobbole.com/tag/mvvm/' class='tag-link-3881' title='6 个话题' style='font-size: 10.96px;'>MVVM</a>
+<a href='http://ios.jobbole.com/tag/nsthread/' class='tag-link-3654' title='3 个话题' style='font-size: 8.96px;'>NSThread</a>
+<a href='http://ios.jobbole.com/tag/objective-c/' class='tag-link-829' title='127 个话题' style='font-size: 21.04px;'>Objective-C</a>
+<a href='http://ios.jobbole.com/tag/opengl/' class='tag-link-4097' title='2 个话题' style='font-size: 8px;'>OpenGL</a>
+<a href='http://ios.jobbole.com/tag/os-x/' class='tag-link-2902' title='7 个话题' style='font-size: 11.36px;'>OS X</a>
+<a href='http://ios.jobbole.com/tag/reactivecocoa/' class='tag-link-3863' title='12 个话题' style='font-size: 13.04px;'>ReactiveCocoa</a>
+<a href='http://ios.jobbole.com/tag/runtime/' class='tag-link-3632' title='15 个话题' style='font-size: 13.76px;'>runtime</a>
+<a href='http://ios.jobbole.com/tag/sqlite/' class='tag-link-3880' title='7 个话题' style='font-size: 11.36px;'>SQLite</a>
+<a href='http://ios.jobbole.com/tag/storyboard/' class='tag-link-3952' title='4 个话题' style='font-size: 9.76px;'>Storyboard</a>
+<a href='http://ios.jobbole.com/tag/swift/' class='tag-link-3608' title='76 个话题' style='font-size: 19.28px;'>swift</a>
+<a href='http://ios.jobbole.com/tag/tdd/' class='tag-link-3660' title='3 个话题' style='font-size: 8.96px;'>tdd</a>
+<a href='http://ios.jobbole.com/tag/tiobe/' class='tag-link-3621' title='2 个话题' style='font-size: 8px;'>TIOBE</a>
+<a href='http://ios.jobbole.com/tag/ui/' class='tag-link-3633' title='14 个话题' style='font-size: 13.6px;'>UI</a>
+<a href='http://ios.jobbole.com/tag/uicollectionviewcontroller/' class='tag-link-4059' title='5 个话题' style='font-size: 10.4px;'>UICollectionViewController</a>
+<a href='http://ios.jobbole.com/tag/uikit/' class='tag-link-3697' title='3 个话题' style='font-size: 8.96px;'>UIKit</a>
+<a href='http://ios.jobbole.com/tag/uiscrollview/' class='tag-link-3638' title='4 个话题' style='font-size: 9.76px;'>UIScrollView</a>
+<a href='http://ios.jobbole.com/tag/uitableview/' class='tag-link-3726' title='5 个话题' style='font-size: 10.4px;'>UITableView</a>
+<a href='http://ios.jobbole.com/tag/viewcontroller/' class='tag-link-3869' title='3 个话题' style='font-size: 8.96px;'>ViewController</a>
+<a href='http://ios.jobbole.com/tag/watchkit/' class='tag-link-3616' title='9 个话题' style='font-size: 12.16px;'>WatchKit</a>
+<a href='http://ios.jobbole.com/tag/xcode/' class='tag-link-3613' title='26 个话题' style='font-size: 15.6px;'>xcode</a>
+<a href='http://ios.jobbole.com/tag/xmppframework/' class='tag-link-4037' title='3 个话题' style='font-size: 8.96px;'>XMPPFramework</a>
+<a href='http://ios.jobbole.com/tag/%e4%ba%8b%e4%bb%b6/' class='tag-link-3829' title='2 个话题' style='font-size: 8px;'>事件</a>
+<a href='http://ios.jobbole.com/tag/%e5%86%85%e5%ad%98/' class='tag-link-3663' title='2 个话题' style='font-size: 8px;'>内存</a>
+<a href='http://ios.jobbole.com/tag/%e5%86%85%e5%ad%98%e7%ae%a1%e7%90%86/' class='tag-link-3823' title='8 个话题' style='font-size: 11.76px;'>内存管理</a>
+<a href='http://ios.jobbole.com/tag/%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b/' class='tag-link-3641' title='2 个话题' style='font-size: 8px;'>函数式编程</a>
+<a href='http://ios.jobbole.com/tag/%e5%8a%a8%e7%94%bb/' class='tag-link-3786' title='13 个话题' style='font-size: 13.36px;'>动画</a>
+<a href='http://ios.jobbole.com/tag/%e5%8d%8f%e8%ae%ae/' class='tag-link-4004' title='3 个话题' style='font-size: 8.96px;'>协议</a>
+<a href='http://ios.jobbole.com/tag/%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95/' class='tag-link-3837' title='5 个话题' style='font-size: 10.4px;'>单元测试</a>
+<a href='http://ios.jobbole.com/tag/%e5%8d%b3%e6%97%b6%e9%80%9a%e4%bf%a1/' class='tag-link-4038' title='3 个话题' style='font-size: 8.96px;'>即时通信</a>
+<a href='http://ios.jobbole.com/tag/%e5%9b%be%e6%a0%87/' class='tag-link-3682' title='4 个话题' style='font-size: 9.76px;'>图标</a>
+<a href='http://ios.jobbole.com/tag/%e5%9b%be%e7%89%87/' class='tag-link-3842' title='4 个话题' style='font-size: 9.76px;'>图片</a>
+<a href='http://ios.jobbole.com/tag/%e5%9b%be%e7%89%87%e7%bc%a9%e6%94%be/' class='tag-link-4121' title='2 个话题' style='font-size: 8px;'>图片缩放</a>
+<a href='http://ios.jobbole.com/tag/%e5%a4%9a%e7%ba%bf%e7%a8%8b/' class='tag-link-3653' title='7 个话题' style='font-size: 11.36px;'>多线程</a>
+<a href='http://ios.jobbole.com/tag/%e5%ad%97%e5%85%b8/' class='tag-link-4015' title='3 个话题' style='font-size: 8.96px;'>字典</a>
+<a href='http://ios.jobbole.com/tag/%e5%ad%97%e7%ac%a6%e4%b8%b2/' class='tag-link-3884' title='5 个话题' style='font-size: 10.4px;'>字符串</a>
+<a href='http://ios.jobbole.com/tag/%e5%ae%89%e5%85%a8/' class='tag-link-3680' title='28 个话题' style='font-size: 15.84px;'>安全</a>
+<a href='http://ios.jobbole.com/tag/%e5%b7%a5%e5%85%b7/' class='tag-link-3659' title='11 个话题' style='font-size: 12.8px;'>工具</a>
+<a href='http://ios.jobbole.com/tag/%e5%ba%94%e7%94%a8/' class='tag-link-3743' title='5 个话题' style='font-size: 10.4px;'>应用</a>
+<a href='http://ios.jobbole.com/tag/%e5%ba%95%e5%b1%82%e5%8e%9f%e7%90%86/' class='tag-link-4146' title='5 个话题' style='font-size: 10.4px;'>底层原理</a>
+<a href='http://ios.jobbole.com/tag/%e5%bc%82%e6%ad%a5%e5%8a%a0%e8%bd%bd/' class='tag-link-3890' title='2 个话题' style='font-size: 8px;'>异步加载</a>
+<a href='http://ios.jobbole.com/tag/%e5%be%ae%e4%bf%a1/' class='tag-link-4017' title='3 个话题' style='font-size: 8.96px;'>微信</a>
+<a href='http://ios.jobbole.com/tag/%e6%80%a7%e8%83%bd/' class='tag-link-3727' title='5 个话题' style='font-size: 10.4px;'>性能</a>
+<a href='http://ios.jobbole.com/tag/%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96/' class='tag-link-3817' title='5 个话题' style='font-size: 10.4px;'>性能优化</a>
+<a href='http://ios.jobbole.com/tag/tech-share/' class='tag-link-860' title='3 个话题' style='font-size: 8.96px;'>技术分享</a>
+<a href='http://ios.jobbole.com/tag/%e6%8b%9b%e8%81%98/' class='tag-link-3876' title='2 个话题' style='font-size: 8px;'>招聘</a>
+<a href='http://ios.jobbole.com/tag/%e6%8e%a7%e4%bb%b6/' class='tag-link-3825' title='2 个话题' style='font-size: 8px;'>控件</a>
+<a href='http://ios.jobbole.com/tag/%e6%8f%92%e4%bb%b6/' class='tag-link-3614' title='2 个话题' style='font-size: 8px;'>插件</a>
+<a href='http://ios.jobbole.com/tag/%e6%95%99%e7%a8%8b/' class='tag-link-3623' title='5 个话题' style='font-size: 10.4px;'>教程</a>
+<a href='http://ios.jobbole.com/tag/%e6%95%b0%e7%bb%84/' class='tag-link-4014' title='3 个话题' style='font-size: 8.96px;'>数组</a>
+<a href='http://ios.jobbole.com/tag/%e6%a1%86%e6%9e%b6/' class='tag-link-3725' title='6 个话题' style='font-size: 10.96px;'>框架</a>
+<a href='http://ios.jobbole.com/tag/%e6%b5%8b%e8%af%95/' class='tag-link-3652' title='4 个话题' style='font-size: 9.76px;'>测试</a>
+<a href='http://ios.jobbole.com/tag/%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f/' class='tag-link-3877' title='3 个话题' style='font-size: 8.96px;'>生命周期</a>
+<a href='http://ios.jobbole.com/tag/%e7%ba%bf%e7%a8%8b/' class='tag-link-3878' title='2 个话题' style='font-size: 8px;'>线程</a>
+<a href='http://ios.jobbole.com/tag/%e7%bc%93%e5%ad%98/' class='tag-link-3982' title='3 个话题' style='font-size: 8.96px;'>缓存</a>
+<a href='http://ios.jobbole.com/tag/%e7%bd%91%e7%bb%9c%e7%bc%96%e7%a8%8b/' class='tag-link-4106' title='2 个话题' style='font-size: 8px;'>网络编程</a>
+<a href='http://ios.jobbole.com/tag/%e8%81%8a%e5%a4%a9/' class='tag-link-3983' title='6 个话题' style='font-size: 10.96px;'>聊天</a>
+<a href='http://ios.jobbole.com/tag/%e8%8b%b9%e6%9e%9c/' class='tag-link-3667' title='6 个话题' style='font-size: 10.96px;'>苹果</a>
+<a href='http://ios.jobbole.com/tag/%e8%a7%86%e5%9b%be/' class='tag-link-3902' title='2 个话题' style='font-size: 8px;'>视图</a>
+<a href='http://ios.jobbole.com/tag/%e8%a7%86%e9%a2%91/' class='tag-link-3618' title='5 个话题' style='font-size: 10.4px;'>视频</a>
+<a href='http://ios.jobbole.com/tag/%e8%ae%be%e8%ae%a1/' class='tag-link-3631' title='24 个话题' style='font-size: 15.36px;'>设计</a>
+<a href='http://ios.jobbole.com/tag/%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f/' class='tag-link-3728' title='9 个话题' style='font-size: 12.16px;'>设计模式</a>
+<a href='http://ios.jobbole.com/tag/%e8%b0%83%e8%af%95/' class='tag-link-3688' title='3 个话题' style='font-size: 8.96px;'>调试</a>
+<a href='http://ios.jobbole.com/tag/%e9%97%ad%e5%8c%85/' class='tag-link-4078' title='2 个话题' style='font-size: 8px;'>闭包</a>
+<a href='http://ios.jobbole.com/tag/%e9%9d%99%e6%80%81%e5%ba%93/' class='tag-link-3894' title='2 个话题' style='font-size: 8px;'>静态库</a>
+<a href='http://ios.jobbole.com/tag/%e9%9d%a2%e8%af%95/' class='tag-link-3885' title='3 个话题' style='font-size: 8.96px;'>面试</a></p></div></div>
+        <h3 class="widget-title">
+            <a target="_blank" href="http://top.jobbole.com/category/news/">业界热点资讯</a>
+            <span style="float:right;"><a target="_blank" href="http://top.jobbole.com/category/news/">更多 &raquo;</a></span>
+        </h3>
+        <!-- BEGIN .container -->
+        <div class="container">
+            
+                <!-- BEGIN .grid-4 -->
+                <div class="grid-4 floated-thumb">
+
+                    
+                        <!-- BEGIN .post-thumb -->
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://top.jobbole.com/34231/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news"><img src="http://jbcdn2.b0.upaiyun.com/2016/03/c72d72604859805b9401fabaa35d8def.jpg" alt="" width="50" height="50" /></a>
+                        </div>
+                        <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" title="Canonical和微软将宣布合作：在Windows 10上运行Ubuntu" target="_blank" href="http://top.jobbole.com/34231/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news">Canonical和微软将宣布合作：在Windows 10上运行Ubuntu</a><br />
+                                2 小时前                                &middot; <i class="fa fa-thumbs-o-up"></i> 3                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                        <!-- BEGIN .post-thumb -->
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://top.jobbole.com/34224/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news"><img src="http://jbcdn2.b0.upaiyun.com/2016/03/f0b4b85656afb754452110d73a07f7bc.png" alt="" width="50" height="50" /></a>
+                        </div>
+                        <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" title="Build 2016：微软将在Windows上运行Linux系统的Bash" target="_blank" href="http://top.jobbole.com/34224/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news">Build 2016：微软将在Windows上运行Linux系统的Bash</a><br />
+                                8 小时前                                &middot; <i class="fa fa-thumbs-o-up"></i> 3                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                        <!-- BEGIN .post-thumb -->
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://top.jobbole.com/34232/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news"><img src="http://jbcdn2.b0.upaiyun.com/2016/03/cf4bdbb1dbeb5677147bae9683576594.png" alt="" width="50" height="50" /></a>
+                        </div>
+                        <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" title="Uber将面向全球开放新API插件 可在其他应用中打Uber" target="_blank" href="http://top.jobbole.com/34232/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news">Uber将面向全球开放新API插件 可在其他应用中打Uber</a><br />
+                                2 小时前                                &middot; <i class="fa fa-thumbs-o-up"></i> 2                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                        <!-- BEGIN .post-thumb -->
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://top.jobbole.com/34229/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news"><img src="http://jbcdn2.b0.upaiyun.com/2016/03/00de0d94b58a86461b5de50149067131.jpg" alt="" width="50" height="50" /></a>
+                        </div>
+                        <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" title="今晚微软Build大会看什么？HoloLens才是主角！" target="_blank" href="http://top.jobbole.com/34229/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news">今晚微软Build大会看什么？HoloLens才是主角！</a><br />
+                                2 小时前                                &middot; <i class="fa fa-thumbs-o-up"></i> 2                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                        <!-- BEGIN .post-thumb -->
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://top.jobbole.com/34226/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news"><img src="http://jbcdn2.b0.upaiyun.com/2016/03/04f90dfc10a58c1369f334dc24063234.jpg" alt="" width="50" height="50" /></a>
+                        </div>
+                        <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" title="一个关于谷歌的问题，让百度无人车负责人生气了" target="_blank" href="http://top.jobbole.com/34226/?utm_source=ios.jobbole.com&utm_medium=sidebar-top-news">一个关于谷歌的问题，让百度无人车负责人生气了</a><br />
+                                2 小时前                                &middot; <i class="fa fa-thumbs-o-up"></i> 2                                
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+                    
+                </div>
+                <!-- END .grid-4 -->
+
+            
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .container -->
+        <div id="text-7" class="widget widget_text">			<div class="textwidget"><p><a href='http://date.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=rightBanner-2&#038;utm_content=2015.9.16' target='_blank'><img src='http://ww2.sinaimg.cn/mw690/bfdcef89gw1esk2g5dvq1j208c03cglu.jpg' /></a></p>
+</div>
+		</div>            <h3 class="widget-title">
+                <a href="http://hao.jobbole.com?catid=31&utm_source=ios.jobbole.com&utm_medium=sidebar-resources-more" target="_blank">iOS工具资源</a>
+                <span style="float:right;"><a target="_blank" href="http://hao.jobbole.com?catid=31&utm_source=ios.jobbole.com&utm_medium=sidebar-resources-more">更多资源 &raquo;</a></span>
+            </h3>
+            <div class="container">
+                <div class="grid-4">
+                
+                    <div class="floated-thumb">
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://hao.jobbole.com/pnchart/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="PNChart：一个简单漂亮的iOS图表库"><img src="http://jbcdn1.b0.upaiyun.com/2016/03/b04df396d71632245ef8de45d2336048.gif" alt="" width="50" height="50" /></a>
+                        </div>
+                        <div class="post-meta">
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://hao.jobbole.com/pnchart/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="PNChart：一个简单漂亮的iOS图表库">PNChart：一个简单漂亮的iOS图表库</a><br />
+                                <a href="http://hao.jobbole.com/category/ios/" title="查看 iOS 中的全部文章" rel="category tag">iOS</a>, <a href="http://hao.jobbole.com/category/ios/ios-libraries-and-frameworks/ios-charts/" title="查看 图表 中的全部文章" rel="category tag">图表</a>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                
+                    <div class="floated-thumb">
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://hao.jobbole.com/jtchartview/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="JTChartView：完全可定制的轻量级图表解决方案"><img src="http://jbcdn1.b0.upaiyun.com/2016/03/5cd0ee14aa3679ef9dba39c05e7053c3.png" alt="" width="50" height="50" /></a>
+                        </div>
+                        <div class="post-meta">
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://hao.jobbole.com/jtchartview/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="JTChartView：完全可定制的轻量级图表解决方案">JTChartView：完全可定制的轻量级图表解决方案</a><br />
+                                <a href="http://hao.jobbole.com/category/ios/" title="查看 iOS 中的全部文章" rel="category tag">iOS</a>, <a href="http://hao.jobbole.com/category/ios/ios-libraries-and-frameworks/ios-charts/" title="查看 图表 中的全部文章" rel="category tag">图表</a>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                
+                    <div class="floated-thumb">
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://hao.jobbole.com/sdurlcache/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="SDURLCache：为iPhone/iPad应用提供本地磁盘缓存的URLCache子类"><img src="http://jbcdn1.b0.upaiyun.com/2016/03/391ff3297fb63f5dcc3d6510d98ad1a1.png" alt="" width="50" height="50" /></a>
+                        </div>
+                        <div class="post-meta">
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://hao.jobbole.com/sdurlcache/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="SDURLCache：为iPhone/iPad应用提供本地磁盘缓存的URLCache子类">SDURLCache：为iPhone/iPad应用提供本地磁盘缓存的U...</a><br />
+                                <a href="http://hao.jobbole.com/category/ios/" title="查看 iOS 中的全部文章" rel="category tag">iOS</a>, <a href="http://hao.jobbole.com/category/ios/ios-libraries-and-frameworks/ios-cache/" title="查看 缓存 中的全部文章" rel="category tag">缓存</a>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                
+                    <div class="floated-thumb">
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://hao.jobbole.com/awesome-cache/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="Awesome Cache：让人喜爱的本地缓存"><img src="http://jbcdn1.b0.upaiyun.com/2016/03/9b3f010ede86139a9b9d6348d2824626.png" alt="" width="50" height="50" /></a>
+                        </div>
+                        <div class="post-meta">
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://hao.jobbole.com/awesome-cache/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="Awesome Cache：让人喜爱的本地缓存">Awesome Cache：让人喜爱的本地缓存</a><br />
+                                <a href="http://hao.jobbole.com/category/ios/" title="查看 iOS 中的全部文章" rel="category tag">iOS</a>, <a href="http://hao.jobbole.com/category/ios/ios-libraries-and-frameworks/ios-cache/" title="查看 缓存 中的全部文章" rel="category tag">缓存</a>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                
+                    <div class="floated-thumb">
+                        <div class="post-thumb">
+                            <a target="_blank" href="http://hao.jobbole.com/mattress/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="Mattress：iOS Web离线缓存"><img src="http://jbcdn1.b0.upaiyun.com/2016/03/676f77fa65007a37e8b0b253fca5ab9f.png" alt="" width="50" height="50" /></a>
+                        </div>
+                        <div class="post-meta">
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://hao.jobbole.com/mattress/?utm_source=ios.jobbole.com&utm_medium=sidebar-resources" title="Mattress：iOS Web离线缓存">Mattress：iOS Web离线缓存</a><br />
+                                <a href="http://hao.jobbole.com/category/ios/" title="查看 iOS 中的全部文章" rel="category tag">iOS</a>, <a href="http://hao.jobbole.com/category/ios/ios-libraries-and-frameworks/ios-cache/" title="查看 缓存 中的全部文章" rel="category tag">缓存</a>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                                </div>
+            </div>
+        <div id="text-8" class="widget widget_text">			<div class="textwidget"><p><a href='http://fanyi.jobbole.com/' target='_blank'><img src='http://ww1.sinaimg.cn/mw690/bfdcef89gw1esnyzyrczej208c03cgm3.jpg' /></a></p>
+</div>
+		</div>		<h3 class='widget-title'>最新评论</h3>
+		<ul>
+		
+					
+			<li id="rc-comment-90321" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/Mikasa"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="刨根问底：对于 self = [super init] 的思考" href="http://ios.jobbole.com/84348/#comment-90321" rel="nofollow">刨根问底：对于 self = [super...</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				一般都用第二种，也是苹果推荐的做法				</div>
+			</li>
+			
+					
+			<li id="rc-comment-90320" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/gfsyy2015"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="Objective-C Runtime 1小时入门教程" href="http://ios.jobbole.com/84028/#comment-90320" rel="nofollow">Objective-C Runtime 1小...</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				赞啊.这么好的文章.怎么没有人赞.超级喜欢啦.楼主好人.赞!				</div>
+			</li>
+			
+					
+			<li id="rc-comment-90319" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/liwei"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="一文让你彻底了解iOS字体相关知识" href="http://ios.jobbole.com/83939/#comment-90319" rel="nofollow">一文让你彻底了解iOS字体相关...</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				是个牛逼人物。				</div>
+			</li>
+			
+					
+			<li id="rc-comment-90318" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/xiaoyouPrince"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="iOS高仿爱鲜蜂" href="http://ios.jobbole.com/84293/#comment-90318" rel="nofollow">iOS高仿爱鲜蜂</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				谢谢分享。				</div>
+			</li>
+			
+					
+			<li id="rc-comment-90317" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/qiucanqinglove"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://q.qlogo.cn/qqapp/208656/B0ACB56D354F74D976E5AD4FFBB5FE48/100"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="使用 AVPlayer 进行多视频播放" href="http://ios.jobbole.com/84287/#comment-90317" rel="nofollow">使用 AVPlayer 进行多视频...</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				看完了，再去github跑跑，感谢				</div>
+			</li>
+			
+					
+			<li id="rc-comment-90316" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/qiucanqinglove"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://q.qlogo.cn/qqapp/208656/B0ACB56D354F74D976E5AD4FFBB5FE48/100"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="iOS高仿爱鲜蜂" href="http://ios.jobbole.com/84293/#comment-90316" rel="nofollow">iOS高仿爱鲜蜂</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				感谢分享				</div>
+			</li>
+			
+					
+			<li id="rc-comment-90315" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/michaelKiven"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="iOS知识树，知识点（包括对象、Block、消息转发、GCD、运行时、runloop、动画、Push、KVO、tableview，UIViewController、提交AppStore）" href="http://ios.jobbole.com/84257/#comment-90315" rel="nofollow">iOS知识树，知识点（包括对象、Block、消息转发、GCD、运行时、r...</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				如此深度好文居然没人点赞?				</div>
+			</li>
+			
+					
+			<li id="rc-comment-90314" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/gsliuwei1989"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://q.qlogo.cn/qqapp/208656/C75CF88724AF29FFB082C92759BE9E62/100"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" title="iOS弹幕(源码)实现原理解析" href="http://ios.jobbole.com/84238/#comment-90314" rel="nofollow">iOS弹幕(源码)实现原理解析</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				正好用得上，谢谢				</div>
+			</li>
+			
+				
+		</ul>
+        	
+	<!-- BEGIN .container -->
+	<div class="container">
+	
+		<!-- BEGIN .grid-2 -->
+		<div class="grid-2">
+			
+						
+		</div>
+		<!-- END .grid-2 -->
+		
+		<!-- BEGIN .grid-2 -->
+		<div class="grid-2">
+			
+						
+		</div>
+		<!-- END .grid-2 -->
+		
+		<div class="clear"></div>
+			
+	</div>
+	<!-- END .container -->
+
+</div>
+<!-- END #sidebar -->
+<div class="clear"></div>	
+
+
+</div>
+<!-- END #wrapper -->
+
+<!-- BEGIN footer -->
+
+    <footer>
+
+        <!-- BEGIN .container -->
+        <div class="container">
+
+            <!-- BEGIN .grid-4 -->
+            <div class="grid-4">
+
+                <div id="text-3" class="widget widget_text"><h3 class="widget-title">关于iOS频道</h3>			<div class="textwidget"><p>iOS频道分享iOS和Swift开发，应用设计和推广，iOS相关的行业动态。</p>
+<p><b>快速链接</b><br />
+<a target='_blank' href="http://group.jobbole.com/category/feedback/thanks">问题反馈与求助 » </a><br />
+<a target='_blank' href="http://hao.jobbole.com/?catid=31">iOS工具资源 » </a><br />
+<a target='_blank' href="http://group.jobbole.com/category/tech/ios-tech/">iOS技术话题 » </a></p>
+</div>
+		</div>
+            </div>
+            <!-- END .grid-4 -->
+
+            <!-- BEGIN .grid-4 -->
+            <div class="grid-4">
+
+                <div id="text-5" class="widget widget_text"><h3 class="widget-title">关注我们</h3>			<div class="textwidget"><p>新浪微博：<a href='http://weibo.com/u/5314643524' target='_blank'>@iOS大全</a><br />
+RSS：<a href='http://ios.jobbole.com/feed/' target='_blank'>订阅地址</a><br />
+推荐微信号<br />
+<img src='http://jbcdn2.b0.upaiyun.com/2015/12/weixin/iOS_weixin.png' width='100' height='110' /><img src='http://jbcdn2.b0.upaiyun.com/2015/12/weixin/ui_weixin.png' width='100' height='110' /><img src='http://jbcdn2.b0.upaiyun.com/2015/12/weixin/iprogrammer_weixin.png' width='100' height='110' /></p>
+<p><strong>合作联系</strong><br />
+Email：<a href='mailto:bd@jobbole.com'>bd@Jobbole.com</a><br />
+QQ： 2302462408  （加好友请注明来意）</p>
+</div>
+		</div>
+            </div>
+            <!-- END .grid-4 -->
+
+            <!-- BEGIN .grid-4 -->
+            <div class="grid-4">
+
+                <div id="text-4" class="widget widget_text"><h3 class="widget-title">更多频道</h3>			<div class="textwidget"><p><a href='http://group.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>小组</a> &#8211; 好的话题、有启发的回复、值得信赖的圈子<br />
+<a href='http://top.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>头条</a> &#8211; 分享和发现有价值的内容与观点<br />
+<a href='http://date.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>相亲</a> &#8211; 为IT单身男女服务的征婚传播平台<br />
+<a href='http://hao.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>资源</a> &#8211; 优秀的工具资源导航<br />
+<a href='http://fanyi.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>翻译</a> &#8211; 翻译传播优秀的外文文章<br />
+<a href='http://blog.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>文章</a> &#8211; 国内外的精选文章<br />
+<a href='http://design.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>设计</a> &#8211; UI,网页，交互和用户体验<br />
+<a href='http://ios.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>iOS</a> &#8211; 专注iOS技术分享<br />
+<a href='http://android.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>安卓</a> &#8211; 专注Android技术分享<br />
+<a href='http://web.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>前端</a> &#8211; JavaScript, HTML5, CSS<br />
+<a href='http://www.importnew.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>Java</a> &#8211; 专注Java技术分享<br />
+<a href='http://python.jobbole.com/?utm_source=ios.jobbole.com&#038;utm_medium=bottomText' target='_blank'>Python</a> &#8211; 专注Python技术分享</p>
+</div>
+		</div>
+            </div>
+            <!-- END .grid-4 -->
+
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .container -->
+
+        <!-- BEGIN #bottom -->
+        <div id="bottom">
+
+            <!-- BEGIN .container -->
+            <div class="container">
+
+                <!-- BEGIN .grid-12 -->
+                <div class="grid-12">
+
+                    <p>&copy; 2016 伯乐在线
+                    <span style="margin-left: 40px;">
+                        <a href="http://www.jobbole.com">首页</a>&nbsp;&nbsp;
+                        <a href="http://blog.jobbole.com">博客</a>&nbsp;&nbsp;
+                        <a href="http://hao.jobbole.com">资源</a>&nbsp;&nbsp;
+                        <a href="http://group.jobbole.com">小组</a>&nbsp;&nbsp;
+                        <a href="http://date.jobbole.com">相亲</a>&nbsp;&nbsp;
+                        <a href="http://group.jobbole.com/category/feedback/thanks/"><i class="fa fa-bullhorn"></i> 反馈</a>
+                    </span>
+                <span style="float:right; ">
+                    本站由 <a href="http://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=bolezaixian&utm_medium=display" target="_blank">UCloud</a> 赞助云主机
+                </span>
+                    </p>
+
+                </div>
+                <!-- END .grid-12 -->
+
+                <div class="clear"></div>
+
+            </div>
+            <!-- END .container -->
+
+        </div>
+        <!-- END #bottom -->
+    </footer>
+
+        <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','http://ios.jobbole.com/wp-content/themes/jobboleblogv3/js/analytics.js','ga');
+
+        ga('create', 'UA-64210724-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+<!-- END footer -->
+
+
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+var thickboxL10n = {"next":"\u4e0b\u4e00\u9875 >","prev":"< \u4e0a\u4e00\u9875","image":"\u56fe\u50cf","of":"\/","close":"\u5173\u95ed","noiframes":"\u8fd9\u4e2a\u529f\u80fd\u9700\u8981 iframe \u7684\u652f\u6301\u3002\u60a8\u53ef\u80fd\u7981\u6b62\u4e86 iframe \u7684\u663e\u793a\uff0c\u6216\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u6b64\u529f\u80fd\u3002","loadingAnimation":"http:\/\/ios.jobbole.com\/wp-includes\/js\/thickbox\/loadingAnimation.gif","closeImage":"http:\/\/ios.jobbole.com\/wp-includes\/js\/thickbox\/tb-close.png"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-includes/js/thickbox/thickbox.js?ver=3.1-20121105'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-includes/js/underscore.min.js?ver=1.4.0'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-includes/js/shortcode.min.js?ver=3.5.2'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-admin/js/media-upload.min.js?ver=3.5.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"http:\/\/ios.jobbole.com\/wp-admin\/admin-ajax.php","post_id":"84360"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/plugins/wp-postviews/postviews-cache.js?ver=1.68'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/ready.js?ver=1.0'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/easing.js?ver=1.3'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/validate.js?ver=1.9.0'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/touchwipe.js?ver=1.1.1'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/caroufredsel.js?ver=5.5.0'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/flexslider.js?ver=2.0'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/jplayer.js?ver=2.1.0'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/fitvids.js?ver=1.0'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/selectnav.js?ver=0.1'></script>
+<script type='text/javascript' src='http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/effects.js?ver=1.1'></script>
+
+
+<div id="full-btm">
+<a><img src="http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/img/back-btm.png" width="20" border=0 alt="跳到底部" title="跳到底部"></a>
+</div>
+
+<script type="text/javascript">
+jQuery('#full-btm').click(function(){
+    jQuery('html, body').animate({scrollTop:jQuery(document).height()}, 'slow');
+    return false;
+});
+</script>
+
+<div id="full-top">
+<a><img src="http://ios.jobbole.com/wp-content/themes/jobboleblogv3/_assets/img/back-top.png" width="20" border=0 alt="返回顶部" title="返回顶部"></a>
+</div>
+
+<script type="text/javascript">
+jQuery('#full-top').click(function(){
+    jQuery('html, body').animate({scrollTop:0}, 'slow');
+    return false;
+});
+
+</script>
+
+</body>
+<!-- END body -->
+
+</html>
+<!-- END html -->

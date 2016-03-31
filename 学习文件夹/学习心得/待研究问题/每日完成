@@ -1,0 +1,6 @@
+
+
+3.29   看了sunnyxx博客里面对Objective-C Class Ivar Layout 探索，动态添加ivar的属性修饰符（_weak,_strong,unsafe_unretained）
+
+3.30   实现了类似ReactiveCocoa里面rac_signalForSelector:方法，通过动态创建类对象，并使当前实例对象通过方法objc_setClass(obj,class)来实现对动态创建类对象的继承关系，使该实例对象具有动态创建类对象的方法，以达到修改方法的目的
+
