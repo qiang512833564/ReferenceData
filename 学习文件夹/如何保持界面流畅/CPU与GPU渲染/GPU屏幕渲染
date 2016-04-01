@@ -1,0 +1,8 @@
+
+OpenGL中，GPU屏幕渲染有一下两种方式：
+      1. On-Screen Rendering
+      意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行
+      
+      2. Off-Screen Rendering
+      意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作
+

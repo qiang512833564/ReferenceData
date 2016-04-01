@@ -23,6 +23,17 @@ int main(int argc, const char * argv[]) {
         //id objc_msgSend(id self, SEL op, ...)
         [class buttonAction];
 //        ((id (*) (id, SEL)) objc_msgSend)( class, NSSelectorFromString(@"buttonAction"));
+        
+        
+        class = [[Super_Class alloc]init];
+        [class initialize];
+        method = class_getInstanceMethod([class class], NSSelectorFromString(@"addMethod"));
+        
+        
+        //id method_invoke(id receiver, Method m, ...)
+        ((id(*)(id,Method))method_invoke)(class,method);
+        //id objc_msgSend(id self, SEL op, ...)
+        [class buttonAction];
     }
     return 0;
 }

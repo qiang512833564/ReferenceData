@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>离屏渲染学习笔记 - 王中周的技术博客</title>
+  <meta name="author" content="王中周">
+
+  
+  <meta name="description" content="离屏渲染学习笔记">
+  <meta name="keywords" content="iPhone, iOS, 离屏渲染">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://foggry.com/blog/2015/05/06/chi-ping-xuan-ran-xue-xi-bi-ji">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="王中周的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <!-- googleapis is fucked by gfw -->
+  <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+  <!--<script src="//libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>-->
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">王中周的技术博客</a></h1>
+  
+    <h2>Stay hungry,stay foolish.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:foggry.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">离屏渲染学习笔记</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-06T17:17:55+08:00" pubdate data-updated="true">May 6<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>一、概念理解</h2>
+
+<p>OpenGL中，GPU屏幕渲染有以下两种方式：</p>
+
+<ul>
+<li>On-Screen Rendering</li>
+</ul>
+
+
+<p>意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。</p>
+
+<ul>
+<li>Off-Screen Rendering</li>
+</ul>
+
+
+<p>意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。</p>
+
+<!-- more -->
+
+
+<h2>二、离屏渲染的是是非非</h2>
+
+<p>相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面：</p>
+
+<ul>
+<li>创建新缓冲区</li>
+</ul>
+
+
+<p>要想进行离屏渲染，首先要创建一个新的缓冲区。</p>
+
+<ul>
+<li>上下文切换</li>
+</ul>
+
+
+<p>离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。</p>
+
+<h2>三、离屏渲染触发方式</h2>
+
+<p>设置了以下属性时，都会触发离屏绘制：</p>
+
+<ul>
+<li>shouldRasterize（光栅化）</li>
+<li>masks（遮罩）</li>
+<li>shadows（阴影）</li>
+<li>edge antialiasing（抗锯齿）</li>
+<li>group opacity（不透明）</li>
+</ul>
+
+
+<p>需要注意的是，如果shouldRasterize被设置成YES，在触发离屏绘制的同时，会将光栅化后的内容缓存起来，如果对应的layer及其sublayers没有发生改变，在下一帧的时候可以直接复用。这将在很大程度上提升渲染性能。</p>
+
+<p>而其它属性如果是开启的，就不会有缓存，离屏绘制会在每一帧都发生。</p>
+
+<h2>四、另一种特殊的“离屏渲染”</h2>
+
+<p>按照之前的说法，如果将不在GPU的当前屏幕缓冲区中进行的渲染都称为离屏渲染，那么就还有另一种特殊的“离屏渲染”方式：<code>CPU渲染</code>。</p>
+
+<p>如果我们重写了drawRect方法，并且使用任何Core Graphics的技术进行了绘制操作，就涉及到了CPU渲染。整个渲染过程由CPU在App内<code>同步地</code>完成，渲染得到的bitmap最后再交由GPU用于显示。</p>
+
+<h2>五、Instruments</h2>
+
+<p>Instruments的Core Animation工具中有几个和离屏渲染相关的检查选项：</p>
+
+<ul>
+<li>Color Offscreen-Rendered Yellow</li>
+</ul>
+
+
+<p>开启后会把那些需要离屏渲染的图层高亮成黄色，这就意味着黄色图层可能存在性能问题。</p>
+
+<ul>
+<li>Color Hits Green and Misses Red</li>
+</ul>
+
+
+<p>如果shouldRasterize被设置成YES，对应的渲染结果会被缓存，如果图层是绿色，就表示这些缓存被复用；如果是红色就表示缓存会被重复创建，这就表示该处存在性能问题了。</p>
+
+<h2>六、如何抉择</h2>
+
+<p>现在摆在我们面前得有三个选择：当前屏幕渲染、离屏渲染、CPU渲染，该用哪个呢？这需要根据具体的使用场景来决定。</p>
+
+<ul>
+<li>尽量使用当前屏幕渲染</li>
+</ul>
+
+
+<p>鉴于离屏渲染、CPU渲染可能带来的性能问题，一般情况下，我们要尽量使用当前屏幕渲染。</p>
+
+<ul>
+<li>离屏渲染 VS CPU渲染</li>
+</ul>
+
+
+<p>由于GPU的浮点运算能力比CPU强，CPU渲染的效率可能不如离屏渲染；但如果仅仅是实现一个简单的效果，直接使用CPU渲染的效率又可能比离屏渲染好，毕竟离屏渲染要涉及到缓冲区创建和上下文切换等耗时操作。</p>
+
+<p>总之，具体的选择应该由性能测试结果来决定。</p>
+
+<h2>七、写在最后</h2>
+
+<p>在赵岩同学的点拨下才理解了离屏渲染的概念，在此表示感谢！</p>
+
+<p>如理解有误还请大家指出。</p>
+
+<h2>参考文档</h2>
+
+<ul>
+<li><p><a href="http://www.objc.io/issue-3/moving-pixels-onto-the-screen.html">Getting Pixels onto the Screen</a> (中文翻译版：<a href="http://objccn.io/issue-3-1/">绘制像素到屏幕上</a>)</p></li>
+<li><p><a href="https://robots.thoughtbot.com/designing-for-ios-graphics-performance">Designing for iOS: Graphics &amp; Performance</a>  (中文翻译版：<a href="http://www.taofengping.com/2013/05/18/designing-for-ios-graphics-performance/#.VUinciGqpBc">iOS图形处理和性能</a>)</p></li>
+<li><p><a href="https://lobste.rs/s/ckm4uw/a_performance-minded_take_on_ios_design">a performance minded take on ios design</a>  (中文翻译版：<a href="http://www.taofengping.com/2013/05/18/ios_offscreen_analysis/#.VUinPyGqpBd">iOS离屏绘制的性能和机制分析</a>)</p></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">王中周</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-06T17:17:55+08:00" pubdate data-updated="true">May 6<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1394012284741689" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UJian Button BEGIN -->
+	<div class="ujian-hook"></div>
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>
+<!-- UJian Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+<!-- UY END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/16/ios-code-signing-xue-xi-bi-ji/" title="Previous Post: iOS Code Signing 学习笔记">&laquo; iOS Code Signing 学习笔记</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/07/27/ru-he-shou-dong-jie-xi-crashlog/" title="Next Post: 手动解析CrashLog之----方法篇">手动解析CrashLog之----方法篇 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>博主简介</h1>
+<li>
+<p>
+	<span style="color:#222222;font-family:inherit;font-size:18px;font-style:inherit;font-weight:inherit;line-height:1.5;">曾就职于高阳科技、北京拉手网；</span>
+</p>
+<p>
+	<span style="font-family:inherit;font-style:inherit;font-weight:inherit;color:#222222;font-size:18px;line-height:1.5;">早期在<a href="http://blog.csdn.net/wzzvictory" target="_blank"><span style="color:#E53333;">CSND上写博客</span></a></span>
+</p>
+</li>
+</section>
+<section>
+    <h1>新浪微博</h1>
+    <ul id="weibo">
+    <li>
+    	
+<iframe width="100%" height="130" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=2&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1734555471&verifier=6c6f0bb3&dpc=1"></iframe>
+
+</li>
+    </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/03/23/cocoapods-xiang-jie-zhi-geng-xin-pian/">CocoaPods 详解之----更新篇</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/08/10/ru-he-shou-dong-jie-xi-crashlogzhi-yuan-li-pian/">手动解析CrashLog之----原理篇</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/27/ru-he-shou-dong-jie-xi-crashlog/">手动解析CrashLog之----方法篇</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/06/chi-ping-xuan-ran-xue-xi-bi-ji/">离屏渲染学习笔记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/16/ios-code-signing-xue-xi-bi-ji/">iOS Code Signing 学习笔记</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/database/'>Database (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/wwdc2014/'>WWDC2014 (2)</a></li>
+<li class='category'><a href='/blog/categories/xcode/'>Xcode (1)</a></li>
+<li class='category'><a href='/blog/categories/xcodesettings/'>XcodeSettings (1)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>iOS (10)</a></li>
+<li class='category'><a href='/blog/categories/opensource/'>opensource (1)</a></li>
+
+  </ul>
+</section>
+<section>
+    <h1>广告时间</h1>
+    <ul id="ad">
+    <li>
+    	
+
+<!-- 广告位：Google -->
+<!-- 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+-->
+<!-- 王中周的技术博客 -->
+<!-- 
+<ins class="adsbygoogle"
+     style="display:inline-block;width:250px;height:250px"
+     data-ad-client="ca-pub-4428888818448200"
+     data-ad-slot="1259477576"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+
+
+
+<!-- 广告位：Baidu -->
+<!-- 广告位：技术博客 -->
+<!-- 
+<script type="text/javascript" >BAIDU_CLB_SLOT_ID = "985176";</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>
+-->
+   
+    </li>
+    </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><div style="text-align:center;">
+	<span style="line-height:1.5;">This work is licensed under a </span><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a><span style="line-height:1.5;">.</span>
+</div>
+<p style="text-align:center;">
+	<span style="line-height:1;">Copyright &copy; 2016 - 王中周 - </span><span class="credit"><span style="line-height:1;">Powered by </span><a href="http://octopress.org"><span style="line-height:1;">Octopress</span></a></span> 
+</p>
+
+<p>
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9975063b89c363c67eac651132751ee6' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</p></footer>
+  
+
+
+
+
+
+  <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:190px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+	<a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+</body>
+</html>

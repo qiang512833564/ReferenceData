@@ -4,3 +4,4 @@
 
 3.30   实现了类似ReactiveCocoa里面rac_signalForSelector:方法，通过动态创建类对象，并使当前实例对象通过方法objc_setClass(obj,class)来实现对动态创建类对象的继承关系，使该实例对象具有动态创建类对象的方法，以达到修改方法的目的
 
+3.31   tableView动态改变cell的高度，通过tableView beginUpdate与endUpdate方法实现，通过可以通过UIView和CATrasition去改变默认的动画周期以及添加动画完成时block回调（另外，也引出了如何改变隐式动画的周期，并为其添加动画完成的block回调）

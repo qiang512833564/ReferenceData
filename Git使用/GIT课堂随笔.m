@@ -334,3 +334,6 @@ You have both byMyself and byMyself/.DS_Store
 error: Error building trees
 解决方法：
 git reset --mixed
+
+问题：
+如果刚刚改过Git下某个文件，并且通过Git Status查看状态，也已经modify了，但是commit的时候却not anything ,此时只能通过git commit -m "" + 文件或者文件夹路径名，来提交

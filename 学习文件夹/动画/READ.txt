@@ -3,3 +3,13 @@ Core Animation
 动画，在接入后台的时候，会被系统停止，
 猜测，是为了解决CPU。
 这一点，有时候需要注意
+
+Core Animation可分为：
+1. 隐式动画
+   是由系统框架自动完成的。
+   Core Animation在每个runloop周期中自动开始一次新的事务，即使你不显式的用[CATransaction begin]开始一次事务，任何在一次runloop循环中属性的改变都会被集中起来，然后做一次0.25秒的动画
+   CATransaction的+begin和+commit方法在+animateWithDuration:animations:内部自动调用，这样block中所有属性的改变都会被事务所包含。
+   Core Animation通常对CALayer的所有属性（可动画的属性）做动画，但是UIView是把它关联的图层的这个特性关闭了
+
+2. 显式动画
+   
