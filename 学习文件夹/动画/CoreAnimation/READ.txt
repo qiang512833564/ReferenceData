@@ -1,4 +1,5 @@
 Core Animation 不仅仅只是用来制作动画，动画只是它功能的一个很小的部分，
+Core Animation 本身并不是一个绘图系统，它用于合成图像和控制你的 app 内容，主要的目的是 让Core Animation 能够对 layer 对象的管理和控制你的content。一个 layer 捕获你的 content 到 bitmap 上，能够轻松的被 graphics 程序所管理
 Core Animation 基于 OpenGL 与 Quartz2D 两个框架生成的,一般它是 on-screen 渲染操作
     layer 就是通过 Core Animation 生成的，它可以管理 layer 树
     Core Animation 的作用有：

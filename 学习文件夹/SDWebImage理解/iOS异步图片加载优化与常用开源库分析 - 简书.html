@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if !IE]><!--> <html> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="description"  content="网络图片显示大体步骤:下载图片图片处理（裁剪，边框等)写入磁盘从磁盘读取数据到内核缓冲区从内核缓冲区复制到用户空间(内存级别拷贝)解压缩为位图（耗cpu较高）如果位图数据不是字节对齐的，CoreAnimation会copy一份位图数据并进行...">
+  <meta property="wb:webmaster" content="294ec9de89e7fadb" />
+  <meta property="qc:admins" content="104102651453316562112116375" />
+  <meta property="qc:admins" content="11635613706305617" />
+  <meta property="qc:admins" content="1163561616621163056375" />
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4" />
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI" />
+  <meta http-equiv="mobile-agent" content="format=html5; url=http://www.jianshu.com/p/3b2c95e1404f">
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/1514498">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="iOS异步图片加载优化与常用开源库分析" property="twitter:title">
+  <meta content="网络图片显示大体步骤:下载图片图片处理（裁剪，边框等)写入磁盘从磁盘读取数据到内核缓冲区从内核缓冲区复制到用户空间(内存级别拷贝)解压缩为位图（耗cpu较高）如果位图数据不是字节对齐的，CoreAnimation会copy一份位图数据并进行..." property="twitter:description">
+  <meta content="http://www.jianshu.com/p/3b2c95e1404f" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="iOS异步图片加载优化与常用开源库分析">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://www.jianshu.com/p/3b2c95e1404f">
+  <meta property="og:description" content="网络图片显示大体步骤:下载图片图片处理（裁剪，边框等)写入磁盘从磁盘读取数据到内核缓冲区从内核缓冲区复制到用户空间(内存级别拷贝)解压缩为位图（耗cpu较高）如果位图数据不是字节对齐的，Core...">
+
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/1514498" />
+  <meta property="al:ios:app_store_id" content="888237539" />
+  <meta property="al:ios:app_name" content="简书" />
+
+  <meta property="al:android:url" content="jianshu://notes/1514498" />
+  <meta property="al:android:package" content="com.jianshu.haruki" />
+  <meta property="al:android:app_name" content="简书" />
+  <!-- End -->
+
+  <title>iOS异步图片加载优化与常用开源库分析 - 简书</title>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="dMAHQbck0IbN+NS16MHxOs5iHShKvG+Demc3ZseOeyWg4Y0rlzxdE1qd95XhBlgTPK2a469bboOBqQ1pCvgzpw==" />
+  <!--[if lte IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/base-f935477e8faba16f29c6f9e4f0e1d032.css" />
+
+    <link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/reading-note-4158a6eeb7c4e4a9fd15332778cfb52c.css" />
+  <link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/base-read-mode-64acccf6966299cfa3d580140a2582fe.css" />
+  <script src="http://cdn-qn0.jianshu.io/assets/modernizr-613ea63b5aa2f0e2a1946e9c28c8eedb.js"></script>
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if IE 8]><link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/scaffolding/for_ie-7f1c477ffedc13c11315103e8787dc6c.css" /><![endif]-->
+  <!--[if lt IE 9]><link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/scaffolding/for_ie-7f1c477ffedc13c11315103e8787dc6c.css" /><![endif]-->
+  <link href="http://baijii-common.b0.upaiyun.com/icons/favicon.ico" rel="icon">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/57-7597f1cff93b0f41cd16ca7641e477eb.png" sizes="57x57" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/72-e02c647005f01e2d24778ac8e7f9dc45.png" sizes="72x72" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/76-4788ffdcd445555b5b93bfb4d1f4747c.png" sizes="76x76" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/114-e89d888a7bce6222606e46082dcab634.png" sizes="114x114" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/120-c7cdad6dd50db5a93175a6e015d6dc08.png" sizes="120x120" />
+      <link rel="apple-touch-icon-precomposed" href="http://cdn0.jianshu.io/assets/apple-touch-icons/152-21fa4ed7968f6503816524e90dcb3d91.png" sizes="152x152" />
+    <meta id="user_access_temp_token" value="f81c8a86785d"></meta>
+    <meta id="current_user_id" value="1296229"></meta>
+    <meta id="current_user_slug" value="818c189c4b8a"></meta>
+  <!-- Baidu stats -->
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</head>
+
+<body class="post output zh cn mac reader-day-mode reader-font2" data-js-module="note-show" data-locale="zh-CN">
+  
+  <div class="navbar navbar-jianshu shrink">
+  <div class="dropdown">
+    <a class="dropdown-toggle logo" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0)">
+      简
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><a href="/"><i class="fa fa-home"></i> 首页</a></li>
+      <li><a href="/collections"><i class="fa fa-th"></i> 专题</a></li>
+      <li><a href="/user_invitations"><i class="fa fa-money"></i> 发钱啦</a></li>
+        <li><a href="/timeline"><i class="fa fa-users"></i> 简友圈</a></li>
+        <li><a href="/writer#/"><i class="fa fa-pencil"></i> 写文章</a></li>
+    </ul>
+  </div>
+</div>
+<div class="navbar-user">
+    <a class="user avatar" data-toggle="dropdown" href="javascript:void(0)">
+      <img src="http://cdn-qn0.jianshu.io/assets/default_avatar/6-c3a19bc117a55e66cd3be55684d8191c.jpg" alt="6" /> <b class="caret"></b>
+</a>    <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dLabel">
+      <li>
+  <a href="/writer#/"><i class="fa fa-pencil"></i> 写文章</a>
+</li>
+<li>
+  <a target="_blank" href="/users/818c189c4b8a"><i class="fa fa-user"></i> 我的主页</a>
+</li>
+  <li>
+    <a href="/favourites">
+      <i class="fa fa-heart"></i> 我喜欢的
+</a>  </li>
+  <li>
+    <a href="/bookmarks">
+      <i class="fa fa-bookmark"></i> 我的收藏
+</a>  </li>
+  <li>
+    <a href="/notifications">
+      <i class="fa fa-bell"></i> 提醒
+</a>  </li>
+  <li>
+    <a href="/chats">
+      <i class="fa fa-envelope"></i> 简信
+</a>  </li>
+  <li><a href="/settings"><i class="fa fa-cogs"></i> 设置</a></li>
+  <li>
+    <a href="/wallet">
+      <i class="fa fa-credit-card"></i> 钱包
+</a>  </li>
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="#"><i class="fa fa-question-circle"></i> 帮助</a>
+    <ul class="dropdown-menu">
+      <li><a href="http://www.jianshu.com/notebooks/547/latest" target="_blank">帮助中心</a></li>
+      <li><a target="_blank" href="/contact">联系我们</a></a></li>
+    </ul>
+  </li>
+  <li>
+    <a rel="nofollow" data-method="DELETE" href="/sign_out">
+      <i class="fa fa-sign-out"></i> 登 出
+</a>  </li>
+
+    </ul>
+    <a class="daytime set-view-mode pull-right" href="javascript:void(0)"><i class="fa fa-moon-o"></i></a>
+</div>
+<div class="navbar navbar-jianshu expanded">
+  <div class="dropdown">
+      <a class="active logo" role="button" data-original-title="个人主页" data-container="div.expanded" href="/">
+        <b>简</b><i class="fa fa-home"></i><span class="title">首页</span>
+</a>      <a data-toggle="tooltip" data-placement="right" data-original-title="专题" data-container="div.expanded" href="/collections">
+        <i class="fa fa-th"></i><span class="title">专题</span>
+</a>        <a data-toggle="tooltip" data-placement="right" data-original-title="简友圈" data-container="div.expanded" href="/timeline">
+          <i class="fa fa-users"></i><span class="title">简友圈</span>
+</a>        <a data-toggle="tooltip" data-placement="right" data-original-title="写文章" data-container="div.expanded" href="/writer#/">
+          <i class="fa fa-pencil"></i><span class="title">写文章</span>
+</a>    <a class="ad-selector" href="/apps">
+      <i class="fa fa-mobile"></i><span class="title">下载手机应用</span>
+</a>    <div class="ad-container ad-container-signed">
+      <div class="ad-pop">
+        <img class="ad-logo" src="http://cdn-qn0.jianshu.io/assets/apple-touch-icons/114-8dae53b3bcea3f06bb139e329d1edab3.png" alt="114" />
+        <p class="ad-title">简书</p>
+        <p class="ad-subtitle">交流故事，沟通想法</p>
+        <img class="ad-qrcode" src="http://cdn-qn0.jianshu.io/assets/app-page/download-app-qrcode-053849fa25f9b44573ef8dd3c118a20f.png" alt="Download app qrcode" />
+        <div>
+          <a class="ad-link" href="https://itunes.apple.com/cn/app/jian-shu/id888237539?ls=1&amp;mt=8">iOS</a>·
+          <a class="ad-link" href="http://downloads.jianshu.io/apps/haruki/JianShu-1.10.4.apk">Android</a>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <div class="nav-user">
+      <a data-toggle="tooltip" data-placement="right" data-original-title="我的主页" data-container="div.expanded" href="/users/818c189c4b8a">
+        <i class="fa fa-user"></i><span class="title">我的主页</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="我的收藏" data-container="div.expanded" href="/bookmarks">
+          <i class="fa fa-bookmark"></i><span class="title">我的收藏</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="提醒" data-container="div.expanded" href="/notifications">
+
+          <i id="notify-icon" class="fa fa-bell"></i><span class="title">提醒</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="简信" data-container="div.expanded" href="/chats">
+            <i id="chat-message-icon" class="fa fa-envelope"></i><span class="title">简信</span>
+</a>
+        <a href='#view-mode-modal' data-toggle='modal'><i class="fa fa-font"></i><span class="title">显示模式</span></a>
+
+        <a data-toggle="tooltip" data-placement="right" data-original-title="设置" data-container="div.expanded" href="/settings">
+          <i class="fa fa-cogs"></i><span class="title">设置</span>
+</a>
+        <a data-toggle="tooltip" data-placement="right" data-original-title="登 出" data-container="div.expanded" rel="nofollow" data-method="delete" href="/sign_out">
+          <i class="fa fa-sign-out"></i><span class="title">登 出</span>
+</a>
+          </div>
+  </div>
+
+  
+    <div class="fixed-btn">
+    <a class="go-top hide-go-top" href="#"> <i class="fa fa-angle-up"></i></a>
+    <a class="qrcode" data-target="#bottom-qrcode" data-toggle="modal" href="javascript:void(0)"><i class="fa fa-qrcode"></i></a>
+    <a class="writer" href="/writer#/" data-toggle="tooltip" data-placement="left" title="写篇文章"><i class="fa fa-pencil"></i></a>
+    <!-- qrcode modal -->
+    <div id="bottom-qrcode" class="modal panel-modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <h4>下载简书移动应用</h4>
+      <div class="panel-body"><img src="http://cdn0.jianshu.io/assets/app-page/download-app-qrcode-85008f146773a25ce86bcc4d7858af68.png" alt="Download app qrcode" /></div>
+    </div>
+  </div>
+
+
+  <div id="show-note-container">
+    
+
+<div class="post-bg" id="flag">
+  <div class="wrap-btn">
+    <!-- Notebook and collections button upper left -->
+      <div class="article-related pull-left">
+          <a class="collection-menu-btn" data-toggle="modal" data-target="#collection-menu" href="javascript:void(null);">
+            <i class="fa fa-th"></i>
+</a>          <a class="notebooks-menu-btn" data-toggle="modal" data-target="#notebooks-menu" href="javascript:void(null);"><i class="fa fa-list-ul"></i></a>
+        <div class="related-avatar-group activities"></div>
+      </div>
+    <!-- ******* -->
+
+      <a class="user avatar" data-toggle="dropdown" href="javascript:void(0)">
+    <img src="http://cdn-qn0.jianshu.io/assets/default_avatar/6-c3a19bc117a55e66cd3be55684d8191c.jpg" alt="6" /> <b class="caret"></b>
+</a>  <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dLabel">
+    <li>
+  <a href="/writer#/"><i class="fa fa-pencil"></i> 写文章</a>
+</li>
+<li>
+  <a target="_blank" href="/users/818c189c4b8a"><i class="fa fa-user"></i> 我的主页</a>
+</li>
+  <li>
+    <a href="/favourites">
+      <i class="fa fa-heart"></i> 我喜欢的
+</a>  </li>
+  <li>
+    <a href="/bookmarks">
+      <i class="fa fa-bookmark"></i> 我的收藏
+</a>  </li>
+  <li>
+    <a href="/notifications">
+      <i class="fa fa-bell"></i> 提醒
+</a>  </li>
+  <li>
+    <a href="/chats">
+      <i class="fa fa-envelope"></i> 简信
+</a>  </li>
+  <li><a href="/settings"><i class="fa fa-cogs"></i> 设置</a></li>
+  <li>
+    <a href="/wallet">
+      <i class="fa fa-credit-card"></i> 钱包
+</a>  </li>
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="#"><i class="fa fa-question-circle"></i> 帮助</a>
+    <ul class="dropdown-menu">
+      <li><a href="http://www.jianshu.com/notebooks/547/latest" target="_blank">帮助中心</a></li>
+      <li><a target="_blank" href="/contact">联系我们</a></a></li>
+    </ul>
+  </li>
+  <li>
+    <a rel="nofollow" data-method="DELETE" href="/sign_out">
+      <i class="fa fa-sign-out"></i> 登 出
+</a>  </li>
+
+  </ul>
+
+
+    <!-- Buttons upper right -->
+      <div class="btn-group editor-article">
+                  <a class='daytime set-view-mode' href='javascript:void(0)'><i class="fa fa-moon-o"></i></a>
+        <span>
+          
+          
+          
+
+            <a data-type="json" data-mcomponent="easy-bookmark" class="bookmark" data-remote="true" rel="nofollow" data-method="post" href="/notes/1514498/bookmark">
+    <i class="fa fa-bookmark-o"></i><span>收藏文章</span>
+</a>
+        </span>
+      </div>
+    <!-- ******* -->
+  </div>
+
+  <div class="container">
+    <!-- Article activities for width under 768px -->
+    <div class="related-avatar-group activities"></div>
+      <div class="article">
+        <div class="preview">
+          <div class="author-info">
+              <div class="btn btn-small btn-success follow" id="follow_user_44867">
+    <a data-type="json" data-user-slug="13b41d7608dc" data-remote="true" rel="nofollow" data-method="post" href="/users/13b41d7608dc/toggle_like"><i class="fa fa-plus"></i>  <span>添加关注</span></a>
+  </div>
+
+            <a class="avatar" href="/users/13b41d7608dc">
+              <img src="http://upload.jianshu.io/users/upload_avatars/44867/accbfea2d804.jpg?imageMogr/thumbnail/90x90/quality/100" alt="100" />
+</a>            <span class="label">
+                作者
+            </span>
+            <a class="author-name blue-link" href="/users/13b41d7608dc">
+              <span>一不</span>
+</a>              <span data-toggle='tooltip' data-original-title='最后编辑于 2015.05.24 09:25'>2015.05.24 09:25*</span>
+            <div>
+              <span>写了6981字</span>，<span>被197人关注</span>，<span>获得了186个喜欢</span>
+            </div>
+          </div>
+          <h1 class="title">iOS异步图片加载优化与常用开源库分析</h1>
+          <div class="meta-top">
+            <span class="wordage"></span>
+            <span class="views-count"></span>
+            <span class="comments-count"></span>
+            <span class="likes-count"></span>
+          </div>
+
+          <!-- Collection/Bookmark/Share for width under 768px -->
+          <div class="article-share"></div>
+          <!-- -->
+
+          <div class="show-content"><h1>1. 网络图片显示大体步骤:</h1>
+<ol>
+<li>下载图片</li>
+<li>图片处理（裁剪，边框等)</li>
+<li>写入磁盘</li>
+<li>从磁盘读取数据到内核缓冲区</li>
+<li>从内核缓冲区复制到用户空间(内存级别拷贝)</li>
+<li>解压缩为位图（耗cpu较高）</li>
+<li>如果位图数据不是字节对齐的，<code>CoreAnimation</code>会<code>copy</code>一份位图数据并进行字节对齐</li>
+<li>
+<code>CoreAnimation</code>渲染解压缩过的位图</li>
+</ol>
+<blockquote><p>以上4，5，6，7，8步是在<code>UIImageView</code>的<code>setImage</code>时进行的，所以默认在主线程进行(iOS UI操作必须在主线程执行)。</p></blockquote>
+<h1>2. 一些优化思路：</h1>
+<ul>
+<li>异步下载图片</li>
+<li>image解压缩放到子线程</li>
+<li>使用缓存 (包括内存级别和磁盘级别)</li>
+<li>存储解压缩后的图片，避免下次从磁盘加载的时候再次解压缩</li>
+<li>减少内存级别的拷贝 （针对第5点和第7点）</li>
+<li>良好的接口（比如<code>SDWebImage</code>使用<code>category</code>）</li>
+<li>
+<code>Core Data</code> vs  <a href="http://biasedbit.com/filesystem-vs-coredata-image-cache/" target="_blank">文件存储</a>
+</li>
+<li>图片预下载</li>
+</ul>
+<h2>2.1 关于异步图片下载:</h2>
+<p><code>fastImageCache</code>主要针对于从磁盘文件读取并展示图片的极端优化，所以并没有集成异步图片下载的功能。这里主要来看看SDWebImage(AFNetWorking的基本类似)的实现方案：</p>
+<h3>tableView中，异步图片下载任务的管理:</h3>
+<p>我们知道，tableViewCell是有重用机制的，也就是说，内存中只有当前可见的cell数目的实例，滑动的时候，新显示cell会重用被滑出的cell对象。这样就存在一个问题：</p>
+<p>一般情况下在我们会在cellForRow方法里面设置cell的图片数据源，也就是说如果一个cell的imageview对象开启了一个下载任务，这个时候该cell对象发生了重用，新的image数据源会开启另外的一个下载任务，由于他们关联的imageview对象实际上是同一个cell实例的imageview对象，就会发生2个下载任务回调给同一个imageview对象。这个时候就有必要做一些处理，避免回调发生时，错误的image数据源刷新了UI。</p>
+<p><strong>SDWebImage提供的UIImageView扩展的解决方案：</strong>  </p>
+<p>imageView对象会关联一个下载列表（列表是给AnimationImages用的，这个时候会下载多张图片），当tableview滑动，imageView重设数据源（url）时，会cancel掉下载列表中所有的任务，然后开启一个新的下载任务。这样子就保证了只有当前可见的cell对象的imageView对象关联的下载任务能够回调，不会发生image错乱。 </p>
+<p>同时，SDWebImage管理了一个全局下载队列（在DownloadManager中）,并发量设置为6.也就是说如果可见cell的数目是大于6的，就会有部分下载队列处于等待状态。而且，在添加下载任务到全局的下载队列中去的时候，SDWebImage默认是采取<code>LIFO</code>策略的，具体是在添加下载任务的时候，将上次添加的下载任务添加依赖为新添加的下载任务。</p>
+<pre><code>        [wself.downloadQueue addOperation:operation];
+        if (wself.executionOrder == SDWebImageDownloaderLIFOExecutionOrder) {
+            // Emulate LIFO execution order by systematically adding new operations as last operation's dependency
+            [wself.lastAddedOperation addDependency:operation];
+            wself.lastAddedOperation = operation;
+        }</code></pre>
+<p>&lt;!--所以在运行SDWebImage的demo的时候，可以看到，如果快速滑下去，然后又滑回来的话，图片是过了一会才显示出来，这是因为快速滑动的时候，旧数据源的下载任务被取消掉了。  --&gt;
+</p>
+<p><strong>另外一种解决方案是：</strong>  </p>
+<p>imageView对象和图片的url相关联，在滑动时，不取消旧的下载任务，而是在下载任务完成回调时，进行url匹配，只有匹配成功的image会刷新imageView对象，而其他的image则只做缓存操作，而不刷新UI。  </p>
+<p>同时，仍然管理一个执行队列，为了避免占用太多的资源，通常会对执行队列设置一个最大的并发量。此外，为了保证<code>LIFO</code>的下载策略，可以自己维持一个等待队列，每次下载任务开始的时候，将后进入的下载任务插入到等待队列的前面。</p>
+<h3>iOS异步任务一般有3种实现方式:</h3>
+<ul>
+<li>NSOperationQueue</li>
+<li>GCD</li>
+<li>NSThread</li>
+</ul>
+<p>这几种方式就不细说了，SDWebImage是通过自定义NSOperation来抽象下载任务的，并结合了GCD来做一些主线程与子线程的切换。具体异步下载的实现，AFNetworking与SDWebImage都是十分优秀的代码，有兴趣的可以深入看看源码。</p>
+<h2>2.2 关于图片解压缩:</h2>
+<p>&lt;!--### 图片来源
+针对app自带的图片，xcode在编译的时候会对png图片进行[优化](http://outofmemory.cn/wr/?u=http%3A%2F%2Fartori.us%2Foptimized-png-in-xcode%2F)（据说是通过[pngcrush](http://pmt.sourceforge.net/pngcrush/)这个开源的工具来优化），这样在显示的时候就会有一些比较好的体验。  
+对于从internet上面下载的图片，多数情况下，是需要做解压缩后，才能渲染到屏幕上的。  
+--&gt;
+</p>
+<h3>通用的解压缩方案</h3>
+<blockquote><p>主体的思路是在子线程，将原始的图片渲染成一张的新的可以字节显示的图片，来获取一个解压缩过的图片。  </p></blockquote>
+<p>基本上比较流行的一些开源库都先后支持了在异步线程完成图片的解压缩，并对解压缩过后的图片进行缓存。  </p>
+<p>这么做的优点是在<code>setImage</code>的时候系统省去了上面的第6步，缺点就是图片占用的空间变大。<br>比如1张50*50像素的图片，在<code>retina</code>的屏幕下所占用的空间为100*100*4 ~ 40KB</p>
+<p>下面的代码是<code>SDWebImage</code>的解决方案:</p>
+<pre><code>+ (UIImage *)decodedImageWithImage:(UIImage *)image {
+    if (image.images) {
+        // Do not decode animated images
+        return image;
+    }
+
+    CGImageRef imageRef = image.CGImage;
+    CGSize imageSize = CGSizeMake(CGImageGetWidth(imageRef), CGImageGetHeight(imageRef));
+    CGRect imageRect = (CGRect){.origin = CGPointZero, .size = imageSize};
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+
+    int infoMask = (bitmapInfo &amp; kCGBitmapAlphaInfoMask);
+    BOOL anyNonAlpha = (infoMask == kCGImageAlphaNone ||
+            infoMask == kCGImageAlphaNoneSkipFirst ||
+            infoMask == kCGImageAlphaNoneSkipLast);
+
+    // CGBitmapContextCreate doesn't support kCGImageAlphaNone with RGB.
+    // https://developer.apple.com/library/mac/#qa/qa1037/_index.html
+    if (infoMask == kCGImageAlphaNone &amp;&amp; CGColorSpaceGetNumberOfComponents(colorSpace) &gt; 1) {
+        // Unset the old alpha info.
+        bitmapInfo &amp;= ~kCGBitmapAlphaInfoMask;
+
+        // Set noneSkipFirst.
+        bitmapInfo |= kCGImageAlphaNoneSkipFirst;
+    }
+            // Some PNGs tell us they have alpha but only 3 components. Odd.
+    else if (!anyNonAlpha &amp;&amp; CGColorSpaceGetNumberOfComponents(colorSpace) == 3) {
+        // Unset the old alpha info.
+        bitmapInfo &amp;= ~kCGBitmapAlphaInfoMask;
+        bitmapInfo |= kCGImageAlphaPremultipliedFirst;
+    }
+
+    // It calculates the bytes-per-row based on the bitsPerComponent and width arguments.
+    CGContextRef context = CGBitmapContextCreate(NULL,
+            imageSize.width,
+            imageSize.height,
+            CGImageGetBitsPerComponent(imageRef),
+            0,
+            colorSpace,
+            bitmapInfo);
+    CGColorSpaceRelease(colorSpace);
+
+    // If failed, return undecompressed image
+    if (!context) return image;
+
+    CGContextDrawImage(context, imageRect, imageRef);
+    CGImageRef decompressedImageRef = CGBitmapContextCreateImage(context);
+
+    CGContextRelease(context);
+
+    UIImage *decompressedImage = [UIImage imageWithCGImage:decompressedImageRef scale:image.scale orientation:image.imageOrientation];
+    CGImageRelease(decompressedImageRef);
+    return decompressedImage;
+}</code></pre>
+<h2>2.3 关于字节对齐</h2>
+<p>SDWebImage与AFNetworking都没有对第7点做优化，FastImageCache相对与其他的开源库，则对第5点与第7点做了优化。这里我们谈谈第七点，关于图片数据的字节对齐。</p>
+<blockquote>
+<p>Core Animation在某些情况下渲染前会先拷贝一份图像数据，通常是在图像数据非字节对齐的情况下会进行拷贝处理，官方文档没有对这次拷贝行为作说明，模拟器和Instrument里有高亮显示“copied images”的功能，但似乎它有bug，即使某张图片没有被高亮显示出渲染时被copy，从调用堆栈上也还是能看到调用了CA::Render::copy_image方法：</p>
+<p>那什么是字节对齐呢，按我的理解，为了性能，底层渲染图像时不是一个像素一个像素渲染，而是一块一块渲染，数据是一块块地取，就可能遇到这一块连续的内存数据里结尾的数据不是图像的内容，是内存里其他的数据，可能越界读取导致一些奇怪的东西混入，所以在渲染之前CoreAnimation要把数据拷贝一份进行处理，确保每一块都是图像数据，对于不足一块的数据置空。大致图示：(pixel是图像像素数据，data是内存里其他数据)</p>
+<p>块的大小应该是跟CPU cache line有关，ARMv7是32byte，A9是64byte，在A9下CoreAnimation应该是按64byte作为一块数据去读取和渲染，让图像数据对齐64byte就可以避免CoreAnimation再拷贝一份数据进行修补。FastImageCache做的字节对齐就是这个事情。</p>
+</blockquote>
+<div class="image-package">
+<img src="http://luoyibu.qiniudn.com/VZB3Qn.png" alt=""><br><div class="image-caption"></div>
+</div>
+<p>从代码上来看，主要是在创建上图解码的过程中，<code>CGBitmapContextCreate</code>函数的<code>bytesPerRow</code>参数必须传<strong>64的倍数</strong>。</p>
+<p>比较各个开源框架的代码，可以看到SDWebImage与AFNetworking的该参数都传的是0，即让系统自动来计算该值（那为何系统自动计算的时候不让图片数据字节就字节对齐呢？）。</p>
+<h2>2.4 关于第3，4点，内存级别拷贝</h2>
+<p>以上3个开源库中，FastImageCache对这一点做了很大的优化，其他的2个开源库则未关注这一点。这一块木有深入研究，就引用一下FastImageCache团队对该点的一些说明。有能力的可以去看看原文章(英文):<a href="https://github.com/path/FastImageCache" target="_blank">here</a>。</p>
+<blockquote>
+<p>内存映射<br>平常我们读取磁盘上的一个文件，上层API调用到最后会使用系统方法read()读取数据，内核把磁盘数据读入内核缓冲区，用户再从内核缓冲区读取数据复制到用户内存空间，这里有一次内存拷贝的时间消耗，并且读取后整个文件数据就已经存在于用户内存中，占用了进程的内存空间。</p>
+<p>FastImageCache采用了另一种读写文件的方法，就是用<code>mmap</code>把文件映射到用户空间里的虚拟内存，文件中的位置在虚拟内存中有了对应的地址，可以像操作内存一样操作这个文件，相当于已经把整个文件放入内存，但在真正使用到这些数据前却不会消耗物理内存，也不会有读写磁盘的操作，只有真正使用这些数据时，也就是图像准备渲染在屏幕上时，虚拟内存管理系统VMS才根据缺页加载的机制从磁盘加载对应的数据块到物理内存，再进行渲染。这样的文件读写文件方式少了数据从内核缓存到用户空间的拷贝，效率很高。</p>
+</blockquote>
+<h2>2.5 关于第二步图片处理（裁剪，边框等）</h2>
+<p>一般情况下，对于下载下来的图片我们可能想要做一些处理，比如说做一些缩放，裁剪，或者添加圆角等等。  </p>
+<p>对于比较通用的缩放，或者圆角等功能，可以集成到控件本身。不过，提供一个接口出来，让使用者能够有机会对下载下来的图片做一些其他的特殊处理是有必要的。</p>
+<pre><code>/** SDWebImage
+ * Allows to transform the image immediately after it has been downloaded and just before to cache it on disk and memory.
+ * NOTE: This method is called from a global queue in order to not to block the main thread.
+ *
+ * @param imageManager The current `SDWebImageManager`
+ * @param image        The image to transform
+ * @param imageURL     The url of the image to transform
+ *
+ * @return The transformed image object.
+ */
+- (UIImage *)imageManager:(SDWebImageManager *)imageManager transformDownloadedImage:(UIImage *)image withURL:(NSURL *)imageURL;</code></pre>
+<h2>2.6 其他（诸如图片预下载，gif支持等等,下载进度条）</h2>
+<p>待补充</p>
+<h1>3. 常用的开源库对比</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">tip</th>
+<th style="text-align:center">SDWebImage</th>
+<th style="text-align:center">AFNetworking</th>
+<th style="text-align:center">FastImageCache </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"> 异步下载图片</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">NO</td>
+</tr>
+<tr>
+<td style="text-align:center"> 子线程解压缩</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+</tr>
+<tr>
+<td style="text-align:center"> 子线程图片处理(缩放，圆角等)</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+</tr>
+<tr>
+<td style="text-align:center"> 存储解压缩后的位图</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+</tr>
+<tr>
+<td style="text-align:center"> 内存级别缓存</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+</tr>
+<tr>
+<td style="text-align:center"> 磁盘级别缓存</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">YES</td>
+</tr>
+<tr>
+<td style="text-align:center"> UIImageView category</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">NO</td>
+</tr>
+<tr>
+<td style="text-align:center"> 减少内存级别的拷贝</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">YES</td>
+</tr>
+<tr>
+<td style="text-align:center"> 接口易用性</td>
+<td style="text-align:center"><em>*</em></td>
+<td style="text-align:center"><em>*</em></td>
+<td style="text-align:center">*</td>
+</tr>
+</tbody>
+</table>
+<h4>参考资料</h4>
+<ol>
+<li>
+<a href="https://github.com/path/FastImageCache" target="_blank">FastImageCache-github</a>  </li>
+<li><a href="https://github.com/rs/SDWebImage" target="_blank">SDWebImage-github</a></li>
+<li>
+<a href="https://github.com/AFNetworking/AFNetworking" target="_blank">AFNetworking-github</a> </li>
+<li>
+<a href="http://biasedbit.com/filesystem-vs-coredata-image-cache/" target="_blank">File System vs Core Data: the image cache test</a>  </li>
+<li>
+<a href="https://bpoplauschi.wordpress.com/2014/03/21/ios-image-caching-sdwebimage-vs-fastimage/" target="_blank">iOS image caching. Libraries benchmark (SDWebImage vs FastImageCache)</a>  </li>
+<li><a href="http://www.cocoanetics.com/2011/10/avoiding-image-decompression-sickness/" target="_blank">Avoiding Image Decompression Sickness</a></li>
+<li><a href="http://blog.cnbang.net/tech/2578/?utm_source=tuicool" target="_blank">iOS图片加载速度极限优化—FastImageCache解析</a></li>
+</ol>
+<hr>
+<p>转载请注明出处哦，我的博客: <a href="http://www.luoyibu.com" target="_blank">luoyibu</a></p>
+</div>
+        </div>
+      </div>
+
+      <div class="visitor_edit">
+        <!-- further readings -->
+        <div id="further-readings" data-user-slug="818c189c4b8a" data-user-nickname="818c189c4b8a">
+          <div id="further-reading-line" class="hide further-reading-line"></div>
+          <ul id="further-readings-list" class="reading-list unstyled"></ul>
+          <div id="further-reading-new" class="reading-edit">
+              <a id="further-reading-new-prompt" href="javascript:void(null)">
+                <i class="fa fa-plus-circle"></i> 推荐拓展阅读
+</a>            <div id="further-reading-form"></div>
+          </div>
+        </div>
+        <div class="pull-right">
+          <!-- abuse report -->
+          <div id="abuse-report" class="report_article dropdown pull-right" data-js-module="report">
+              <a data-toggle="dropdown" href="#"><i class="fa fa-flag-o"></i> 举报文章</a>
+              <ul class="dropdown-menu arrow-top">
+                <li><a data-type="json" data-remote="true" rel="nofollow" data-method="post" href="/notes/1514498/abuse_reports?type=ad">广告及垃圾信息</a></li>
+                <li><a data-type="json" data-remote="true" rel="nofollow" data-method="post" href="/notes/1514498/abuse_reports?type=plagiarism">抄袭或未授权转载</a></li>
+                <li><a data-toggle="modal" data-url="/notes/1514498/abuse_reports" href="#report-modal">其他</a></li>
+              </ul>
+          </div>
+          <!-- copyright -->
+          <div class="author-copyright pull-right" data-toggle="tooltip" data-html="true" title="转载请联系作者获得授权，并标注“简书作者”。">
+            <a><i class="fa fa-copyright"></i> 著作权归作者所有</a>
+          </div>
+        </div>   
+      </div>
+
+      <!-- Reward / Support Author -->
+        <div class="support-author">
+          <p>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</p>
+            <a class="btn btn-pay" data-toggle="modal" href="#pay-modal">¥ 打赏支持</a>
+          <div class="avatar-list"></div>
+        </div>
+
+      <!-- article meta bottom -->
+      <div class="meta-bottom clearfix">
+        <!--  Like Button -->
+        <div class="like ">
+            <div class="like-button">
+              <a class="like-content" data-remote="true" rel="nofollow" data-method="post" href="/notes/1514498/like">
+                <i class="fa fa-heart-o"></i>  喜欢
+</a></div>          <span id="likes-count" data-toggle="tooltip" data-placement="right" title="查看所有喜欢的用户">
+            <i class="fa fa-spinner fa-pulse"></i>
+</span>        </div>
+        <!--  share group -->
+        <div class="share-group pull-right">
+          <a href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;http://cwb.assets.jianshu.io/notes/images/1514498/weibo/image_c14da4f66814.jpg&#39;, &#39;推荐 @luoyibu 的文章《iOS异步图片加载优化与常用开源库分析》（ 分享自 @简书 ）&#39;,&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-name="weibo">
+            <i class="fa fa-weibo"></i><span>分享到微博</span>
+          </a>
+          <a data-toggle="modal" href="#share-weixin-modal" data-name="weixin">
+            <i class="fa fa-weixin"></i><span>分享到微信</span>
+          </a>
+          <div class="more">
+            <a href="javascript:void(0)" data-toggle="dropdown">更多分享<i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu arrow-top">
+                <li><a href="http://cwb.assets.jianshu.io/notes/images/1514498/weibo/image_c14da4f66814.jpg" target="_blank" data-name="changweibo"><i class="fa fa-arrow-circle-o-down"></i> 下载长微博图片</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://share.v.t.qq.com/index.php?c=share&amp;a=index&amp;url=&#39;+e(&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 一不 的文章《iOS异步图片加载优化与常用开源库分析》（ 分享自 @jianshuio ）&#39;),x=function(){if(!window.open(r,&#39;tweibo&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="tweibo"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/tweibo.png">分享到腾讯微博</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 一不 的文章《iOS异步图片加载优化与常用开源库分析》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="qzone"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/qzone.png">分享到QQ空间</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 一不 的文章《iOS异步图片加载优化与常用开源库分析》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="twitter"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/twitter.png">分享到Twitter</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://www.facebook.com/sharer.php?s=100&amp;p[url]=&#39;+e(&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;)+&#39;&amp;p[title]=&#39;+e(&#39;iOS异步图片加载优化与常用开源库分析 - 简书社&#39;)+&#39;&amp;p[summary]=&#39;+e(&#39;推荐 一不 的文章《iOS异步图片加载优化与常用开源库分析》&#39;),x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="facebook"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/facebook.png">分享到Facebook</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="google_plus"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/google_plus.png">分享到Google+</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://widget.renren.com/dialog/share?resourceUrl=&#39;+e(&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;)+&#39;&amp;description=&#39;+e(&#39;推荐 一不 的文章《iOS异步图片加载优化与常用开源库分析》&#39;)+&#39;&amp;title=&#39;+e(&#39;iOS异步图片加载优化与常用开源库分析&#39;),x=function(){if(!window.open(r,&#39;renren&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();" data-name="renren"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/renren.png">分享到人人网</a></li>
+                <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;http://www.jianshu.com/p/3b2c95e1404f&#39;)+&#39;&amp;title=&#39;+e(&#39;iOS异步图片加载优化与常用开源库分析&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()" data-name="douban"><img src="http://baijii-common.b0.upaiyun.com/social_icons/32x32/douban.png">分享到豆瓣</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modals -->
+      <div id="share-weixin-modal" class="modal hide fade share-weixin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+  <div class="modal-body">
+    <h5>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</h5>
+  </div>
+</div>
+
+      <div id="contribute-modal" tabindex="-1" class="arrow-top user-editor-actions modal hide fade">
+  <div class="modal-header">
+    <b>
+      添加到我管理的专题
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    </b>
+  </div>
+  <div class="modal-body">
+    <div class="search">
+      <input type="text" name="search_term" id="search_term" class="input-large search-query" placeholder="搜索我管理的专题" data-search-collections-url="/collections/search?note_id=1514498" />
+    </div>
+    <ul class="add-list"></ul>
+  </div>
+</div>
+
+      <div id="notebooks-menu" class="panel notebooks-menu arrow-top modal hide fade"><img class="loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" alt="Tiny" /></div>
+      <div id="collection-menu" class="panel collection-menu arrow-top modal hide fade"><img class="loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" alt="Tiny" /></div>
+      
+      <div id="likes-modal" class="modal modal_new support_list-modal fullscreen hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>喜欢的用户</h3>
+      </div>
+      <div class="modal-body">
+        <ul class="unstyled users">
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Comments -->
+    <div id="comments" class="comment-list clearfix">
+        <div class="comment-head clearfix">
+          4条评论
+          <span class="order">
+            （
+            <a data-order="asc" class="active" href="javascript:void(0)">按时间正序</a>·
+            <a data-order="desc" href="javascript:void(0)">按时间倒序</a>·
+            <a data-order="likes_count" href="javascript:void(0)">按喜欢排序</a>
+            ）
+          </span>
+            <a href="javascript:void(null)" class="goto-comment pull-right"><i class="fa fa-pencil"></i>添加新评论</a>
+        </div>
+        <div id="comment-list">
+          <img class="loader-tiny" src="http://baijii-common.b0.upaiyun.com/loaders/tiny.gif" alt="Tiny" />
+        </div>
+          <form class="new_comment" id="new_comment" data-type="json" action="/notes/1514498/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+    <div class="comment-text">
+      <textarea maxlength="2000" placeholder="写下你的评论…" class="mousetrap" name="comment[content]" id="comment_content">
+</textarea>
+      <div>
+        <input type="submit" name="commit" value="发 表" class="btn btn-info" data-disable-with="提交中..." />
+          <div class="emoji">
+    <a href="#emoji-modal" data-toggle="modal"><i class="fa fa-smile-o"></i></a>
+    <div id="emoji-modal" class="emoji-modal arrow-top hide" tabindex="-1" aria-hidden="true">
+      <ul id="emojiTab" class="emoji-nav-tabs modal-header">
+          <li class="active"><a href="#emoji-pane-1" data-toggle="tab">1</a></li>
+          <li class=""><a href="#emoji-pane-2" data-toggle="tab">2</a></li>
+          <li class=""><a href="#emoji-pane-3" data-toggle="tab">3</a></li>
+          <li class=""><a href="#emoji-pane-4" data-toggle="tab">4</a></li>
+      </ul>
+      <div id="emojiTabContent" class="tab-content">
+          <div class="tab-pane fade active in" id="emoji-pane-1">
+          <ul>
+          </ul>
+        </div>
+          <div class="tab-pane fade  in" id="emoji-pane-2">
+          <ul>
+          </ul>
+        </div>
+          <div class="tab-pane fade  in" id="emoji-pane-3">
+          <ul>
+          </ul>
+        </div>
+          <div class="tab-pane fade  in" id="emoji-pane-4">
+          <ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+          <span class="hotkey">⌘+Return 发表</span>
+        <span class="warning" style="display: none"><i class="fa fa-exclamation-circle"></i><span class="warning-text"></span></span>
+      </div>
+    </div>
+</form>
+    </div>
+    <!-- -->
+
+  </div>
+
+  <script type='application/json' data-name='note'>
+    {"id":1514498,"abbr":"网络图片显示大体步骤:下载图片图片处理（裁剪，边框等)写入磁盘从磁盘读取数据到内核缓冲区从内核缓冲区复制到用户空间(内存级别拷贝)解压缩为位图（耗cpu较高）如果位图数据不是字节对齐的，CoreAnimation会copy一份位图数据并进行...","slug":"3b2c95e1404f","url":"http://www.jianshu.com/p/3b2c95e1404f","image_url":"http://cwb.assets.jianshu.io/notes/images/1514498/weibo/image_c14da4f66814.jpg","wordage":3043,"has_further_readings":false,"views_count":20846,"likes_count":111,"comments_count":4,"rewards_total_count":0}
+  </script>
+
+  <script type='application/json' data-name='uuid'>
+    {"uuid":"f97f7cd0-df8c-0133-06a2-52540095852f"}
+  </script>
+
+  <script type='application/json' data-name='author'>
+    {"id":44867,"nickname":"一不","slug":"13b41d7608dc","public_notes_count":3,"followers_count":197,"total_likes_count":186,"is_current_user":false,"is_signed_author":false}
+  </script>
+
+    <script type='application/json' data-name='current-user'>
+      {"id":1296229,"slug":"818c189c4b8a","nickname":"818c189c4b8a","avatar_url":"http://cdn-qn0.jianshu.io/assets/default_avatar/6-c3a19bc117a55e66cd3be55684d8191c.jpg","blocked_by_author":false,"blocked_user_ids":[],"balance_in_cent":0,"is_a_collection_editor":false}
+    </script>
+
+    <script type='application/json' data-name='comment-participants'>
+      []
+    </script>
+
+
+
+    <div class="include-collection">
+      <div class="content">
+        <h5>被以下专题收入，发现更多相似内容：</h5>
+        <ul id="all-collections" class="unstyled collections-list">
+            <li>
+              <a class="avatar" href="/collection/bDHhpK"><img src="http://upload.jianshu.io/collections/images/47/rdn_4ddb18fddd2e9_%281%29.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/180" alt="180" /></a>              <div class="collections-info">
+                <h5>
+                  <a href="/collection/bDHhpK">首页投稿</a>
+                </h5>
+                
+  <div class="btn btn-success follow" id=subscribe_collection_47>
+    <a data-type="json" data-collection-id="47" data-remote="true" rel="nofollow" data-method="post" href="/collections/47/subscribe">
+      <i class="fa fa-fw fa-plus"></i>  <span>添加关注</span>
+</a>    <span>87.7K</span>
+  </div>
+
+                <p class="description">玩转简书的第一步，从这个专题开始。
+
+想上首页热门榜么？好内容想被更多人看到么？来投稿吧！如果被拒也不要灰心哦～入选文章会进一个队...</p>
+                <p>
+                  <a class="blue-link" href="/collection/bDHhpK">44590篇文章</a> · 87710人关注
+                </p>
+              </div>
+            </li>
+            <li>
+              <a class="avatar" href="/collection/19dbe28002a3"><img src="http://upload.jianshu.io/collections/images/6919/c4409daa19d59b1950bf3bed66a49495.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/180" alt="180" /></a>              <div class="collections-info">
+                <h5>
+                  <a href="/collection/19dbe28002a3">iOS开发技巧</a>
+                </h5>
+                
+  <div class="btn btn-success follow" id=subscribe_collection_6919>
+    <a data-type="json" data-collection-id="6919" data-remote="true" rel="nofollow" data-method="post" href="/collections/6919/subscribe">
+      <i class="fa fa-fw fa-plus"></i>  <span>添加关注</span>
+</a>    <span>12.7K</span>
+  </div>
+
+                <p class="description"> 【简介】
+专题内容主要包括OC、swift等涉及到iOS开发进阶的内容。
+swift可以关注下我的另一个专题：
+swift开发...</p>
+                <p>
+                  <a class="blue-link" href="/collection/19dbe28002a3">987篇文章</a> · 12783人关注
+                </p>
+              </div>
+            </li>
+            <li>
+              <a class="avatar" href="/collection/0f5e015fc36c"><img src="http://upload.jianshu.io/collections/images/2150/3.png?imageMogr2/auto-orient/strip|imageView2/2/w/180" alt="180" /></a>              <div class="collections-info">
+                <h5>
+                  <a href="/collection/0f5e015fc36c">代码改变世界</a>
+                </h5>
+                
+  <div class="btn btn-success follow" id=subscribe_collection_2150>
+    <a data-type="json" data-collection-id="2150" data-remote="true" rel="nofollow" data-method="post" href="/collections/2150/subscribe">
+      <i class="fa fa-fw fa-plus"></i>  <span>添加关注</span>
+</a>    <span>9.6K</span>
+  </div>
+
+                <p class="description">Write the Code, Change the World, 改变世界从编程开始, 收集编程相关的干货</p>
+                <p>
+                  <a class="blue-link" href="/collection/0f5e015fc36c">1566篇文章</a> · 9631人关注
+                </p>
+              </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+  <!-- Modal -->
+    <div class="modal pay-modal text-center hide fade" id="pay-modal">
+  <div class="modal-header clearfix">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <form id="new_reward" class="new_reward" target="_blank" action="/notes/1514498/rewards" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="6mrMD3C7blrec+4zTqD3hCwTu9TfIL6+X2s0qmMTZzE+S0ZlUKPjz0kWzRNHZ16t3tw8HzrHv76kpQ6lrmUvsw==" />
+    <div class="modal-body">
+      <a href="/users/13b41d7608dc">
+        <div class="avatar"><img src="http://upload.jianshu.io/users/upload_avatars/44867/accbfea2d804.jpg?imageMogr/thumbnail/90x90/quality/100" alt="100" /></div>
+</a>      <p><i class="fa fa-quote-left pull-left"></i>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！<i class="fa fa-quote-right pull-right"></i></p>
+      <div class="main-inputs text-left">
+        <div class="control-group">
+          <label for="reward_amount">打赏金额</label><i class="fa fa-yen"></i>
+          <input value="2.00" type="text" name="reward[amount_in_yuan]" id="reward_amount_in_yuan" />
+        </div>
+        <div class="control-group message">
+          <textarea placeholder="给Ta留言" name="reward[message]" id="reward_message">
+</textarea>
+        </div>
+      </div>
+      <div class="choose-pay text-left">
+        <h5>选择支付方式：</h5>
+        <div>
+          <label for="reward_channel_alipay">
+            <input type="radio" value="alipay" checked="checked" name="reward[channel]" id="reward_channel_alipay" />
+            <span class="alipay-bg"></span>
+</label>
+          <label for="reward_channel_balance">
+            <input type="radio" value="balance" name="reward[channel]" id="reward_channel_balance" />
+            简书余额（ 余额：¥ 0.00 ）
+</label>
+          <label for="reward_channel_wx_pub_qr">
+            <input type="radio" value="wx_pub_qr" name="reward[channel]" id="reward_channel_wx_pub_qr" />
+            微信支付
+</label>        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button name="button" type="submit" class="btn btn-large btn-pay">立即支付</button>
+    </div>
+</form></div>
+
+    <div class="modal success-pay text-center hide fade" id="success-pay">
+  <div class="modal-header clearfix">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <div class="modal-body">
+    <h3><i class="icon-ok"></i>打赏成功</h3>
+    <img src="http://cdn-qn0.jianshu.io/assets/complete-pay-25426877089eb23bd76d9d0e6aad89c1.png" alt="Complete pay" />
+  </div>
+  <div class="modal-footer">
+    <a class="blue-link" href="/wallet">查看打赏记录</a>
+  </div>
+</div>
+
+</div>
+  </div>
+  <div id="flash" class="hide"></div>
+  
+  <div id="view-mode-modal" tabindex="-1" class="modal hide read-modal" aria-hidden="false" data-js-module='view-mode-modal'>
+    <div class="btn-group change-background" data-toggle="buttons-radio">
+
+      <a class="btn btn-daytime active" data-mode="day" data-remote="true" rel="nofollow" data-method="put" href="/preferences?read_mode=day">
+        <i class="fa fa-sun-o"></i>
+</a>      <a class="btn btn-nighttime " data-mode="night" data-remote="true" rel="nofollow" data-method="put" href="/preferences?read_mode=night">
+        <i class="fa fa-moon-o"></i>
+</a>    </div>
+    <div class="btn-group change-font" data-toggle="buttons-radio">
+      <a class="btn font " data-font="font1" data-remote="true" rel="nofollow" data-method="put" href="/preferences?default_font=font1">宋体</a>
+      <a class="btn font hei active" data-font="font2" data-remote="true" rel="nofollow" data-method="put" href="/preferences?default_font=font2">黑体</a>
+    </div>
+    <div class="btn-group change-locale" data-toggle="buttons-radio">
+      <a class="btn font active" data-locale="zh-CN" data-remote="true" rel="nofollow" data-method="put" href="/preferences/set_locale?locale=zh-CN">简</a>
+      <a class="btn font hei " data-locale="zh-TW" data-remote="true" rel="nofollow" data-method="put" href="/preferences/set_locale?locale=zh-TW">繁</a>
+    </div>
+  </div>
+
+  <div id="report-modal" class="modal hide fade modal_report fullscreen" tabindex="-1" role="dialog"
+  aria-labelledby="reportModal" aria-hidden="true" data-js-module="report-modal">
+  <form id="report-form" data-type="json" action="javascript:void(0)" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+    <input type="hidden" name="type" id="type" value="other" />
+
+    <div class="modal-header">
+      <b>举报原因</b>
+    </div>
+    <div class="modal-body">
+      <textarea name="content" id="content" maxlength="2000" placeholder="写下你的举报原因...">
+</textarea>
+    </div>
+    <div class="modal-footer">
+      <a class="btn" data-dismiss="modal" aria-hidden="true" href="javascript:void(0)">取消</a>
+      <input type="submit" name="commit" value="确认" class="btn btn-info" />
+    </div>
+</form></div>
+
+
+  <script src="http://cdn-qn0.jianshu.io/assets/base-a98dff045a1c5a43531523085b1ed813.js"></script>
+  
+  <script src="http://cdn-qn0.jianshu.io/assets/reading-base-9132a81390eb5b2cc4f21734b0e9cd08.js"></script>
+  <script src="http://cdn-qn0.jianshu.io/assets/reading/module_sets/note_show-12e94137c3593b4c6278c57fead5ad33.js"></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35169517-1']);
+  _gaq.push(['_setCustomVar', 2, 'User Type', 'Member', 1 ]);
+  _gaq.push(['_trackPageview']);
+
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+</html>

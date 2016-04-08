@@ -19,5 +19,5 @@
 10. GCD实现原理
 11. Core Graphics 如何渲染 Layer 层
 12. 如何根据一条曲线，来获取到其对应的贝塞尔曲线
-
+13. 如何理解字节对齐( coreAnimation 如何通过 copy 对位图数据进行字节对齐的)
 

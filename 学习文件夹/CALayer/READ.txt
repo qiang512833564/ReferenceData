@@ -1,4 +1,5 @@
 图片可以通过CALayer去展示，
+大部分 layer 都是通过 GPU 去渲染的，不仅速度比 Core Graphic 快很多，而且避免了创建寄宿图
 
 优点：直接可以直接通过CALayer去对图片添加动画
 let imageMask = CALayer()
@@ -40,3 +41,7 @@ presentationLayer 是 modelLayer 的复制 mutablecopy
 CALayer类的概念与UIView非常类似，它也具有树形的层级关系，并且可以包含图片文本、背景色等。它与UIView最大的不同在于它不能响应用户交互，可以说它根本就不知道响应链的存在，它的 API 虽然提供了 “某点是否在图层范围内的方法—可以通过 -hitTest: 方法来判断指定图层是否被触摸”，但是它并不具有响应的能力。
 为什么我们能看到CALayer的内容呢，是因为CALayer内部有一个contents属性。contents默认可以传一个id类型的对象，但是只有你传CGImage的时候，它才能够正常显示在屏幕上。 所以最终我们的图形渲染落点落在contents身上
 contents也被称为寄宿图，除了给它赋值CGImage之外，我们也可以直接对它进行绘制，绘制的方法正是这次问题的关键，通过继承UIView并实现-drawRect:方法即可自定义绘制。-drawRect: 方法没有默认的实现，因为对UIView来说，寄宿图并不是必须的，UIView不关心绘制的内容。如果UIView检测到-drawRect:方法被调用了，它就会为视图分配一个寄宿图，这个寄宿图的像素尺寸等于视图大小乘以contentsScale(这个属性与屏幕分辨率有关，我们的画板程序在不同模拟器下呈现的内存用量不同也是因为它) 的值
+
+
+1.Layer的渲染架构
+Layer也和View一样存在着一个层级树状结构,称之为图层树(Layer Tree),直接创建的或者通过UIView获得的(view.layer)用于显示的图层树,称之为模型树(Model Tree),模型树的背后还存在两份图层树的拷贝,一个是呈现树(Presentation Tree),一个是渲染树(Render Tree). 呈现树可以通过普通layer(其实就是模型树)的layer.presentationLayer获得,而模型树则可以通过modelLayer属性获得(详情文档).模型树的属性在其被修改的时候就变成了新的值,这个是可以用代码直接操控的部分;呈现树的属性值和动画运行过程中界面上看到的是一致的.而渲染树是私有的,你无法访问到,渲染树是对呈现树的数据进行渲染,为了不阻塞主线程,渲染的过程是在单独的进程或线程中进行的,所以你会发现Animation的动画并不会阻塞主线程.
