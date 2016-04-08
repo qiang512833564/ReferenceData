@@ -23,4 +23,20 @@ imageShape.mask = imageMask
 通过，这种方式，shapeLayer获取的仅仅只是图片的path,或者说只是图形,另外，可以通过这种方式，改变图型的颜色
 
 
+CALayer 是一个连接用户界面（就是 MVC 中的 view）虚拟的类，
+        一个 CALayer 通常分为 modelLayer 、presentationLayer
+        可以对应 MVC 上，理解为：M（modelLayer模型层）V(presentationLayer呈现层)C(Core Graphics)
+其中需注意:
+       呈现图层仅仅当图层首次被提交（就是首次第一次在屏幕上显示）的时候创建，所以在那之前调用presentationLayer 将会返回 nil                                                                            
+       通常一个图层上调用 -modelLayer 会返回 -self (实际上我们已经创建的原始图层就是一种数据模型modelLayer)
 
+presentationLayer 是 modelLayer 的复制 mutablecopy
+
+实现 layer 层动画过程中，去响应点击事件：
+   1. 把 controller 的 view 修改为自定义的 view,然后在 view 的 hitTest 方法，监听 view 的点击事件，在判断 view 上点击的点，是否在 view 的子 layer 层上。
+   2. 注意，不要通过 touchesBegan 方法去监听，view 的点击，因为动画的过程中，view 是不能够处理事件的
+
+
+CALayer类的概念与UIView非常类似，它也具有树形的层级关系，并且可以包含图片文本、背景色等。它与UIView最大的不同在于它不能响应用户交互，可以说它根本就不知道响应链的存在，它的 API 虽然提供了 “某点是否在图层范围内的方法—可以通过 -hitTest: 方法来判断指定图层是否被触摸”，但是它并不具有响应的能力。
+为什么我们能看到CALayer的内容呢，是因为CALayer内部有一个contents属性。contents默认可以传一个id类型的对象，但是只有你传CGImage的时候，它才能够正常显示在屏幕上。 所以最终我们的图形渲染落点落在contents身上
+contents也被称为寄宿图，除了给它赋值CGImage之外，我们也可以直接对它进行绘制，绘制的方法正是这次问题的关键，通过继承UIView并实现-drawRect:方法即可自定义绘制。-drawRect: 方法没有默认的实现，因为对UIView来说，寄宿图并不是必须的，UIView不关心绘制的内容。如果UIView检测到-drawRect:方法被调用了，它就会为视图分配一个寄宿图，这个寄宿图的像素尺寸等于视图大小乘以contentsScale(这个属性与屏幕分辨率有关，我们的画板程序在不同模拟器下呈现的内存用量不同也是因为它) 的值

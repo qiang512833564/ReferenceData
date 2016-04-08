@@ -7,33 +7,69 @@
 //
 
 #import "ViewController.h"
+#import "View.h"
 
-@interface ViewController ()
+@interface ViewController ()<ViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *redView;
 @property (weak, nonatomic) IBOutlet UIView *greenView;
 @property (weak, nonatomic) IBOutlet UIView *blueView;
-@property (nonatomic, strong) UIView *test_view;
+@property (nonatomic, strong) View *test_view;
 @end
 
 @implementation ViewController
-
+#if 0
+- (void)loadView{
+    View * view = [[View alloc]init];
+    view.delegate = self;
+    view.backgroundColor = [UIColor whiteColor];
+    [view addSubview:self.redView];
+    [view addSubview:self.greenView];
+    [view addSubview:self.blueView];
+    self.view = view;
+}
+#endif
+- (void)touchAction:(CGPoint)point{
+    NSLog(@"%@",NSStringFromCGPoint(point));
+    NSLog(@"%@",[self.test_view.layer.presentationLayer hitTest:point]);
+    if ([self.test_view.layer.presentationLayer hitTest:point]) {
+        
+        self.test_view.backgroundColor = [UIColor yellowColor];
+    }else{
+        
+        //self.test_view.layer.position = point;
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.test_view = [[UIView alloc]init];
+    self.test_view = [[View alloc]init];
+//    self.test_view.userInteractionEnabled = NO;
     self.test_view.frame = CGRectMake(0, 0, 100, 100);
     self.test_view.center = CGPointZero;
     self.test_view.backgroundColor = [UIColor redColor];
     [self.view addSubview:_test_view];
     NSLog(@"%@----%@",self.test_view.layer,self.test_view.layer.presentationLayer);
     [UIView animateWithDuration:5.0f animations:^{
-        //self.test_view.center = CGPointMake(200, 400);
+        self.test_view.center = CGPointMake(200, 400);
     }];
     //CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:self selector:@selector(show)];
     //displaylink.frameInterval = 60;
     //[displaylink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    CGPoint point = [[touches anyObject]locationInView:self.view];
+    //NSLog(@"%@----%@----bool=%d",self.test_view.layer,self.test_view.layer.presentationLayer,self.test_view.layer == self.test_view.layer.presentationLayer);
+    NSLog(@"%@",[self.test_view.layer.presentationLayer hitTest:point]);
+    if ([self.test_view.layer.presentationLayer hitTest:point]) {
+        
+        self.test_view.backgroundColor = [UIColor yellowColor];
+    }else{
+        
+        //self.test_view.layer.position = point;
+    }
 }
 - (void)show{
     
@@ -57,6 +93,7 @@
      */
 }
 - (IBAction)beginAnimation:(UIButton *)sender {
+    
     NSLog(@"%@",NSStringFromCGRect(self.blueView.frame));
     CGPoint red_startPoint = self.redView.center;
     CGPoint blue_startPoint = self.blueView.center;
@@ -88,7 +125,7 @@
     NSNumber *fromValue = @500;
     NSNumber *toValue = @88;
     NSNumber *endValue = toValue;
-    
+   
     if(!sender.selected){
         animation.fromValue = @([fromValue intValue] - [toValue intValue]);
     }else{

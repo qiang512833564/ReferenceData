@@ -13,6 +13,7 @@
 		2938DC211CB6293E00C91C4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2938DC1F1CB6293E00C91C4F /* Main.storyboard */; };
 		2938DC231CB6293E00C91C4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2938DC221CB6293E00C91C4F /* Assets.xcassets */; };
 		2938DC261CB6293E00C91C4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2938DC241CB6293E00C91C4F /* LaunchScreen.storyboard */; };
+		295BEC281CB787240049FD57 /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 295BEC271CB787240049FD57 /* View.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		2938DC221CB6293E00C91C4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2938DC251CB6293E00C91C4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2938DC271CB6293E00C91C4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		295BEC261CB787240049FD57 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		295BEC271CB787240049FD57 /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				2938DC1A1CB6293E00C91C4F /* AppDelegate.m */,
 				2938DC1C1CB6293E00C91C4F /* ViewController.h */,
 				2938DC1D1CB6293E00C91C4F /* ViewController.m */,
+				295BEC261CB787240049FD57 /* View.h */,
+				295BEC271CB787240049FD57 /* View.m */,
 				2938DC1F1CB6293E00C91C4F /* Main.storyboard */,
 				2938DC221CB6293E00C91C4F /* Assets.xcassets */,
 				2938DC241CB6293E00C91C4F /* LaunchScreen.storyboard */,
@@ -149,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				295BEC281CB787240049FD57 /* View.m in Sources */,
 				2938DC1E1CB6293E00C91C4F /* ViewController.m in Sources */,
 				2938DC1B1CB6293E00C91C4F /* AppDelegate.m in Sources */,
 				2938DC181CB6293E00C91C4F /* main.m in Sources */,
@@ -300,6 +306,7 @@
 				2938DC2C1CB6293E00C91C4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
