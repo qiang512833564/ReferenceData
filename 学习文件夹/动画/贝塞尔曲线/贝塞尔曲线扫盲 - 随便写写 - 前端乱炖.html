@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="Shortcut Icon" href="http://htmljs.b0.upaiyun.com//images/logo.ico?123">
+    <link href="http://htmljs.b0.upaiyun.com//images/logo.ico?123" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/bootstrap.css?dddddddd" type="text/css">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/main.css?zdzjjddddddddddxdz" type="text/css">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/prettify.css?22" type="text/css">
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/glyphicons.css?2d2ddddddd" type="text/css">
+    <script src="http://htmljs.b0.upaiyun.com//js/jquery.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/htmljs.js?12ddd2ddeddddddd23"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/prettify.js?12"></script><meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="http://htmljs.b0.upaiyun.com//images/icon.png" rel="apple-touch-icon"/>
+    <meta name="keywords" content="前端, 前端开发, web前端, web前端开发, 前端开发工程师, 前端开发攻城师,设计, 开发, 前端资源, CSS, JavaScript, Ajax, jQuery, html,html5,css3,浏览器兼容, 前端开发工具, 前端招聘, jQuery API, CSS整形和优化工具 , JS压缩工具 , JS格式化工具 , CSS参考手册 ,HTML参考手册 , 多重搜索 , nodejs , node , boostrap , sublime"/>
+    <meta name="baidu-site-verification" content="OnKVgNu37S" />
+    <script>if($.browser.msie<8){alert("请不要使用ie浏览本站！本站不支持ie10以下浏览器。")}</script>
+    <title>贝塞尔曲线扫盲 - 随便写写 - 前端乱炖</title><meta name="description" content="相信很多同学都知道“贝塞尔曲线”这个词，我们在很多地方都能经常看到。但是，可能并不是每位同学都清楚地知道，到底什么是“贝塞尔曲线”，又是什么特点让它有这么高的知名度。贝塞尔曲线的数学基础是早在1912">
+    <style>
+      #bdshare a{}
+      .ad-blank{opacity:0.6;}
+    </style>
+    <script src="http://htmljs.b0.upaiyun.com//js/bootstrap/bootstrap-tooltip.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/bootstrap/bootstrap-scrollspy.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/tips.js?dddddddd"></script>
+    <link rel="stylesheet" href="http://htmljs.b0.upaiyun.com//css/tips.css?2dd2dddddddd" type="text/css">
+  </head>
+  <body id="article">
+    <div id="header">
+      <div class="wrapper clearfix"><a href="/" title="前端乱炖" class="logo"><span class="dun">炖</span></a>
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <div class="container">
+              <div class="nav-collapse collapse">
+                <ul class="nav left-nav">
+                  <li pageId="0" class=""><a href="/"><i class="icon-home"></i>首页</a></li>
+                  <li pageId="1" class="active"><a href="/article"><i class="icon-book-open"></i>专栏</a></li>
+                  <li pageId="7" class=""><a href="/qa"><i class="icon-lightbulb"></i>问答</a></li>
+                  <li pageId="10" class=""><a href="/topic"><i class="icon-group"></i>讨论区</a></li>
+                  <li pageId="20" class="hidden "><a href="/talk"><i class="icon-conversation"></i>实时讨论</a></li>
+                  <li pageId="15" class="hidden "><a href="/blog"><i class="icon-sampler"></i>博集</a></li>
+                  <li pageId="8" class="hidden "><a href="/tag">标签</a></li>
+                  <li pageId="2" class="hidden "><a href="/job"><i class="icon-leaf"></i>招聘</a></li>
+                  <li pageId="2" class=""><a href="/cards"><i class="icon-nameplate"></i>花名册</a></li>
+                  <li pageId="101" class=""><a href="http://www.jiankongbao.com/labs/http">免费性能测试</a></li>
+                  <li class="search">
+                    <form action="/search" method="get" style="margin:0;"><i class="icon-search"></i>
+                      <input id="keyword" type="text" name="q" placeholder="搜索全站、站外内容" class="span2 input-large">
+                    </form>
+                  </li>
+                  <li pageId="6" class="hidden "><a href="/book">免费送书</a></li>
+                </ul>
+                <ul class="right-nav">
+                  <li><a href="/user/login?redirect=%2Farticle%2F1628">登录</a></li>
+                  <li><a href="/talk"><i class="icon-conversation"></i>在线聊天</a></li>
+                  <li class="hidden sub-trigger"><a>其他功能</a>
+                    <ul class="sub-menu hidden">
+                      <li pageId="5" class=""><a href="/act">活动</a></li>
+                      <li pageId="9" class=""><a href="/tools"><i class="icon-classic-hammer hidden"></i>常用工具</a><span class="my-favs"></span></li>
+                      <li><a href="/talk">
+                           
+                          实时讨论</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $(".sub-trigger").mouseenter(function(){
+          $(".sub-menu",this).removeClass("hidden")
+          }).mouseleave(function(){
+          $(".sub-menu",this).addClass("hidden")
+          })
+        })       
+    </script>
+    <div id="content" class="clearfix">
+      <div class="daen"></div>
+      <ul class="breadcrumb hidden">
+        <li><a href="/">首页</a><span class="divider">/</span></li>
+        <li><a href="/article">所有专栏</a><span class="divider">/</span></li>
+        <li><a href="/article/column/738">随便写写</a><span class="divider">/</span></li>
+        <li class="active"><span>贝塞尔曲线扫盲</span></li>
+      </ul>
+      <div class="title">
+        <div class="wrapper">
+          <div style="font-size: 30px;line-height:50px;" href="http://p.html-js.com/article/1628" title="贝塞尔曲线扫盲" rel="bookmark" class="2">贝塞尔曲线扫盲</div>
+          <div class="info">
+            <div class="line"><span class="author vcard item"><a rel="author" href="/user/264" class="value url fn">米粽粽</a> 发布在<a href="/article/column/738" class="value">随便写写</a></span><span class="item">2014年11月20日</span><span class="item"><span class="index">view：</span><span class="value">23032</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wapper">
+        <div class="content">
+          <div class="left"><a href="http://www.zhufengpeixun.cn/customize/node/index.html" style="display:block;margin-top:30px;" class="ad-blank"> <img src="http://htmljs.b0.upaiyun.com/uploads/1457071517699-29d53e57a8fed9b4b4af3f045f966326.jpg"></a>
+            <div style="margin-top:20px;" class="alert">在文章任何区域双击击即可给文章添加【评注】！浮到评注点上可以查看详情。<div class="checkbox" style="float:right;line-height:40px;color:#333;padding-top:3px;"><label><input type="checkbox" id="hide_tip">隐藏标注</label></div></div>
+            <article id="post-1628" style="overflow:hidden;" class="post">
+              <div class="wrapper">
+                <div style="padding-top:0;" class="entry-content"><!--<a href="http://passport.lagou.com/landingPage.html?utm_source=AD__html-js&amp;utm_medium=banner&amp;utm_campaign=lp" class="ad-blank"></a><img src="http://htmljs.b0.upaiyun.com/uploads/1439192041460-7786e01e91744693f0cc2c15f7ce9ab3.png">--><p>相信很多同学都知道“<a href="http://en.wikipedia.org/wiki/Bézier_curve">贝塞尔曲线</a>”这个词，我们在很多地方都能经常看到。但是，可能并不是每位同学都清楚地知道，到底什么是“贝塞尔曲线”，又是什么特点让它有这么高的知名度。</p>
+
+<p>贝塞尔曲线的数学基础是早在 1912 年就广为人知的<a href="http://en.wikipedia.org/wiki/Bernstein_polynomial">伯恩斯坦多项式</a>。但直到 1959 年，当时就职于雪铁龙的法国数学家 <a href="http://en.wikipedia.org/wiki/Paul_de_Casteljau">Paul de Casteljau</a> 才开始对它进行图形化应用的尝试，并提出了一种数值稳定的 <a href="http://en.wikipedia.org/wiki/De_Casteljau's_algorithm">de Casteljau 算法</a>。然而贝塞尔曲线的得名，却是由于 1962 年另一位就职于雷诺的法国工程师 <a href="http://en.wikipedia.org/wiki/Pierre_Bézier">Pierre Bézier</a> 的广泛宣传。他使用这种只需要很少的控制点就能够生成复杂平滑曲线的方法，来辅助汽车车体的工业设计。</p>
+
+<p>正是因为控制简便却具有极强的描述能力，贝塞尔曲线在工业设计领域迅速得到了广泛的应用。不仅如此，在计算机图形学领域，尤其是矢量图形学，贝塞尔曲线也占有重要的地位。今天我们最常见的一些矢量绘图软件，如 Flash、Illustrator、CorelDraw 等，无一例外都提供了绘制贝塞尔曲线的功能。甚至像 Photoshop 这样的位图编辑软件，也把贝塞尔曲线作为仅有的矢量绘制工具（钢笔工具）包含其中。</p>
+
+<p>贝塞尔曲线在 web 开发领域同样占有一席之地。CSS3 新增了 <a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function-property">transition-timing-function</a> 属性，它的取值就可以设置为一个三次贝塞尔曲线方程。在此之前，也有不少 JavaScript 动画库使用贝塞尔曲线来实现美观逼真的缓动效果。</p>
+
+<p>下面我们就通过例子来了解一下如何用 de Casteljau 算法绘制一条贝塞尔曲线。</p>
+
+<p>在平面内任选 3 个不共线的点，依次用线段连接。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078245509-bezier-quadratic-start.png" alt="enter image description here" title /></p>
+
+<p>在第一条线段上任选一个点 D。计算该点到线段起点的距离 AD，与该线段总长 AB 的比例。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078258661-bezier-quadratic-step1.png" alt="enter image description here" title /></p>
+
+<p>根据上一步得到的比例，从第二条线段上找出对应的点 E，使得 <code class='language-javascript'>AD:AB = BE:BC</code>。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078272369-bezier-quadratic-step2.png" alt="enter image description here" title /></p>
+
+<p>连接这两点 DE。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078284528-bezier-quadratic-step3.png" alt="enter image description here" title /></p>
+
+<p>从新的线段 DE 上再次找出相同比例的点 F，使得 <code class='language-javascript'>DF:DE = AD:AB = BE:BC</code>。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078293828-bezier-quadratic-step4.png" alt="enter image description here" title /></p>
+
+<p>到这里，我们就确定了贝塞尔曲线上的一个点 F。接下来，请稍微回想一下中学所学的极限知识，让选取的点 D 在第一条线段上从起点 A 移动到终点 B，找出所有的贝塞尔曲线上的点 F。所有的点找出来之后，我们也得到了这条贝塞尔曲线。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078307084-bezier-quadratic-end.png" alt="enter image description here" title /></p>
+
+<p>如果你实在想象不出这个过程，没关系，看动画！
+<img src="http://htmljs.b0.upaiyun.com/uploads/1415845715278-bezier-quadratic-animation.gif" alt="enter image description here" title /></p>
+
+<p>回过头来看这条贝塞尔曲线，为了确定曲线上的一个点，需要进行两轮取点的操作，因此我们称得到的贝塞尔曲线为二次曲线（这样记忆很直观，但曲线的次数其实是由前面提到的伯恩斯坦多项式决定的）。</p>
+
+<p>当控制点个数为 4 时，情况是怎样的？
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078421816-bezier-cubic-start.png" alt="enter image description here" title /></p>
+
+<p>步骤都是相同的，只不过我们每确定一个贝塞尔曲线上的点，要进行三轮取点操作。如图，<code class='language-javascript'>AE:AB = BF:BC = CG:CD = EH:EF = FI:FG = HJ:HI</code>，其中点 J 就是最终得到的贝塞尔曲线上的一个点。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078436764-bezier-cubic-points.png" alt="enter image description here" title /></p>
+
+<p>这样我们得到的是一条三次贝塞尔曲线。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078443819-bezier-cubic-end.png" alt="enter image description here" title /></p>
+
+<p>看过了二次和三次曲线，更高次的贝塞尔曲线大家应该也知道要怎么画了吧。那么比二次曲线更简单的一次（线性）贝塞尔曲线存在吗？长什么样？根据前面的介绍，只要稍作思考，想必你也能猜出来了。哈！就是一条直线~
+<img src="http://htmljs.b0.upaiyun.com/uploads/1415845739049-bezier-linear-animation.gif" alt="enter image description here" title /></p>
+
+<p>能画曲线也能画直线，是不是很厉害？要绘制更复杂的曲线，控制点的增加也仅仅是线性的。这一特点使其不光在工业设计领域大展拳脚，就连数学基础不好的人也可以比较容易地掌握，比如大多数平面美术设计师们。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1415845756871-complex-bezier-curve.gif" alt="enter image description here" title /></p>
+
+<p>上面介绍的内容并不足以展示贝塞尔曲线的真正威力。推广到三维空间的<a href="http://en.wikipedia.org/wiki/Bézier_surface">贝塞尔曲面</a>，以及更进一步的<a href="http://en.wikipedia.org/wiki/Non-uniform_rational_B-spline">非均匀有理 B 样条（NURBS）</a>，早已成为当今计算机辅助设计（CAD）的行业标准，不论是我们平常用到的各种产品，还是在电影院看到的精彩大片，都少不了它们的功劳。
+<img src="http://htmljs.b0.upaiyun.com/uploads/1386078496790-bezier-surface.png" alt="enter image description here" title /></p>
+
+<p><img src="http://htmljs.b0.upaiyun.com/uploads/1386078505773-industrial-design.png" alt="enter image description here" title /></p>
+
+<p>动态绘制贝塞尔曲线的<a href="http://myst729.github.io/bezier-curve">在线演示</a></p>
+
+<p>&#8211; 完 &#8211;</p><script src="http://htmljs.b0.upaiyun.com//js/tuiku.js"></script>
+                </div>
+                <div class="entry-meta">
+                  <p>本站专栏文章皆为原创，转载请注明出处（带有 前端乱炖 字样）和本文的显式链接(<a href="http://www.html-js.com/article/1628">http://www.html-js.com/article/1628</a>)，本站和作者保留随时要求删除文章的权利！</p>
+                </div>
+              </div>
+            </article>
+            <div id="comment" class="comment module">
+              <div class="hd">评论</div>
+              <div class="bd">
+                <div class="publish">
+                  <textarea id="comment-text" placeholder="参与讨论。支持markdown语法" class="input-block-level"></textarea>
+                  <div id="comment-submit" class="btn comment-submit">发表评论</div>
+                </div>
+                <div class="comment-list">
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/1302483543/50/5706351826/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/8010" class="value url fn">半夏如歌</a>
+                          <div class="hd-time">2个月前</div></span>
+                        <div class="html">赞了此文章！</div>
+                      </div>
+                      <div class="time"><a data-nick="半夏如歌" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/1978225951/50/5737984217/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/7352" class="value url fn">Ultraman_wen</a>
+                          <div class="hd-time">5个月前</div></span>
+                        <div class="html"><p>不得不支持</p></div>
+                      </div>
+                      <div class="time"><a data-nick="Ultraman_wen" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/2031989407/50/0/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/6151" class="value url fn">Assistant_Master</a>
+                          <div class="hd-time">11个月前</div></span>
+                        <div class="html"><p>有营养</p></div>
+                      </div>
+                      <div class="time"><a data-nick="Assistant_Master" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp1.sinaimg.cn/1693534972/50/5668262728/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/845" class="value url fn">刘骥-JimLiu</a>
+                          <div class="hd-time">1年前</div></span>
+                        <div class="html"><p><a href="https://gist.github.com/LiuJi-Jim/8198646">https://gist.github.com/LiuJi-Jim/8198646</a> 分享一个de Casteljau生成贝塞尔曲线的gist。</p></div>
+                      </div>
+                      <div class="time"><a data-nick="刘骥-JimLiu" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp4.sinaimg.cn/3064917707/50/40063416671/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/3205" class="value url fn">小泼墨</a>
+                          <div class="hd-time">1年前</div></span>
+                        <div class="html"><p>nice</p></div>
+                      </div>
+                      <div class="time"><a data-nick="小泼墨" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                  <div class="comment-item clearfix"><a class="headpic"><img data-original="http://tp3.sinaimg.cn/2331277154/50/5698920535/1" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/2677" class="value url fn">AprilJTsai</a>
+                          <div class="hd-time">1年前</div></span>
+                        <div class="html"><p>大赞！</p></div>
+                      </div>
+                      <div class="time"><a data-nick="AprilJTsai" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                </div>
+                <script id="comment-tpl" type="text/template">
+                  <div class="comment-item clearfix"><a class="headpic"><img src="{{user_headpic}}" width="70" height="70"></a>
+                    <div class="comment-right">
+                      <div class="con"><span class="author vcard item"><a rel="author" href="/user/{{user_id}}" class="value url fn">{{user_nick}}：</a></span>
+                        <div class="html">{{{html}}}</div>
+                      </div>
+                      <div class="time">{{createdAt}}<a data-nick="{{user_nick}}" class="reply">回复</a></div>
+                    </div>
+                  </div>
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right"><!--<a target="_blank" href="http://www.oneapm.com/bi/feature.html?utm_source=htmljs&amp;utm_medium=billboard&amp;utm_term=bi&amp;utm_campaign=JulyTechAds&amp;from=maadfisejs" style="width:100%;display:block;margin-top:20px;" class="ad-blank"><img src="http://htmljs.b0.upaiyun.com/uploads/1436597035936-4450bd15970bac6348a570d12c151324.png"></a>-->
+          <div style="padding:0;margin-top:20px;" class="module"><img src="http://htmljs.b0.upaiyun.com/uploads/1417158556053-%E6%9C%AA%E6%A0%87%E9%A2%98-5.png"></div>
+          <div class="writer-and-column clearfix">
+            <div class="writer module">
+              <div class="hd">WRITTEN BY</div>
+              <!--a.head-pic(href="/user/#{writer.id}")-->
+              <!--  img(src='#{writer.head_pic}')-->
+              <div class="info"><a href="/user/264" class="nick">米粽粽</a>
+                <div class="desc">摩擦摩擦</div><a href="http://weibo.cn/1408056531" target="_blank" class="weibo">TA的新浪微博</a>
+              </div>
+            </div>
+            <div class="column module">
+              <div class="hd">PUBLISHED IN</div>
+              <div class="info"><a href="/article/column/738" class="name">随便写写</a>
+                <div class="desc"><p>高兴了就随便写写，不高兴就不写。不保证对你手头的工作有帮助。</p></div>
+                <div class="action"><a href="/article/column/1/rss" class="rssit btn small-btn"><i class="rss social"></i> 订阅</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="other-articles module">
+            <div class="hd">本专栏其他文章</div>
+            <div class="bd">
+              <div class="item"><a href="/article/2434">A* 寻路算法</a>
+                <div class="others"><span class="time">时间:2014-11-20</span><span class="visit_count">浏览:3931</span><span class="zan_count">赞:9</span></div>
+              </div>
+              <div class="item"><a href="/article/1628">贝塞尔曲线扫盲</a>
+                <div class="others"><span class="time">时间:2013-12-03</span><span class="visit_count">浏览:23032</span><span class="zan_count">赞:10</span></div>
+              </div>
+              <div class="item"><a href="/article/1538">判断一个点是否在多边形内部 [3] 回转数法</a>
+                <div class="others"><span class="time">时间:2013-10-23</span><span class="visit_count">浏览:6318</span><span class="zan_count">赞:0</span></div>
+              </div>
+              <div class="item"><a href="/article/1528">判断一个点是否在多边形内部 [2] 射线法实现</a>
+                <div class="others"><span class="time">时间:2013-10-21</span><span class="visit_count">浏览:6886</span><span class="zan_count">赞:1</span></div>
+              </div>
+              <div class="item"><a href="/article/1517">判断一个点是否在多边形内部 [1] 射线法思路</a>
+                <div class="others"><span class="time">时间:2013-10-15</span><span class="visit_count">浏览:6607</span><span class="zan_count">赞:5</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-action module">
+            <div class="wrapper">
+              <div class="actions"><a href="javascript:void(0);" class="zan action"><i class="icon-thumbs-up"></i><em>赞</em> <span>10</span></a><span class="zanlogs"><a href="/user/8010" data-original-title="" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/1302483543/50/5706351826/1"></a><a href="/user/42" data-original-title="前端攻城师~~~！" class="tooltip-trigger"><img data-original="http://tp1.sinaimg.cn/1707662604/50/22827474836/1"></a><a href="/user/2280" data-original-title="" class="tooltip-trigger"><img data-original="http://tp2.sinaimg.cn/1785064213/50/0/1"></a><a href="/user/3751" data-original-title="web前端农民工" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/2277900343/50/40065032323/0"></a><a href="/user/2677" data-original-title="&lt;script&gt;document.body.height=0&lt;/script&gt;" class="tooltip-trigger"><img data-original="http://tp3.sinaimg.cn/2331277154/50/5698920535/1"></a><a href="/user/3652" data-original-title="专注前端，保持一颗纯粹的心，完美主义者，工作狂！~~
+平时的一些小玩意儿http://codepen.io/ideazhao/public/
+交流群：152128548" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/5318458615/50/40067203979/1"></a><a href="/user/3702" data-original-title="" class="tooltip-trigger"><img data-original="http://tp4.sinaimg.cn/2376163207/50/40057122209/0"></a><a href="/user/1038" data-original-title="none" class="tooltip-trigger"><img data-original="http://tp2.sinaimg.cn/1824217685/50/5615537594/1"></a><a href="/user/1" data-original-title="思考，去做，做好，做的比别人好" class="tooltip-trigger"><img data-original="http://tp1.sinaimg.cn/1717808700/50/5656122350/1"></a></span>
+              </div>
+              <div class="actions"><a target="_blank" href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fwww.html-js.com%2Farticle%2F1628&amp;title=分享一篇@米粽粽 的原创文章【贝塞尔曲线扫盲】来自@前端乱炖 专栏「随便写写」 。前端乱炖是一个专业的前端知识原创内容社区&amp;pic=http://www.html-js.com/uploads/article_thumb/1628.png&amp;appkey=659341943" class="action"><i class="icon-new-window"></i><em style="background:none !important;float:none;display:inline;padding:0;" class="bds_more">分享到微博</em></a><a href="javascript:void(0);" class="add_fav action"><em>收藏</em> <span>8</span></a>
+              </div>
+            </div>
+          </div>
+          <div id="fixed-modules"><a target="_blank" href="http://www.appcan.cn" style="width:100%;display:block;" class="ad-blank"><img src="http://htmljs.b0.upaiyun.com/uploads/1430307535247-前端乱炖.gif"></a><a target="_blank" href="http://cloudwise.mikecrm.com/f.php?t=aZWutd" style="width:100%;display:block;" class="ad-blank"><img src="http://htmljs.b0.upaiyun.com/uploads/1458284214968-9ee6f562c0ab46738280f5de1eb4216e.jpg"></a>
+            <!--a.ad-blank(target="_blank",href="https://coding.net/marketing/codeinsight?hmsr=http%3A%2F%2Fwww.html-js.com%2F&hmmd=%E5%9B%BE%E7%89%87%E5%B9%BF%E5%91%8A&hmpl=CodeInsight&hmkw=&hmci=",style="width:280px;height:120px;display:block;")-->
+            <!--  img(src="http://htmljs.b0.upaiyun.com/uploads/1425371986895-coding.png")-->
+          </div>
+        </div>
+      </div>
+      <p>
+        <script id="bdshare_js" data="type=tools&amp;uid=2555549" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        var bds_config={"bdText":"分享一篇@米粽粽 的原创文章【贝塞尔曲线扫盲】来自@前端乱炖 专栏「随便写写」 {{前端乱炖是国内最专业的前端知识原创内容社区}}","bdPic":"http://www.html-js.com/uploads/article_thumb/1628.png","snsKey":{'tsina':'659341943','tqq':'','t163':'','tsohu':''}}
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script>
+      </p>
+      <script id="tip_tpl" type="text/template">
+        {{#tips}}
+          <li class="ng-scope single-comment pin-comment">
+            <div class="comment-body ng-binding" >{{content}}</div>
+            <div class="comment-meta">
+              <span class="author-name ng-binding">— {{user_nick}} </span>
+              <time class="create-time" >{{time}}</time>
+            </div>
+          </li>
+          {{/tips}}
+      </script>
+    </div>
+    <script src="http://htmljs.b0.upaiyun.com//js/mustache.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/messageTip.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/loadingTip.js"></script>
+    <script src="http://htmljs.b0.upaiyun.com//js/lazyload.js?12"></script>
+    <script>
+      $(window).scroll(function(){
+        if($(window).scrollTop()+$(window).height()>=$(".comment").offset().top){
+          $(".comment-layer").addClass("hidden")
+        }else{
+        $(".comment-layer").removeClass("hidden")
+        }
+        })
+      $(".comment-layer").click(function(){
+        $("html,body").animate({
+          scrollTop:$(".comment").offset().top-200
+          })
+        $(".comment textarea").focus()
+        })
+      var comment_tpl = $("#comment-tpl").html()
+      //- loadingTip.show("评论加载中")
+      //- $.ajax({
+      //-   url:"/comment/article_1628",
+      //-   type:"get",
+      //-   dataType:"json",
+      //-   success:function(data){
+      //-     loadingTip.hide("正在提交中")
+      //-       if(data.success){
+      //-       for(var i=0;i<data.comments.length;i++){
+      //-       var comment = data.comments[i]
+      //-         var html = Mustache.render(comment_tpl,comment);
+      //-         $(".comment-list").append(html)
+      //-         $(".reply").click(function(){
+      //-   $("#comment-text").val("@"+$(this).attr("data-nick")+" ").focus()
+      //-    $("#comment-text")[0].setSelectionRange($("#comment-text")[0].value.length, $("#comment-text")[0].value.length)
+      //-   })
+      //-       }
+      //-       }else{
+      //-       alert(data.info)
+      //-       }
+      
+      //-   }
+      //-   })
+      $(".headpic img").lazyload();
+      $(".tooltip-trigger img").lazyload();
+      $(".reply").click(function(){
+        $("#comment-text").val("@"+$(this).attr("data-nick")+" ").focus()
+         $("#comment-text")[0].setSelectionRange($("#comment-text")[0].value.length, $("#comment-text")[0].value.length)
+        })
+      $("#comment-submit").click(function(){
+        var text = $("#comment-text").val();
+        if(!text){
+          messageTip.show("请输入评论内容");
+        }else{
+          loadingTip.show("正在提交中")
+           HtmlJS.util.ajax("/comment/add",{
+              md:text,
+              target_id:"article_1628"
+           },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                $("#comment-text").val("")
+                var html = Mustache.render(comment_tpl,data.comment);
+                  $(".comment-list").prepend(html)
+                }else{
+                  alert(data.info)
+                }
+           },function(){
+           
+            },null,function(){
+            HtmlJS.util.ajax("/comment/add",{
+              md:text,
+              target_id:"article_1628"
+            },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                $("#comment-text").val("")
+                var html = Mustache.render(comment_tpl,data.comment);
+                  $(".comment-list").prepend(html)
+                }else{
+                  alert(data.info)
+                }
+            },function(){
+            
+            },null,function(){
+            
+          })
+          })
+        }
+        })
+        
+        $(".zan").click(function(){
+          var self = this;
+            HtmlJS.util.ajax("/article/1628/zan",{
+              score:$(self).attr("data-index")
+            },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                
+                  messageTip.show("成功！")
+                    $("em",self).html("已赞")
+                    $("span",self).html($("span",self).html()*1+1)
+                }else{
+                  alert(data.info)
+                }
+            },function(){
+            
+            },null,function(){
+            HtmlJS.util.ajax("/article/1628/zan",{
+              score:$(self).attr("data-index")
+            },"post",function(data){
+              loadingTip.hide()
+                if(data.success){
+                  messageTip.show("成功！")
+                    $("em",self).html("已赞")
+                    $("span",self).html($("span",self).html()*1+1)
+                }else{
+                  alert(data.info)
+                }
+            },function(){
+            
+            },null,function(){
+            
+          })
+          })
+          })
+          $('.user').tooltip({
+          placement:"bottom"
+          });
+          $(".add_fav").click(function(){
+            var self=this;
+            HtmlJS.util.ajax("/user/fav",{
+              uuid:"46f4fef7-2968-4e81-94a4-5e78bd87c52e"
+            },"post",function(data){
+                loadingTip.hide()
+                if(data.success){
+                  messageTip.show("收藏成功！")
+                    $("em",self).html("已收藏")
+                     $("span",self).html($("span",self).html()*1+1)
+                }else{
+                  alert(data.info)
+                }
+            },function(){},null,function(){
+                HtmlJS.util.ajax("/user/fav",{
+                  uuid:"46f4fef7-2968-4e81-94a4-5e78bd87c52e"
+                },"post",function(data){
+                    loadingTip.hide()
+                    if(data.success){
+                      messageTip.show("收藏成功！")
+                         $("em",self).html("已收藏")
+                          $("span",self).html($("span",self).html()*1+1)
+                    }else{
+                      alert(data.info)
+                    }
+                },function(){
+                })
+            })
+            });
+            $(document).ready(function(){
+                if($(window).width()>600){
+                  new Tip().init({
+                      selector:".post",
+                      url:"/tip/add",
+                      uuid:"1628"
+                  })
+                }
+                
+            })
+            
+    </script>
+    <div id="footer">
+      <div class="wrapper">
+        <div class="module">
+          <div style="font-size:12px;line-height:20px;">Power By NodeJS，本站所有代码的地址在<a href="https://github.com/xinyu198736/htmljs" target="_blank">这里</a>  浙ICP备12047043号  <a href="/friendlink">友情链接</a>  <a href="https://f2e.souche.com/blog" target="_blank">大搜车前端团队博客</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="coin-fixed"><span id="gotop"><i class="icon-airplane"></i></span><span class="my-favs"><i class="icon-heart"></i><a href="/user/fav"> 我的收藏      </a></span>
+    </div>
+    <script>
+      try{
+        $('.tooltip-trigger').tooltip({
+              placement:"bottom"
+              });
+      }catch(e){};
+      
+      
+      
+    </script>
+    <div class="hidden">
+      <script>
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2fc2fae0509f820259c1760fce28d7d2' type='text/javascript'%3E%3C/script%3E"));
+        
+      </script>
+    </div>
+  </body>
+</html>

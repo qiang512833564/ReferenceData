@@ -10,3 +10,5 @@ anchorPoint——x与y一般设置为0~1，但是也可以设置为0~1范围以�
 anchorPoint：为了将视图精确地放置在屏幕的父视图上，需要设置该矩形的位置参考点，这个点就是anchorPoint
              另外，anchorPoint的值，是相对于bounds的百分比来取值的
 position:视图的中心坐标
+
+我们可以这么理解，position是锚点相对于父layer的坐标值，而anchorPoint则是锚点相对于自身的坐标值，两者共同决定了锚点和整个Layer所在的位置

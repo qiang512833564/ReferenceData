@@ -1,5 +1,5 @@
-
 图片可以通过CALayer去展示，
+
 优点：直接可以直接通过CALayer去对图片添加动画
 let imageMask = CALayer()
 imageMask.contents = image.CGImage

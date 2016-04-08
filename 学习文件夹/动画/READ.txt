@@ -1,15 +1,39 @@
+Core Animation 不仅仅只是用来制作动画，动画只是它功能的一个很小的部分，
+Core Animation 基于 OpenGL 与 Quartz2D 两个框架生成的,一般它是 on-screen 渲染操作
+    layer 就是通过 Core Animation 生成的，它可以管理 layer 树
+    Core Animation 的作用有：
+         1.能够被现代的显卡并行的处理（硬件）
+         2.能够 cache layer的 contents 到磁盘上，以便你的代码不需要时常地去重绘图形（这也是iphone UI能够如此快速地绘制的原因）
+
 
 Core Animation
-动画，在接入后台的时候，会被系统停止，
+动画，在进入后台的时候，会被系统停止，
 猜测，是为了解决CPU。
 这一点，有时候需要注意
 
 Core Animation可分为：
-1. 隐式动画
+1. 隐式动画 (当对非 Root Layer 的部分属性进行修改时，默认会自动产生一些动画效果，这些属性就被成为可动画属性)
    是由系统框架自动完成的。
    Core Animation在每个runloop周期中自动开始一次新的事务，即使你不显式的用[CATransaction begin]开始一次事务，任何在一次runloop循环中属性的改变都会被集中起来，然后做一次0.25秒的动画
    CATransaction的+begin和+commit方法在+animateWithDuration:animations:内部自动调用，这样block中所有属性的改变都会被事务所包含。
    Core Animation通常对CALayer的所有属性（可动画的属性）做动画，但是UIView是把它关联的图层的这个特性关闭了
+   例如：
+- (void)viewDidLoad {
+...省略
+[self.view addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(drop:)]];
+}
 
+- (void)drop:(UIGestureRecognizer *)recognizer {
+    [CATransaction setAnimationDuration:1.0];
+    NSArray *layers = self.view.layer.sublayers;
+    NSLog(@"--%@",layers);
+    //由打印出来的数组得知第5个是MyLayer
+    CALayer *layer = [layers objectAtIndex:4];
+    CGPoint toPoint = CGPointMake(160, 210);
+    [layer setContents:(id)[UIImage imageNamed:@"id"].CGImage];
+    [layer setPosition:toPoint];
+    [layer setBounds:CGRectMake(0, 0, 90, 90)];
+}
 2. 显式动画
-   
+   直接生成 CAAnimation 对象，然后对 layer 层添加动画 CAAnimation 对象，来实现
+

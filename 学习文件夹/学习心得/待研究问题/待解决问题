@@ -6,10 +6,18 @@
     iOS中如何通过GPU预渲染图片并且缓存图片到磁盘中
     iOS中的图片渲染都是GPU来操作的吗？
     iOS中如何在后台渲染图片或者渲染图形
+    iOS中如何实现pre-rendering
+    iOS中CGGradient与CAGradientLayer谁更好，为什么（目前只知道CGGradient是更好的，但是不知道是为什么）
     iOS中离屏渲染既然会影响性能，那么为什么系统中仍然存在很多方法去实现离屏渲染呢（如mask等）
     drawRect、CoreGraphcis哪些方法是在后台进行的
 4.  iOS中如何做到性能优化（重要）
-5.  iOS中数据库的迁移
-6.  iOS中多张表，比如QQ的聊天记录
-7.  空闲的时候，还需了解ReactNative
+5.  SDWebImage实现的原理
+6.  iOS中数据库的迁移
+7.  iOS中多张表，比如QQ的聊天记录
+8.  空闲的时候，还需了解ReactNative
+9.  block使用有什么好处
+10. GCD实现原理
+11. Core Graphics 如何渲染 Layer 层
+12. 贝塞尔曲线如何实现 CAMediaTimingFunction 
+
 

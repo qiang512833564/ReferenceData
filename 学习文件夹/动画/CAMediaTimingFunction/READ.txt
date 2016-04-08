@@ -1,0 +1,11 @@
+
+一个图表化的工具说明数字线性关係:
+http://netcetera.org/camtf-playground.html
+
+对于 CAMediaTimingFunction 的时间曲线：（位移曲线---因此：一般自定义CAMediaTimingFunction的时候，需要把速度曲线转换成位移曲线）
+系统提供了绘制贝塞尔曲线的方法，只需要确定曲线的两个控制器坐标即可。
+而坐标的原点为（0,0）,最后收尾的点则在（1，1），横轴为时间，纵轴为动画的执行程度，坐标值代表着相对比例值。
+
+CAMediaTimingFunction 的时间曲线，就是三阶贝赛尔曲线，（其中贝塞尔曲线是几阶，是由所有控制点连线，生成的所有边上取点的个数决定的）
+
+CAMediaTimingFunction 由三阶贝塞尔曲线形成的，不要被四阶贝塞尔曲线所误导，因为，三阶也可以实现像四阶那样子的头尾像相反两边的曲线，此时该三阶可以理解成这样的连线：startPoint -- > control point1 ---> control point2 --- > end point

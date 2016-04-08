@@ -10,5 +10,3 @@ objc_msgSend，它就是负责发送一个消息给对象的C函数。
    
 	objc_msgSend方法也能hold住message的参数，如：
 	objc_msgSend(receiver,selector,arg1,arg2,...);
-
-I

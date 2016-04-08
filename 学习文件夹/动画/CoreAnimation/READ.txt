@@ -1,0 +1,12 @@
+Core Animation 不仅仅只是用来制作动画，动画只是它功能的一个很小的部分，
+Core Animation 基于 OpenGL 与 Quartz2D 两个框架生成的,一般它是 on-screen 渲染操作
+    layer 就是通过 Core Animation 生成的，它可以管理 layer 树
+    Core Animation 的作用有：
+         1.能够被现代的显卡并行的处理（硬件）
+         2.能够 cache layer的 contents 到磁盘上，以便你的代码不需要时常地去重绘图形（这也是iphone UI能够如此快速地绘制的原因）
+
+在 iOS 中，软件绘图通常是由 Core Graphics 框架来完成。但是在一般情况下，相比 Core Animation 和 OpenGL，Core Graphics 要慢了很多。
+软件绘图不仅效率低，还会消耗可观的内存。
+CALayer 只需要一些与自己相关的内存：只有它的寄宿图会消耗一定的内存空间。即使直接赋值给 contents 属性一张图片，也不需要增加额外的图片存储大小。如果相同的一张图片被多个图层作为 contents 属性，那么他们会公用同一块内存，而不是复制内存块。
+
+
