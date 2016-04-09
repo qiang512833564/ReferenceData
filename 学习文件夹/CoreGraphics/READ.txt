@@ -3,6 +3,7 @@ Quartz2D 的内存管理：
    使用含有“create”或“copy”的函数创建的对象，使用完后必须释放，否则将导致内存泄露
    使用不含有“create”或“copy”的函数获取的对象，则不需要释放
 
+在 Core Graphics 中，一个 context 就相当于一个画布，但是它里面存储着关于我们想要怎么绘制以及设备怎么样去绘制的信息，因此可以称 context 是画布和元数据两者的融合
 
 在 iOS 中，软件绘图通常是由 Core Graphics 框架来完成。但是在一般情况下，相比 Core Animation 和 OpenGL，Core Graphics 要慢了很多。
 软件绘图不仅效率低，还会消耗可观的内存。
@@ -23,3 +24,15 @@ CALayer 只需要一些与自己相关的内存：只有它的寄宿图会消耗
    不会被图层边界剪裁掉。
    不会出现像素化
 2.只绘制需要绘制的 rect,而不重绘脏矩形 -setNeedsDisplayInRect：
+
+
+UIGraphicsBeginImageContext 是在建立于 CGBitmapContextCreate 之上对 UIKit 进行封装的，同时也会导致其功能性降低。因此 UIGraphicsBeginImageContext 是仅仅只能够在 main thread 上进行调用
+UIGraphicsBeginImageContext 、 UIImage、UIColor、UIFont 目前都是现成安全的
+
+UIKit 方法会调用 CoreGraphics 实现的
+UIGraphicsBeginImageContext 内部是通过 UIKit functions 实现的而不是 Core Graphics functions (从以 UI 开头，也可以猜测到)
+
+UIGraphicsBeginImageContextWithOptions 与 drawRect 暂用的内存都差不多（前提是，size 设置的与 bound.size 一致），所以调用 UIGraphicsBeginImageContextWithOptions 方法的时候，千万要记住 UIGraphicsEndImageContext 调用来释放内存
+
+UIGraphicsBeginImageContextWithOptions 相对于 drawRect 的优点就是：
+     不会一直暂用 size 的内存，一般在进行绘制操作完成后，立刻被释放

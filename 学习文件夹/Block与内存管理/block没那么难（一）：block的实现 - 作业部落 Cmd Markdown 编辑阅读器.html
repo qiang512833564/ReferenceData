@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html class="theme">
+
+<head>
+    <meta charset="utf-8">
+    
+    <meta name="description" content="Cmd Markdown 编辑阅读器，支持实时同步预览，区分写作和阅读模式，支持在线存储，分享文稿网址。">
+    <meta name="author" content="Jiawei Zhang">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>block没那么难（一）：block的实现 - 作业部落 Cmd Markdown 编辑阅读器</title>
+
+
+    <link href="https://www.zybuluo.com/static/img/favicon.png" type="image/x-icon" rel="icon">
+
+    <link href="https://www.zybuluo.com/static/assets/1bc053c8.base.lib.min.css" rel="stylesheet" media="screen">
+
+
+    
+    <!-- id="prettify-style" will be used to get the link element below and change href to change prettify code style, so it can't be in beginmin/endmin block. -->
+    <link id="prettify-style" href="https://www.zybuluo.com/static/editor/libs/google-code-prettify/prettify-cmd.css" type="text/css" rel="stylesheet">
+    <link href="https://www.zybuluo.com/static/assets/mdeditor/79228b55.layout.min.css" rel="stylesheet" media="screen">
+
+
+    
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44461741-1', 'zybuluo.com');
+      ga('send', 'pageview');
+    </script>
+</head>
+
+<body class="theme">
+
+    <div id="global-prompt-alert" class="hide alert alert-warning">
+        <span id="global-prompt-message"></span>
+        <a id="close-global-prompt-alert" href="">[关闭]</a>
+    </div>
+
+    <!-- zybuluo's body -->
+    
+
+
+
+
+
+
+
+<!-- mdeditor's body -->
+
+
+
+
+
+
+<div id="editor-reader-full" class="editor-reader-full-shown" style="position: static;">
+    <div id="reader-full-topInfo" class="reader-full-topInfo-shown">
+        <span>
+            <code>@MicroCai</code>
+        </span>
+        <code><span class="article-updated-date">2015-03-03T15:20:50.000000Z</span></code>
+        <code><span>字数 </span><span class="article-characters">4638</span></code>
+        <code><span>阅读 </span><span class="article-read">5516</span></code>
+    </div>
+    <div id="wmd-preview" class="wmd-preview wmd-preview-full-reader"><div class="md-section-divider"></div>
+
+<div class="md-section-divider"></div>
+
+<h1 id="block没那么难一block的实现" data-anchor-id="batl">block没那么难（一）：block的实现</h1>
+
+<p data-anchor-id="m8y7"><code>Archives</code> <code>iOS</code></p>
+
+<hr>
+
+<p data-anchor-id="0yrv"><em>本系列博文总结自《Pro Multithreading and Memory Management for iOS and OS X with ARC》</em></p>
+
+<p data-anchor-id="zyxt"><em>如果您觉得我的博客对您有帮助，请通过关注我的新浪微博 <i class="icon-weibo"></i> <a href="http://weibo.com/1736763114/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank">MicroCai</a> 支持我，谢谢！</em></p>
+
+<hr>
+
+<p data-anchor-id="scth">block 顾名思义就是代码块，将同一逻辑的代码放在一个块，使代码更简洁紧凑，易于阅读，而且它比函数使用更方便，代码更美观，因而广受开发者欢迎。但同时 block 也是 iOS 开发中坑最多的地方之一，因此有必要了解下 block 的实现原理，知其然，更知其所以然，才能从根本上避免挖坑和踩坑。</p>
+
+<p data-anchor-id="pcv9">需要知道的是，block 只是 Objective-C 对闭包的实现，并不是 iOS 独有的概念，在 C++、Java 等语言也有实现闭包，名称不同而已。</p>
+
+<p data-anchor-id="57k7"><strong>特别声明</strong></p>
+
+<blockquote data-anchor-id="atxa" class="white-blockquote">
+  <p>以下研究所用的过程代码由 clang 编译前端生成，仅作理解之用。实际上 clang 根本不会将 block 转换成人类可读的代码，它对 block 到底做了什么，谁也不知道。</p>
+  
+  <p>所以，<strong>切勿将过程代码当做block的实际实现，切记切记！！！</strong></p>
+</blockquote>
+
+<hr>
+
+<p data-anchor-id="4ymd">将下面的 <code>test.m</code> 代码用 clang 工具翻译 <code>test.cpp</code> 代码</p>
+
+<blockquote data-anchor-id="iap9" class="white-blockquote">
+  <p>clang -rewrite-objc test.m</p>
+</blockquote>
+
+<p data-anchor-id="ylaz"><code>test.m 代码</code></p>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="tb89"><ol class="linenums"><li class="L0"><code><span class="com">/************* Objective-C 源码 *************/</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">int</span><span class="pln"> main</span><span class="pun">()</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(^</span><span class="pln">blk</span><span class="pun">)(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">^{</span><span class="pln"> printf</span><span class="pun">(</span><span class="str">"Block\n"</span><span class="pun">);</span><span class="pln"> </span><span class="pun">};</span><span class="pln"> </span></code></li><li class="L5"><code><span class="pln">    blk</span><span class="pun">();</span></code></li><li class="L6"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pun">}</span></code></li></ol></pre>
+
+<p data-anchor-id="6nuf"><code>test.cpp</code></p>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="3pqz"><ol class="linenums"><li class="L0"><code><span class="com">/************* 使用 clang 翻译后如下 *************/</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">struct</span><span class="pln"> __block_impl</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="pln">isa</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="typ">Flags</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="typ">Reserved</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="typ">FuncPtr</span><span class="pun">;</span></code></li><li class="L8"><code><span class="pun">};</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="kwd">struct</span><span class="pln"> __main_block_impl_0</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    </span><span class="kwd">struct</span><span class="pln"> __block_impl impl</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pln">    </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0</span><span class="pun">*</span><span class="pln"> </span><span class="typ">Desc</span><span class="pun">;</span></code></li><li class="L4"><code></code></li><li class="L5"><code><span class="pln">    __main_block_impl_0</span><span class="pun">(</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="pln">fp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0 </span><span class="pun">*</span><span class="pln">desc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> flags</span><span class="pun">=</span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L6"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L7"><code><span class="pln">        impl</span><span class="pun">.</span><span class="pln">isa </span><span class="pun">=</span><span class="pln"> </span><span class="pun">&amp;</span><span class="typ">_NSConcreteStackBlock</span><span class="pun">;</span></code></li><li class="L8"><code><span class="pln">        impl</span><span class="pun">.</span><span class="typ">Flags</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> flags</span><span class="pun">;</span></code></li><li class="L9"><code><span class="pln">        impl</span><span class="pun">.</span><span class="typ">FuncPtr</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> fp</span><span class="pun">;</span></code></li><li class="L0"><code><span class="pln">        </span><span class="typ">Desc</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> desc</span><span class="pun">;</span></code></li><li class="L1"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L2"><code><span class="pun">};</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> __main_block_func_0</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> __main_block_impl_0 </span><span class="pun">*</span><span class="pln">__cself</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">    printf</span><span class="pun">(</span><span class="str">"Block\n"</span><span class="pun">);</span></code></li><li class="L7"><code><span class="pun">}</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0</span></code></li><li class="L0"><code><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">    </span><span class="typ">size_t</span><span class="pln"> reserved</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pln">    </span><span class="typ">size_t</span><span class="pln"> </span><span class="typ">Block_size</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pun">}</span><span class="pln"> __main_block_desc_0_DATA </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">sizeof</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> __main_block_impl_0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">};</span></code></li><li class="L4"><code></code></li><li class="L5"><code><span class="kwd">int</span><span class="pln"> main</span><span class="pun">()</span></code></li><li class="L6"><code><span class="pun">{</span></code></li><li class="L7"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(*</span><span class="pln">blk</span><span class="pun">)(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(*)())&amp;</span><span class="pln">__main_block_impl_0</span><span class="pun">((</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">__main_block_func_0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">__main_block_desc_0_DATA</span><span class="pun">);</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    </span><span class="pun">((</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(*)(</span><span class="pln">__block_impl </span><span class="pun">*))((</span><span class="pln">__block_impl </span><span class="pun">*)</span><span class="pln">blk</span><span class="pun">)-&gt;</span><span class="typ">FuncPtr</span><span class="pun">)((</span><span class="pln">__block_impl </span><span class="pun">*)</span><span class="pln">blk</span><span class="pun">);</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pun">}</span></code></li></ol></pre>
+
+<hr>
+
+<p data-anchor-id="f3s0">接着，我们逐一来看下这些函数和结构体</p>
+
+<div class="md-section-divider"></div>
+
+<h2 id="block-结构体信息详解" data-anchor-id="y9y3">block 结构体信息详解</h2>
+
+<div class="md-section-divider"></div>
+
+<h3 id="struct-blockimpl" data-anchor-id="vnp7">struct __block_impl</h3>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="bgxy"><ol class="linenums"><li class="L0"><code><span class="com">// __block_impl 是 block 实现的结构体</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">struct</span><span class="pln"> __block_impl</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="pln">isa</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="typ">Flags</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="typ">Reserved</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="typ">FuncPtr</span><span class="pun">;</span></code></li><li class="L8"><code><span class="pun">};</span></code></li></ol></pre>
+
+<ul data-anchor-id="kxc8">
+<li><code>isa</code> <br>
+指向实例对象，表明 block 本身也是一个 Objective-C 对象。block 的三种类型：<code>_NSConcreteStackBlock</code>、<code>_NSConcreteGlobalBlock</code>、<code>_NSConcreteMallocBlock</code>，即当代码执行时，isa 有三种值 <br>
+
+
+<blockquote class="white-blockquote">
+  <p>impl.isa = &amp;_NSConcreteStackBlock; <br>
+  impl.isa = &amp;_NSConcreteMallocBlock; <br>
+  impl.isa = &amp;_NSConcreteGlobalBlock;</p></blockquote></li>
+  </ul> <br>
+  从这些实例对象可以看出 block 所在内存区域分别为stack、ROData、heap，后面文章会详说。<p></p>
+
+
+<ul data-anchor-id="zj7h">
+<li><p><code>Flags</code> <br>
+按位承载 block 的附加信息；</p></li>
+<li><p><code>Reserved</code> <br>
+保留变量；</p></li>
+<li><p><code>FuncPtr</code> <br>
+函数指针，指向 Block 要执行的函数，即<code>{ printf("Block\n") }</code>; </p></li>
+</ul>
+
+<div class="md-section-divider"></div>
+
+<h3 id="struct-mainblockimpl0" data-anchor-id="kwre">struct __main_block_impl_0</h3>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="h3ae"><ol class="linenums"><li class="L0"><code><span class="com">// __main_block_impl_0 是 block 实现的结构体，也是 block 实现的入口</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">struct</span><span class="pln"> __main_block_impl_0</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">struct</span><span class="pln"> __block_impl impl</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0</span><span class="pun">*</span><span class="pln"> </span><span class="typ">Desc</span><span class="pun">;</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">    __main_block_impl_0</span><span class="pun">(</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="pln">fp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0 </span><span class="pun">*</span><span class="pln">desc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> flags</span><span class="pun">=</span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L8"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L9"><code><span class="pln">        impl</span><span class="pun">.</span><span class="pln">isa </span><span class="pun">=</span><span class="pln"> </span><span class="pun">&amp;</span><span class="typ">_NSConcreteStackBlock</span><span class="pun">;</span></code></li><li class="L0"><code><span class="pln">        impl</span><span class="pun">.</span><span class="typ">Flags</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> flags</span><span class="pun">;</span></code></li><li class="L1"><code><span class="pln">        impl</span><span class="pun">.</span><span class="typ">FuncPtr</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> fp</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pln">        </span><span class="typ">Desc</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> desc</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L4"><code><span class="pun">};</span></code></li></ol></pre>
+
+<ul data-anchor-id="2itz">
+<li><p><code>impl</code> <br>
+block 实现的结构体变量，该结构体前面已说明；</p></li>
+<li><p><code>Desc</code> <br>
+描述 block 的结构体变量；</p></li>
+<li><p><code>__main_block_impl_0</code> <br>
+结构体的构造函数，初始化结构体变量 <code>impl</code>、<code>Desc</code>；</p></li>
+</ul>
+
+<div class="md-section-divider"></div>
+
+<h3 id="static-void-mainblockfunc0" data-anchor-id="0f3h">static void __main_block_func_0</h3>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="5e8h"><ol class="linenums"><li class="L0"><code><span class="com">// __main_block_func_0 是 block 要最终要执行的函数代码</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> __main_block_func_0</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> __main_block_impl_0 </span><span class="pun">*</span><span class="pln">__cself</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    printf</span><span class="pun">(</span><span class="str">"Block\n"</span><span class="pun">);</span></code></li><li class="L5"><code><span class="pun">}</span></code></li></ol></pre>
+
+<div class="md-section-divider"></div>
+
+<h3 id="static-struct-mainblockdesc0" data-anchor-id="mvwa">static struct __main_block_desc_0</h3>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="ns3i"><ol class="linenums"><li class="L0"><code><span class="com">// __main_block_desc_0 是 block 的描述信息结构体</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="typ">size_t</span><span class="pln"> reserved</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">    </span><span class="typ">size_t</span><span class="pln"> </span><span class="typ">Block_size</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pun">}</span><span class="pln"> __main_block_desc_0_DATA </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">sizeof</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> __main_block_impl_0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">};</span></code></li></ol></pre>
+
+<ul data-anchor-id="t9ou">
+<li><p><code>reserved</code> <br>
+结构体信息保留字段</p></li>
+<li><p><code>Block_size</code> <br>
+结构体大小</p></li>
+</ul>
+
+<p data-anchor-id="muj9">此处已定义了一个该结构体类型的变量 <code>__main_block_desc_0_DATA</code></p>
+
+<hr>
+
+<div class="md-section-divider"></div>
+
+<h2 id="block-实现的执行流程" data-anchor-id="b7zw">block 实现的执行流程</h2>
+
+<div class="md-section-divider"></div>
+
+<div class="flow-diagram theme theme-white" data-anchor-id="jpeb"><svg height="458.5" version="1.1" width="561.3125" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock33" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="0" y="0" width="62.515625" height="36.5" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="start" transform="matrix(1,0,0,1,250.3984,13)"></rect><text x="10" y="18.25" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="startt" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,250.3984,13)"><tspan dy="5.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">main()</tspan></text><rect x="0" y="0" width="555.3125" height="54.5" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="op1" transform="matrix(1,0,0,1,4,103.5)"></rect><text x="10" y="27.25" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="op1t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,4,103.5)"><tspan dy="-3.75" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">调用 __main_block_impl_0 构造函数初始化结构体</tspan><tspan dy="18" x="10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">__main_block_impl_0（__main_block_func_0 , __main_block_desc_0_DATA）;</tspan></text><rect x="0" y="0" width="342.609375" height="36.5" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="op2" transform="matrix(1,0,0,1,110.3516,221)"></rect><text x="10" y="18.25" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="op2t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,110.3516,221)"><tspan dy="5.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">得到的__main_block_impl_0 类型变量赋值给 blk</tspan></text><rect x="0" y="0" width="321.125" height="36.5" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="op3" transform="matrix(1,0,0,1,121.0938,320.5)"></rect><text x="10" y="18.25" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="op3t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,121.0938,320.5)"><tspan dy="5.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">执行 blk-&gt;FuncPtr()函数，即 printf("Block\n");</tspan></text><rect x="0" y="0" width="46.703125" height="36.5" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="end" transform="matrix(1,0,0,1,258.3047,420)"></rect><text x="10" y="18.25" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="endt" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,258.3047,420)"><tspan dy="5.25" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">End</tspan></text><path fill="none" stroke="#000000" d="M281.65625,49.5C281.65625,49.5,281.65625,89.15409994125366,281.65625,100.50043908460066" stroke-width="2" marker-end="url(#raphael-marker-endblock33)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M281.65625,158C281.65625,158,281.65625,205.48365688323975,281.65625,218.00376172550023" stroke-width="2" marker-end="url(#raphael-marker-endblock33)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M281.65625,257.5C281.65625,257.5,281.65625,304.98365688323975,281.65625,317.5037617255002" stroke-width="2" marker-end="url(#raphael-marker-endblock33)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M281.65625,357C281.65625,357,281.65625,404.48365688323975,281.65625,417.0037617255002" stroke-width="2" marker-end="url(#raphael-marker-endblock33)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div>
+
+<p data-anchor-id="6s53">最基础的 block 实现就这么简单。</p>
+
+<hr>
+
+<p data-anchor-id="tigr">接着再看 block 获取外部变量</p>
+
+<div class="md-section-divider"></div>
+
+<h2 id="block-获取外部变量" data-anchor-id="ls8a">block 获取外部变量</h2>
+
+<p data-anchor-id="f60x">运行下面的代码</p>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="nxzm"><ol class="linenums"><li class="L0"><code><span class="kwd">int</span><span class="pln"> main</span><span class="pun">()</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> intValue </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(^</span><span class="pln">blk</span><span class="pun">)(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">^{</span><span class="pln"> printf</span><span class="pun">(</span><span class="str">"intValue = %d\n"</span><span class="pun">,</span><span class="pln"> intValue</span><span class="pun">);</span><span class="pln"> </span><span class="pun">};</span></code></li><li class="L4"><code></code></li><li class="L5"><code><span class="pln">    blk</span><span class="pun">();</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L8"><code><span class="pun">}</span></code></li></ol></pre>
+
+<p data-anchor-id="uodq">打印结果</p>
+
+<blockquote data-anchor-id="8sb4" class="white-blockquote">
+  <p>intValue = 1</p>
+</blockquote>
+
+<p data-anchor-id="7kkx">和第一段源码不同的是，这里多了个局部变量 intValue，而且还在 block 里面获取到了。</p>
+
+<p data-anchor-id="6ura">通过前一段对 block 源码的学习，我们已经了解到 block 的函数定义在 main() 函数之外，那它又是如何获取 main() 里面的局部变量呢？为了解开疑惑，我们再次用 clang 重写这段代码</p>
+
+<div class="md-section-divider"></div>
+
+<pre class="prettyprint linenums prettyprinted" data-anchor-id="a25t"><ol class="linenums"><li class="L0"><code><span class="kwd">struct</span><span class="pln"> __block_impl</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="pln">isa</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="typ">Flags</span><span class="pun">;</span></code></li><li class="L4"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> </span><span class="typ">Reserved</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="typ">FuncPtr</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pun">};</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="kwd">struct</span><span class="pln"> __main_block_impl_0</span></code></li><li class="L9"><code><span class="pun">{</span></code></li><li class="L0"><code><span class="pln">    </span><span class="kwd">struct</span><span class="pln"> __block_impl impl</span><span class="pun">;</span></code></li><li class="L1"><code><span class="pln">    </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0</span><span class="pun">*</span><span class="pln"> </span><span class="typ">Desc</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> intValue</span><span class="pun">;</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    __main_block_impl_0</span><span class="pun">(</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*</span><span class="pln">fp</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0 </span><span class="pun">*</span><span class="pln">desc</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> _intValue</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> flags</span><span class="pun">=</span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> intValue</span><span class="pun">(</span><span class="pln">_intValue</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">        impl</span><span class="pun">.</span><span class="pln">isa </span><span class="pun">=</span><span class="pln"> </span><span class="pun">&amp;</span><span class="typ">_NSConcreteStackBlock</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pln">        impl</span><span class="pun">.</span><span class="typ">Flags</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> flags</span><span class="pun">;</span></code></li><li class="L8"><code><span class="pln">        impl</span><span class="pun">.</span><span class="typ">FuncPtr</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> fp</span><span class="pun">;</span></code></li><li class="L9"><code><span class="pln">        </span><span class="typ">Desc</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> desc</span><span class="pun">;</span></code></li><li class="L0"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L1"><code><span class="pun">};</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> __main_block_func_0</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> __main_block_impl_0 </span><span class="pun">*</span><span class="pln">__cself</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> intValue </span><span class="pun">=</span><span class="pln"> __cself</span><span class="pun">-&gt;</span><span class="pln">intValue</span><span class="pun">;</span><span class="pln"> </span><span class="com">// bound by copy</span></code></li><li class="L6"><code><span class="pln">    printf</span><span class="pun">(</span><span class="str">"intValue = %d\n"</span><span class="pun">,</span><span class="pln"> intValue</span><span class="pun">);</span></code></li><li class="L7"><code><span class="pun">}</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">struct</span><span class="pln"> __main_block_desc_0</span></code></li><li class="L0"><code><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">    </span><span class="typ">size_t</span><span class="pln"> reserved</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pln">    </span><span class="typ">size_t</span><span class="pln"> </span><span class="typ">Block_size</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pun">}</span><span class="pln"> __main_block_desc_0_DATA </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">sizeof</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> __main_block_impl_0</span><span class="pun">)};</span></code></li><li class="L4"><code></code></li><li class="L5"><code><span class="kwd">int</span><span class="pln"> main</span><span class="pun">()</span></code></li><li class="L6"><code><span class="pun">{</span></code></li><li class="L7"><code><span class="pln">    </span><span class="kwd">int</span><span class="pln"> intValue </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    </span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(*</span><span class="pln">blk</span><span class="pun">)(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(*)())&amp;</span><span class="pln">__main_block_impl_0</span><span class="pun">((</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">__main_block_func_0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">__main_block_desc_0_DATA</span><span class="pun">,</span><span class="pln"> intValue</span><span class="pun">);</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="pln">    </span><span class="pun">((</span><span class="kwd">void</span><span class="pln"> </span><span class="pun">(*)(</span><span class="pln">__block_impl </span><span class="pun">*))((</span><span class="pln">__block_impl </span><span class="pun">*)</span><span class="pln">blk</span><span class="pun">)-&gt;</span><span class="typ">FuncPtr</span><span class="pun">)((</span><span class="pln">__block_impl </span><span class="pun">*)</span><span class="pln">blk</span><span class="pun">);</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></code></li><li class="L4"><code><span class="pun">}</span></code></li></ol></pre>
+
+<p data-anchor-id="dgzl">原来 block 通过参数值传递获取到 <code>intValue</code> 变量，通过函数</p>
+
+<blockquote data-anchor-id="b6of" class="white-blockquote">
+  <p>__main_block_impl_0 (void *fp, struct __main_block_desc_0 *desc, int _intValue, int flags=0) : intValue(_intValue)</p>
+</blockquote>
+
+<p data-anchor-id="tx5p">保存到 <code>__main_block_impl_0</code> 结构体的同名变量 <code>intValue</code>，通过代码 <code>int intValue = __cself-&gt;intValue;</code> 取出 <code>intValue</code>，打印出来。</p>
+
+<blockquote data-anchor-id="ntt2" class="white-blockquote">
+  <p>构造函数 <code>__main_block_impl_0</code> 冒号后的表达式 <code>intValue(_intValue)</code> 的意思是，用 <code>_intValue</code> 初始化结构体成员变量 <code>intValue</code>。</p>
+  
+  <p>有四种情况下应该使用初始化表达式来初始化成员： <br>
+  1：初始化const成员 <br>
+  2：初始化引用成员 <br>
+  3：当调用基类的构造函数，而它拥有一组参数时 <br>
+  4：当调用成员类的构造函数，而它拥有一组参数时</p>
+  
+  <p><a href="http://blog.csdn.net/zj510/article/details/8135556" target="_blank">参考：C++类成员冒号初始化以及构造函数内赋值</a></p>
+</blockquote>
+
+<p data-anchor-id="e60x">至此，我们已经了解了block 的实现，以及获取外部变量的原理。但是，我们还不能在 block 内修改 intValue 变量。如果你有心试下，在 block 内部修改 <code>intValue</code> 的值，会报编译错误</p>
+
+<blockquote data-anchor-id="xjlm" class="white-blockquote">
+  <p>Variable is not assignable(missing __block type specifier)</p>
+</blockquote>
+
+<p data-anchor-id="etbj">那么如何在 block 内修改外部变量呢，请看下篇 <a href="https://www.zybuluo.com/MicroCai/note/57603" target="_blank">block没那么难(二)：block 和变量的内存管理</a></p></div>
+    <div class="remark-icons">
+    </div>
+</div>
+
+<!--in page preview buttons. -->
+<div class="in-page-preview-buttons in-page-preview-buttons-full-reader">
+    <ul>
+        <li class="in-page-button dropdown" id="preview-toc-button" title="内容目录 Ctrl+Alt+O">
+            <span class="dropdown-toggle icon-list" data-toggle="dropdown"></span>
+            <div id="toc-list" class="dropdown-menu theme pull-right"> <!-- Add theme means this element will be changed when apply theme color. -->
+                <h3>内容目录</h3>
+                <hr>
+                <div class="table-of-contents"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div id="reader-full-toolbar" class="reader-full-toolbar-shown" style="padding-top: 0;">
+    <ul id="reader-full-toolbar-home" class="preview-button-row">
+        <li class="preview-button-full-reader" id="preview-editor-button" title="撰写文本 Ctrl+Alt+M">
+            <span class="icon-pencil"></span>
+        </li>
+    </ul>
+    <ul id="preview-button-row" class="preview-button-row">
+        <li class="preview-button-full-reader dropdown" id="preview-list-button" title="文本列表 Ctrl+Alt+F">
+            <span class="dropdown-toggle icon-reorder" data-toggle="dropdown"></span>
+            <ul id="file-list" class="dropdown-menu theme-black pull-right" role="menu">
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="About-Blog">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">About-Blog</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2014-12-01T12:41:08.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/51120" title="【已发布】 2015-10-31T07:29:55.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="51120">MicroCai 的博客</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="Archives">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">Archives</span></span>
+                            <span class="tag-count pull-right">17</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-07-13T04:50:15.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/131655" title="【已发布】 2015-07-24T18:05:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="131655">问题记录：iOS 用户行为统计代码的剥离</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-03T08:15:56.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/74039" title="【已发布】 2015-03-03T08:32:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="74039">[译] 照片框架</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-02T16:02:59.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/73867" title="【已发布】 2015-07-18T05:48:41.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="73867">Autolayout 基础</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-29T20:53:54.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/67734" title="【已发布】 2015-08-24T01:45:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="67734">ARC 下内存泄露的那些点</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-26T21:48:18.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66738" title="【已发布】 2015-03-03T15:13:03.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66738">KVO 和 KVC 的使用和实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-24T14:09:53.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66142" title="【已发布】 2015-03-03T15:14:18.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66142">iOS Events and Responder Chain</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-21T21:18:31.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/65325" title="【已发布】 2015-06-09T12:01:23.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="65325">两个超大整数相加</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:51:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64272" title="【已发布】 2015-08-31T06:58:31.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64272">Effective Objective-C Notes：GCD 实现同步锁</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:50:37.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64271" title="【已发布】 2015-03-03T15:18:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64271">Effective Objective-C Notes：理解类对象</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:18:03.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64270" title="【已发布】 2015-03-03T15:19:01.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64270">Effective Objective-C Notes：理解消息传递机制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T18:03:10.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63941" title="【已发布】 2015-03-03T15:19:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63941">Effective Objective-C Notes：Objective-C命名规范</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T16:30:09.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63930" title="【已发布】 2015-03-03T15:19:32.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63930">Effective Objective-C Notes：概览</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-28T18:28:24.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/58470" title="【已发布】 2015-06-27T05:49:54.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="58470">block没那么难（三）：block和对象的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-24T14:59:07.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/57603" title="【已发布】 2015-03-03T15:20:30.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="57603">block没那么难（二）：block和变量的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-01T12:27:48.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/51116" title="【已发布】 2015-03-03T15:20:50.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="51116" class="whiter-on-black">block没那么难（一）：block的实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-29T20:03:55.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/50592" title="【已发布】 2015-03-31T08:23:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="50592">iOS 集合的深复制与浅复制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-26T15:55:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/49713" title="【已发布】 2015-03-03T15:22:06.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="49713">[译] Block 小测验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="iOS">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">iOS</span></span>
+                            <span class="tag-count pull-right">16</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-07-13T04:50:15.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/131655" title="【已发布】 2015-07-24T18:05:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="131655">问题记录：iOS 用户行为统计代码的剥离</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-03T08:15:56.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/74039" title="【已发布】 2015-03-03T08:32:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="74039">[译] 照片框架</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-02T16:02:59.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/73867" title="【已发布】 2015-07-18T05:48:41.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="73867">Autolayout 基础</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-29T20:53:54.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/67734" title="【已发布】 2015-08-24T01:45:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="67734">ARC 下内存泄露的那些点</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-26T21:48:18.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66738" title="【已发布】 2015-03-03T15:13:03.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66738">KVO 和 KVC 的使用和实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-24T14:09:53.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66142" title="【已发布】 2015-03-03T15:14:18.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66142">iOS Events and Responder Chain</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:51:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64272" title="【已发布】 2015-08-31T06:58:31.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64272">Effective Objective-C Notes：GCD 实现同步锁</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:50:37.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64271" title="【已发布】 2015-03-03T15:18:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64271">Effective Objective-C Notes：理解类对象</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:18:03.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64270" title="【已发布】 2015-03-03T15:19:01.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64270">Effective Objective-C Notes：理解消息传递机制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T18:03:10.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63941" title="【已发布】 2015-03-03T15:19:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63941">Effective Objective-C Notes：Objective-C命名规范</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T16:30:09.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63930" title="【已发布】 2015-03-03T15:19:32.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63930">Effective Objective-C Notes：概览</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-28T18:28:24.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/58470" title="【已发布】 2015-06-27T05:49:54.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="58470">block没那么难（三）：block和对象的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-24T14:59:07.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/57603" title="【已发布】 2015-03-03T15:20:30.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="57603">block没那么难（二）：block和变量的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-01T12:27:48.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/51116" title="【已发布】 2015-03-03T15:20:50.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="51116" class="whiter-on-black">block没那么难（一）：block的实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-29T20:03:55.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/50592" title="【已发布】 2015-03-31T08:23:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="50592">iOS 集合的深复制与浅复制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-26T15:55:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/49713" title="【已发布】 2015-03-03T15:22:06.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="49713">[译] Block 小测验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="翻译">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">翻译</span></span>
+                            <span class="tag-count pull-right">2</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-03-03T08:15:56.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/74039" title="【已发布】 2015-03-03T08:32:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="74039">[译] 照片框架</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-26T15:55:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/49713" title="【已发布】 2015-03-03T15:22:06.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="49713">[译] Block 小测验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="计算机基础">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">计算机基础</span></span>
+                            <span class="tag-count pull-right">5</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-03-16T17:10:02.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/78063" title="【已发布】 2015-03-22T09:26:27.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="78063">进程间通信的方式</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-15T18:11:48.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77642" title="【已发布】 2015-03-22T15:29:44.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77642">排序算法整理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-14T19:02:38.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77440" title="【已发布】 2015-03-16T11:14:08.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77440">算法的时间复杂度</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-14T11:02:59.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77353" title="【已发布】 2015-03-15T15:27:22.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77353">HTTP 请求基础</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-13T16:42:18.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77183" title="【已发布】 2015-03-14T11:01:01.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77183">RESTful 与 HTTP</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="趣味题">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">趣味题</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-01-21T21:18:31.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/65325" title="【已发布】 2015-06-09T12:01:23.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="65325">两个超大整数相加</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+            </ul>
+            <ul id="file-list-topbar" class="dropdown-menu theme-black pull-right" role="menu">
+                <li id="search-file-bar">
+                    <i class="icon-search icon-large"></i>
+                    <input type="text" id="search-file-textbox" placeholder="搜索 MicroCai 的文稿标题， * 显示全部">
+                    <i class="icon-level-down icon-rotate-90 icon-large"></i>
+                </li>
+                <li id="tag-file-bar">
+                    以下【标签】将用于标记这篇文稿：
+                </li>
+            </ul>
+        </li>
+        <li class="preview-button-full-reader" id="preview-theme-button" title="主题切换 Ctrl+Alt+Y">
+            <span class="icon-adjust"></span>
+        </li>
+        <li class="preview-button-full-reader" id="preview-fullscreen-button" title="全屏模式 F11">
+            <span class="icon-fullscreen"></span>
+        </li>
+        <li class="preview-button-full-reader wmd-spacer"></li>
+        <li class="preview-button-full-reader dropdown" id="preview-about-button" title="关于本站">
+            <span class="dropdown-toggle icon-info-sign" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="true"></span>
+            <ul id="about-menu" class="dropdown-menu theme-black pull-right" role="menu">
+                <li title="下载全平台客户端"><a tabindex="-1" href="https://www.zybuluo.com/cmd" target="_blank"><i class="icon-laptop"></i>下载客户端</a></li>
+                <li title="@ghosert"><a tabindex="-1" href="http://www.weibo.com/ghosert" target="_blank"><i class="icon-weibo"></i>关注开发者</a></li>
+                <li title=""><a tabindex="-1" href="https://github.com/ghosert/cmd-editor/issues" target="_blank"><i class="icon-github-alt"></i>报告问题，建议</a></li>
+                <li title="support@zybuluo.com"><a tabindex="-1" href="mailto:support@zybuluo.com" target="_blank"><i class="icon-envelope"></i>联系我们</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<ul id="reader-full-toolbar-tail" class="reader-full-toolbar-tail-shown">
+    <li class="preview-button-full-reader" id="preview-hidden-button" title="隐藏工具栏 Ctrl+Alt+I">
+        <span class="icon-chevron-sign-right"></span>
+    </li>
+</ul>
+
+
+
+
+
+
+<!-- side remark, hidden when loading. -->
+<div class="remark-list side-remark-hidden">
+    <div class="remark-items">
+    </div>
+    <div class="leave-remark unselectable"><span class='icon-plus-sign-alt'></span><span>添加新批注</span></div>
+    <div class="new-remark">
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+        <div class="remark-notice">在作者公开此批注前，只有你和作者可见。</div>
+    </div>
+</div>
+
+<!-- template for new remark/reply -->
+<div class="new-remark-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="https://www.zybuluo.com/static/img/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-editor" contentEditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+</div>
+
+<!-- template for .remark-item/.remark-reply -->
+<div class="remark-item-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="https://www.zybuluo.com/static/img/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-delete-link unselectable"><span class="icon-remove"></span></div> <!--This is mainly for deleting remark-reply, shown when author/remark hovering on remark-reply.-->
+    <div class="remark-editor" contentEditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-edit btn-link">修改</button>
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+        <button class="remark-delete btn-link">删除</button>
+    </div>
+</div>
+
+<!-- template for remark-item-->
+<div class="remark-item side-remark-hidden" data-rand-id="" data-version-id="">
+    <div class="remark-published-link unselectable"><span class="icon-link icon-rotate-90"></span></div>
+    <ul class="remark-options theme unselectable">
+        <li class="remark-private"><span class="icon-eye-close"></span><span>私有</span></li>
+        <li class="remark-public"><span class="icon-group"></span><span>公开</span></li>
+        <li class="remark-delete"><span class="icon-remove"></span><span>删除</span></li>
+    </ul>
+
+    <!-- clone the template $('.remark-item-reply').html() to here.-->
+
+    <button class="remark-reply-view-more btn-link">查看更早的 5 条回复</button>
+    <div class="remark-replies">
+        <!--
+        <div class="remark-reply">
+            clone the template $('.remark-item-reply').html() to here.
+        </div>
+        -->
+    </div>
+
+    <div class="leave-reply unselectable"><span>回复批注</span></div>
+    <div class="new-reply">
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+    </div>
+</div>
+
+<!-- jiawzhang NOTICE: .remark-icons will be put to mdeditor.mako and user_note.mako, where next to .wmd-preview -->
+<!-- <div class="remark-icons"></div> -->
+
+<!-- template for remark-icon -->
+<div class="remark-icon unselectable side-remark-hidden remark-icon-empty" style="display: none;">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div>
+
+
+<!-- canvas, hidden always, this is used to convert svg to canvas and then convert canvas to png. -->
+<canvas id="svg-canvas-image" class="editor-reader-hidden-always"></canvas>
+
+
+    
+
+
+    <!-- Hidden Popup Modal -->
+    <div id="notification-popup-window" class="modal hide fade theme" tabindex="-1" role="dialog" aria-labelledby="notification-title" aria-hidden="true">
+        <div class="modal-header theme">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="notification-title">通知</h3>
+        </div>
+        <div class="modal-body theme">
+            <p></p>
+        </div>
+        <div class="modal-footer theme">
+            <button id="notification-cancel" class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button id="notification-confirm" class="btn btn-primary">确认</button>
+        </div>
+    </div>
+
+    <!-- zybuluo's foot -->
+
+    <script src="https://www.zybuluo.com/static/assets/288313bb.base.lib.min.js"></script>
+
+    <script>
+        Namespace('com.zybuluo.base');
+        com.zybuluo.base.initData = {
+            globalPromptUrl: "https://www.zybuluo.com/global/prompt",
+        };
+    </script>
+
+    
+    <!--mathjax-->
+    <!--blacker: 1 below means font weight.-->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } }, messageStyle: "none", SVG: { blacker: 1 }});
+    </script>
+    <script src="https://www.zybuluo.com/static/editor/libs/mathJax.js"></script>
+    <!--mathjax source code is here: https://github.com/mathjax/MathJax.-->
+    <script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.layout');
+        com.zybuluo.mdeditor.layout.initData = {
+            // '' means not logged in, otherwise the logged in username, for mdeditor.mako, this value will be reset in render.js otherwise, for user_note.mako, it's rendered by server side.
+            loggedInUsername: '',
+            isPageOwner: 'False' === 'True' ? true : false,
+            loginComeFromUrl: 'https://www.zybuluo.com/login?return_to=https%3A%2F%2Fwww.zybuluo.com%2FMicroCai%2Fnote%2F51116',
+            noteRemarksUrl: "https://www.zybuluo.com/note/51116/remarks", 
+            newNoteRemarkUrl: "https://www.zybuluo.com/note/51116/remark/new", 
+            updateNoteRemarkUrl: "https://www.zybuluo.com/note/51116/remark/update", 
+            deleteNoteRemarkUrl: "https://www.zybuluo.com/note/51116/remark/delete", 
+            publishNoteRemarkUrl: "https://www.zybuluo.com/note/51116/remark/publish", 
+            newNoteRemarkReplyUrl: "https://www.zybuluo.com/note/51116/remark_reply/new", 
+            updateNoteRemarkReplyUrl: "https://www.zybuluo.com/note/51116/remark_reply/update", 
+            deleteNoteRemarkReplyUrl: "https://www.zybuluo.com/note/51116/remark_reply/delete", 
+        };
+
+        // BEGIN: pace.js configuration
+        window.paceOptions = {
+            // disable others, enable for ajax call only,
+            ajax: true,
+            document: false,
+            elements: false,
+            eventLag: false,
+        };
+        // jiawzhang NOTICE: to make sure pace.js is working for any ajax call especially the jquery ajax, add 'Pace.restart()' into jquery ajax call like '$.post'
+        // Originally, pace 0.5.6 doesn't support jquery ajax, see details in: https://github.com/HubSpot/pace/issues/29
+        // END: pace.js configuration
+
+    </script>
+
+    <script src="https://www.zybuluo.com/static/assets/mdeditor/7a70106e.layout.lib.min.js"></script>
+
+    <script src="https://www.zybuluo.com/static/assets/mdeditor/56964507.layout.min.js"></script>
+
+
+
+    
+
+    <!-- https://www.zybuluo.com/static/assets/mdeditor/user_note.lib.min.js -->
+    <!-- -->
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.user_note');
+        com.zybuluo.mdeditor.user_note.initData = {
+            isLoggedIn: 'False',
+            mdeditorUrl: "https://www.zybuluo.com/mdeditor",
+            passwordPassed: 'True' === 'True' ? true : false,
+        };
+    </script>
+
+    <script src="https://www.zybuluo.com/static/assets/mdeditor/6cd3112e.user_note.min.js"></script>
+
+
+
+</body>
+</html>
+    

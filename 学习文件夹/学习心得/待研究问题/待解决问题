@@ -12,12 +12,13 @@
     drawRect、CoreGraphcis哪些方法是在后台进行的
 4.  iOS中如何做到性能优化（重要）
 5.  SDWebImage实现的原理
-6.  iOS中数据库的迁移
-7.  iOS中多张表，比如QQ的聊天记录
-8.  空闲的时候，还需了解ReactNative
-9.  block使用有什么好处
-10. GCD实现原理
-11. Core Graphics 如何渲染 Layer 层
-12. 如何根据一条曲线，来获取到其对应的贝塞尔曲线
-13. 如何理解字节对齐( coreAnimation 如何通过 copy 对位图数据进行字节对齐的)
+6.  iOS中数据库的迁移—————实现个人信息的存储，
+7.  注册或者登录的时候，如何进行加密
+8.  iOS中多张表，比如QQ的聊天记录
+9.  空闲的时候，还需了解ReactNative
+10.  block使用有什么好处
+11. GCD实现原理
+12. Core Graphics 如何渲染 Layer 层
+13. 如何根据一条曲线，来获取到其对应的贝塞尔曲线
+14. 如何理解字节对齐( coreAnimation 如何通过 copy 对位图数据进行字节对齐的)
 

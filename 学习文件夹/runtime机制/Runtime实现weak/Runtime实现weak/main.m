@@ -12,6 +12,8 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 #pragma  mark ----- 
+        NSDictionary *dic = [[NSDictionary alloc]init];
+        id Object = dic[@"key"];
         
 #pragma mark ---- 赋值(由下，可见，对象之间的赋值，并不是简单的retain,而是直接把对象里的内容，进行了类似浅拷贝copy操作)
        id obj = [[NSObject alloc]init];
@@ -21,16 +23,25 @@ int main(int argc, const char * argv[]) {
         NSLog(@"%@---%@",obj,obj1);
         obj = nil;
         NSLog(@"%@-----%@",obj,obj1);
+/*
+ 字典与哈希表相同点：
+     Hash 找不到 key 对应的 value 时，会返回一个 nil
+     字典  找不到 则会返回一个 nil
  
-#pragma mark --- weak操作(objc_storeWeak函数，是通过赋值对象，去找到赋值对象指向的地址块，所以，对应的hash表的key与value分别是key=赋值对象地址,value=__weak对象地址----也就是说：在 runtime 阶段，对于 weak 变量而言，系统使用 hash 表进行管理，将赋值对象地址作为 hash 表的 key，当赋值对象的引用计数为零的时候，系统根据赋值对象的内存地址找到所有指向该对象的 weak 变量，并将这些 weak 变量置为 nil。) 总之：__weak对象与赋值对象指向的地址块，是一样的
-        
+ objc_storeWeak函数把第二个参数--赋值对象（b）的内存地址作为键值key，将第一个参数--weak修饰的属性变量（a）的内存地址（&a）作为value，注册到 weak 表中。如果第二个参数（b）为0（nil），那么把变量（a）的内存地址（&a）从weak表中删除，
+ 你可以把objc_storeWeak(&a, b)理解为：objc_storeWeak(value, key)，并且当key变nil，将value置nil
+ */
+#pragma mark --- weak操作(objc_storeWeak函数，是通过赋值对象，去找到赋值对象指向的地址块，所以，对应的hash表的key与value分别是key=赋值对象地址,value=__weak对象地址----也就是说：在 runtime 阶段，对于 weak 变量而言，系统使用 hash 表进行管理，将赋值对象地址作为 hash 表的 key（这里的 key 是经过 hash 化后的整型数字，作为 hash 的索引），当赋值对象的引用计数为零的时候，系统根据赋值对象的内存地址找到所有指向该对象的 weak 变量，并将这些 weak 变量置为 nil。) 总之：__weak对象与赋值对象指向的地址块，是一样的，其实 objc_storeWeak 函数内部(*location = (id)newObj;)，也会调用赋值语句 value = key(但是注意这里的赋值是 assign 类型的赋值，并没有对原来的对象 retain)。
+        //在编译的时候编译器会把程序中出现的所有变量名都换成相对内存地址，变量名不占内存
         id weakNew ;
         id weakOld = [[NSObject alloc]init];
+        NSLog(@"p=%p,obj=%@",weakNew,weakNew);
         objc_storeWeak(&weakNew, weakOld);//参数一：_weak对象的地址，参数二：_weak对象指向的赋值对象
        // weakNew = [[NSObject alloc]init];
+        NSLog(@"p=%p,obj=%@",weakNew,weakNew);
         weakOld = nil;
         //objc_loadWeak(&weakNew);
-    
+        weakOld = [[NSObject alloc]init];
         objc_storeWeak(&weakNew, 0);
         
         //[weakOld release];

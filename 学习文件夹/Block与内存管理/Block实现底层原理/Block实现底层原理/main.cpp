@@ -106,18 +106,10 @@ struct __AtAutoreleasePool {
 };
 
 #define __OFFSETOFIVAR__(TYPE, MEMBER) ((long long) &((TYPE *)0)->MEMBER)
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_0 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"key",3};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_1 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"%@---%@",7};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_2 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"%@-----%@",9};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_3 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"p=%p,obj=%@",11};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_4 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"p=%p,obj=%@",11};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_5 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"%p--%@-----%p",13};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_6 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"first =  %@",11};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_7 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"origin",6};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_8 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"origion!",8};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_9 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"mutable=%@\np=%p,\n copy=%@\np=%p",30};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_10 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"copy\345\225\212",7};
-static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_11 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"%@",2};
+static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_0 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"AAAA=%d",7};
+static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_1 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"BBBB",4};
+static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_2 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"%@",2};
+static __NSConstantStringImpl __NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_3 __attribute__ ((section ("__DATA, __cfstring"))) = {__CFConstantStringClassReference,0x000007c8,"Hello, World!",13};
 
 
 
@@ -104572,447 +104564,79 @@ struct NSXPCListenerEndpoint_IMPL {
 
 /* @end */
 
-typedef struct objc_method *Method;
 
-
-typedef struct objc_ivar *Ivar;
-
-
-typedef struct objc_category *Category;
-
-
-typedef struct objc_property *objc_property_t;
-
-struct objc_class {
-    Class isa __attribute__((deprecated));
-} __attribute__((unavailable));
-
-
-
-
-
-// @class Protocol;
-#ifndef _REWRITER_typedef_Protocol
-#define _REWRITER_typedef_Protocol
-typedef struct objc_object Protocol;
-typedef struct {} _objc_exc_Protocol;
-#endif
-
-
-
-
-
-
-struct objc_method_description {
- SEL name;
- char *types;
+struct __Block_byref_a_0 {
+  void *__isa;
+__Block_byref_a_0 *__forwarding;
+ int __flags;
+ int __size;
+ int a;
 };
 
-
-typedef struct {
-    const char *name;
-    const char *value;
-} objc_property_attribute_t;
-extern "C" __attribute__((visibility("default"))) id object_copy(id obj, size_t size)
-    __attribute__((availability(macosx,introduced=10.0)))
-                        ;
-extern "C" __attribute__((visibility("default"))) id object_dispose(id obj)
-    __attribute__((availability(macosx,introduced=10.0)))
-                        ;
-extern "C" __attribute__((visibility("default"))) Class object_getClass(id obj)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Class object_setClass(id obj, Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL object_isClass(id obj)
-    __attribute__((availability(macosx,introduced=10.10)));
-extern "C" __attribute__((visibility("default"))) const char *object_getClassName(id obj)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) void *object_getIndexedIvars(id obj)
-    __attribute__((availability(macosx,introduced=10.0)))
-                        ;
-extern "C" __attribute__((visibility("default"))) id object_getIvar(id obj, Ivar ivar)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) void object_setIvar(id obj, Ivar ivar, id value)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Ivar object_setInstanceVariable(id obj, const char *name, void *value)
-    __attribute__((availability(macosx,introduced=10.0)))
-                        ;
-extern "C" __attribute__((visibility("default"))) Ivar object_getInstanceVariable(id obj, const char *name, void **outValue)
-    __attribute__((availability(macosx,introduced=10.0)))
-                        ;
-extern "C" __attribute__((visibility("default"))) Class objc_getClass(const char *name)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) Class objc_getMetaClass(const char *name)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) Class objc_lookUpClass(const char *name)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) Class objc_getRequiredClass(const char *name)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) int objc_getClassList(Class *buffer, int bufferCount)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) Class *objc_copyClassList(unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) const char *class_getName(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL class_isMetaClass(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Class class_getSuperclass(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Class class_setSuperclass(Class cls, Class newSuper)
-     __attribute__((availability(macosx,introduced=10.5,deprecated=10.5)));
-extern "C" __attribute__((visibility("default"))) int class_getVersion(Class cls)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) void class_setVersion(Class cls, int version)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) size_t class_getInstanceSize(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Ivar class_getInstanceVariable(Class cls, const char *name)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) Ivar class_getClassVariable(Class cls, const char *name)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Ivar *class_copyIvarList(Class cls, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Method class_getInstanceMethod(Class cls, SEL name)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) Method class_getClassMethod(Class cls, SEL name)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) IMP class_getMethodImplementation(Class cls, SEL name)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) IMP class_getMethodImplementation_stret(Class cls, SEL name)
-     __attribute__((availability(macosx,introduced=10.5)))
-                           ;
-extern "C" __attribute__((visibility("default"))) BOOL class_respondsToSelector(Class cls, SEL sel)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Method *class_copyMethodList(Class cls, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL class_conformsToProtocol(Class cls, Protocol *protocol)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Protocol * *class_copyProtocolList(Class cls, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) objc_property_t class_getProperty(Class cls, const char *name)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) objc_property_t *class_copyPropertyList(Class cls, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const uint8_t *class_getIvarLayout(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const uint8_t *class_getWeakIvarLayout(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL class_addMethod(Class cls, SEL name, IMP imp,
-                                 const char *types)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) IMP class_replaceMethod(Class cls, SEL name, IMP imp,
-                                    const char *types)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL class_addIvar(Class cls, const char *name, size_t size,
-                               uint8_t alignment, const char *types)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL class_addProtocol(Class cls, Protocol *protocol)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL class_addProperty(Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) void class_replaceProperty(Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount)
-     __attribute__((availability(macosx,introduced=10.7)));
-
-
-
-
-
-
-
-extern "C" __attribute__((visibility("default"))) void class_setIvarLayout(Class cls, const uint8_t *layout)
-     __attribute__((availability(macosx,introduced=10.5)));
-
-
-
-
-
-
-
-extern "C" __attribute__((visibility("default"))) void class_setWeakIvarLayout(Class cls, const uint8_t *layout)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Class objc_getFutureClass(const char *name)
-     __attribute__((availability(macosx,introduced=10.5)))
-                         ;
-extern "C" __attribute__((visibility("default"))) id class_createInstance(Class cls, size_t extraBytes)
-    __attribute__((availability(macosx,introduced=10.0)))
-                        ;
-extern "C" __attribute__((visibility("default"))) id objc_constructInstance(Class cls, void *bytes)
-    __attribute__((availability(macosx,introduced=10.6)))
-                        ;
-extern "C" __attribute__((visibility("default"))) void *objc_destructInstance(id obj)
-    __attribute__((availability(macosx,introduced=10.6)))
-                        ;
-extern "C" __attribute__((visibility("default"))) Class objc_allocateClassPair(Class superclass, const char *name,
-                                         size_t extraBytes)
-     __attribute__((availability(macosx,introduced=10.5)));
-
-
-
-
-
-
-extern "C" __attribute__((visibility("default"))) void objc_registerClassPair(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-
-
-
-
-
-
-extern "C" __attribute__((visibility("default"))) Class objc_duplicateClass(Class original, const char *name, size_t extraBytes)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) void objc_disposeClassPair(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) SEL method_getName(Method m)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) IMP method_getImplementation(Method m)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *method_getTypeEncoding(Method m)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) unsigned int method_getNumberOfArguments(Method m)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) char *method_copyReturnType(Method m)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) char *method_copyArgumentType(Method m, unsigned int index)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) void method_getReturnType(Method m, char *dst, size_t dst_len)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) void method_getArgumentType(Method m, unsigned int index,
-                                        char *dst, size_t dst_len)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) struct objc_method_description *method_getDescription(Method m)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) IMP method_setImplementation(Method m, IMP imp)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) void method_exchangeImplementations(Method m1, Method m2)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *ivar_getName(Ivar v)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *ivar_getTypeEncoding(Ivar v)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) ptrdiff_t ivar_getOffset(Ivar v)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *property_getName(objc_property_t property)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *property_getAttributes(objc_property_t property)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) objc_property_attribute_t *property_copyAttributeList(objc_property_t property, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) char *property_copyAttributeValue(objc_property_t property, const char *attributeName)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) Protocol *objc_getProtocol(const char *name)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Protocol * *objc_copyProtocolList(unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL protocol_isEqual(Protocol *proto, Protocol *other)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *protocol_getName(Protocol *p)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) struct objc_method_description protocol_getMethodDescription(Protocol *p, SEL aSel, BOOL isRequiredMethod, BOOL isInstanceMethod)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) struct objc_method_description *protocol_copyMethodDescriptionList(Protocol *p, BOOL isRequiredMethod, BOOL isInstanceMethod, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) objc_property_t protocol_getProperty(Protocol *proto, const char *name, BOOL isRequiredProperty, BOOL isInstanceProperty)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) objc_property_t *protocol_copyPropertyList(Protocol *proto, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Protocol * *protocol_copyProtocolList(Protocol *proto, unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) Protocol *objc_allocateProtocol(const char *name)
-     __attribute__((availability(macosx,introduced=10.7)));
-
-
-
-
-
-
-
-extern "C" __attribute__((visibility("default"))) void objc_registerProtocol(Protocol *proto)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) void protocol_addMethodDescription(Protocol *proto, SEL name, const char *types, BOOL isRequiredMethod, BOOL isInstanceMethod)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) void protocol_addProtocol(Protocol *proto, Protocol *addition)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) void protocol_addProperty(Protocol *proto, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount, BOOL isRequiredProperty, BOOL isInstanceProperty)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) const char **objc_copyImageNames(unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *class_getImageName(Class cls)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char **objc_copyClassNamesForImage(const char *image,
-                                                     unsigned int *outCount)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) const char *sel_getName(SEL sel)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) SEL sel_getUid(const char *str)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) SEL sel_registerName(const char *str)
-    __attribute__((availability(macosx,introduced=10.0)));
-extern "C" __attribute__((visibility("default"))) BOOL sel_isEqual(SEL lhs, SEL rhs)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) void objc_enumerationMutation(id obj)
-     __attribute__((availability(macosx,introduced=10.5)));
-
-
-
-
-
-
-extern "C" __attribute__((visibility("default"))) void objc_setEnumerationMutationHandler(void (*handler)(id))
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) void objc_setForwardHandler(void *fwd, void *fwd_stret)
-     __attribute__((availability(macosx,introduced=10.5)));
-extern "C" __attribute__((visibility("default"))) IMP imp_implementationWithBlock(id block)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) id imp_getBlock(IMP anImp)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) BOOL imp_removeBlock(IMP anImp)
-     __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) id objc_loadWeak(id *location)
-    __attribute__((availability(macosx,introduced=10.7)));
-extern "C" __attribute__((visibility("default"))) id objc_storeWeak(id *location, id obj)
-    __attribute__((availability(macosx,introduced=10.7)));
-typedef uintptr_t objc_AssociationPolicy; enum {
-    OBJC_ASSOCIATION_ASSIGN = 0,
-    OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,
-
-    OBJC_ASSOCIATION_COPY_NONATOMIC = 3,
-
-    OBJC_ASSOCIATION_RETAIN = 01401,
-
-    OBJC_ASSOCIATION_COPY = 01403
-
+struct __main_block_impl_0 {
+  struct __block_impl impl;
+  struct __main_block_desc_0* Desc;
+  __Block_byref_a_0 *a; // by ref
+  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, __Block_byref_a_0 *_a, int flags=0) : a(_a->__forwarding) {
+    impl.isa = &_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
 };
-extern "C" __attribute__((visibility("default"))) void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)
-    __attribute__((availability(macosx,introduced=10.6)));
-extern "C" __attribute__((visibility("default"))) id objc_getAssociatedObject(id object, const void *key)
-    __attribute__((availability(macosx,introduced=10.6)));
-extern "C" __attribute__((visibility("default"))) void objc_removeAssociatedObjects(id object)
-    __attribute__((availability(macosx,introduced=10.6)));
-struct objc_method_list;
+static void __main_block_func_0(struct __main_block_impl_0 *__cself) {
+  __Block_byref_a_0 *a = __cself->a; // bound by ref
 
+            (a->__forwarding->a) = 20;
+            NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_0,(a->__forwarding->a));
+        }
+static void __main_block_copy_0(struct __main_block_impl_0*dst, struct __main_block_impl_0*src) {_Block_object_assign((void*)&dst->a, (void*)src->a, 8/*BLOCK_FIELD_IS_BYREF*/);}
 
+static void __main_block_dispose_0(struct __main_block_impl_0*src) {_Block_object_dispose((void*)src->a, 8/*BLOCK_FIELD_IS_BYREF*/);}
 
+static struct __main_block_desc_0 {
+  size_t reserved;
+  size_t Block_size;
+  void (*copy)(struct __main_block_impl_0*, struct __main_block_impl_0*);
+  void (*dispose)(struct __main_block_impl_0*);
+} __main_block_desc_0_DATA = { 0, sizeof(struct __main_block_impl_0), __main_block_copy_0, __main_block_dispose_0};
 
-
-
-extern "C" __attribute__((visibility("default"))) IMP class_lookupMethod(Class cls, SEL sel)
-    __attribute__((availability(macosx,introduced=10.0,deprecated=10.5)));
-extern "C" __attribute__((visibility("default"))) BOOL class_respondsToMethod(Class cls, SEL sel)
-    __attribute__((availability(macosx,introduced=10.0,deprecated=10.5)));
-extern "C" __attribute__((visibility("default"))) void _objc_flush_caches(Class cls)
-    __attribute__((availability(macosx,introduced=10.0,deprecated=10.5)));
-
-extern "C" __attribute__((visibility("default"))) id object_copyFromZone(id anObject, size_t nBytes, void *z)
-    __attribute__((availability(macosx,introduced=10.0,deprecated=10.5)))
-                        ;
-extern "C" __attribute__((visibility("default"))) id object_realloc(id anObject, size_t nBytes) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) id object_reallocFromZone(id anObject, size_t nBytes, void *z) __attribute__((unavailable));
-
-
-extern "C" __attribute__((visibility("default"))) void *objc_getClasses(void) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) void objc_addClass(Class myClass) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) void objc_setClassHandler(int (*)(const char *)) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) void objc_setMultithreaded (BOOL flag) __attribute__((unavailable));
-
-extern "C" __attribute__((visibility("default"))) id class_createInstanceFromZone(Class, size_t idxIvars, void *z)
-    __attribute__((availability(macosx,introduced=10.0,deprecated=10.5)))
-                        ;
-
-extern "C" __attribute__((visibility("default"))) void class_addMethods(Class, struct objc_method_list *) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) void class_removeMethods(Class, struct objc_method_list *) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) void _objc_resolve_categories_for_class(Class cls) __attribute__((unavailable));
-
-extern "C" __attribute__((visibility("default"))) Class class_poseAs(Class imposter, Class original) __attribute__((unavailable));
-
-extern "C" __attribute__((visibility("default"))) unsigned int method_getSizeOfArguments(Method m) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) unsigned method_getArgumentInfo(struct objc_method *m, int arg, const char **type, int *offset) __attribute__((unavailable));
-
-extern "C" __attribute__((visibility("default"))) Class objc_getOrigClass(const char *name) __attribute__((unavailable));
-
-extern "C" __attribute__((visibility("default"))) struct objc_method_list *class_nextMethodList(Class, void **) __attribute__((unavailable));
-
-
-
-
-
-
-
-extern "C" __attribute__((visibility("default"))) id (*_alloc)(Class, size_t) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) id (*_copy)(id, size_t) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) id (*_realloc)(id, size_t) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) id (*_dealloc)(id) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) id (*_zoneAlloc)(Class, size_t, void *) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) id (*_zoneRealloc)(id, size_t, void *) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) id (*_zoneCopy)(id, size_t, void *) __attribute__((unavailable));
-extern "C" __attribute__((visibility("default"))) void (*_error)(id, const char *, va_list) __attribute__((unavailable));
-
-#ifndef _REWRITER_typedef_Object_weak
-#define _REWRITER_typedef_Object_weak
-typedef struct objc_object Object_weak;
-typedef struct {} _objc_exc_Object_weak;
-#endif
-
-struct Object_weak_IMPL {
-	struct NSObject_IMPL NSObject_IVARS;
+struct __main_block_impl_1 {
+  struct __block_impl impl;
+  struct __main_block_desc_1* Desc;
+  __main_block_impl_1(void *fp, struct __main_block_desc_1 *desc, int flags=0) {
+    impl.isa = &_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
 };
+static void __main_block_func_1(struct __main_block_impl_1 *__cself) {
 
-// @property (nonatomic, weak) id weakObjc;
-// @property (nonatomic, assign) id assignObjc;
-// @property (nonatomic, copy) id mycopyObjc;
-/* @end */
+                NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_1);
+            }
 
+static struct __main_block_desc_1 {
+  size_t reserved;
+  size_t Block_size;
+} __main_block_desc_1_DATA = { 0, sizeof(struct __main_block_impl_1)};
 int main(int argc, const char * argv[]) {
     /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool; 
+        __attribute__((__blocks__(byref))) __Block_byref_a_0 a = {(void*)0,(__Block_byref_a_0 *)&a, 0, sizeof(__Block_byref_a_0), 0};
+        void (*block)() = ((void (*)())&__main_block_impl_0((void *)__main_block_func_0, &__main_block_desc_0_DATA, (__Block_byref_a_0 *)&a, 570425344)) ;
 
-        NSDictionary *dic = ((NSDictionary *(*)(id, SEL))(void *)objc_msgSend)((id)((NSDictionary *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NSDictionary"), sel_registerName("alloc")), sel_registerName("init"));
-        id Object = ((id  _Nullable (*)(id, SEL, KeyType))(void *)objc_msgSend)((id)dic, sel_registerName("objectForKeyedSubscript:"), (id)(NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_0);
+        if(true)
+        {
 
+        }
+        else
+        {
+            block = ((void (*)())&__main_block_impl_1((void *)__main_block_func_1, &__main_block_desc_1_DATA));
+        }
+        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_2,block);
+        ((void (*)(__block_impl *))((__block_impl *)block)->FuncPtr)((__block_impl *)block);
 
-       id obj = ((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NSObject"), sel_registerName("alloc")), sel_registerName("init"));
-        id obj1;
-        obj1 = obj;
-        obj = ((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NSObject"), sel_registerName("alloc")), sel_registerName("init"));
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_1,obj,obj1);
-        obj = __null;
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_2,obj,obj1);
-        id weakNew ;
-        id weakOld = ((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NSObject"), sel_registerName("alloc")), sel_registerName("init"));
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_3,weakNew,weakNew);
-        objc_storeWeak(&weakNew, weakOld);
-
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_4,weakNew,weakNew);
-        weakOld = __null;
-
-        weakOld = ((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NSObject"), sel_registerName("alloc")), sel_registerName("init"));
-        objc_storeWeak(&weakNew, 0);
-
-
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_5,weakNew,weakNew,weakOld);
-
-
-        Object_weak *weakObjc = ((Object_weak *(*)(id, SEL))(void *)objc_msgSend)((id)((Object_weak *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("Object_weak"), sel_registerName("alloc")), sel_registerName("init"));
-        NSObject *objc = ((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass("NSObject"), sel_registerName("alloc")), sel_registerName("init"));
-        ((void (*)(id, SEL, id _Nullable))(void *)objc_msgSend)((id)weakObjc, sel_registerName("setWeakObjc:"), (id _Nullable)objc);
-        ((void (*)(id, SEL, id))(void *)objc_msgSend)((id)weakObjc, sel_registerName("setAssignObjc:"), (id)objc);
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_6,((id  _Nullable (*)(id, SEL))(void *)objc_msgSend)((id)weakObjc, sel_registerName("weakObjc")));
-
-        objc = __null;
-
-
-
-        NSMutableString *string = ((NSMutableString *(*)(id, SEL, NSString *))(void *)objc_msgSend)((id)objc_getClass("NSMutableString"), sel_registerName("stringWithString:"), (NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_7);
-        NSString *stringCopy = ((id (*)(id, SEL))(void *)objc_msgSend)((id)string, sel_registerName("copy"));
-
-        ((void (*)(id, SEL, NSString *, ...))(void *)objc_msgSend)((id)string, sel_registerName("appendFormat:"), (NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_8);
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_9,string,string,stringCopy,stringCopy);
-
-        NSString *imutablestring = ((NSString *(*)(id, SEL, NSString *, ...))(void *)objc_msgSend)((id)objc_getClass("NSString"), sel_registerName("stringWithFormat:"), (NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_10);
-        id object_test = ((id (*)(id, SEL))(void *)objc_msgSend)((id)imutablestring, sel_registerName("copy"));
-        imutablestring = __null;
-        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_f9f72b_mi_11,object_test);
+        NSLog((NSString *)&__NSConstantStringImpl__var_folders_fq_sk65gv697czgqzlmls71z45c0000gn_T_main_42db42_mi_3);
     }
     return 0;
 }

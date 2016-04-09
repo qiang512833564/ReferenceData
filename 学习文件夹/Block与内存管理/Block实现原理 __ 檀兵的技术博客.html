@@ -1,0 +1,961 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+
+
+  <meta name="keywords" content="Block,iOS," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="檀兵的技术博客" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.png?v=0.4.4" />
+
+
+<meta name="description" content="&amp;lt;!-- create time: 2015-07-11 18:44:40  --&amp;gt;
+&amp;lt;!-- This file is created from $MARBOO_HOME/.media/starts/default.md
+ 本文件由 $MARBOO_HOME/.media/starts/default.md 复制而来 --&amp;gt;
+摘要block是2010年WWDC苹果为Objective－C提供的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Block实现原理">
+<meta property="og:url" content="http://blog.itanbing.com/2015/07/18/block-implement-principle/index.html">
+<meta property="og:site_name" content="檀兵的技术博客">
+<meta property="og:description" content="&amp;lt;!-- create time: 2015-07-11 18:44:40  --&amp;gt;
+&amp;lt;!-- This file is created from $MARBOO_HOME/.media/starts/default.md
+ 本文件由 $MARBOO_HOME/.media/starts/default.md 复制而来 --&amp;gt;
+摘要block是2010年WWDC苹果为Objective－C提供的一">
+<meta property="og:updated_time" content="2015-07-20T08:32:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Block实现原理">
+<meta name="twitter:description" content="&amp;lt;!-- create time: 2015-07-11 18:44:40  --&amp;gt;
+&amp;lt;!-- This file is created from $MARBOO_HOME/.media/starts/default.md
+ 本文件由 $MARBOO_HOME/.media/starts/default.md 复制而来 --&amp;gt;
+摘要block是2010年WWDC苹果为Objective－C提供的一">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Block实现原理 // 檀兵的技术博客 </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?77b91b32137f2ba4e4250391bbd01906";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">檀兵的技术博客</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+<form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'h6KniG1j7MEXNhhWgYsb','2.0.0');
+</script>
+
+<div class="site-search-toggle"></div>
+    </div>
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Block实现原理
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-07-18T01:42:32+08:00" content="2015-07-18">
+            2015-07-18
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/iOS开发/" itemprop="url" rel="index"><span itemprop="name">iOS开发</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/07/18/block-implement-principle/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/18/block-implement-principle/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><!-- create time: 2015-07-11 18:44:40  -->
+<!-- This file is created from $MARBOO_HOME/.media/starts/default.md
+ 本文件由 $MARBOO_HOME/.media/starts/default.md 复制而来 -->
+<h2 id="摘要">摘要</h2><p>block是2010年WWDC苹果为Objective－C提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了block，用来往执行队列中添加执行。那么block到底是什么东西呢。其实它就是一个<a href="https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_%28%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%29" target="_blank" rel="external">闭包</a>，一个引用自动变量的函数。很多语言也实现自己的闭包，比如C#的lamda表达式。这篇文章将从分析源码的角度来分析下block到底是什么鬼。<br><a id="more"></a></p>
+<h2 id="最简单的block，不持有变量">最简单的block，不持有变量</h2><p>我们先新建一个源文件：block.c 代码如下</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{
+    <span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^(){<span class="built_in">printf</span>(<span class="string">"This is a block."</span>);};
+    blk();
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>我们使用<strong>clang</strong>(<strong>LLVM</strong>编译器，和GCC类似)，通过命令<code>clang -rewrite-objc block.c</code>，解析block.c<br>这样我们就会得到对应的cpp文件block.cpp。去除一些影响我们阅读的代码。如下：</p>
+<pre><code><span class="keyword">struct</span> __block_impl {
+    <span class="keyword">void</span> *isa;
+    <span class="keyword">int</span> Flags;
+    <span class="keyword">int</span> Reserved;
+    <span class="keyword">void</span> *FuncPtr;
+};
+
+<span class="keyword">struct</span> __main_block_impl_0 {
+    <span class="keyword">struct</span> __block_impl impl;
+    <span class="keyword">struct</span> __main_block_desc_0* Desc;
+    __main_block_impl_0(<span class="keyword">void</span> *fp, <span class="keyword">struct</span> __main_block_desc_0 *desc, <span class="keyword">int</span> flags=<span class="number">0</span>) {
+        impl.isa = &amp;_NSConcreteStackBlock;
+        impl.Flags = flags;
+        impl.FuncPtr = fp;
+        Desc = desc;
+    }
+};
+
+<span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(<span class="keyword">struct</span> __main_block_impl_0 *__cself) {
+    <span class="built_in">printf</span>(<span class="string">"This is a block."</span>);
+}
+
+<span class="keyword">static</span> <span class="keyword">struct</span> __main_block_desc_0 {
+    <span class="keyword">size_t</span> reserved;
+    <span class="keyword">size_t</span> Block_size;
+} __main_block_desc_0_DATA = { <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> __main_block_impl_0)};
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{
+    <span class="keyword">void</span> (*blk)(<span class="keyword">void</span>) = (<span class="keyword">void</span> (*)())&amp;__main_block_impl_0((<span class="keyword">void</span> *)__main_block_func_0
+                        ,&amp;__main_block_desc_0_DATA);
+    ((<span class="keyword">void</span> (*)(__block_impl *))((__block_impl *)blk)-&gt;FuncPtr)((__block_impl *)blk);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>下面我们来分析下源码，看看我们定义的block到底是个什么东西。<br>先看下main()函数，我们定义了block  </p>
+<pre><code>void <span class="params">(^blk)</span><span class="params">(void)</span> = ^<span class="params">()</span>{printf<span class="params">(<span class="string">"This is a block."</span>)</span>;};  
+</code></pre><p>被转化成了  </p>
+<pre><code>void <span class="comment">(*blk)(void) = (void (*)</span>())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA);
+</code></pre><p>去除影响阅读的强制转换代码后  </p>
+<pre><code>void <span class="list">(<span class="keyword">*blk</span>)</span><span class="list">(<span class="keyword">void</span>)</span> = &amp;__main_block_impl_0<span class="list">(<span class="keyword">__main_block_func_0</span>, <span class="keyword">&amp;__main_block_desc_0_DATA</span>)</span><span class="comment">;</span>
+</code></pre><p>这样就清晰了。我们写的block被转化成了指向<code>__main_block_impl_0</code>结构体的指针。构造函数的参数我们先不管，慢慢一步步分析<br>首先，我们来看下第一个struct  </p>
+<pre><code><span class="keyword">struct</span> __block_impl {
+    <span class="keyword">void</span> *isa;
+    <span class="keyword">int</span> Flags;
+    <span class="keyword">int</span> Reserved;
+    <span class="keyword">void</span> *FuncPtr;
+};  
+</code></pre><ol>
+<li>isa指针，如果我们对runtime了解的话，就明白isa指向Class的指针。</li>
+<li>Flags，当block被copy时，应该执行的操作</li>
+<li>Reserved为保留字段</li>
+<li>FuncPtr指针，指向block内的函数实现  </li>
+</ol>
+<p><code>__block_impl</code>保存block的类型isa（如&amp;_NSConcreteStackBlock），标识（当block发生copy时，会用到），block的方法。方法实现如下</p>
+<pre><code><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(<span class="keyword">struct</span> __main_block_impl_0 *__cself) {
+    <span class="built_in">printf</span>(<span class="string">"This is a block."</span>);
+}  
+</code></pre><p>下面我们再看一个结构体</p>
+<pre><code><span class="keyword">static</span> <span class="keyword">struct</span> __main_block_desc_0 {
+    <span class="keyword">size_t</span> reserved;
+    <span class="keyword">size_t</span> Block_size;
+} __main_block_desc_0_DATA = { <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> __main_block_impl_0)};  
+</code></pre><ol>
+<li>reserved为保留字段默认为0</li>
+<li>Block_size为<code>sizeof(struct __main_block_impl_0)</code>，用来表示block所占内存大小。因为没有持有变量，block大小为impl的大小加上Desc指针大小</li>
+<li><code>__main_block_desc_0_DATA</code>为<strong>main_block_desc_0的一个结构体实例<br>这个结构体，用来描述block的大小等信息。如果持有可修改的捕获变量时（即加`</strong>block`），会增加两个函数（copy和dispose），我们后面会分析</li>
+</ol>
+<p>再看最重要的一个结构体<code>__main_block_impl_0</code></p>
+<pre><code><span class="keyword">struct</span> __main_block_impl_0 {
+    <span class="keyword">struct</span> __block_impl <span class="keyword">impl</span>;
+    <span class="keyword">struct</span> __main_block_desc_0* Desc;
+    __main_block_impl_0(void *fp, <span class="keyword">struct</span> __main_block_desc_0 *desc, <span class="keyword">int</span> flags=<span class="number">0</span>) {
+        <span class="keyword">impl</span>.isa = &amp;_NSConcreteStackBlock;
+        <span class="keyword">impl</span>.Flags = flags;
+        <span class="keyword">impl</span>.FuncPtr = fp;
+        Desc = desc;
+    }
+};  
+</code></pre><p><code>__main_block_impl_0</code>里面有两个变量<code>struct __block_impl impl</code>和<code>struct __main_block_desc_0</code></p>
+<pre><code>__main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, int <span class="variable">flags=</span><span class="number">0</span>) {
+    impl.<span class="variable">isa =</span> &amp;_NSConcreteStackBlock;
+    impl.<span class="variable">Flags =</span> flags;
+    impl.<span class="variable">FuncPtr =</span> fp;
+    <span class="variable">Desc =</span> desc;
+}  
+</code></pre><p>结构体构造函数用来初始化变量<code>__main_block_impl_0</code>和<code>__main_block_desc_0</code><br>注：clang转换的代码和真实运行时有区别。应该为<code>impl.isa = &amp;_NSConcreteGlobalBlock</code></p>
+<p>我们再来看下最开始的  </p>
+<pre><code>void <span class="list">(<span class="keyword">*blk</span>)</span><span class="list">(<span class="keyword">void</span>)</span> = &amp;__main_block_impl_0<span class="list">(<span class="keyword">__main_block_func_0</span>, <span class="keyword">&amp;__main_block_desc_0_DATA</span>)</span><span class="comment">;  </span>
+</code></pre><p>我们可以看到，block其实就是指向<code>__main_block_impl_0</code>的结构体指针，这个结构体包含两个<code>__block_impl</code>和<code>__main_block_desc_0</code>两个结构体，和一个方法。<br>通过上面的分析，是不是很已经清晰了<br>最后，main函数里面的  </p>
+<pre><code><span class="list">(<span class="list">(<span class="keyword">void</span> <span class="list">(<span class="keyword"><span class="built_in">*</span></span>)</span><span class="list">(<span class="keyword">__block_impl</span> *)</span>)</span><span class="list">(<span class="list">(<span class="keyword">__block_impl</span> *)</span>blk)</span>-&gt;FuncPtr)</span><span class="list">(<span class="list">(<span class="keyword">__block_impl</span> *)</span>blk)</span><span class="comment">;</span>
+</code></pre><p>同样，去除转化代码，上面的代码就可以转化为  </p>
+<pre><code>blk-&gt;FuncPtr<span class="list">(<span class="keyword">blk</span>)</span><span class="comment">; </span>
+</code></pre><p>执行block函数  </p>
+<p>这样我们就完成了，对简单block实现的分析。是不是很简单</p>
+<h2 id="持有变量的block">持有变量的block</h2><p>我们知道block可以持有变量，现在我们实现一个持有变量的block。修改下原来的block.c源文件</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{
+    <span class="keyword">int</span> i = <span class="number">4</span>;
+    <span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^(){<span class="built_in">printf</span>(<span class="string">"i = %d"</span>, i);};
+    i++;
+    blk();
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>同样的，使用clang命令转化下上述代码</p>
+<pre><code><span class="keyword">struct</span> __block_impl {
+    <span class="keyword">void</span> *isa;
+    <span class="keyword">int</span> Flags;
+    <span class="keyword">int</span> Reserved;
+    <span class="keyword">void</span> *FuncPtr;
+};
+
+<span class="keyword">struct</span> __main_block_impl_0 {
+    <span class="keyword">struct</span> __block_impl impl;
+    <span class="keyword">struct</span> __main_block_desc_0* Desc;
+    <span class="keyword">int</span> i;
+    __main_block_impl_0(<span class="keyword">void</span> *fp, <span class="keyword">struct</span> __main_block_desc_0 *desc, <span class="keyword">int</span> _i, <span class="keyword">int</span> flags=<span class="number">0</span>) : i(_i) {
+        impl.isa = &amp;_NSConcreteStackBlock;
+        impl.Flags = flags;
+        impl.FuncPtr = fp;
+        Desc = desc;
+    }
+};
+<span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(<span class="keyword">struct</span> __main_block_impl_0 *__cself) {
+    <span class="keyword">int</span> i = __cself-&gt;i; <span class="comment">// bound by copy</span>
+    <span class="built_in">printf</span>(<span class="string">"i=%d"</span>, i);
+}
+
+<span class="keyword">static</span> <span class="keyword">struct</span> __main_block_desc_0 {
+    <span class="keyword">size_t</span> reserved;
+    <span class="keyword">size_t</span> Block_size;
+} __main_block_desc_0_DATA = { <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> __main_block_impl_0)};
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{
+    <span class="keyword">int</span> i = <span class="number">4</span>;
+    <span class="keyword">void</span> (*blk)(<span class="keyword">void</span>) = (<span class="keyword">void</span> (*)())&amp;__main_block_impl_0((<span class="keyword">void</span> *)__main_block_func_0, &amp;__main_block_desc_0_DATA, i);
+    ((<span class="keyword">void</span> (*)(__block_impl *))((__block_impl *)blk)-&gt;FuncPtr)((__block_impl *)blk);
+    i++;
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>我们只看下在持有变量时，block转化，有哪些不同</p>
+<pre><code><span class="keyword">struct</span> __main_block_impl_0 {
+    <span class="keyword">struct</span> __block_impl <span class="keyword">impl</span>;
+    <span class="keyword">struct</span> __main_block_desc_0* Desc;
+    <span class="keyword">int</span> i;  <span class="comment">/*看这里～看这里～*/</span>
+    __main_block_impl_0(void *fp, <span class="keyword">struct</span> __main_block_desc_0 *desc, <span class="keyword">int</span> _i, <span class="keyword">int</span> flags=<span class="number">0</span>) : i(_i) {
+        <span class="keyword">impl</span>.isa = &amp;_NSConcreteStackBlock;
+        <span class="keyword">impl</span>.Flags = flags;
+        <span class="keyword">impl</span>.FuncPtr = fp;
+        Desc = desc;
+    }
+};
+</code></pre><p><code>__main_block_impl_0</code>结构体多了一个变量i。这个变量用来保存main函数的变量i。</p>
+<pre><code><span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(<span class="keyword">struct</span> __main_block_impl_0 *__cself) {
+    <span class="keyword">int</span> i = __cself-&gt;i; <span class="comment">// bound by copy</span>
+    <span class="built_in">printf</span>(<span class="string">"i=%d"</span>, i);
+}
+</code></pre><p>在执行block时，取出的i为__main_block_impl_0保存的值，这两个变量不是同一个。这就是为什么我们执行了i++操作，再执行block，i的值仍然不变的原因</p>
+<h2 id="可修改持有变量的block">可修改持有变量的block</h2><p>为了修改持有变量，我们在变量前面加上<code>__block</code>，修改后的block.c如下  </p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{
+    __block <span class="keyword">int</span> i = <span class="number">4</span>;
+    <span class="keyword">void</span> (^blk)(<span class="keyword">void</span>) = ^(){<span class="built_in">printf</span>(<span class="string">"i = %d"</span>, i);};
+    i++;
+    blk();
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>转化后的代码如下</p>
+<pre><code><span class="keyword">struct</span> __block_impl {
+    <span class="keyword">void</span> *isa;
+    <span class="keyword">int</span> Flags;
+    <span class="keyword">int</span> Reserved;
+    <span class="keyword">void</span> *FuncPtr;
+};
+
+<span class="keyword">struct</span> __Block_byref_i_0 {
+    <span class="keyword">void</span> *__isa;
+    __Block_byref_i_0 *__forwarding;
+    <span class="keyword">int</span> __flags;
+    <span class="keyword">int</span> __size;
+    <span class="keyword">int</span> i;
+};
+
+<span class="keyword">struct</span> __main_block_impl_0 {
+    <span class="keyword">struct</span> __block_impl impl;
+    <span class="keyword">struct</span> __main_block_desc_0* Desc;
+    __Block_byref_i_0 *i; <span class="comment">// by ref</span>
+    __main_block_impl_0(<span class="keyword">void</span> *fp, <span class="keyword">struct</span> __main_block_desc_0 *desc, __Block_byref_i_0 *_i, <span class="keyword">int</span> flags=<span class="number">0</span>) : i(_i-&gt;__forwarding) {
+        impl.isa = &amp;_NSConcreteStackBlock;
+        impl.Flags = flags;
+        impl.FuncPtr = fp;
+        Desc = desc;
+    }
+};
+<span class="keyword">static</span> <span class="keyword">void</span> __main_block_func_0(<span class="keyword">struct</span> __main_block_impl_0 *__cself) {
+    __Block_byref_i_0 *i = __cself-&gt;i; <span class="comment">// bound by ref</span>
+
+    (i-&gt;__forwarding-&gt;i)++;
+    <span class="built_in">printf</span>(<span class="string">"i=%d"</span>, (i-&gt;__forwarding-&gt;i));
+}
+
+<span class="keyword">static</span> <span class="keyword">void</span> __main_block_copy_0(<span class="keyword">struct</span> __main_block_impl_0*dst, <span class="keyword">struct</span> __main_block_impl_0*src) {
+    _Block_object_assign((<span class="keyword">void</span>*)&amp;dst-&gt;i, (<span class="keyword">void</span>*)src-&gt;i, <span class="number">8</span><span class="comment">/*BLOCK_FIELD_IS_BYREF*/</span>);
+}
+
+<span class="keyword">static</span> <span class="keyword">void</span> __main_block_dispose_0(<span class="keyword">struct</span> __main_block_impl_0*src) {
+    _Block_object_dispose((<span class="keyword">void</span>*)src-&gt;i, <span class="number">8</span><span class="comment">/*BLOCK_FIELD_IS_BYREF*/</span>);
+}
+
+<span class="keyword">static</span> <span class="keyword">struct</span> __main_block_desc_0 {
+    <span class="keyword">size_t</span> reserved;
+    <span class="keyword">size_t</span> Block_size;
+    <span class="keyword">void</span> (*copy)(<span class="keyword">struct</span> __main_block_impl_0*, <span class="keyword">struct</span> __main_block_impl_0*);
+    <span class="keyword">void</span> (*dispose)(<span class="keyword">struct</span> __main_block_impl_0*);
+} __main_block_desc_0_DATA = { <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> __main_block_impl_0), __main_block_copy_0, __main_block_dispose_0};
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{
+    __attribute__((__blocks__(byref))) __Block_byref_i_0 i = {(<span class="keyword">void</span>*)<span class="number">0</span>,(__Block_byref_i_0 *)&amp;i, <span class="number">0</span>, <span class="keyword">sizeof</span>(__Block_byref_i_0), <span class="number">4</span>};
+    <span class="keyword">void</span> (*blk)(<span class="keyword">void</span>) = (<span class="keyword">void</span> (*)())&amp;__main_block_impl_0((<span class="keyword">void</span> *)__main_block_func_0, &amp;__main_block_desc_0_DATA, (__Block_byref_i_0 *)&amp;i, <span class="number">570425344</span>);
+    ((<span class="keyword">void</span> (*)(__block_impl *))((__block_impl *)blk)-&gt;FuncPtr)((__block_impl *)blk);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>我们发现当我们想要修改持有变量时，转化后的代码有所增加。当我们在变量前面加上<code>__block</code>时，就会生成一个结构体，来保存变量值。<br>新增了结构体<code>__Block_byref_i_0</code>，实现如下  </p>
+<pre><code>struct __Block_byref_i_0 {
+    void *__isa<span class="comment">;</span>
+    __Block_byref_i_0 *__forwarding<span class="comment">;</span>
+    int __flags<span class="comment">;</span>
+    int __size<span class="comment">;</span>
+    int i<span class="comment">;</span>
+}<span class="comment">;</span>
+</code></pre><ol>
+<li>__isa指向变量Class</li>
+<li>____forwarding，指向自己的指针，当从栈copy到堆时，指向堆上的block</li>
+<li>__flags，当block被copy时，标识被捕获的对象，该执行的操作</li>
+<li>__size，结构体大小</li>
+<li>i，持有的变量</li>
+</ol>
+<p>看下转换后的main函数</p>
+<pre><code>__attribute__<span class="params">(<span class="params">(__blocks__<span class="params">(byref)</span>)</span>)</span> __Block_byref_i_0 i = {<span class="params">(void*)</span><span class="number">0</span>,<span class="params">(__Block_byref_i_0 *)</span>&amp;i, <span class="number">0</span>, sizeof<span class="params">(__Block_byref_i_0)</span>, <span class="number">4</span>};
+</code></pre><p>即<br>    <strong>Block_byref_i_0 i = {(void*)0,&amp;i, 0, sizeof(</strong>Block_byref_i_0), 4};<br><code>int i = 4</code>被转化成上述代码。它被转化成结构体<code>__Block_byref_i_0</code>。<code>__Block_byref_i_0</code>持有变量i。</p>
+<pre><code>i++<span class="comment">;</span>
+blk()<span class="comment">;</span>
+</code></pre><p>也转化成对<code>__Block_byref_i_0</code>中的变量i进行++运算</p>
+<pre><code><span class="keyword">static</span> <span class="type">void</span> __main_block_func_0(struct __main_block_impl_0 *__cself) {
+    __Block_byref_i_0 *i = __cself-&gt;i; // bound by <span class="keyword">ref</span>
+
+    (i-&gt;__forwarding-&gt;i)++;
+    printf(<span class="string">"i=%d"</span>, (i-&gt;__forwarding-&gt;i));
+}
+</code></pre><p>这样便达到对i值的修改</p>
+<h2 id="Block_copy(…)的实现">Block_copy(…)的实现</h2><p>根据<a href="http://opensource.apple.com/source/clang/clang-137/src/projects/compiler-rt/BlocksRuntime/Block.h" target="_blank" rel="external">Block.h</a>上显示，Block_copy(…)被定义如下：</p>
+<pre><code><span class="hexcolor">#def</span>ine <span class="function"><span class="title">Block_copy</span><span class="params">(...)</span></span> ((__typeof(__VA_ARGS__))_Block_copy((const void *)(__VA_ARGS__)))
+</code></pre><p><code>_Block_copy</code>被声明在<a href="http://opensource.apple.com/source/clang/clang-137/src/projects/compiler-rt/BlocksRuntime/runtime.c" target="_blank" rel="external">runtime.c</a>中，对应实现：</p>
+<pre><code><span class="keyword">void</span> *_Block_copy(<span class="keyword">const</span> <span class="keyword">void</span> *arg) {
+    <span class="function"><span class="keyword">return</span> <span class="title">_Block_copy_internal</span><span class="params">(arg, WANTS_ONE)</span></span>;
+}
+</code></pre><p>该方法调用了</p>
+<pre><code>/* <span class="type">Copy</span>, <span class="keyword">or</span> bump refcount, <span class="keyword">of</span> a <span class="keyword">block</span>.  <span class="type">If</span> really copying, call the copy helper <span class="keyword">if</span> present. */
+<span class="keyword">static</span> <span class="type">void</span> *_Block_copy_internal(<span class="keyword">const</span> <span class="type">void</span> *arg, <span class="keyword">const</span> <span class="type">int</span> flags) {
+    struct <span class="type">Block_layout</span> *aBlock;
+    ...
+    <span class="keyword">if</span> (aBlock-&gt;flags &amp; <span class="type">BLOCK_NEEDS_FREE</span>) {
+        // latches on high
+        latching_incr_int(&amp;aBlock-&gt;flags);
+        <span class="keyword">return</span> aBlock;
+    }
+    <span class="keyword">else</span> <span class="keyword">if</span> (aBlock-&gt;flags &amp; <span class="type">BLOCK_IS_GLOBAL</span>) {
+        <span class="keyword">return</span> aBlock;
+    }
+
+    // <span class="type">Its</span> a stack <span class="keyword">block</span>.  <span class="type">Make</span> a copy.
+    struct <span class="type">Block_layout</span> *<span class="literal">result</span> = malloc(aBlock-&gt;descriptor-&gt;size);
+    <span class="keyword">if</span> (!<span class="literal">result</span>) <span class="keyword">return</span> (<span class="type">void</span> *)<span class="number">0</span>;
+    memmove(<span class="literal">result</span>, aBlock, aBlock-&gt;descriptor-&gt;size); // bitcopy first
+    // reset refcount
+    <span class="literal">result</span>-&gt;flags &amp;= ~(<span class="type">BLOCK_REFCOUNT_MASK</span>);    // <span class="type">XXX</span> <span class="keyword">not</span> needed
+    <span class="literal">result</span>-&gt;flags |= <span class="type">BLOCK_NEEDS_FREE</span> | <span class="number">1</span>;
+    <span class="literal">result</span>-&gt;isa = _NSConcreteMallocBlock;
+    <span class="keyword">if</span> (<span class="literal">result</span>-&gt;flags &amp; <span class="type">BLOCK_HAS_COPY_DISPOSE</span>) {
+        //printf(<span class="string">"calling block copy helper %p(%p, %p)...\n"</span>, aBlock-&gt;descriptor-&gt;copy, <span class="literal">result</span>, aBlock);
+        (*aBlock-&gt;descriptor-&gt;copy)(<span class="literal">result</span>, aBlock); // <span class="keyword">do</span> fixup            
+        <span class="keyword">return</span> <span class="literal">result</span>;
+    }
+}
+</code></pre><p>当原始block在堆上时，引用计数+1。当为全局block时，copy不做任何操作  </p>
+<pre><code>// <span class="type">Its</span> a stack <span class="keyword">block</span>.  <span class="type">Make</span> a copy.
+struct <span class="type">Block_layout</span> *<span class="literal">result</span> = malloc(aBlock-&gt;descriptor-&gt;size);
+<span class="keyword">if</span> (!<span class="literal">result</span>) <span class="keyword">return</span> (<span class="type">void</span> *)<span class="number">0</span>;
+memmove(<span class="literal">result</span>, aBlock, aBlock-&gt;descriptor-&gt;size); // bitcopy first
+// reset refcount
+<span class="literal">result</span>-&gt;flags &amp;= ~(<span class="type">BLOCK_REFCOUNT_MASK</span>);    // <span class="type">XXX</span> <span class="keyword">not</span> needed
+<span class="literal">result</span>-&gt;flags |= <span class="type">BLOCK_NEEDS_FREE</span> | <span class="number">1</span>;
+<span class="literal">result</span>-&gt;isa = _NSConcreteMallocBlock;
+<span class="keyword">if</span> (<span class="literal">result</span>-&gt;flags &amp; <span class="type">BLOCK_HAS_COPY_DISPOSE</span>) {
+    //printf(<span class="string">"calling block copy helper %p(%p, %p)...\n"</span>, aBlock-&gt;descriptor-&gt;copy, <span class="literal">result</span>, aBlock);
+    (*aBlock-&gt;descriptor-&gt;copy)(<span class="literal">result</span>, aBlock); // <span class="keyword">do</span> fixup
+}
+</code></pre><p>当block在栈上时，调用Block_copy，block将被copy到堆上。如果block实现了copy和dispose方法，则调用对应的方法，来处理捕获的变量。</p>
+<h2 id="小节">小节</h2><p>通过上面的分析，相信大家对block有了更加清晰的理解。😊<br>如果大家有兴趣，可以看下block在<a href="http://opensource.apple.com/source/clang/clang-137/src/projects/compiler-rt/BlocksRuntime/runtime.c" target="_blank" rel="external">runtime的源码</a>，结合我们上面转换的c++代码，可以看到更完整实现细节。下节，我将从使用block所引发的retain cycle问题，来分析<a href="http://opensource.apple.com/source/clang/clang-137/src/projects/compiler-rt/BlocksRuntime/runtime.c" target="_blank" rel="external">runtime的源码</a>。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Block/" rel="tag">#Block</a>
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/20/block-retain-cycle-problem/" rel="prev">MRC和ARC下使用block的循环引用问题</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+                  <div class="ds-thread" data-thread-key="2015/07/18/block-implement-principle/"
+                       data-title="Block实现原理" data-url="http://blog.itanbing.com/2015/07/18/block-implement-principle/">
+                  </div>
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="檀兵" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">檀兵</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最简单的block，不持有变量"><span class="nav-number">2.</span> <span class="nav-text">最简单的block，不持有变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持有变量的block"><span class="nav-number">3.</span> <span class="nav-text">持有变量的block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可修改持有变量的block"><span class="nav-number">4.</span> <span class="nav-text">可修改持有变量的block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Block_copy(…)的实现"><span class="nav-number">5.</span> <span class="nav-text">Block_copy(…)的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小节"><span class="nav-number">6.</span> <span class="nav-text">小节</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">檀兵</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"itanbing"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>
