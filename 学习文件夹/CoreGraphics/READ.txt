@@ -25,7 +25,7 @@ CALayer 只需要一些与自己相关的内存：只有它的寄宿图会消耗
    不会出现像素化
 2.只绘制需要绘制的 rect,而不重绘脏矩形 -setNeedsDisplayInRect：
 
-
+UIGraphicsBeginImageContext / drawRect 都是在 main thread 上，CGBitmapContextCreate 并不需要在 main thread 上，可以放在 background thread
 UIGraphicsBeginImageContext 是在建立于 CGBitmapContextCreate 之上对 UIKit 进行封装的，同时也会导致其功能性降低。因此 UIGraphicsBeginImageContext 是仅仅只能够在 main thread 上进行调用
 UIGraphicsBeginImageContext 、 UIImage、UIColor、UIFont 目前都是现成安全的
 

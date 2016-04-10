@@ -25,9 +25,11 @@ int main(int argc, const char * argv[]) {
         NSLog(@"%@-----%@",obj,obj1);
 /*
  字典与哈希表相同点：
-     Hash 找不到 key 对应的 value 时，会返回一个 nil
-     字典  找不到 则会返回一个 nil
- 
+     Hash 找不到 key 对应的 value 时，会返回一个 nil （Hash 可以存储大量的值，相同的 key 以链表的时候）
+     字典  找不到 则会返回一个 nil                   （字典只是一般的 key - value  形式）
+           不同点：
+     Hash 是线程安全的，同时可以有几个线程进行读取，但是只能存在一个线程进行 写入
+     字典  并不是线程安全的
  objc_storeWeak函数把第二个参数--赋值对象（b）的内存地址作为键值key，将第一个参数--weak修饰的属性变量（a）的内存地址（&a）作为value，注册到 weak 表中。如果第二个参数（b）为0（nil），那么把变量（a）的内存地址（&a）从weak表中删除，
  你可以把objc_storeWeak(&a, b)理解为：objc_storeWeak(value, key)，并且当key变nil，将value置nil
  */

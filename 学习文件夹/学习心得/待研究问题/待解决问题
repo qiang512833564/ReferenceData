@@ -16,9 +16,11 @@
 7.  注册或者登录的时候，如何进行加密
 8.  iOS中多张表，比如QQ的聊天记录
 9.  空闲的时候，还需了解ReactNative
-10.  block使用有什么好处
+10. block使用有什么好处
 11. GCD实现原理
-12. Core Graphics 如何渲染 Layer 层
+12. Core Animation 如何渲染 Layer 层                   
 13. 如何根据一条曲线，来获取到其对应的贝塞尔曲线
-14. 如何理解字节对齐( coreAnimation 如何通过 copy 对位图数据进行字节对齐的)
-
+14. 如何理解字节对齐( coreAnimation 如何通过 copy 对位图数据进行字节对齐的) —— 已解决
+15. AsyncDisplayKit 如何优化性能的？
+16. tableView 性能优化
+17. 学习 facebook 下的 pop 动画，以及 C++

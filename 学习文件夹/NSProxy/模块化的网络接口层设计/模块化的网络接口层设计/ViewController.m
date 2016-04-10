@@ -29,7 +29,6 @@
     [[HttpProxy sharedInstance]getUserWithID:@100];
     [[HttpProxy sharedInstance]getCommentsWithDate:[NSDate date]];
     
-    
 }
 - (void)forwardInvocation:(NSInvocation *)invocation {
     void *null = NULL;

@@ -1,3 +1,6 @@
+
+https://code.facebook.com/projects/  (Facebook github 官方地址)
+
 syncDisplayKit
 
 AsyncDisplayKit 是 Facebook 推出的用于保持界面流畅性的框架，其原理大致如下：

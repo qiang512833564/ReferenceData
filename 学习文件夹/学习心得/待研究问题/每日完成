@@ -10,10 +10,22 @@
 
 4.9   CoreAnimation 的理解（不仅仅只用来做动画的，也用来管理layer层）
       layer 层的结构：modelLayer、presentationLayer、渲染树（保存着 presentationLayer 渲染显示的相关数据）
+      对于 layer 层的代理方法 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx  ：
+      CATiledLayer 是 background thread 调用的 
+      CALayer 的 drawsAsynachronously 属性设置为 YES 时，是在 main thread 上调用的，但是方法里面的 CG 开头的命令会被存储，之后再在 background thread 上去执行
       类似 SDWebImage 图片处理优化，了解网络图片显示的大体步骤，以及优化思路，其中需要注意：在位图数据不是字节对齐的时候 CoreAnimation 会 copy 一份位图数据并进行字节对齐，以及这个 UIImageView 是通过 layer 的 content 设置 image 为待显示的对象， layer 层的渲染是通过 Core Animation 进行的，
       CoreAnimation 相对于 CoreGraphics 有很多优点：
       1. CALayer 只需要一些与自己相关的内存：只有它的寄宿图会消耗一定的内存空间
       2. CoreAnimation 较 CoreGraphics 效率高，因为 CoreAnimation 是基于 OpenGL 与 Core Graphics 两者之上的
       UIGraphicsBeginImageContextWithOptions 与 CGBitmapContextCreate 区别：UIGraphicsBeginImageContextWithOptions 是通过 UIKit 的方法去加载 context 的，并且是线程安全的，而且仅仅只是在 main thread 才能生效
       UIGraphicsBeginImageContextWithOptions 与 drawRect 内存消耗，都是一样的，只是 UIGraphicsBeginImageContextWithOptions 创建的寄宿图，可以通过 UIGraphicsEndImageContext方法去手动释放，而 drawRect 创建的寄宿图会一直存在，直到该 view 被释放掉
+
+4.10  block 实现原理(__block 关键字)
+      weak 关键字， runtime 通过实现原理（runtime 动态创建 class 的时候，如何添加 weak 属性）
+      id 类型是一个 Objective-C 对象，但并不都是指向继承自 NSObject 的对象，即使这个类型和 NSObject 对象有很多共同的方法，（id 它只是简单地申明了指向对象的指针，没有给编译器任何类型信息，因此，编译器不会做类型检查，可以发送任何信息给 id 类型的对象，都不会产生编译错误）
+      NSObject 与 <NSObject> 两者之间有什么关系， <NSObject> 协议只是，NSProxy 与 NSObject 是同一级别的， Foundation/Cocoa 对象并不都继承自 NSObject,很有一些和 NSObject 一样级别的根类，
+      NSObject 协议定义了一套基础方法（所有的根类都可以去实现），也就是说 <NSObject> 协议里方法或者属性只是 NSObject 对象中的最基础方法或者属性。
+      NSProxy 遵循 <NSObject> 协议意味着你可以依靠实现 NSProxy 来实现 NSObject 方法。
+      NSProxy 的作用：建立 proxy 对象，通常是为了留给大多数未实现的方法，所以他们就可以使用一个forwardInvocation: 方法来转发。把 NSObject 作为子类则可能会引入更多包，那样将会冲突。而 NSProxy 可以避免，因为提供了一个简单的超类，所以不会有多余的东西在里面。
+      UIGraphicsBeginImageContextWithOptions 与 drawRect 都是在线程上进行的（除了 CATiledLayer 与 CALayer 的 drawsAsynachronously）
       
