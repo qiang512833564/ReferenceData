@@ -1,0 +1,4 @@
+
+1. tableView 延迟加载图片的新思路：
+   UIImage *downloadedImage = ....;
+   [self.avatarimageView performSelector:@selector(setImage:) withObject:downloadedImage afterDelay:0 inMode:@[NSDefaultRunloopMode]];

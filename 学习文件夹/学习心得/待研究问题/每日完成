@@ -29,3 +29,5 @@
       NSProxy 的作用：建立 proxy 对象，通常是为了留给大多数未实现的方法，所以他们就可以使用一个forwardInvocation: 方法来转发。把 NSObject 作为子类则可能会引入更多包，那样将会冲突。而 NSProxy 可以避免，因为提供了一个简单的超类，所以不会有多余的东西在里面。
       UIGraphicsBeginImageContextWithOptions 与 drawRect 都是在线程上进行的（除了 CATiledLayer 与 CALayer 的 drawsAsynachronously）
       
+4.10  大文件下载（通过对 NSURLConnection、NSURLSession 的使用）
+      图片解码通过 background thread 对 bitmap 位图的创建，来进行性能优化（理解代码的含义，见SDWebImage理解中缓存工程）

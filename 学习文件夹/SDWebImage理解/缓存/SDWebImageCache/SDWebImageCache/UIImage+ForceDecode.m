@@ -43,11 +43,26 @@
     BOOL anyNonAlpha = (infoMask == kCGImageAlphaNone ||
                         infoMask == kCGImageAlphaNoneSkipFirst ||
                         infoMask == kCGImageAlphaNoneSkipLast);
+    // kCGImageAlphaNoneSkipLast、kCGImageAlphaNoneSkipFirst、kCGImageAlphaNone 三者是等效的
+    // kCGImageAlphaNone 没有alpha通道。如果在颜色空间中总大小的像素的数量大于所需的空间颜色组件,导致最重要的部分将被忽略。
     
+    // CGBitmapContextCreate doesn't support kCGImageAlphaNone with RGB.
+    /*
+     I desperately need to create a CGContextRef WITHOUT an alpha channel. Unfortunately, with Core Graphics you CANNOT specify kCGImageAlphaNone with CGBitmapCreateContext.
+     解决办法：
+     CGContextRef gc = CGBitmapContextCreate(NULL, myWidth, myHeight, 8, myWidth * 4,
+     myColorSpace, kCGImageAlphaNoneSkipLast);
+     */
     if (infoMask == kCGImageAlphaNone && CGColorSpaceGetNumberOfComponents(colorSpace)) {
-        bitmapInfo &= ~kCGBitmapAlphaInfoMask;
+        //CGColorSpaceGetNumberOfComponents 返回指定 colorSpace  的 color components 的数目（不包含 alpha value）
+        // For example, for an RGB color space, CGColorSpaceGetNumberOfComponents returns a value of 3.
         
-        bitmapInfo |= kCGImageAlphaNoneSkipFirst;
+        // unset the old alpha info.（个人理解：就是去除旧的 alpha 信息）
+        bitmapInfo &= ~kCGBitmapAlphaInfoMask;//(x &= ~y 等价于 x=x&(~y),先对 y 取反，再和 x 做与运算)
+        // kCGBitmapAlphaInfoMask --  alpha information 的包装. Use this to extract （获取） alpha information that specifies（指定） whether（是否）a bitmap contains an alpha channel and how the alpha channel is generated（生成）.
+        
+        // set noneSkipFirst （个人理解：设置新的 alpha 信息---只是这个是一个 kCGImageAlphaNoneSkipFirst（表示图片像素不包含 alpha 值，用于 reate a CGContextRef WITHOUT an alpha channel））
+        bitmapInfo |= kCGImageAlphaNoneSkipFirst;//(x |= y 等价于 x = x|y,为位运算里面的或)
     }else if (!anyNonAlpha && CGColorSpaceGetNumberOfComponents(colorSpace)) {
         bitmapInfo &= ~kCGBitmapAlphaInfoMask;
         bitmapInfo |= kCGImageAlphaPremultipliedFirst;
