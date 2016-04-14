@@ -17,7 +17,7 @@ runloop还可以在loop处于循环中的同时响应其他输入源，比如界
 使用情况：
 1.使用端口或自定义输入源和其他线程通信
 2.使用线程的定时器 
-3.cocoa中使用任何performSelector...的方法
+3.cocoa中使用任何performSelector...的方法(performSelector 在哪个线程下调用，performSelector 执行的方法就在该线程下执行)
 4.使线程周期性工作
 
 Runloop接收两种事件源：input sources和timer sources
@@ -36,7 +36,9 @@ CFRunLoopStop(CFRunLoopGetCurrent());//目前，这里是子线程，是行的�
 CFRunLoopStop，在测试的时候，很管用的，不然，不停止runloop，runloop就会一直处于运行状态，使得do{runloop runMode后面的代码，在默认的1分钟内不会被执行，从而降低CPU的消耗，但是可以通过CFRunLoopRunInMode修改停留时间}，或者通过[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];来设置超时时间
 另外，如果通过runMode:beforeDate:来设置超时时间，则在超时时间之前，该runloop一直处于等待设定的mode类型事件源的发生。
 
-performSelecter
+NSThread (创建线程去调用方法的时候，底层会生成一个 autoReleasePool 自动释放池————自动释放池的创建于销毁对应的方法是 push 与 pop,是对 runloop 进行监听，runloop 进入的时候，激活最大优先级的 observer 去创建自动释放池，保证在所有对象被引用或者创建时被加入自动释放池，runloop 退出的时候，激活最小优先级的 observer 去销毁自动释放池，保证销毁所有需要销毁的对象——————另外：自动释放池对象是一个 class，里面存储着添加到自动释放池所有对象的地址,通过 id *next 指向，当一个自动释放池满的时候，会另创建一个 autoreleasepool 去存储加入释放池的对象，原释放池通过 child 指向新创建的释放池，新创建的释放池通过 parent 指向原释放池，有点类似双向链表的存储结构)
+
+performSelecter 
 当调用NSObject的performSelecter:afterDelay:后，实际上其内部会创建一个Timer并添加到当前线程的Runloop中，所以如果当前线程没有Runloop，则这个方法会失效。
 当调用performSelector:onThread:时，实际上其会创建一个Timer加到对应的线程去，同样的，如果对应线程没有Runloop该方法也会失效。
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RunMode.h"
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 #if 0
@@ -23,9 +24,6 @@ int main(int argc, const char * argv[]) {
         }
 #endif
         RunMode *mode = [[RunMode alloc]init];
-        do{
-            
-        }while (1);
         
     }
     return 0;

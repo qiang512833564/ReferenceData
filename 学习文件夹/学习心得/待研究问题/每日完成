@@ -31,3 +31,15 @@
       
 4.10  大文件下载（通过对 NSURLConnection、NSURLSession 的使用）
       图片解码通过 background thread 对 bitmap 位图的创建，来进行性能优化（理解代码的含义，见SDWebImage理解中缓存工程）
+
+4.13 BLOCK 会对 self 进行 retain，而对 全局变量或者静态变量不会进行 retain，主要原因是：全局变量或静态变量在内存中的地址是固定的，Block在读取该变量值的时候是直接从其所在内存读出，获取到的是最新值，而不是在定义时copy的常量（个人认为：block 会现根据变量的内存地址是属于全局区还是哪一块进行判断）。
+      全局变量也称为外部变量，它是在函数外部定义的变量。它不属于哪一个函数，它属于一个源程序文件。其作用域是整个源程序。在函数中使用全局变量，一般应作全局变量说明。 只有在函数内经过说明的全局变量才能使用。全局变量的说明符为 extern。但在一个函数之前定义的全局变量，在该函数内使用可不再加说明
+
+4.14 自动释放池
+     NSThread (创建线程去调用方法的时候，底层会生成一个 autoReleasePool 自动释放池————自动释放池的创建于销毁对应的方法是 push 与 pop,是对 runloop 进行监听，runloop 进入的时候，激活最大优先级的 observer 去创建自动释放池，保证在所有对象被引用或者创建时被加入自动释放池，runloop 退出的时候，激活最小优先级的 observer 去销毁自动释放池，保证销毁所有需要销毁的对象——————另外：自动释放池对象是一个 class，里面存储着添加到自动释放池所有对象的地址,通过 id *next 指向，当一个自动释放池满的时候，会另创建一个 autoreleasepool 去存储加入释放池的对象，原释放池通过 child 指向新创建的释放池，新创建的释放池通过 parent 指向原释放池，有点类似双向链表的存储结构)
+     runloop（ 有这种情况，runloop 会被回收 app退出；线程关闭；设置最大时间到期；modeItem为空；）
+     1. 给子线程的 runloop 添加 source1 ,使其不会退出 exit runloop(一般通过挪用run才会实现 runloop 循环,需要注意的是 addPort 一般写在 run 前面(这也是在程序中保证子线程一直存活的方式)，因为 run 方法一旦没有 source 或者 timer 的生活，就会直接 exit runloop )
+     2. 经过创建子线程测试，没有手动添加 input source 的时候，就会直接退出 exit runloop --- 个人理解：创建的子线程，并没有被系统自动添加一些 input source
+     3. runMode:beforeDate: 与 run 方法的区别在于：第一个可以设置超时时间，超过超时时间，就会退出 runloop，而 run 缺一致处于 runloop 循环中 (CFRunLoopRunInMode 就是对 runMode:beforeDate: 方法的封装)
+     GCD 
+     GCD 的计时器，使用的避免了 NSTimer 的缺点：1.必须保证有一个活跃的runloop。2.NSTimer的创建与撤销必须在同一个线程操作、performSelector的创建与撤销必须在同一个线程操作。3.内存管理有潜在泄露的风险

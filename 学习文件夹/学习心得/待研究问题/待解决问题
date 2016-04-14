@@ -27,3 +27,12 @@
 18. Autorelease 如何通过 runloop 实现
 19. 线程间如何通讯？
 20. runtime 与 runloop 之间的关系
+21. iOS 系统内核
+22. int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));这个方法具体是什么作用
+    }
+}  
+23. 通知实现原理（多线程情况下，是否可以在一个线程上发送通知而被另一个线程接收？？？）
+24. 为什么 BLOCK 会对 self 进行 retain，而对 全局变量或者静态变量不会进行 retain
+    
