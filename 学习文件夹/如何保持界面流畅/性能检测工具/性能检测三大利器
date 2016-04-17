@@ -3,3 +3,4 @@ Timer Profiler
 Core Animation
 OpenGL ES Driver
 
+( allocations 用于查看内存占用情况 — 也可以用于查看调试 方法调用情况 )

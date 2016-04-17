@@ -54,7 +54,7 @@
         NSLog(@"%@",connectionError);
     }];
 #endif
-#if 1
+#if 0
     UIImage *image = [UIImage imageWithCGImage:ref];
     NSLog(@"%@",[NSDate date]);//2015-12-22 06:40:28 +0000
     self.imageview.image = image;
@@ -68,7 +68,7 @@
     NSLog(@"successed--->%d",successed);
 #endif
     //self.imageview.image = [UIImage imageNamed:@"图片.jpg"];
-#if 0
+#if 1
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateImage) userInfo:nil repeats:YES];
 #endif
     

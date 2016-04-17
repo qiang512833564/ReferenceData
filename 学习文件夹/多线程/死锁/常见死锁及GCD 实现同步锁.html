@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+<html class="theme">
+
+<head>
+    <meta charset="utf-8">
+    
+    <meta name="description" content="Cmd Markdown 编辑阅读器，支持实时同步预览，区分写作和阅读模式，支持在线存储，分享文稿网址。">
+    <meta name="author" content="Jiawei Zhang">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>Effective Objective-C Notes：GCD 实现同步锁 - 作业部落 Cmd Markdown 编辑阅读器</title>
+
+
+    <link href="https://www.zybuluo.com/static/img/favicon.png" type="image/x-icon" rel="icon">
+
+    <link href="https://www.zybuluo.com/static/assets/1bc053c8.base.lib.min.css" rel="stylesheet" media="screen">
+
+
+    
+    <!-- id="prettify-style" will be used to get the link element below and change href to change prettify code style, so it can't be in beginmin/endmin block. -->
+    <link id="prettify-style" href="https://www.zybuluo.com/static/editor/libs/google-code-prettify/prettify-cmd.css" type="text/css" rel="stylesheet">
+    <link href="https://www.zybuluo.com/static/assets/mdeditor/79228b55.layout.min.css" rel="stylesheet" media="screen">
+
+
+    
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44461741-1', 'zybuluo.com');
+      ga('send', 'pageview');
+    </script>
+</head>
+
+<body class="theme">
+
+    <div id="global-prompt-alert" class="hide alert alert-warning">
+        <span id="global-prompt-message"></span>
+        <a id="close-global-prompt-alert" href="">[关闭]</a>
+    </div>
+
+    <!-- zybuluo's body -->
+    
+
+
+
+
+
+
+
+<!-- mdeditor's body -->
+
+
+
+
+
+
+<div id="editor-reader-full" class="editor-reader-full-shown" style="position: static;">
+    <div id="reader-full-topInfo" class="reader-full-topInfo-shown">
+        <span>
+            <code>@MicroCai</code>
+        </span>
+        <code><span class="article-updated-date">2015-08-31T06:58:31.000000Z</span></code>
+        <code><span>字数 </span><span class="article-characters">6539</span></code>
+        <code><span>阅读 </span><span class="article-read">4252</span></code>
+    </div>
+    <div id="wmd-preview" class="wmd-preview wmd-preview-full-reader"><div class="md-section-divider"></div><div class="md-section-divider"></div><h1 data-anchor-id="kad2" id="effective-objective-c-notesgcd-实现同步锁">Effective Objective-C Notes：GCD 实现同步锁</h1><p data-anchor-id="jf8a"><code>Archives</code> <code>iOS</code></p><hr><p data-anchor-id="2g69"><em>《Effective Objective-C Notes》系列博文整理自《Effective Objective-C 2.0》</em></p><p data-anchor-id="dqdy"><em>如果您觉得我的博客对您有帮助，请通过关注我的新浪微博 <i class="icon-weibo"></i> <a href="http://weibo.com/1736763114/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank">MicroCai</a> 支持我，谢谢！</em></p><hr><p data-anchor-id="x5hx">本文名为《GCD 实现同步锁》，内容不止于锁。文章试图通过 GCD 同步锁的问题，尽量往外延伸扩展，以讲解更多 GCD 同步机制的内容。</p><div class="md-section-divider"></div><h2 data-anchor-id="t8i7" id="引语线程安全问题">引语：线程安全问题</h2><p data-anchor-id="wvsh">如果一段代码所在的进程中有多个线程在同时运行，那么这些线程就有可能会同时运行这段代码。假如多个线程每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。或者说：一个类或者程序所提供的接口对于线程来说是原子操作或者多个线程之间的切换不会导致该接口的执行结果存在二义性，也就是说我们不用考虑同步的问题。</p><p data-anchor-id="cd4h">由于可读写的全局变量及静态变量可以在不同线程修改，所以这两者也通常是引起线程安全问题的所在。在 Objective-C 中还包括属性和实例变量（实际上属性和实例变量本质上也可以看做类内的全局变量）。</p><div class="md-section-divider"></div><h2 data-anchor-id="pxrd" id="objective-c-同步锁">Objective-C 同步锁</h2><p data-anchor-id="6yv8">在 Objective-C 中，如果有多个线程执行同一份代码，那么有可能会出现线程安全问题。这种情况下，就需要一个同步机制来解决 —— 锁（lock）。在 Objective-C 中，有如下几种可用的锁：</p><blockquote data-anchor-id="4izs" class="white-blockquote">
+  <ul>
+  <li>NSLock 实现锁 <br>
+  NSLock是Cocoa提供给我们最基本的锁对象，这也是我们经常所使用的锁之一。 <br>
+  .</li>
+  <li>@synchronized 关键字构建的锁 <br>
+  synchronized指令实现锁的优点就是我们不需要在代码中显式的创建锁对象，便可以实现锁的机制，但作为一种预防措施，@synchronized块会隐式的添加一个异常处理例程来保护代码，该处理例程会在异常抛出的时候自动的释放互斥锁。所以如果不想让隐式的异常处理例程带来额外的开销，你可以考虑使用锁对象。 <br>
+  .</li>
+  <li>使用 C 语言的 pthread_mutex_t 实现的锁 <br>
+  .</li>
+  <li>使用 GCD 来实现的“锁” <br>
+  在GCD中也已经提供了一种信号机制，使用它我们也可以来构建一把“锁”。从本质意义上讲，信号量与锁是有区别，具体差异参加信号量与互斥锁之间的区别。 <br>
+  .</li>
+  <li>NSRecursiveLock 递归锁 <br>
+  递归锁会跟踪它被多少次lock。每次成功的lock都必须平衡调用unlock操作。只有所有的锁住和解锁操作都平衡的时候，锁才真正被释放给其他线程获得。 <br>
+  .</li>
+  <li>NSConditionLock 条件锁 <br>
+  当我们在使用多线程的时候，有时一把只会lock和unlock的锁未必就能完全满足我们的使用。因为普通的锁只能关心锁与不锁，而不在乎用什么钥匙才能开锁，而我们在处理资源共享的时候，多数情况是只有满足一定条件的情况下才能打开这把锁。 <br>
+  .</li>
+  <li>NSDistributedLock 分布式锁 <br>
+  从它的类名就知道这是一个分布式的 Lock。NSDistributedLock 的实现是通过文件系统的，所以使用它才可以有效的实现不同进程之间的互斥，但 NSDistributedLock 并非继承于 NSLock，它没有 lock 方法，它只实现了 tryLock，unlock，breakLock，所以如果需要 lock 的话，你就必须自己实现一个 tryLock 的轮询。 <br>
+  补充：简单查了下资料，这个锁主要用于 OS X 的开发。而iOS 较少用到多进程，所以很少在 iOS 上见到过。由于精力有限，查询不够充分，如有错误请指出，谢谢！</li>
+  </ul>
+</blockquote><div class="md-section-divider"></div><h2 data-anchor-id="sbps" id="常见锁的弊病">常见锁的弊病</h2><p data-anchor-id="edze">在 GCD 之前，解决线程安全通常有两种锁。一是采用内置的同步锁</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="9qy8"><ol class="linenums"><li class="L0"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">synchronizedMethod </span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    </span><span class="lit">@synchronized</span><span class="pun">(</span><span class="kwd">self</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L3"><code><span class="pln">        </span><span class="com">// safe code</span></code></li><li class="L4"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L5"><code><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="6tgy">这种写法会根据给定对象，自动创建一个锁，并等待块中的代码执行完毕，才释放锁。这段代码本身没什么问题，但是因为 @synchronized(self) 锁的对象是 self，造成共用此锁的同步块阻塞，降低效率。</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="9u7a"><ol class="linenums"><li class="L0"><code><span class="com">// someString 属性</span></code></li><li class="L1"><code><span class="com">// 当 someString 开始读时，对其的写入阻塞，这是合理的；</span></code></li><li class="L2"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">someString </span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="lit">@synchronized</span><span class="pun">(</span><span class="kwd">self</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">        </span><span class="kwd">return</span><span class="pln"> _someString</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L7"><code><span class="pun">}</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">setSomeString</span><span class="pun">:(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">someString</span></code></li><li class="L0"><code><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">    </span><span class="lit">@synchronized</span><span class="pun">(</span><span class="kwd">self</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">        _someString </span><span class="pun">=</span><span class="pln"> someString</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L4"><code><span class="pun">}</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="com">//otherString 属性</span></code></li><li class="L7"><code><span class="com">// 当线程在对 someString 进行读写时，与之无关的 otherString 也会受到干扰阻塞，这是不合理的；</span></code></li><li class="L8"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">otherString </span></code></li><li class="L9"><code><span class="pun">{</span></code></li><li class="L0"><code><span class="pln">    </span><span class="lit">@synchronized</span><span class="pun">(</span><span class="kwd">self</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        </span><span class="kwd">return</span><span class="pln"> _otherString</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L3"><code><span class="pun">}</span></code></li><li class="L4"><code></code></li><li class="L5"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">setOtherString</span><span class="pun">:(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">otherString</span></code></li><li class="L6"><code><span class="pun">{</span></code></li><li class="L7"><code><span class="pln">    </span><span class="lit">@synchronized</span><span class="pun">(</span><span class="kwd">self</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L8"><code><span class="pln">        _otherString </span><span class="pun">=</span><span class="pln"> otherString</span><span class="pun">;</span></code></li><li class="L9"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L0"><code><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="8pew">此例子只用于说明 @synchronized(self) 的问题。聪明的同学应该还会想到直接使用 atomic 来修饰属性，进行同步操作更简单直接。</p><p data-anchor-id="k0zc">另一种方法是使用 NSLock 对象</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="4kk4"><ol class="linenums"><li class="L0"><code><span class="pln">_lock </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[[</span><span class="typ">NSLock</span><span class="pln"> alloc</span><span class="pun">]</span><span class="pln"> init</span><span class="pun">];</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">synchronizedMethod</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="pun">[</span><span class="pln">_lock </span><span class="kwd">lock</span><span class="pun">];</span></code></li><li class="L5"><code></code></li><li class="L6"><code><span class="pln">    </span><span class="com">//safe code...</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">    </span><span class="pun">[</span><span class="pln">_lock unlock</span><span class="pun">];</span></code></li><li class="L9"><code><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="5tfu">然而 NSLock 有可能在不经意间就造成了死锁</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="kr9h"><ol class="linenums"><li class="L0"><code><span class="com">//主线程中</span></code></li><li class="L1"><code><span class="typ">NSLock</span><span class="pln"> </span><span class="pun">*</span><span class="pln">theLock </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[[</span><span class="typ">NSLock</span><span class="pln"> alloc</span><span class="pun">]</span><span class="pln"> init</span><span class="pun">];</span></code></li><li class="L2"><code><span class="typ">TestObject</span><span class="pln"> </span><span class="pun">*</span><span class="pln">aObject </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[[</span><span class="typ">TestObject</span><span class="pln"> alloc</span><span class="pun">]</span><span class="pln"> init</span><span class="pun">];</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="com">//线程1</span></code></li><li class="L5"><code><span class="com">//线程1 在递归的block内，可能会进行多次的lock，而最后只有一次unlock</span></code></li><li class="L6"><code><span class="pln">dispatch_async</span><span class="pun">(</span><span class="pln">dispatch_get_global_queue</span><span class="pun">(</span><span class="pln">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">),</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">    </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pun">(^</span><span class="typ">TestMethod</span><span class="pun">)(</span><span class="kwd">int</span><span class="pun">);</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    </span><span class="typ">TestMethod</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">^(</span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">        </span><span class="pun">[</span><span class="pln">theLock </span><span class="kwd">lock</span><span class="pun">];</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">value </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">        </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">            </span><span class="pun">[</span><span class="pln">aObject method1</span><span class="pun">];</span></code></li><li class="L7"><code><span class="pln">            sleep</span><span class="pun">(</span><span class="lit">5</span><span class="pun">);</span></code></li><li class="L8"><code><span class="pln">            </span><span class="typ">TestMethod</span><span class="pun">(</span><span class="pln">value</span><span class="pun">-</span><span class="lit">1</span><span class="pun">);</span></code></li><li class="L9"><code><span class="pln">        </span><span class="pun">}</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="pln">        </span><span class="pun">[</span><span class="pln">theLock unlock</span><span class="pun">];</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">};</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">    </span><span class="typ">TestMethod</span><span class="pun">(</span><span class="lit">5</span><span class="pun">);</span></code></li><li class="L5"><code><span class="pun">});</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="com">//线程2</span></code></li><li class="L8"><code><span class="pln">dispatch_async</span><span class="pun">(</span><span class="pln">dispatch_get_global_queue</span><span class="pun">(</span><span class="pln">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">),</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">    sleep</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span></code></li><li class="L1"><code><span class="pln">    </span><span class="pun">[</span><span class="pln">theLock </span><span class="kwd">lock</span><span class="pun">];</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">[</span><span class="pln">aObject method2</span><span class="pun">];</span></code></li><li class="L3"><code><span class="pln">    </span><span class="pun">[</span><span class="pln">theLock unlock</span><span class="pun">];</span></code></li><li class="L4"><code><span class="pun">});</span></code></li></ol></pre><p data-anchor-id="oo9v">这段代码就是一种典型的死锁情况，可以用递归锁 NSRecursiveLock 来避免这种情况。使用 NSRecursiveLock 类定义的锁会跟踪它被多少次 lock，每次成功的 lock 都必须平衡调用 unlock 操作。只有所有的上锁和解锁操作都平衡的时候，锁才真正被释放给其他线程获得。</p><div class="md-section-divider"></div><h2 data-anchor-id="f36r" id="用-gcd-实现同步机制">用 GCD 实现同步机制</h2><div class="md-section-divider"></div><h3 data-anchor-id="na8u" id="了解gcd-基础">了解GCD 基础</h3><p data-anchor-id="k2cv">在讲解 GCD 同步机制前，先讲点 GCD 的基础知识。GCD 是异步任务的技术之一，开发者可以用它将自定义的任务（task）追加到适当的派发队列（dispatch queue），就能生成必要的线程并执行任务。</p><p data-anchor-id="q0yz">在 GCD 中有三种队列：主队列（main queue）、全局队列（global queue）、用户队列（user-created queue）。全局队列是并发队列，即队列中的任务（task）执行顺序和进入队列的顺序无关；主队列和用户队列是串行队列，队列中的任务按FIFO（first input first output，先进先出）的顺序执行。</p><p data-anchor-id="sj2l">GCD 有两种派发方式：同步派发和异步派发。千万注意：这里的同步和异步指的是 <strong>“任务派发方式”</strong>，而非任务的执行方式。</p><p data-anchor-id="av67">看个例子：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="7r8y"><ol class="linenums"><li class="L0"><code><span class="com">// 这小段代码有问题，出现了线程死锁，知道为什么吗？</span></code></li><li class="L1"><code><span class="com">// 提示：下面的代码在主线程（main_thread）中执行</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">viewDidLoad</span></code></li><li class="L4"><code><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">    dispatch_sync</span><span class="pun">(</span><span class="pln">dispatch_get_main_queue</span><span class="pun">(),</span><span class="pln"> block</span><span class="pun">());</span></code></li><li class="L6"><code><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="804w">要理解这题，首先需要了解 dispatch_sync 和 dispatch_async 的工作流程。</p><p data-anchor-id="nc4q">dispatch_sync(queue, block) 做了两件事情</p><blockquote data-anchor-id="043w" class="white-blockquote">
+  <ul>
+  <li>将 block 添加到 queue 队列；</li>
+  <li>阻塞调用线程，等待 block() 执行结束，回到调用线程。</li>
+  </ul>
+</blockquote><p data-anchor-id="lc3s">dispatch_async(queue, block) 也做了两件事情：</p><blockquote data-anchor-id="sqq5" class="white-blockquote">
+  <ul>
+  <li>将 block 添加到 queue 队列；</li>
+  <li>直接回到调用线程（不阻塞调用线程）。</li>
+  </ul>
+</blockquote><p data-anchor-id="4jb0">这里也能看到同步派发和异步派发的区别，就是看是否阻塞调用线程。</p><p data-anchor-id="1ztl">回到题目，当在 main_thread 中调用 dispatch_sync 时：</p><blockquote data-anchor-id="vaeo" class="white-blockquote">
+  <ul>
+  <li>main_thread 被阻塞，无法继续执行；</li>
+  <li>同步派发 sync 导致 block() 需要在 main_thread 中执行结束才会返回；</li>
+  <li>而此时 main_thread 被阻塞，两者互相等待，线程死锁；</li>
+  </ul>
+</blockquote><p data-anchor-id="lbib">所以记住这个教训：不要将 block 同步派发到调用 GCD 所在线程的关联队列中。例如，如果你在主线程（main thread）中调用 GCD，那么在 GCD 内就不要使用同步派发（dispatch_sync）将 block 派发到主线程（main thread）关联的主队列（main queue）中。</p><p data-anchor-id="an5b">除此之外，还有个容易让人忽略而导致死锁的东西：队列的层级体系。</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="8i73"><ol class="linenums"><li class="L0"><code><span class="com">// 因最外层 queueA 已经同步派发，导致内层 queueA 同步派发时会死锁</span></code></li><li class="L1"><code><span class="com">// 这个例子同时也告诫我们不要相信和使用 dispatch_get_current_queue</span></code></li><li class="L2"><code></code></li><li class="L3"><code><span class="pln">dispatch_sync </span><span class="pun">(</span><span class="pln">queueA</span><span class="pun">,</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="typ">dispatch_block_t</span><span class="pln"> block </span><span class="pun">=</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L5"><code><span class="pln">        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">dispatch_get_current_queue</span><span class="pun">()</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> queueA</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">            block</span><span class="pun">();</span></code></li><li class="L7"><code><span class="pln">        </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L8"><code><span class="pln">            dispatch_sync</span><span class="pun">(</span><span class="pln">queueA</span><span class="pun">,</span><span class="pln"> block</span><span class="pun">);</span></code></li><li class="L9"><code><span class="pln">        </span><span class="pun">}</span></code></li><li class="L0"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L1"><code><span class="pun">})</span></code></li></ol></pre><p data-anchor-id="gfg2">队列层级用图画出来通常长这样，最顶层是全局并发队列（此图和上面例子无关）</p><p data-anchor-id="vzlx"><img src="http://blogofzuoyebuluo.qiniudn.com/image_note64272_2.png" alt="" title=""></p><div class="md-section-divider"></div><h3 data-anchor-id="juyw" id="gcd-同步锁">GCD 同步锁</h3><p data-anchor-id="fkm1">有了前面的基础，就可以瞧瞧在 GCD 中更好的同步锁的实现方式。在 GCD 队列中，有个简单直接的方法可以代替同步锁或锁对象，将读写操作都安排在一个串行同步队列里，即可保证数据同步，如下：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="22hn"><ol class="linenums"><li class="L0"><code><span class="pln">_syncQueue </span><span class="pun">=</span><span class="pln"> dispatch_queue_create</span><span class="pun">(</span><span class="str">"com.effectiveObjectiveC.syncQueue"</span><span class="pun">,</span><span class="pln"> NULL</span><span class="pun">);</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">someString</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    __weak </span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*</span><span class="pln">localSomeString</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">    dispatch_sync</span><span class="pun">(</span><span class="pln">_syncQueue</span><span class="pun">,</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L6"><code><span class="pln">        localSomeString </span><span class="pun">=</span><span class="pln"> _someString</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">});</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> localSomeString</span><span class="pun">;</span></code></li><li class="L0"><code><span class="pun">}</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">setSomeString</span><span class="pun">:(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">someString</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    dispatch_sync</span><span class="pun">(</span><span class="pln">_syncQueue</span><span class="pun">,</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L5"><code><span class="pln">        _someString </span><span class="pun">=</span><span class="pln"> someString</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pln">    </span><span class="pun">});</span></code></li><li class="L7"><code><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="vtcr">使用串行同步队列，将读写操作全部放在序列化的队列里执行，所有指针对属性的操作即可同步。加锁和解锁的全部转移给 GCD 处理，而 GCD 在较深的底层实现，可以进行许多的优化。</p><p data-anchor-id="dyao">然而设置方法不一定非得是同步的，设置实例变量的 block 没有返回值，所以可以将此方法改成异步：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="nozs"><ol class="linenums"><li class="L0"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">setSomeString</span><span class="pun">:(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">someString</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    dispatch_async</span><span class="pun">(</span><span class="pln">_syncQueue</span><span class="pun">,</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L3"><code><span class="pln">        _someString </span><span class="pun">=</span><span class="pln"> someString</span><span class="pun">;</span></code></li><li class="L4"><code><span class="pln">    </span><span class="pun">});</span></code></li><li class="L5"><code><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="5zga">这次只是把 dispatch_sync 改成 dispatch_async，从调用者来看提升了执行速度。但正是由于执行异步派发 <br>
+dispatch_async 时会拷贝 block，当拷贝 block 的时间大于执行 block 的时间时，dispatch_async 的速度会比 dispatch_sync 速度更慢。所以实际情况应根据 block 所执行任务的繁重程度来决定使用 dispatch_async 还是 dispatch_sync。</p><p data-anchor-id="53rr">多个获取方法可以并发执行，获取方法与设置方法不能并发执行。据此可以使用并发队列和 GCD 的 barrier 来写出更快的代码。</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="dnnn"><ol class="linenums"><li class="L0"><code><span class="pln">_syncQueue </span><span class="pun">=</span><span class="pln"> dispatch_get_global_queue</span><span class="pun">(</span><span class="pln">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">);</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">someString</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    __weak </span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*</span><span class="pln">localSomeString</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">    dispatch_sync</span><span class="pun">(</span><span class="pln">_syncQueue</span><span class="pun">,</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L6"><code><span class="pln">        localSomeString </span><span class="pun">=</span><span class="pln"> _someString</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">});</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    </span><span class="kwd">return</span><span class="pln"> localSomeString</span><span class="pun">;</span></code></li><li class="L0"><code><span class="pun">}</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">setSomeString</span><span class="pun">:(</span><span class="typ">NSString</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">someString</span></code></li><li class="L3"><code><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">    </span><span class="com">// barrier</span></code></li><li class="L5"><code><span class="pln">    dispatch_barrier_async</span><span class="pun">(</span><span class="pln">_syncQueue</span><span class="pun">,</span><span class="pln"> </span><span class="pun">^{</span></code></li><li class="L6"><code><span class="pln">        _someString </span><span class="pun">=</span><span class="pln"> someString</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pln">    </span><span class="pun">});</span></code></li><li class="L8"><code><span class="pun">}</span></code></li></ol></pre><p data-anchor-id="xw6t">在使用上面的方式创建的同步锁之后，会发现执行速度和效率都更高。难道并发队列厉害吗？其实原因不只是并发队列，还有 barrier block 的功劳，那么什么是 barrier block 呢？</p><p data-anchor-id="qa7n">函数 <code>dispatch_barrier_sync</code> 和 <code>dispatch_barrier_async</code> 可以让队列中派发的 block 变成 barrier（栅栏） 使用，这种 block 称为 barrier block。队列中的 barrier block 必须等当前并发队列中的 block 都执行结束才开始执行，时序图如下：</p><p data-anchor-id="w2wa"><img src="http://blogofzuoyebuluo.qiniudn.com/image_note64272_1.png" alt="时序图" title=""></p><div class="md-section-divider"></div><h2 data-anchor-id="k0n7" id="其他同步机制">其他同步机制</h2><p data-anchor-id="c1jw">GCD 的同步方式还有组派发（dispatch group）和信号量（dispatch semaphore）</p><div class="md-section-divider"></div><h3 data-anchor-id="rqsf" id="组派发dispatch-group">组派发（dispatch group）</h3><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="lykg"><ol class="linenums"><li class="L0"><code><span class="com">/**</span></code></li><li class="L1"><code><span class="com"> *  阻塞当前线程，执行group内任务，阻塞时间为timeout</span></code></li><li class="L2"><code><span class="com"> *</span></code></li><li class="L3"><code><span class="com"> *  @param group    等待的group</span></code></li><li class="L4"><code><span class="com"> *  @param timeout  等待的时间，即函数在等待dispatch group内的任务执行完毕时，应阻塞多久</span></code></li><li class="L5"><code><span class="com"> *</span></code></li><li class="L6"><code><span class="com"> *  @return 如果执行dispatch group所需时间小于timeout，则返回0，否则返回非0值；</span></code></li><li class="L7"><code><span class="com">            timeout可以取常量DISPATCH_TIME_FOREVER，表示永远不会超时</span></code></li><li class="L8"><code><span class="com"> */</span></code></li><li class="L9"><code><span class="kwd">long</span><span class="pln"> dispatch_group_wait</span><span class="pun">(</span><span class="typ">dispatch_group_t</span><span class="pln"> </span><span class="kwd">group</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L0"><code><span class="pln">                         </span><span class="typ">dispatch_time_t</span><span class="pln"> timeout</span><span class="pun">);</span></code></li></ol></pre><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="7byl"><ol class="linenums"><li class="L0"><code><span class="com">/**</span></code></li><li class="L1"><code><span class="com"> *  如果group内的任务全部执行完毕后，将block提交到queue上执行</span></code></li><li class="L2"><code><span class="com"> *</span></code></li><li class="L3"><code><span class="com"> *  @param group  等待的group</span></code></li><li class="L4"><code><span class="com"> *  @param queue  即将提交的队列</span></code></li><li class="L5"><code><span class="com"> *  @param block  即将提交的任务</span></code></li><li class="L6"><code><span class="com"> */</span></code></li><li class="L7"><code><span class="kwd">void</span><span class="pln"> dispatch_group_notify</span><span class="pun">(</span><span class="typ">dispatch_group_t</span><span class="pln"> </span><span class="kwd">group</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L8"><code><span class="pln">                           </span><span class="typ">dispatch_queue_t</span><span class="pln"> queue</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L9"><code><span class="pln">                           </span><span class="typ">dispatch_block_t</span><span class="pln"> block</span><span class="pun">);</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="ntq5" id="信号量dispatch-semaphore">信号量（dispatch semaphore）</h3><p data-anchor-id="2jt6">信号量在 linux/unix 开发中十分常见，其概念相当于经典的“生产者-消费者”模型。当信号个数为 0 时，则线程阻塞，等待发送新信号；一旦信号个数大于 0 时，就开始处理任务。</p><ul data-anchor-id="xzvv">
+<li><p>dispatch_semaphore_create：创建一个semaphore</p></li>
+<li><p>dispatch_semaphore_signal：发送一个信号，信号个数加1</p></li>
+<li><p>dispatch_semaphore_wait：等待信号</p></li>
+</ul><hr><p data-anchor-id="2a78">除了《Effective Objective-C 2.0》之外，本文还参考了：</p><p data-anchor-id="cojq">[0] <a href="http://baike.baidu.com/link?url=iL-tOFGGAi7idv2tEH9PnU-r1F_BCRvEtYhF-2xrkqe6a8Ljb6WgjvfACFs4vUhTwmoSYTyX4iMVAPAPheVDGK" target="_blank">百度百科：线程安全的基本概念</a> <br>
+[1] <a href="http://www.tanhao.me/pieces/616.html" target="_blank">老谭：Objective-C 中不同方式实现锁（一）</a> <br>
+[2] <a href="http://www.tanhao.me/pieces/643.html" target="_blank">老谭：Objective-C 中不同方式实现锁（二）</a> <br>
+[4] <a href="http://www.tanhao.me/pieces/392.html" target="_blank">老谭：在 CGD 中快速实现多线程的并发控制</a> <br>
+[5] <a href="http://blog.csdn.net/kesalin/article/details/6721481" target="_blank">飘飘白云：深入浅出 Cocoa 多线程编程之 block 与 dispatch quene</a></p></div>
+    <div class="remark-icons">
+    </div>
+</div>
+
+<!--in page preview buttons. -->
+<div class="in-page-preview-buttons in-page-preview-buttons-full-reader">
+    <ul>
+        <li class="in-page-button dropdown" id="preview-toc-button" title="内容目录 Ctrl+Alt+O">
+            <span class="dropdown-toggle icon-list" data-toggle="dropdown"></span>
+            <div id="toc-list" class="dropdown-menu theme pull-right"> <!-- Add theme means this element will be changed when apply theme color. -->
+                <h3>内容目录</h3>
+                <hr>
+                <div class="table-of-contents"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div id="reader-full-toolbar" class="reader-full-toolbar-shown" style="padding-top: 0;">
+    <ul id="reader-full-toolbar-home" class="preview-button-row">
+        <li class="preview-button-full-reader" id="preview-editor-button" title="撰写文本 Ctrl+Alt+M">
+            <span class="icon-pencil"></span>
+        </li>
+    </ul>
+    <ul id="preview-button-row" class="preview-button-row">
+        <li class="preview-button-full-reader dropdown" id="preview-list-button" title="文本列表 Ctrl+Alt+F">
+            <span class="dropdown-toggle icon-reorder" data-toggle="dropdown"></span>
+            <ul id="file-list" class="dropdown-menu theme-black pull-right" role="menu">
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="About-Blog">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">About-Blog</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2014-12-01T12:41:08.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/51120" title="【已发布】 2015-10-31T07:29:55.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="51120">MicroCai 的博客</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="Archives">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">Archives</span></span>
+                            <span class="tag-count pull-right">17</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-07-13T04:50:15.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/131655" title="【已发布】 2015-07-24T18:05:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="131655">问题记录：iOS 用户行为统计代码的剥离</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-03T08:15:56.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/74039" title="【已发布】 2015-03-03T08:32:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="74039">[译] 照片框架</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-02T16:02:59.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/73867" title="【已发布】 2015-07-18T05:48:41.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="73867">Autolayout 基础</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-29T20:53:54.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/67734" title="【已发布】 2015-08-24T01:45:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="67734">ARC 下内存泄露的那些点</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-26T21:48:18.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66738" title="【已发布】 2015-03-03T15:13:03.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66738">KVO 和 KVC 的使用和实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-24T14:09:53.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66142" title="【已发布】 2015-03-03T15:14:18.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66142">iOS Events and Responder Chain</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-21T21:18:31.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/65325" title="【已发布】 2015-06-09T12:01:23.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="65325">两个超大整数相加</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:51:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64272" title="【已发布】 2015-08-31T06:58:31.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64272" class="whiter-on-black">Effective Objective-C Notes：GCD 实现同步锁</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:50:37.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64271" title="【已发布】 2015-03-03T15:18:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64271">Effective Objective-C Notes：理解类对象</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:18:03.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64270" title="【已发布】 2015-03-03T15:19:01.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64270">Effective Objective-C Notes：理解消息传递机制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T18:03:10.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63941" title="【已发布】 2015-03-03T15:19:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63941">Effective Objective-C Notes：Objective-C命名规范</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T16:30:09.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63930" title="【已发布】 2015-03-03T15:19:32.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63930">Effective Objective-C Notes：概览</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-28T18:28:24.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/58470" title="【已发布】 2015-06-27T05:49:54.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="58470">block没那么难（三）：block和对象的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-24T14:59:07.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/57603" title="【已发布】 2015-03-03T15:20:30.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="57603">block没那么难（二）：block和变量的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-01T12:27:48.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/51116" title="【已发布】 2015-03-03T15:20:50.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="51116">block没那么难（一）：block的实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-29T20:03:55.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/50592" title="【已发布】 2015-03-31T08:23:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="50592">iOS 集合的深复制与浅复制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-26T15:55:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/49713" title="【已发布】 2015-03-03T15:22:06.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="49713">[译] Block 小测验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="iOS">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">iOS</span></span>
+                            <span class="tag-count pull-right">16</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-07-13T04:50:15.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/131655" title="【已发布】 2015-07-24T18:05:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="131655">问题记录：iOS 用户行为统计代码的剥离</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-03T08:15:56.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/74039" title="【已发布】 2015-03-03T08:32:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="74039">[译] 照片框架</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-02T16:02:59.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/73867" title="【已发布】 2015-07-18T05:48:41.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="73867">Autolayout 基础</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-29T20:53:54.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/67734" title="【已发布】 2015-08-24T01:45:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="67734">ARC 下内存泄露的那些点</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-26T21:48:18.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66738" title="【已发布】 2015-03-03T15:13:03.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66738">KVO 和 KVC 的使用和实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-24T14:09:53.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/66142" title="【已发布】 2015-03-03T15:14:18.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="66142">iOS Events and Responder Chain</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:51:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64272" title="【已发布】 2015-08-31T06:58:31.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64272" class="whiter-on-black">Effective Objective-C Notes：GCD 实现同步锁</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:50:37.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64271" title="【已发布】 2015-03-03T15:18:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64271">Effective Objective-C Notes：理解类对象</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-18T16:18:03.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/64270" title="【已发布】 2015-03-03T15:19:01.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="64270">Effective Objective-C Notes：理解消息传递机制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T18:03:10.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63941" title="【已发布】 2015-03-03T15:19:19.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63941">Effective Objective-C Notes：Objective-C命名规范</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-01-16T16:30:09.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/63930" title="【已发布】 2015-03-03T15:19:32.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="63930">Effective Objective-C Notes：概览</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-28T18:28:24.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/58470" title="【已发布】 2015-06-27T05:49:54.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="58470">block没那么难（三）：block和对象的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-24T14:59:07.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/57603" title="【已发布】 2015-03-03T15:20:30.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="57603">block没那么难（二）：block和变量的内存管理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-12-01T12:27:48.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/51116" title="【已发布】 2015-03-03T15:20:50.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="51116">block没那么难（一）：block的实现</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-29T20:03:55.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/50592" title="【已发布】 2015-03-31T08:23:36.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="50592">iOS 集合的深复制与浅复制</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-26T15:55:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/49713" title="【已发布】 2015-03-03T15:22:06.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="49713">[译] Block 小测验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="翻译">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">翻译</span></span>
+                            <span class="tag-count pull-right">2</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-03-03T08:15:56.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/74039" title="【已发布】 2015-03-03T08:32:00.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="74039">[译] 照片框架</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2014-11-26T15:55:05.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/49713" title="【已发布】 2015-03-03T15:22:06.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="49713">[译] Block 小测验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="计算机基础">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">计算机基础</span></span>
+                            <span class="tag-count pull-right">5</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-03-16T17:10:02.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/78063" title="【已发布】 2015-03-22T09:26:27.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="78063">进程间通信的方式</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-15T18:11:48.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77642" title="【已发布】 2015-03-22T15:29:44.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77642">排序算法整理</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-14T19:02:38.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77440" title="【已发布】 2015-03-16T11:14:08.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77440">算法的时间复杂度</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-14T11:02:59.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77353" title="【已发布】 2015-03-15T15:27:22.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77353">HTTP 请求基础</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2015-03-13T16:42:18.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/77183" title="【已发布】 2015-03-14T11:01:01.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="77183">RESTful 与 HTTP</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="趣味题">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">趣味题</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2015-01-21T21:18:31.000000Z">
+        <a tabindex="-1" href="https://www.zybuluo.com/MicroCai/note/65325" title="【已发布】 2015-06-09T12:01:23.000000Z">
+        <i class="icon-share-sign"></i>
+        <span id="65325">两个超大整数相加</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+            </ul>
+            <ul id="file-list-topbar" class="dropdown-menu theme-black pull-right" role="menu">
+                <li id="search-file-bar">
+                    <i class="icon-search icon-large"></i>
+                    <input type="text" id="search-file-textbox" placeholder="搜索 MicroCai 的文稿标题， * 显示全部">
+                    <i class="icon-level-down icon-rotate-90 icon-large"></i>
+                </li>
+                <li id="tag-file-bar">
+                    以下【标签】将用于标记这篇文稿：
+                </li>
+            </ul>
+        </li>
+        <li class="preview-button-full-reader" id="preview-theme-button" title="主题切换 Ctrl+Alt+Y">
+            <span class="icon-adjust"></span>
+        </li>
+        <li class="preview-button-full-reader" id="preview-fullscreen-button" title="全屏模式 F11">
+            <span class="icon-fullscreen"></span>
+        </li>
+        <li class="preview-button-full-reader wmd-spacer"></li>
+        <li class="preview-button-full-reader dropdown" id="preview-about-button" title="关于本站">
+            <span class="dropdown-toggle icon-info-sign" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="true"></span>
+            <ul id="about-menu" class="dropdown-menu theme-black pull-right" role="menu">
+                <li title="下载全平台客户端"><a tabindex="-1" href="https://www.zybuluo.com/cmd" target="_blank"><i class="icon-laptop"></i>下载客户端</a></li>
+                <li title="@ghosert"><a tabindex="-1" href="http://www.weibo.com/ghosert" target="_blank"><i class="icon-weibo"></i>关注开发者</a></li>
+                <li title=""><a tabindex="-1" href="https://github.com/ghosert/cmd-editor/issues" target="_blank"><i class="icon-github-alt"></i>报告问题，建议</a></li>
+                <li title="support@zybuluo.com"><a tabindex="-1" href="mailto:support@zybuluo.com" target="_blank"><i class="icon-envelope"></i>联系我们</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<ul id="reader-full-toolbar-tail" class="reader-full-toolbar-tail-shown">
+    <li class="preview-button-full-reader" id="preview-hidden-button" title="隐藏工具栏 Ctrl+Alt+I">
+        <span class="icon-chevron-sign-right"></span>
+    </li>
+</ul>
+
+
+
+
+
+
+<!-- side remark, hidden when loading. -->
+<div class="remark-list side-remark-hidden">
+    <div class="remark-items">
+    </div>
+    <div class="leave-remark unselectable"><span class='icon-plus-sign-alt'></span><span>添加新批注</span></div>
+    <div class="new-remark">
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+        <div class="remark-notice">在作者公开此批注前，只有你和作者可见。</div>
+    </div>
+</div>
+
+<!-- template for new remark/reply -->
+<div class="new-remark-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="https://www.zybuluo.com/static/img/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-editor" contentEditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+</div>
+
+<!-- template for .remark-item/.remark-reply -->
+<div class="remark-item-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="https://www.zybuluo.com/static/img/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-delete-link unselectable"><span class="icon-remove"></span></div> <!--This is mainly for deleting remark-reply, shown when author/remark hovering on remark-reply.-->
+    <div class="remark-editor" contentEditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-edit btn-link">修改</button>
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+        <button class="remark-delete btn-link">删除</button>
+    </div>
+</div>
+
+<!-- template for remark-item-->
+<div class="remark-item side-remark-hidden" data-rand-id="" data-version-id="">
+    <div class="remark-published-link unselectable"><span class="icon-link icon-rotate-90"></span></div>
+    <ul class="remark-options theme unselectable">
+        <li class="remark-private"><span class="icon-eye-close"></span><span>私有</span></li>
+        <li class="remark-public"><span class="icon-group"></span><span>公开</span></li>
+        <li class="remark-delete"><span class="icon-remove"></span><span>删除</span></li>
+    </ul>
+
+    <!-- clone the template $('.remark-item-reply').html() to here.-->
+
+    <button class="remark-reply-view-more btn-link">查看更早的 5 条回复</button>
+    <div class="remark-replies">
+        <!--
+        <div class="remark-reply">
+            clone the template $('.remark-item-reply').html() to here.
+        </div>
+        -->
+    </div>
+
+    <div class="leave-reply unselectable"><span>回复批注</span></div>
+    <div class="new-reply">
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+    </div>
+</div>
+
+<!-- jiawzhang NOTICE: .remark-icons will be put to mdeditor.mako and user_note.mako, where next to .wmd-preview -->
+<!-- <div class="remark-icons"></div> -->
+
+<!-- template for remark-icon -->
+<div class="remark-icon unselectable side-remark-hidden remark-icon-empty" style="display: none;">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div>
+
+
+<!-- canvas, hidden always, this is used to convert svg to canvas and then convert canvas to png. -->
+<canvas id="svg-canvas-image" class="editor-reader-hidden-always"></canvas>
+
+
+    
+
+
+    <!-- Hidden Popup Modal -->
+    <div id="notification-popup-window" class="modal hide fade theme" tabindex="-1" role="dialog" aria-labelledby="notification-title" aria-hidden="true">
+        <div class="modal-header theme">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="notification-title">通知</h3>
+        </div>
+        <div class="modal-body theme">
+            <p></p>
+        </div>
+        <div class="modal-footer theme">
+            <button id="notification-cancel" class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button id="notification-confirm" class="btn btn-primary">确认</button>
+        </div>
+    </div>
+
+    <!-- zybuluo's foot -->
+
+    <script src="https://www.zybuluo.com/static/assets/288313bb.base.lib.min.js"></script>
+
+    <script>
+        Namespace('com.zybuluo.base');
+        com.zybuluo.base.initData = {
+            globalPromptUrl: "https://www.zybuluo.com/global/prompt",
+        };
+    </script>
+
+    
+    <!--mathjax-->
+    <!--blacker: 1 below means font weight.-->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } }, messageStyle: "none", SVG: { blacker: 1 }});
+    </script>
+    <script src="https://www.zybuluo.com/static/editor/libs/mathJax.js"></script>
+    <!--mathjax source code is here: https://github.com/mathjax/MathJax.-->
+    <script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.layout');
+        com.zybuluo.mdeditor.layout.initData = {
+            // '' means not logged in, otherwise the logged in username, for mdeditor.mako, this value will be reset in render.js otherwise, for user_note.mako, it's rendered by server side.
+            loggedInUsername: '',
+            isPageOwner: 'False' === 'True' ? true : false,
+            loginComeFromUrl: 'https://www.zybuluo.com/login?return_to=https%3A%2F%2Fwww.zybuluo.com%2FMicroCai%2Fnote%2F64272',
+            noteRemarksUrl: "https://www.zybuluo.com/note/64272/remarks", 
+            newNoteRemarkUrl: "https://www.zybuluo.com/note/64272/remark/new", 
+            updateNoteRemarkUrl: "https://www.zybuluo.com/note/64272/remark/update", 
+            deleteNoteRemarkUrl: "https://www.zybuluo.com/note/64272/remark/delete", 
+            publishNoteRemarkUrl: "https://www.zybuluo.com/note/64272/remark/publish", 
+            newNoteRemarkReplyUrl: "https://www.zybuluo.com/note/64272/remark_reply/new", 
+            updateNoteRemarkReplyUrl: "https://www.zybuluo.com/note/64272/remark_reply/update", 
+            deleteNoteRemarkReplyUrl: "https://www.zybuluo.com/note/64272/remark_reply/delete", 
+        };
+
+        // BEGIN: pace.js configuration
+        window.paceOptions = {
+            // disable others, enable for ajax call only,
+            ajax: true,
+            document: false,
+            elements: false,
+            eventLag: false,
+        };
+        // jiawzhang NOTICE: to make sure pace.js is working for any ajax call especially the jquery ajax, add 'Pace.restart()' into jquery ajax call like '$.post'
+        // Originally, pace 0.5.6 doesn't support jquery ajax, see details in: https://github.com/HubSpot/pace/issues/29
+        // END: pace.js configuration
+
+    </script>
+
+    <script src="https://www.zybuluo.com/static/assets/mdeditor/7a70106e.layout.lib.min.js"></script>
+
+    <script src="https://www.zybuluo.com/static/assets/mdeditor/56964507.layout.min.js"></script>
+
+
+
+    
+
+    <!-- https://www.zybuluo.com/static/assets/mdeditor/user_note.lib.min.js -->
+    <!-- -->
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.user_note');
+        com.zybuluo.mdeditor.user_note.initData = {
+            isLoggedIn: 'False',
+            mdeditorUrl: "https://www.zybuluo.com/mdeditor",
+            passwordPassed: 'True' === 'True' ? true : false,
+        };
+    </script>
+
+    <script src="https://www.zybuluo.com/static/assets/mdeditor/6cd3112e.user_note.min.js"></script>
+
+
+
+</body>
+</html>
+    

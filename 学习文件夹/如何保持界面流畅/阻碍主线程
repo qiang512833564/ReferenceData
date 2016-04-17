@@ -7,3 +7,7 @@
 除了UIKit和CoreAnimation相关操作必须在主线程中进行，其他的都可以挪到后台线程异步执行
 
 在不需要响应事件的时候，处理一些操作
+
+
+One way is to generate a bitmap image and reuse it across all instances.
+即：通过 background thread 创建一个 bitmap context,然后再生成 image,并对创建后的 image 进行 reuse

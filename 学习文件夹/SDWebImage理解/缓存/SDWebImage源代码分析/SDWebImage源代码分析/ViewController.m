@@ -42,6 +42,8 @@
     
     dispatch_source_set_cancel_handler(timer, ^{
         NSLog(@"timersource cancel handle block");
+        
+        
     });
     
     dispatch_resume(timer);

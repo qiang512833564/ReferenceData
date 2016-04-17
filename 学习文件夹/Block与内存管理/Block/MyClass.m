@@ -95,9 +95,9 @@ typedef void(^MyBlock)(void);
     
     NSLog(@"%@",aBlock);//<__NSStackBlock__: 0x7fff5f4f78b8>
     //1.NSGlobalBlock,可以通过是否引用外部变量识别，未引用外部变量即为NSGlobalBlock,可以当做函数使用。
-    NSLog(@"%@",globalBlock);//<__NSMallocBlock__: 0x7f9662c0e320>
+    NSLog(@"%@",globalBlock);//<__NSGlobalBlock__: 0x7f9662c0e320>
     //aBlock = [[aBlock copy]autorelease];
-    NSLog(@"%@",aBlock);//<__NSMallocBlock__: 0x7f9662c0e320>也就是说：
+    NSLog(@"%@",aBlock);//<__NSStackBlock__: 0x7f9662c0e320>也就是说：
     aBlock();
     /*
      _globalObj和_staticObj在内存中的位置是确定的，所以Block copy时不会retain对象

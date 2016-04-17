@@ -33,7 +33,10 @@ NSThread *A;
 //        //while (1) {
 //        [[NSRunLoop currentRunLoop]addTimer:timer forMode:NSDefaultRunLoopMode];
         
-#pragma mark --- runMode:beforeDate: 与 run 方法的区别在于：第一个可以设置超时时间，超过超时时间，就会退出 runloop，而 run 缺一致处于 runloop 循环中 (CFRunLoopRunInMode 就是对 CFRunLoopRunInMode 方法的封装)(runMode:beforeDate:  官方说明文档：Runs the loop once, blocking for input in the specified mode until a given date.字面意思：一旦运行了这个 runloop ,就会调用这个方法去阻塞线程等待有 input source 在指定的 runModel 上发生，这种状态一直持续到 given date 限定的超时时间---------个人理解：为什么要指定 runMode 是因为 runloop 同一时间点只能运行一种 mode,想要切换 mode,只能先退出 runloop 再从新进入 runloop, 才能正常运行 mode)
+#pragma mark --- runMode:beforeDate: 与 run 方法的区别在于：第一个可以设置超时时间，超过超时时间，就会退出 runloop，而 run 却一致处于 runloop 循环中，直到没有任何 input sources or timers 在 runloop 上或者CFRunLoopStop  (CFRunLoopRunInMode 就是对 CFRunLoopRunInMode 方法的封装)(runMode:beforeDate:  官方说明文档：Runs the loop once, blocking for input in the specified mode until a given date.字面意思：一旦运行了这个 runloop ,就会调用这个方法去阻塞线程等待有 input source 在指定的 runModel 上发生，这种状态一直持续到 given date 限定的超时时间---------个人理解：为什么要指定 runMode 是因为 runloop 同一时间点只能运行一种 mode,想要切换 mode,只能先退出 runloop 再从新进入 runloop, 才能正常运行 mode)
+        /*
+         在你运行一个Run Loop时，你会为它显示或隐式地指定一个mode。这之后，在这个Run Loop中，只有与这个mode关联的事件源才会被监听并被允许分发事件，同理，也只有与这个mode关联的observer才会被通知。和其他mode关联的事件源只有当Run Loop运行在对应的mode下才会分发相应的事件过来，否则就处于暂停状态。
+         */
         // runMode:beforeDate:
         // 1. 没有任何 input source 输入源的时候，线程会执行到 runMode:beforeDate: 这行代码的时候，处于监听是否有输入源的状态，直到有输入源输入或者超过超时时间（超过超时时间，则会退出 runloop 循环---这里的退出循环，只是退出监听输入的状态，当重新调用 runMode 方法的时候，又会继续监听，并不是正真意义上的 runloop 退出销毁）
         // 2. 当 input source 在处理的过程中和到达超时时间的时候，会返回 YES

@@ -203,7 +203,13 @@ static NSString *const kCompletedCallbackKey = @"completed";
         }
         return;
     }
-
+    // dispatch_barrier_sync
+    // 1. 是对一个通过 dispatch_queue_create 方法创建的 concurrent 并行队列，进行 sync 操作
+    // 2. 如果传入的是 serial queue ，则作用等同于 dispatch_sync
+    // 3. 向 dispatch queue 提交一个受保护的 barrier block  进行同步 synchronous 操作，
+    // 4. 调用这个方法是为了暂停 current concurrent queue 直到 barrier block 执行完成。
+    // 5. no retain is performed on the target queue. Because calls to this function are synchronous, it "borrows" the reference of the caller. Moreover, no Block_copy is performed on the block.
+    // 6. 在这个 barrier block 完成之前，任何在 the barrier block 以后添加的 block，都不会被执行 executed.
     dispatch_barrier_sync(self.barrierQueue, ^{
         BOOL first = NO;
         if (!self.URLCallbacks[url]) {

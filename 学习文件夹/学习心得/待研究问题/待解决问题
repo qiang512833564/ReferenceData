@@ -35,4 +35,5 @@
 }  
 23. 通知实现原理（多线程情况下，是否可以在一个线程上发送通知而被另一个线程接收？？？）
 24. 为什么 BLOCK 会对 self 进行 retain，而对 全局变量或者静态变量不会进行 retain
-    
+25. Runloop 与 NSURLConnection  
+26. dispatch_sync / dispatch_async / dispatch_barrier_sync / dispatch_barrier_async  

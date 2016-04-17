@@ -43,3 +43,6 @@
      3. runMode:beforeDate: 与 run 方法的区别在于：第一个可以设置超时时间，超过超时时间，就会退出 runloop，而 run 缺一致处于 runloop 循环中 (CFRunLoopRunInMode 就是对 runMode:beforeDate: 方法的封装)
      GCD 
      GCD 的计时器，使用的避免了 NSTimer 的缺点：1.必须保证有一个活跃的runloop。2.NSTimer的创建与撤销必须在同一个线程操作、performSelector的创建与撤销必须在同一个线程操作。3.内存管理有潜在泄露的风险
+
+4.16
+     GCD—dispatch_sync/dispatch_async/dispatch_barrier_sync/dispatch_barrier_async 四者异同点：dispatch_sync、dispatch_async 在串行对列和 global queue 中起作用，dispatch_barrier_sync 、dispatch_barrier_async 在 dispatch_queue_create 创建的 concurrent queue 上起作用，另外 sync / async 区别在于：sync 会等待传入的 Block 完成后，才会 return ,也不会在 on the queue 执行 retain 操作，也不会对 block 进行 block_copy 操作, async 会立刻 return ,会 retain

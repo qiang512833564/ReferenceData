@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRw-iZ-mWz">
+                                <rect key="frame" x="0.0" y="20" width="600" height="128"/>
+                                <color key="backgroundColor" red="1" green="0.94804429863859863" blue="0.28104485349206954" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="OoD-aR-8yn"/>
+                                </constraints>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ij2-Up-FVa">
+                                <rect key="frame" x="-2" y="148" width="604" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="sPg-tk-sXl"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="changeValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="76Q-Xs-7zl"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZRw-iZ-mWz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="5Yi-j5-hEv"/>
+                            <constraint firstAttribute="trailing" secondItem="Ij2-Up-FVa" secondAttribute="trailing" id="Otg-G5-Lo5"/>
+                            <constraint firstItem="ZRw-iZ-mWz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UZt-C9-w7E"/>
+                            <constraint firstItem="Ij2-Up-FVa" firstAttribute="top" secondItem="ZRw-iZ-mWz" secondAttribute="bottom" id="hph-IA-zLI"/>
+                            <constraint firstAttribute="trailing" secondItem="ZRw-iZ-mWz" secondAttribute="trailing" id="j6a-C7-5CH"/>
+                            <constraint firstItem="Ij2-Up-FVa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mi4-O2-QEy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="needAnimationView" destination="ZRw-iZ-mWz" id="Ai5-ha-ZeX"/>
+                        <outlet property="slider" destination="Ij2-Up-FVa" id="6RU-mR-KsC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

@@ -35,7 +35,7 @@
     
         size_t width = CGImageGetWidth(imageRef);
         size_t height = CGImageGetHeight(imageRef);
-    
+    
         // current
         CGColorSpaceModel imageColorSpaceModel = CGColorSpaceGetModel(CGImageGetColorSpace(imageRef));
         CGColorSpaceRef colorspaceRef = CGImageGetColorSpace(imageRef);
