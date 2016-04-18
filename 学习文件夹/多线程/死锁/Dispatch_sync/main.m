@@ -33,6 +33,16 @@ int main(int argc, const char * argv[]) {
             NSLog(@"等待主线程完成");
         });
         NSLog(@"主线程完成");
+////        
+//         NSLog(@"主线程开始");
+//         dispatch_async(dispatch_get_main_queue(), ^{
+//         NSLog(@"等待主线程完成");
+//         });
+//         sleep(5);
+//         NSLog(@"主线程完成");
+//        do{}while (1) ;
+//         CFRunLoopRun();
+        
 //        dispatch_queue_t q = dispatch_queue_create("serical", DISPATCH_QUEUE_SERIAL);//dispatch_get_global_queue(0, 0);
 //        dispatch_async(q, ^{
 //            sleep(3);

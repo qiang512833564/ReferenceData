@@ -45,4 +45,12 @@
      GCD 的计时器，使用的避免了 NSTimer 的缺点：1.必须保证有一个活跃的runloop。2.NSTimer的创建与撤销必须在同一个线程操作、performSelector的创建与撤销必须在同一个线程操作。3.内存管理有潜在泄露的风险
 
 4.16
-     GCD—dispatch_sync/dispatch_async/dispatch_barrier_sync/dispatch_barrier_async 四者异同点：dispatch_sync、dispatch_async 在串行对列和 global queue 中起作用，dispatch_barrier_sync 、dispatch_barrier_async 在 dispatch_queue_create 创建的 concurrent queue 上起作用，另外 sync / async 区别在于：sync 会等待传入的 Block 完成后，才会 return ,也不会在 on the queue 执行 retain 操作，也不会对 block 进行 block_copy 操作, async 会立刻 return ,会 retain
+     GCD—dispatch_sync/dispatch_async/dispatch_barrier_sync/dispatch_barrier_async 四者异同点：dispatch_sync、dispatch_async 在串行对列和 global queue 中起作用，dispatch_barrier_sync 、dispatch_barrier_async 在 dispatch_queue_create 创建的 concurrent queue 上起作用，另外 sync / async 区别在于：sync 会等待传入的 Block 完成后，才会 return ,也不会在 on the queue 执行 retain 操作，也不会对 block 进行 block_copy 操作, async 会立刻 return ,会 retain；此外 dispatch_async 在串行队列里，会虽然会立刻 return ,但是传入的 block并不会立刻被 invoke,知道前面的 block 完成，或者所在线程（前提是传入的队列也是该线程的队列）任务完成才会被 invoke ，如：
+     NSLog(@"主线程开始");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"等待主线程完成");
+        });
+        sleep(5);
+        NSLog(@"主线程完成");
+        CFRunLoopRun();// 换成 while(1);就会一直不调用 dispatch_async 传入的 block，因为当前线程的任务一直没有被完成，至于为何 CFRunLoopRun(）可以，个人理解：这是因为 CFRunLoopRun(),会使当前线程处于循环状态（有事情就处理，没事情就休眠），直到有 exit runloop 发生，才会结束
+        另外需要注意：在非主队列的 serial queue 上 CFRunLoopRun（）需要被调用，才能看出效果，不然runloop 不会被激活，当前线程执行完，会结束线程，导致 GCD async 里面的 block 不会被 invoke(GCD 与 Runloop 的关系是，每循环一次 runloop 都会询问 GCD 里面是否有需要执行的任务(GCD 相当于 runloop 的 source0)，到指定的 queue 上执行Block),这一点可以用在更新 UI，因为更新 UI 界面（Core Animation 实现图层树的打包，并提交给 GPU ）是在 GPU 上进行的，此时 CPU 是处于等待结果处理完的状态，所以我们可以通过dispatch_async(dispatch_get_main_queue()，^{})实现在更新 UI 的同时，再进行一些其它 UI 的操作，这样可以减少 CPU 的等待时间
